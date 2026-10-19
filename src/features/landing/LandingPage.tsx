@@ -221,8 +221,8 @@ export const LandingPage: React.FC = () => {
         </div>
       </header>
 
-      {/* 3. Hero Section (Inspirasi Persis Econest: Full Viewport Height, Pristine Natural Golden Sunlight, Professional Typography) */}
-      <section className="relative overflow-hidden min-h-screen flex items-center bg-[#0B0F0D] pt-24 sm:pt-28 pb-20 sm:pb-24">
+      {/* 3. Hero Section (Full Viewport Height, Pristine Natural Golden Sunlight, Professional Typography) */}
+      <section className="relative overflow-hidden h-screen h-dvh min-h-[600px] flex items-center bg-[#0B0F0D]">
         {/* Full Photographic Background with Sunlit Nature - Zero Green Murky Tint */}
         <div className="absolute inset-0 z-0">
           <img
@@ -234,8 +234,8 @@ export const LandingPage: React.FC = () => {
           <div className="absolute inset-y-0 left-0 w-full lg:w-[60%] bg-gradient-to-r from-black/85 via-black/45 to-transparent z-1 pointer-events-none" />
           {/* Subtle top shade for transparent navbar */}
           <div className="absolute top-0 inset-x-0 h-28 bg-gradient-to-b from-black/60 to-transparent z-1 pointer-events-none" />
-          {/* Subtle bottom shade blending cleanly into the torn paper edge */}
-          <div className="absolute bottom-0 inset-x-0 h-20 bg-gradient-to-t from-black/50 to-transparent z-1 pointer-events-none" />
+          {/* Subtle bottom shade for natural contrast */}
+          <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-black/40 to-transparent z-1 pointer-events-none" />
         </div>
 
         {/* Hero Content Container: Elevated typography without the deleted pill badge */}
@@ -296,19 +296,6 @@ export const LandingPage: React.FC = () => {
               </div>
             </div>
           </div>
-        </div>
-
-        {/* Jagged Torn Paper / Painterly Edge Mask at bottom of Hero */}
-        <div className="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none z-20 pointer-events-none">
-          <svg
-            viewBox="0 0 1440 70"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-full h-10 sm:h-14 lg:h-16 text-white fill-current"
-            preserveAspectRatio="none"
-          >
-            <path d="M0,70 L1440,70 L1440,28 C1380,44 1340,14 1280,36 C1220,58 1180,16 1120,38 C1060,62 1010,18 960,36 C900,54 860,12 800,32 C740,54 700,16 640,40 C580,64 530,10 480,32 C420,56 380,14 320,36 C260,58 210,12 160,30 C100,48 60,14 0,34 Z" />
-          </svg>
         </div>
       </section>
 
