@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   ArrowRight,
@@ -36,6 +36,16 @@ export const LandingPage: React.FC = () => {
   const { funders, partners, programs, fundingRecords, beneficiaries } = useCSRStore();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<'visi' | 'misi' | 'metode'>('visi');
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 30);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const totalCommitted = fundingRecords
     .filter(r => r.recordType === 'Commitment' && r.status === 'Approved (Demo)')
@@ -49,140 +59,179 @@ export const LandingPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-surface-bg text-ink-primary font-sans selection:bg-[#F5CA44] selection:text-[#072418]">
-      {/* 1. Top Announcement Bar */}
-      <div className="bg-[#072418] text-emerald-200 px-4 py-2 text-xs border-b border-emerald-900/60 relative z-30">
-        <div className="max-w-7xl mx-auto flex items-center justify-between text-[11px]">
-          <div className="flex items-center gap-2">
-            <span className="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#F5CA44]/20 text-[#F5CA44] font-bold text-[10px] uppercase tracking-wider">
-              <Sprout className="w-3 h-3 text-[#F5CA44]" /> CSR Movement
-            </span>
-            <span className="text-emerald-100/90 hidden sm:inline">
-              Universa CSR Hub: Solusi Tata Kelola Digital Tanggung Jawab Sosial & Kesiapan PROPER KLHK
-            </span>
-            <span className="text-emerald-100/90 sm:hidden">
-              Universa CSR Hub — Tata Kelola CSR Digital
-            </span>
-          </div>
-          <div className="flex items-center gap-4">
-            <span className="text-emerald-300/80 font-medium hidden md:inline">Mode Prototipe MVP</span>
-            <Link
-              to="/dashboard"
-              className="text-[#F5CA44] hover:text-amber-200 font-bold underline flex items-center gap-1 transition-colors"
-            >
-              Masuk Dashboard <ArrowRight className="w-3 h-3" />
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      {/* 2. Main Navigation Bar (Over Hero) */}
-      <header className="relative z-30 bg-[#072418]/85 backdrop-blur-md border-b border-white/10 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
-          {/* Brand Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-2xl bg-[#F5CA44] flex items-center justify-center text-[#072418] shadow-sm font-black text-xl tracking-wider group-hover:scale-105 transition-transform">
-              U
-            </div>
-            <div className="flex flex-col">
-              <span className="font-extrabold text-lg tracking-tight text-white leading-tight flex items-center gap-1.5">
-                UNIVERSA
-                <span className="text-[10px] font-extrabold px-1.5 py-0.5 rounded-md bg-[#F5CA44]/20 text-[#F5CA44] border border-[#F5CA44]/30">
-                  CSR HUB
-                </span>
+      {/* Dynamic Header: Transparent initially over hero, becomes floating pill capsule on scroll */}
+      <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 pointer-events-none px-4 sm:px-6">
+        <div
+          className={`mx-auto transition-all duration-300 pointer-events-auto ${
+            isScrolled
+              ? 'max-w-6xl mt-3 py-2.5 px-6 rounded-full bg-white/95 backdrop-blur-md shadow-elevated border border-border-subtle text-ink-primary'
+              : 'max-w-7xl pt-6 pb-4 bg-transparent text-white'
+          }`}
+        >
+          <div className="flex items-center justify-between gap-4">
+            {/* Brand Logo with logo-universa.png */}
+            <Link to="/" className="flex items-center gap-3 group">
+              <img
+                src="/brand/logo-universa.png"
+                alt="Universa"
+                className={`transition-all duration-300 object-contain ${
+                  isScrolled ? 'h-6 sm:h-7' : 'h-7 sm:h-8 drop-shadow-[0_2px_12px_rgba(255,255,255,0.4)]'
+                }`}
+              />
+              <span
+                className={`text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border transition-all ${
+                  isScrolled
+                    ? 'bg-brand-mint text-brand-primary border-emerald-200'
+                    : 'bg-white/15 text-[#F5CA44] border-white/20 backdrop-blur-xs'
+                }`}
+              >
+                CSR HUB
               </span>
-              <span className="text-[11px] font-medium text-emerald-200/70 tracking-wide">
-                Social Governance & Impact Platform
-              </span>
-            </div>
-          </Link>
-
-          {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-8 text-xs font-bold text-emerald-100/80">
-            <a href="#tentang" className="hover:text-[#F5CA44] transition-colors">Tentang Kami</a>
-            <a href="#pilar" className="hover:text-[#F5CA44] transition-colors">Pilar Program CSR</a>
-            <a href="#ekosistem" className="hover:text-[#F5CA44] transition-colors">Alur Ekosistem</a>
-            <a href="#mitra" className="hover:text-[#F5CA44] transition-colors">Mitra & Funder</a>
-            <a href="#dampak" className="hover:text-[#F5CA44] transition-colors">Laporan Dampak</a>
-          </nav>
-
-          {/* Right Action: Contact info + Warm Gold Pill Button */}
-          <div className="hidden sm:flex items-center gap-4">
-            <div className="hidden xl:flex items-center gap-2.5 text-xs text-emerald-100/70 border-r border-white/10 pr-4">
-              <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-[#F5CA44]">
-                <PhoneCall className="w-3.5 h-3.5" />
-              </div>
-              <div>
-                <div className="text-[10px] text-emerald-300/80">Konsultasi CSR:</div>
-                <div className="font-bold text-white text-[11px]">+62 21 555-0129</div>
-              </div>
-            </div>
-
-            <Link
-              to="/dashboard"
-              className="px-5 py-2.5 rounded-full bg-[#F5CA44] hover:bg-[#F3C22B] text-[#072418] text-xs font-black shadow-lg hover:shadow-xl transition-all flex items-center gap-2.5 group cursor-pointer"
-            >
-              <span>Explore More</span>
-              <div className="w-6 h-6 rounded-full bg-[#072418] flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
-                <ArrowRight className="w-3.5 h-3.5 text-[#F5CA44]" />
-              </div>
             </Link>
-          </div>
 
-          {/* Mobile menu toggle */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 rounded-xl text-white hover:bg-white/10 cursor-pointer"
-          >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
+            {/* Desktop Navigation Links */}
+            <nav className="hidden lg:flex items-center gap-7 text-xs font-bold">
+              <a
+                href="#tentang"
+                className={`transition-colors py-1 ${
+                  isScrolled
+                    ? 'text-ink-secondary hover:text-brand-primary'
+                    : 'text-white/90 hover:text-[#F5CA44]'
+                }`}
+              >
+                Tentang Kami
+              </a>
+              <a
+                href="#pilar"
+                className={`transition-colors py-1 ${
+                  isScrolled
+                    ? 'text-ink-secondary hover:text-brand-primary'
+                    : 'text-white/90 hover:text-[#F5CA44]'
+                }`}
+              >
+                Pilar Program CSR
+              </a>
+              <a
+                href="#ekosistem"
+                className={`transition-colors py-1 ${
+                  isScrolled
+                    ? 'text-ink-secondary hover:text-brand-primary'
+                    : 'text-white/90 hover:text-[#F5CA44]'
+                }`}
+              >
+                Alur Ekosistem
+              </a>
+              <a
+                href="#mitra"
+                className={`transition-colors py-1 ${
+                  isScrolled
+                    ? 'text-ink-secondary hover:text-brand-primary'
+                    : 'text-white/90 hover:text-[#F5CA44]'
+                }`}
+              >
+                Mitra & Funder
+              </a>
+              <a
+                href="#dampak"
+                className={`transition-colors py-1 ${
+                  isScrolled
+                    ? 'text-ink-secondary hover:text-brand-primary'
+                    : 'text-white/90 hover:text-[#F5CA44]'
+                }`}
+              >
+                Laporan Dampak
+              </a>
+            </nav>
 
-        {/* Mobile dropdown */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden px-4 pt-2 pb-6 bg-[#072418] border-b border-white/10 space-y-3 text-xs font-bold text-white">
-            <a
-              href="#tentang"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-emerald-100 hover:text-[#F5CA44]"
-            >
-              Tentang Kami
-            </a>
-            <a
-              href="#pilar"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-emerald-100 hover:text-[#F5CA44]"
-            >
-              Pilar Program CSR
-            </a>
-            <a
-              href="#ekosistem"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-emerald-100 hover:text-[#F5CA44]"
-            >
-              Alur Ekosistem
-            </a>
-            <a
-              href="#mitra"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-emerald-100 hover:text-[#F5CA44]"
-            >
-              Mitra & Funder
-            </a>
-            <div className="pt-2 border-t border-white/10">
+            {/* Right Action: Button to Dashboard */}
+            <div className="hidden sm:flex items-center gap-3">
               <Link
                 to="/dashboard"
-                onClick={() => setMobileMenuOpen(false)}
-                className="w-full py-3 px-4 rounded-full bg-[#F5CA44] text-[#072418] font-black flex items-center justify-center gap-2"
+                className={`px-5 py-2.5 rounded-full text-xs font-black shadow-md hover:shadow-lg transition-all flex items-center gap-2.5 group cursor-pointer ${
+                  isScrolled
+                    ? 'bg-[#176B4D] hover:bg-[#0E4F37] text-white'
+                    : 'bg-[#F5CA44] hover:bg-[#F3C22B] text-[#072418]'
+                }`}
               >
-                Masuk ke Dashboard <ArrowRight className="w-4 h-4" />
+                <span>Masuk ke Dashboard</span>
+                <div
+                  className={`w-6 h-6 rounded-full flex items-center justify-center group-hover:translate-x-0.5 transition-transform ${
+                    isScrolled ? 'bg-white/20' : 'bg-[#072418]'
+                  }`}
+                >
+                  <ArrowRight
+                    className={`w-3.5 h-3.5 ${isScrolled ? 'text-white' : 'text-[#F5CA44]'}`}
+                  />
+                </div>
               </Link>
             </div>
+
+            {/* Mobile menu toggle */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className={`lg:hidden p-2 rounded-xl transition-colors cursor-pointer ${
+                isScrolled
+                  ? 'text-ink-primary hover:bg-surface-secondary'
+                  : 'text-white hover:bg-white/10'
+              }`}
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
           </div>
-        )}
+
+          {/* Mobile dropdown */}
+          {mobileMenuOpen && (
+            <div
+              className={`lg:hidden mt-3 pt-3 pb-4 px-4 rounded-2xl border space-y-2 text-xs font-bold shadow-elevated ${
+                isScrolled
+                  ? 'bg-white text-ink-primary border-border-subtle'
+                  : 'bg-[#072418]/95 backdrop-blur-md text-white border-white/15'
+              }`}
+            >
+              <a
+                href="#tentang"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block py-2 hover:text-[#F5CA44]"
+              >
+                Tentang Kami
+              </a>
+              <a
+                href="#pilar"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block py-2 hover:text-[#F5CA44]"
+              >
+                Pilar Program CSR
+              </a>
+              <a
+                href="#ekosistem"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block py-2 hover:text-[#F5CA44]"
+              >
+                Alur Ekosistem
+              </a>
+              <a
+                href="#mitra"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block py-2 hover:text-[#F5CA44]"
+              >
+                Mitra & Funder
+              </a>
+              <div className="pt-2 border-t border-border-subtle/40">
+                <Link
+                  to="/dashboard"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full py-2.5 px-4 rounded-full bg-[#F5CA44] text-[#072418] font-black flex items-center justify-center gap-2"
+                >
+                  Masuk ke Dashboard <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
+          )}
+        </div>
       </header>
 
       {/* 3. Hero Section (Inspirasi Persis Econest: Full Photographic Cover, Warm Tone, Dual-Color Font, Torn Edge) */}
-      <section className="relative overflow-hidden min-h-[580px] lg:min-h-[640px] flex items-center bg-[#072418]">
+      <section className="relative overflow-hidden min-h-[640px] lg:min-h-[700px] flex items-center bg-[#072418] pt-28 sm:pt-32 lg:pt-36">
         {/* Full Photographic Background with People & Nature */}
         <div className="absolute inset-0 z-0">
           <img
@@ -854,11 +903,15 @@ export const LandingPage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           <div className="flex flex-col md:flex-row items-start justify-between gap-6">
             <div className="space-y-2 max-w-sm">
-              <div className="flex items-center gap-2 font-extrabold text-base text-ink-primary">
-                <div className="w-7 h-7 rounded-lg bg-brand-primary text-white flex items-center justify-center text-xs font-bold">
-                  U
-                </div>
-                UNIVERSA CSR HUB
+              <div className="flex items-center gap-2.5 font-extrabold text-base text-ink-primary">
+                <img
+                  src="/brand/logo-universa.png"
+                  alt="Universa"
+                  className="h-6 object-contain"
+                />
+                <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-brand-mint text-brand-primary border border-emerald-200">
+                  CSR HUB
+                </span>
               </div>
               <p className="text-[11px] leading-relaxed">
                 Infrastruktur digital orkestrasi program Tanggung Jawab Sosial dan Lingkungan Perseroan (TJSL) terintegrasi di Indonesia.

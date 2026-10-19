@@ -58,20 +58,25 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <NavLink 
           to="/dashboard" 
           onClick={onCloseMobile}
-          className="flex items-center gap-3 group focus:outline-none"
+          className="flex items-center gap-2.5 group focus:outline-none"
         >
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-primary to-brand-emerald flex items-center justify-center text-white shadow-xs font-bold text-lg tracking-wider shrink-0 group-hover:scale-105 transition-transform">
-            U
-          </div>
-          {!collapsed && (
-            <div className="flex flex-col">
-              <span className="font-extrabold text-base tracking-tight text-ink-primary leading-tight flex items-center gap-1.5">
-                UNIVERSA
-                <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-sm bg-brand-mint text-brand-primary border border-emerald-200">
+          {collapsed ? (
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-primary to-brand-emerald flex items-center justify-center text-white shadow-xs font-black text-lg tracking-wider shrink-0 group-hover:scale-105 transition-transform">
+              U
+            </div>
+          ) : (
+            <div className="flex flex-col gap-0.5">
+              <div className="flex items-center gap-2">
+                <img
+                  src="/brand/logo-universa.png"
+                  alt="Universa"
+                  className="h-6 object-contain"
+                />
+                <span className="text-[10px] font-extrabold px-1.5 py-0.5 rounded-sm bg-brand-mint text-brand-primary border border-emerald-200">
                   HUB
                 </span>
-              </span>
-              <span className="text-[11px] font-medium text-ink-muted tracking-wide">
+              </div>
+              <span className="text-[10px] font-medium text-ink-muted tracking-wide">
                 CSR & Social Governance
               </span>
             </div>
