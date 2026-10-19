@@ -171,7 +171,7 @@ export const Topbar: React.FC<TopbarProps> = ({ onOpenMobileSidebar }) => {
     <header className="sticky top-0 z-20 bg-[#F8FAF9]/90 backdrop-blur-md no-print">
       <div className="flex items-center justify-between h-20 px-4 sm:px-8 max-w-7xl w-full mx-auto gap-4">
         {/* Left: Mobile Menu & Minimalist Soft Search Pill */}
-        <div className="flex items-center gap-3 flex-1 max-w-md">
+        <div className="flex items-center gap-3 flex-1 max-w-2xl lg:max-w-3xl">
           <button
             onClick={onOpenMobileSidebar}
             className="md:hidden p-2.5 rounded-2xl bg-white text-slate-500 hover:text-slate-900 shadow-2xs transition-colors cursor-pointer"
@@ -191,11 +191,11 @@ export const Topbar: React.FC<TopbarProps> = ({ onOpenMobileSidebar }) => {
               value={globalSearchQuery}
               onChange={(e) => setGlobalSearchQuery(e.target.value)}
               onFocus={() => setSearchFocused(true)}
-              placeholder="Cari program, proposal, mitra..."
-              className="w-full pl-10 pr-9 py-2.5 bg-white hover:bg-white focus:bg-white border border-slate-100 focus:border-[#176B4D]/30 rounded-full text-xs text-slate-700 placeholder:text-slate-400 focus:outline-none transition-all shadow-[0_2px_12px_-2px_rgba(0,0,0,0.03)]"
+              placeholder="Cari program, proposal, mitra, funder..."
+              className="w-full pl-11 pr-14 py-2.5 bg-white hover:bg-white focus:bg-white border border-slate-100 focus:border-[#176B4D]/30 rounded-full text-xs text-slate-700 placeholder:text-slate-400 focus:outline-none transition-all shadow-[0_2px_12px_-2px_rgba(0,0,0,0.03)]"
             />
 
-            {globalSearchQuery && (
+            {globalSearchQuery ? (
               <button
                 onClick={() => {
                   setGlobalSearchQuery('');
@@ -205,6 +205,12 @@ export const Topbar: React.FC<TopbarProps> = ({ onOpenMobileSidebar }) => {
               >
                 ✕
               </button>
+            ) : (
+              <div className="hidden sm:flex absolute inset-y-0 right-0 pr-3.5 items-center pointer-events-none">
+                <span className="px-1.5 py-0.5 rounded-md text-[10px] font-bold text-slate-400 bg-slate-50 border border-slate-200/60">
+                  ⌘K
+                </span>
+              </div>
             )}
 
             {/* Quick Search Results */}
