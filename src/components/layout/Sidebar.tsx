@@ -55,7 +55,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
     <div className="flex flex-col h-full bg-white border-r border-slate-100/90 select-none">
       {/* Top Brand Logo (Click to return to Home / Landing Page) */}
       <div
-        className={`flex items-center h-22 shrink-0 ${
+        className={`flex items-center h-20 shrink-0 ${
           collapsed ? 'justify-center px-2' : 'justify-between px-6'
         }`}
       >
@@ -66,7 +66,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           title="Kembali ke Beranda"
         >
           {collapsed ? (
-            <div className="w-12 h-12 rounded-2xl bg-[#E8F6F0] text-[#176B4D] flex items-center justify-center font-black text-xl tracking-wider shrink-0 group-hover:bg-[#176B4D] group-hover:text-white transition-all shadow-2xs">
+            <div className="w-11 h-11 rounded-2xl bg-[#E8F6F0] text-[#176B4D] flex items-center justify-center font-black text-lg tracking-wider shrink-0 group-hover:bg-[#176B4D] group-hover:text-white transition-all shadow-2xs">
               U
             </div>
           ) : (
@@ -74,9 +74,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <img
                 src="/brand/logo-universa.png"
                 alt="Universa"
-                className="h-10 w-auto object-contain object-left group-hover:opacity-85 transition-opacity"
+                className="h-[30px] w-auto object-contain object-left group-hover:opacity-85 transition-opacity"
               />
-              <span className="text-[11px] font-semibold text-slate-400 tracking-wider mt-1 uppercase">
+              <span className="text-[10px] font-semibold text-slate-400 tracking-wider mt-0.5 uppercase">
                 CSR Management
               </span>
             </div>
