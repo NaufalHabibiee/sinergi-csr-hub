@@ -694,10 +694,10 @@ export const LandingPage: React.FC = () => {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <div>
               <span className="text-[#176B4D] text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 mb-2">
-                <Sprout className="w-4 h-4 text-[#176B4D]" /> Pilar Program CSR
+                <Sprout className="w-4 h-4 text-[#176B4D]" /> Pilar &amp; Direktori Program CSR
               </span>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#0B2518] leading-tight">
-                4 Pilar Utama Pemberdayaan Berkelanjutan
+                8 Program Unggulan Pemberdayaan Berkelanjutan
               </h2>
             </div>
             <div className="space-y-2 md:text-right">
@@ -708,125 +708,141 @@ export const LandingPage: React.FC = () => {
                 to="/dashboard/programs"
                 className="inline-flex items-center gap-1.5 text-xs font-bold text-[#176B4D] hover:underline"
               >
-                <span>Lihat Seluruh Direktori Program</span>
+                <span>Buka Seluruh Direktori Program</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
           </div>
 
-          {/* Cards Grid with Photos */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Card 1: Lingkungan */}
-            <div className="bg-white border border-slate-200/80 rounded-3xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
-              <div className="relative h-48 overflow-hidden bg-slate-100">
-                <img
-                  src="/images/volunteers_planting_saplings.jpg"
-                  alt="Reboisasi Mangrove"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <span className="absolute top-3 left-3 bg-black/60 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur-md">
-                  No - 01 • Lingkungan
-                </span>
-              </div>
-              <div className="p-5 space-y-2 flex-1 flex flex-col justify-between">
-                <div>
-                  <h3 className="font-bold text-base text-[#0B2518] group-hover:text-[#176B4D] transition-colors">
-                    Reboisasi &amp; Perlindungan Pesisir
-                  </h3>
-                  <p className="text-xs text-ink-secondary mt-1 leading-relaxed">
-                    Restorasi 50.000 bibit mangrove dan rehabilitasi gambut untuk menahan abrasi serta menurunkan emisi karbon.
-                  </p>
+          {/* Cards Grid with Photos - All 8 Programs */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                id: 'prg_001',
+                num: '01',
+                category: 'Lingkungan',
+                title: 'Restorasi 50.000 Mangrove & Pesisir',
+                description: 'Restorasi 50.000 bibit mangrove dan rehabilitasi pesisir untuk menahan abrasi serta menurunkan emisi karbon.',
+                image: '/images/volunteers_planting_saplings.jpg',
+                location: 'Muara Gembong, Bekasi',
+                metric: '1.200 Penerima',
+                status: 'Aktif • 68%'
+              },
+              {
+                id: 'prg_002',
+                num: '02',
+                category: 'Pendidikan',
+                title: 'Beasiswa Talenta & Coding Vokasi',
+                description: 'Bantuan biaya kuliah penuh dan pelatihan intensif software engineering untuk talenta prasejahtera.',
+                image: '/images/program_beasiswa_vokasi.jpg',
+                location: 'Semarang & Solo',
+                metric: '150 Mahasiswa',
+                status: 'Aktif • 60%'
+              },
+              {
+                id: 'prg_003',
+                num: '03',
+                category: 'Ekonomi UMKM',
+                title: 'Inkubasi & Halal UMKM Kuliner',
+                description: 'Fasilitasi sertifikasi halal, standarisasi kemasan BPOM, dan digitalisasi pencatatan omzet bagi 250 usaha mikro.',
+                image: '/images/program_umkm_culinary.jpg',
+                location: 'Tuban & Lamongan',
+                metric: '250 UMKM',
+                status: 'Aktif • 55%'
+              },
+              {
+                id: 'prg_004',
+                num: '04',
+                category: 'Kesehatan',
+                title: 'Intervensi Stunting & Gizi Balita Pesisir',
+                description: 'Pemberian PMT lokal berprotein tinggi, pelatihan kader posyandu, dan pemantauan antropometri 600 balita.',
+                image: '/images/program_stunting_posyandu.jpg',
+                location: 'Timor Tengah Selatan',
+                metric: '600 Balita',
+                status: 'Aktif • 50%'
+              },
+              {
+                id: 'prg_005',
+                num: '05',
+                category: 'Infrastruktur',
+                title: 'Pompa Tenaga Surya & Pipanisasi Karst',
+                description: 'Penyediaan air minum higienis bebas emisi untuk 1.800 warga di desa karst langganan kekeringan.',
+                image: '/images/program_water_solar.jpg',
+                location: 'Gunungkidul, DIY',
+                metric: '1.800 Warga',
+                status: 'Aktif • 82%'
+              },
+              {
+                id: 'prg_006',
+                num: '06',
+                category: 'Konservasi Gambut',
+                title: 'Reboisasi 100 Ha Gambut & Patroli Api',
+                description: 'Pemulihan vegetasi pohon endemik di zona karhutla dan patroli Masyarakat Peduli Api pencegahan kebakaran.',
+                image: '/images/program_peatland_patrol.jpg',
+                location: 'Pelalawan, Riau',
+                metric: '800 Penerima',
+                status: 'Aktif • 48%'
+              },
+              {
+                id: 'prg_007',
+                num: '07',
+                category: 'Pendidikan Inklusif',
+                title: 'Vokasi Kerja Inklusif Disabilitas',
+                description: 'Pelatihan keahlian desain digital, administrasi data, dan penyaluran kerja inklusif bagi pemuda disabilitas.',
+                image: '/images/program_vokasi_disabilitas.jpg',
+                location: 'DKI Jakarta & Tangerang',
+                metric: '80 Pemuda',
+                status: 'Selesai • 100%'
+              },
+              {
+                id: 'prg_008',
+                num: '08',
+                category: 'Ketahanan Pangan',
+                title: 'Lumbung Pangan Mandiri & Bio-Kompos',
+                description: 'Pelatihan pembuatan formulasi pupuk bio-organik dan lumbung bibit unggul untuk kedaulatan pangan desa.',
+                image: '/images/program_lumbung_organik.jpg',
+                location: 'Magelang, Jawa Tengah',
+                metric: '400 Petani',
+                status: 'Aktif • 35%'
+              }
+            ].map((prog) => (
+              <Link
+                key={prog.id}
+                to={`/dashboard/programs/${prog.id}`}
+                className="bg-white border border-slate-200/80 rounded-3xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
+              >
+                <div className="relative h-48 overflow-hidden bg-slate-100">
+                  <img
+                    src={prog.image}
+                    alt={prog.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <span className="absolute top-3 left-3 bg-black/60 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur-md">
+                    No - {prog.num} • {prog.category}
+                  </span>
+                  <span className="absolute top-3 right-3 bg-white/95 text-[#0B2518] text-[10px] font-extrabold px-2.5 py-0.5 rounded-full backdrop-blur-md shadow-sm">
+                    {prog.status}
+                  </span>
                 </div>
-                <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-[#176B4D] font-bold">
-                  <span>3 Program Aktif</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <div className="p-5 space-y-2 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h3 className="font-bold text-base text-[#0B2518] group-hover:text-[#176B4D] transition-colors leading-snug line-clamp-2">
+                      {prog.title}
+                    </h3>
+                    <p className="text-xs text-ink-secondary mt-1.5 leading-relaxed line-clamp-3">
+                      {prog.description}
+                    </p>
+                  </div>
+                  <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-[#176B4D] font-bold">
+                    <span className="text-[11px] text-slate-500 font-medium truncate max-w-[150px]">{prog.metric}</span>
+                    <span className="flex items-center gap-1">
+                      <span>Detail Program</span>
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    </span>
+                  </div>
                 </div>
-              </div>
-            </div>
-
-            {/* Card 2: Pendidikan */}
-            <div className="bg-white border border-slate-200/80 rounded-3xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
-              <div className="relative h-48 overflow-hidden bg-slate-100">
-                <img
-                  src="/images/program_beasiswa_vokasi.jpg"
-                  alt="Beasiswa & Coding Camp"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <span className="absolute top-3 left-3 bg-black/60 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur-md">
-                  No - 02 • Pendidikan
-                </span>
-              </div>
-              <div className="p-5 space-y-2 flex-1 flex flex-col justify-between">
-                <div>
-                  <h3 className="font-bold text-base text-[#0B2518] group-hover:text-[#176B4D] transition-colors">
-                    Beasiswa Talenta &amp; Coding Vokasi
-                  </h3>
-                  <p className="text-xs text-ink-secondary mt-1 leading-relaxed">
-                    Bantuan biaya kuliah dan pelatihan intensif software engineering untuk pemuda prasejahtera dan disabilitas.
-                  </p>
-                </div>
-                <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-[#176B4D] font-bold">
-                  <span>2 Program Aktif</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </div>
-            </div>
-
-            {/* Card 3: UMKM */}
-            <div className="bg-white border border-slate-200/80 rounded-3xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
-              <div className="relative h-48 overflow-hidden bg-slate-100">
-                <img
-                  src="/images/program_umkm_culinary.jpg"
-                  alt="Inkubasi & Halal UMKM Kuliner"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <span className="absolute top-3 left-3 bg-black/60 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur-md">
-                  No - 03 • Ekonomi UMKM
-                </span>
-              </div>
-              <div className="p-5 space-y-2 flex-1 flex flex-col justify-between">
-                <div>
-                  <h3 className="font-bold text-base text-[#0B2518] group-hover:text-[#176B4D] transition-colors">
-                    Inkubasi &amp; Halal UMKM Kuliner
-                  </h3>
-                  <p className="text-xs text-ink-secondary mt-1 leading-relaxed">
-                    Fasilitasi sertifikasi halal, standarisasi kemasan BPOM, dan digitalisasi pencatatan omzet bagi 250 usaha mikro.
-                  </p>
-                </div>
-                <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-[#176B4D] font-bold">
-                  <span>2 Program Aktif</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </div>
-            </div>
-
-            {/* Card 4: Air Bersih */}
-            <div className="bg-white border border-slate-200/80 rounded-3xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
-              <div className="relative h-48 overflow-hidden bg-slate-100">
-                <img
-                  src="/images/program_water_solar.jpg"
-                  alt="Pompa Tenaga Surya & Pipanisasi"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <span className="absolute top-3 left-3 bg-black/60 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur-md">
-                  No - 04 • Air &amp; Sanitasi
-                </span>
-              </div>
-              <div className="p-5 space-y-2 flex-1 flex flex-col justify-between">
-                <div>
-                  <h3 className="font-bold text-base text-[#0B2518] group-hover:text-[#176B4D] transition-colors">
-                    Pompa Tenaga Surya &amp; Pipanisasi
-                  </h3>
-                  <p className="text-xs text-ink-secondary mt-1 leading-relaxed">
-                    Penyediaan air minum higienis bebas emisi untuk 1.800 warga di desa karst langganan kekeringan Gunungkidul.
-                  </p>
-                </div>
-                <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-[#176B4D] font-bold">
-                  <span>1 Program Aktif</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </div>
-            </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
