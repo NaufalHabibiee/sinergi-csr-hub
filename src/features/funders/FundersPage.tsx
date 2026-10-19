@@ -4,24 +4,16 @@ import {
   Plus,
   Search,
   Wallet,
-  ArrowUpRight,
-  ArrowDownRight,
+  ArrowRight,
   Layers,
   MapPin,
   Mail,
   ShieldCheck,
-  ExternalLink,
   Coins,
-  TrendingUp,
   LayoutGrid,
   List,
   CheckCircle2,
-  BadgeCheck,
-  Award,
-  ChevronRight,
-  FileSpreadsheet,
-  PieChart,
-  Briefcase
+  Award
 } from 'lucide-react';
 import { useCSRStore } from '../../context/CSRStoreContext';
 import { StatusBadge } from '../../components/ui/StatusBadge';
@@ -92,125 +84,119 @@ export const FundersPage: React.FC = () => {
 
   const sectorTabs = [
     { key: 'all', label: 'Semua Korporasi' },
-    { key: 'BUMN', label: 'BUMN & Energi' },
+    { key: 'BUMN', label: 'BUMN' },
     { key: 'Swasta', label: 'Swasta Tbk' },
     { key: 'Perbankan', label: 'Perbankan & Finansial' },
   ];
 
   return (
-    <div className="space-y-5 animate-in fade-in duration-200">
-      {/* 1. Executive Header + Corporate ESG Treasury Banner */}
-      <div className="bg-surface-card rounded-3xl border border-border-subtle shadow-card p-6 space-y-5">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div className="flex items-center gap-3.5">
-            <div className="w-12 h-12 rounded-2xl bg-[#072418] text-[#FDE047] flex items-center justify-center shadow-sm shrink-0">
-              <Building2 className="w-6 h-6" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h1 className="text-xl sm:text-2xl font-extrabold text-[#072418] tracking-tight">
-                  Perbendaharaan & Portofolio Corporate Funder
-                </h1>
-                <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-extrabold border border-emerald-300">
-                  {funders.length} Korporasi Terdaftar
-                </span>
-              </div>
-              <p className="text-xs text-ink-muted mt-0.5">
-                Monitoring komitmen anggaran TJSL/CSR perusahaan mitra, kepatuhan PROPER, dan alokasi saldo siap salur.
-              </p>
-            </div>
+    <div className="space-y-6 animate-in fade-in duration-200">
+      {/* 1. Header Tenang & Rapi */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <div className="flex items-center gap-3">
+            <h1 className="text-2xl font-black text-[#072418] tracking-tight">
+              Portofolio Corporate Funder & Treasury CSR
+            </h1>
+            <span className="text-xs text-slate-500 font-medium">
+              {funders.length} Korporasi Terdaftar
+            </span>
           </div>
+          <p className="text-xs text-ink-muted mt-1 max-w-2xl leading-relaxed">
+            Pemantauan komitmen alokasi anggaran TJSL/CSR perusahaan mitra, kepatuhan PROPER, dan perbendaharaan saldo siap salur.
+          </p>
+        </div>
 
-          <div className="flex items-center gap-2.5 self-start sm:self-auto">
-            {/* View Switcher: Portofolio Treasury / Buku Besar Tabel */}
-            <div className="inline-flex items-center p-1 rounded-xl bg-surface-secondary border border-border-subtle">
-              <button
-                onClick={() => setViewMode('grid')}
-                className={`p-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
-                  viewMode === 'grid'
-                    ? 'bg-white text-[#072418] shadow-2xs'
-                    : 'text-ink-muted hover:text-ink-primary'
-                }`}
-                title="Tampilan Portofolio Treasury"
-              >
-                <LayoutGrid className="w-4 h-4" />
-                <span className="hidden sm:inline pr-1">Portofolio</span>
-              </button>
-              <button
-                onClick={() => setViewMode('table')}
-                className={`p-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
-                  viewMode === 'table'
-                    ? 'bg-white text-[#072418] shadow-2xs'
-                    : 'text-ink-muted hover:text-ink-primary'
-                }`}
-                title="Tampilan Buku Besar Tabel"
-              >
-                <List className="w-4 h-4" />
-                <span className="hidden sm:inline pr-1">Buku Besar</span>
-              </button>
-            </div>
-
+        <div className="flex items-center gap-2.5 self-start sm:self-auto shrink-0">
+          {/* View Switcher */}
+          <div className="inline-flex items-center p-1 rounded-xl bg-slate-100">
             <button
-              onClick={() => setIsFormOpen(true)}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#072418] hover:bg-[#176B4D] text-[#FDE047] text-xs font-extrabold transition-all shadow-sm cursor-pointer"
+              onClick={() => setViewMode('grid')}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
+                viewMode === 'grid'
+                  ? 'bg-white text-[#072418] shadow-xs'
+                  : 'text-ink-muted hover:text-ink-primary'
+              }`}
             >
-              <Plus className="w-4 h-4" />
-              <span>Tambah Corporate Funder</span>
+              <LayoutGrid className="w-3.5 h-3.5" />
+              <span>Portofolio</span>
+            </button>
+            <button
+              onClick={() => setViewMode('table')}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
+                viewMode === 'table'
+                  ? 'bg-white text-[#072418] shadow-xs'
+                  : 'text-ink-muted hover:text-ink-primary'
+              }`}
+            >
+              <List className="w-3.5 h-3.5" />
+              <span>Buku Besar</span>
             </button>
           </div>
+
+          <button
+            onClick={() => setIsFormOpen(true)}
+            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#072418] hover:bg-[#176B4D] text-[#FDE047] text-xs font-bold transition-all shadow-xs cursor-pointer"
+          >
+            <Plus className="w-4 h-4" />
+            <span>Tambah Corporate Funder</span>
+          </button>
+        </div>
+      </div>
+
+      {/* 2. Ringkasan Finansial Treasury 4-Angka (Bersih, Rapi, Tanpa Kotak Tebal) */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 p-4 bg-white rounded-2xl border border-slate-200/80">
+        <div>
+          <span className="text-[10px] text-slate-400 uppercase tracking-wider block font-medium">
+            Total Pagu Komitmen
+          </span>
+          <span className="text-lg font-black text-slate-900 mt-0.5 block">
+            {formatCompactIDR(platformFunding.totalCommitted)}
+          </span>
+          <span className="text-[11px] text-slate-500">Anggaran TJSL Resmi</span>
         </div>
 
-        {/* 4-Stat Corporate Treasury KPI Strip */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-3 border-t border-border-subtle">
-          <div className="p-3.5 bg-surface-secondary/50 rounded-2xl border border-border-subtle">
-            <span className="text-[10px] font-semibold text-ink-muted uppercase tracking-wider block">
-              Total Komitmen Pagu
-            </span>
-            <span className="text-lg font-black text-[#072418] mt-0.5 block">
-              {formatCompactIDR(platformFunding.totalCommitted)}
-            </span>
-            <span className="text-[10px] text-ink-muted font-medium">Bujet CSR Resmi Disahkan</span>
-          </div>
-
-          <div className="p-3.5 bg-surface-secondary/50 rounded-2xl border border-border-subtle">
-            <span className="text-[10px] font-semibold text-ink-muted uppercase tracking-wider block">
-              Dana Terserap
-            </span>
-            <span className="text-lg font-black text-[#176B4D] mt-0.5 block">
-              {formatCompactIDR(platformFunding.totalDisbursed)}
-            </span>
-            <span className="text-[10px] text-emerald-700 font-semibold">
-              {platformFunding.totalCommitted > 0
-                ? `${Math.round((platformFunding.totalDisbursed / platformFunding.totalCommitted) * 100)}% Tersalurkan Lapangan`
-                : '0% Serapan'}
-            </span>
-          </div>
-
-          <div className="p-3.5 bg-surface-secondary/50 rounded-2xl border border-border-subtle">
-            <span className="text-[10px] font-semibold text-ink-muted uppercase tracking-wider block">
-              Likuiditas Saldo Bebas
-            </span>
-            <span className="text-lg font-black text-blue-700 mt-0.5 block">
-              {formatCompactIDR(platformFunding.availableUnallocatedBalance)}
-            </span>
-            <span className="text-[10px] text-blue-800 font-medium">Siap Dialokasikan ke Program</span>
-          </div>
-
-          <div className="p-3.5 bg-surface-secondary/50 rounded-2xl border border-border-subtle">
-            <span className="text-[10px] font-semibold text-ink-muted uppercase tracking-wider block">
-              Kepatuhan ESG / PROPER
-            </span>
-            <span className="text-lg font-black text-[#072418] mt-0.5 block">
-              100% WTP
-            </span>
-            <span className="text-[10px] text-emerald-700 font-semibold flex items-center gap-1">
-              <CheckCircle2 className="w-3 h-3" /> Audit Keuangan Bersih
-            </span>
-          </div>
+        <div className="border-l border-slate-100 pl-4">
+          <span className="text-[10px] text-slate-400 uppercase tracking-wider block font-medium">
+            Dana Tersalurkan
+          </span>
+          <span className="text-lg font-black text-[#176B4D] mt-0.5 block">
+            {formatCompactIDR(platformFunding.totalDisbursed)}
+          </span>
+          <span className="text-[11px] text-emerald-700 font-medium">
+            {platformFunding.totalCommitted > 0
+              ? `${Math.round((platformFunding.totalDisbursed / platformFunding.totalCommitted) * 100)}% Serapan Lapangan`
+              : '0% Serapan'}
+          </span>
         </div>
 
-        {/* Sector Filter Tabs */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-1 pt-1 no-scrollbar border-t border-border-subtle">
+        <div className="border-l border-slate-100 pl-4">
+          <span className="text-[10px] text-slate-400 uppercase tracking-wider block font-medium">
+            Saldo Siap Salur
+          </span>
+          <span className="text-lg font-black text-slate-800 mt-0.5 block">
+            {formatCompactIDR(platformFunding.availableUnallocatedBalance)}
+          </span>
+          <span className="text-[11px] text-slate-500">Likuiditas Bebas</span>
+        </div>
+
+        <div className="border-l border-slate-100 pl-4">
+          <span className="text-[10px] text-slate-400 uppercase tracking-wider block font-medium">
+            Status Audit
+          </span>
+          <span className="text-lg font-black text-slate-900 mt-0.5 block">
+            100% WTP
+          </span>
+          <span className="text-[11px] text-emerald-700 font-medium flex items-center gap-1">
+            <CheckCircle2 className="w-3 h-3" /> PROPER Compliant
+          </span>
+        </div>
+      </div>
+
+      {/* 3. Filter Sektor & Pencarian */}
+      <div className="space-y-3">
+        {/* Sektor Tabs */}
+        <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
           {sectorTabs.map((tab) => {
             const isActive = sectorFilter === tab.key;
             return (
@@ -219,8 +205,8 @@ export const FundersPage: React.FC = () => {
                 onClick={() => setSectorFilter(tab.key)}
                 className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all shrink-0 cursor-pointer ${
                   isActive
-                    ? 'bg-[#072418] text-[#FDE047] shadow-xs'
-                    : 'bg-surface-secondary/70 hover:bg-surface-secondary text-ink-muted hover:text-ink-primary'
+                    ? 'bg-[#072418] text-white shadow-xs'
+                    : 'bg-white hover:bg-slate-50 text-slate-600 border border-slate-200/80'
                 }`}
               >
                 {tab.label}
@@ -228,28 +214,26 @@ export const FundersPage: React.FC = () => {
             );
           })}
         </div>
-      </div>
 
-      {/* 2. Filter & Search Controls */}
-      <div className="bg-surface-card p-3 rounded-2xl border border-border-subtle shadow-card">
+        {/* Search Input */}
         <div className="relative">
-          <Search className="w-4 h-4 text-ink-muted absolute left-3 top-2.5" />
+          <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Cari nama perusahaan, kode bursa, sektor industri (BUMN, Swasta, Perbankan), atau domisili..."
-            className="w-full pl-9 pr-3 py-2 bg-surface-secondary/70 hover:bg-surface-secondary focus:bg-surface-card border border-border-subtle focus:border-brand-primary rounded-xl text-xs text-ink-primary placeholder:text-ink-muted focus:outline-none transition-all"
+            placeholder="Cari nama korporasi, kode emiten, tipe industri, atau domisili kantor pusat..."
+            className="w-full pl-10 pr-3 py-2.5 bg-white border border-slate-200 rounded-xl text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#176B4D] transition-colors"
           />
         </div>
       </div>
 
-      {/* 3. Corporate Funder Content Views */}
+      {/* 4. Tampilan Konten Funder (KONSEP CORPORATE TREASURY: BERSIH, LEGA, FOKUS FINANSIAL, TANPA BORDER BERLAPIS) */}
       {filteredFunders.length === 0 ? (
         <EmptyState
           icon={Building2}
           title="Funder Tidak Ditemukan"
-          description="Tidak ada perusahaan atau korporasi yang cocok dengan pencarian Anda."
+          description="Tidak ada perusahaan yang cocok dengan pencarian Anda."
           actionLabel="Tampilkan Semua Funder"
           onAction={() => {
             setSearch('');
@@ -257,8 +241,8 @@ export const FundersPage: React.FC = () => {
           }}
         />
       ) : viewMode === 'grid' ? (
-        /* KONSEP BARU: Corporate ESG Treasury Portfolio Cards (DISTINCT Carbon/Deep Forest Enterprise Styling) */
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        /* Corporate Cards (2 Kolom Bersih, Fokus Anggaran & Portofolio) */
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {filteredFunders.map((funder) => {
             const metrics = calculateFunderFunding(funder.id, fundingRecords);
             const funderPrograms = programs.filter((p) => p.funderId === funder.id);
@@ -271,135 +255,110 @@ export const FundersPage: React.FC = () => {
               <div
                 key={funder.id}
                 onClick={() => setSelectedFunder(funder)}
-                className="bg-white rounded-3xl border border-border-subtle hover:border-[#176B4D] hover:shadow-elevated transition-all duration-300 flex flex-col justify-between group cursor-pointer overflow-hidden"
+                className="bg-white rounded-2xl border border-slate-200/80 p-5 hover:border-[#176B4D] hover:shadow-sm transition-all duration-200 flex flex-col justify-between group cursor-pointer"
               >
-                <div>
-                  {/* Enterprise Dark Forest Header Banner */}
-                  <div className="bg-gradient-to-r from-[#072418] via-[#0b3323] to-[#072418] text-white p-5 space-y-3">
-                    <div className="flex items-center justify-between gap-2">
-                      <div className="flex items-center gap-2">
-                        <span className="font-mono text-[10px] font-black bg-white/15 px-2 py-0.5 rounded text-[#FDE047] border border-white/20">
+                <div className="space-y-4">
+                  {/* Top Baris: Kode, Nama Perusahaan, & Rating PROPER */}
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-2 text-[11px] text-slate-500 font-medium">
+                        <span className="font-mono font-bold text-slate-700 bg-slate-100 px-1.5 py-0.2 rounded">
                           {funder.code}
                         </span>
-                        <span className="text-[11px] font-extrabold text-white/90 uppercase tracking-wider">
-                          {funder.subType}
-                        </span>
+                        <span>•</span>
+                        <span>{funder.subType}</span>
                       </div>
-
-                      <div className="flex items-center gap-1.5 bg-emerald-950/60 border border-emerald-500/30 px-2.5 py-0.5 rounded-full text-[10px] font-bold text-emerald-300">
-                        <Award className="w-3 h-3 text-[#FDE047]" />
-                        <span>PROPER Hijau / Emas</span>
-                      </div>
-                    </div>
-
-                    <div>
-                      <h3 className="font-black text-lg text-white group-hover:text-[#FDE047] transition-colors tracking-tight">
+                      <h3 className="font-bold text-base text-slate-900 group-hover:text-[#176B4D] transition-colors truncate mt-1">
                         {funder.name}
                       </h3>
-                      <div className="flex items-center gap-1.5 text-[11px] text-white/70 mt-1">
-                        <MapPin className="w-3 h-3 text-[#FDE047] shrink-0" />
-                        <span className="truncate">{funder.region}</span>
-                      </div>
+                      <p className="text-xs text-slate-500 flex items-center gap-1 mt-0.5">
+                        <MapPin className="w-3 h-3 text-slate-400" /> {funder.region}
+                      </p>
+                    </div>
+
+                    <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 text-[11px] font-semibold shrink-0">
+                      <Award className="w-3.5 h-3.5 text-emerald-600" />
+                      <span>PROPER Hijau</span>
                     </div>
                   </div>
 
-                  {/* Treasury Utilization Bar & Financial Stats */}
-                  <div className="p-5 space-y-4">
-                    {/* Visual Segmented Progress Bar */}
-                    <div className="space-y-1.5">
-                      <div className="flex items-center justify-between text-[11px]">
-                        <span className="font-bold text-ink-secondary">Pemanfaatan Saldo TJSL</span>
-                        <span className="font-mono text-ink-muted">{disbursedPct}% Tersalurkan</span>
-                      </div>
-                      
-                      <div className="w-full h-2.5 bg-gray-100 rounded-full overflow-hidden flex">
-                        <div
-                          style={{ width: `${disbursedPct}%` }}
-                          className="bg-[#176B4D] h-full"
-                          title={`Tersalurkan: ${disbursedPct}%`}
-                        />
-                        <div
-                          style={{ width: `${Math.max(0, allocatedPct - disbursedPct)}%` }}
-                          className="bg-amber-400 h-full"
-                          title="Teralokasi Program"
-                        />
-                        <div
-                          style={{ width: `${availablePct}%` }}
-                          className="bg-blue-200 h-full"
-                          title={`Saldo Bebas: ${availablePct}%`}
-                        />
-                      </div>
+                  {/* Deskripsi Kebijakan TJSL Singkat */}
+                  <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed">
+                    {funder.description}
+                  </p>
 
-                      <div className="flex items-center justify-between text-[10px] text-ink-muted pt-0.5">
-                        <span className="flex items-center gap-1">
-                          <span className="w-2 h-2 rounded-full bg-[#176B4D]" /> Terserap
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <span className="w-2 h-2 rounded-full bg-amber-400" /> Dialokasikan
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <span className="w-2 h-2 rounded-full bg-blue-300" /> Saldo Siap Salur
-                        </span>
-                      </div>
+                  {/* Bilah Alokasi Perbendaharaan Segmen Bersih */}
+                  <div className="space-y-2 pt-1">
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="text-slate-600 font-medium">Realisasi Pagu Anggaran</span>
+                      <span className="font-mono font-bold text-[#176B4D]">{disbursedPct}% Tersalurkan</span>
                     </div>
 
-                    {/* 3-Column Financial Breakdown */}
-                    <div className="grid grid-cols-3 gap-2 p-3 rounded-2xl bg-[#F8FAF9] border border-emerald-950/5 text-center">
+                    <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden flex">
+                      <div
+                        style={{ width: `${disbursedPct}%` }}
+                        className="bg-[#176B4D] h-full"
+                        title={`Terserap: ${disbursedPct}%`}
+                      />
+                      <div
+                        style={{ width: `${Math.max(0, allocatedPct - disbursedPct)}%` }}
+                        className="bg-amber-400 h-full"
+                        title={`Dialokasikan: ${allocatedPct - disbursedPct}%`}
+                      />
+                      <div
+                        style={{ width: `${availablePct}%` }}
+                        className="bg-slate-200 h-full"
+                        title={`Saldo Bebas: ${availablePct}%`}
+                      />
+                    </div>
+
+                    {/* Angka Finansial 3 Kolom Bersih (TANPA KOTAK BERLAPIS) */}
+                    <div className="grid grid-cols-3 gap-2 pt-2 text-xs">
                       <div>
-                        <span className="text-[10px] text-ink-muted block font-medium">Komitmen Pagu</span>
-                        <span className="font-black text-sm text-[#072418] mt-0.5 block">
+                        <span className="text-[10px] text-slate-400 uppercase tracking-wider block font-medium">
+                          Pagu Komitmen
+                        </span>
+                        <span className="text-sm font-bold text-slate-900 mt-0.5 block">
                           {formatCompactIDR(metrics.committed)}
                         </span>
                       </div>
 
-                      <div className="border-x border-border-subtle px-1">
-                        <span className="text-[10px] text-ink-muted block font-medium">Tersalurkan</span>
-                        <span className="font-black text-sm text-[#176B4D] mt-0.5 block">
+                      <div className="border-l border-slate-200 pl-3">
+                        <span className="text-[10px] text-slate-400 uppercase tracking-wider block font-medium">
+                          Tersalurkan
+                        </span>
+                        <span className="text-sm font-extrabold text-[#176B4D] mt-0.5 block">
                           {formatCompactIDR(metrics.disbursed)}
                         </span>
                       </div>
 
-                      <div>
-                        <span className="text-[10px] text-ink-muted block font-medium">Saldo Bebas</span>
-                        <span className="font-black text-sm text-blue-700 mt-0.5 block">
+                      <div className="border-l border-slate-200 pl-3">
+                        <span className="text-[10px] text-slate-400 uppercase tracking-wider block font-medium">
+                          Saldo Bebas
+                        </span>
+                        <span className="text-sm font-bold text-slate-700 mt-0.5 block">
                           {formatCompactIDR(metrics.availableBalance)}
                         </span>
                       </div>
                     </div>
+                  </div>
 
-                    {/* Connected Programs Showcase */}
-                    <div className="space-y-1.5">
-                      <div className="flex items-center justify-between text-[11px]">
-                        <span className="font-bold text-ink-secondary">Inisiatif Program Didanai:</span>
-                        <span className="font-bold text-[#176B4D] text-[10px]">
-                          {funderPrograms.length} Inisiatif Aktif
-                        </span>
-                      </div>
-                      <div className="flex flex-wrap gap-1.5">
-                        {funderPrograms.length === 0 ? (
-                          <span className="text-[11px] text-ink-muted italic">Belum ada inisiatif yang terhubung</span>
-                        ) : (
-                          funderPrograms.map((p) => (
-                            <span
-                              key={p.id}
-                              className="text-[10px] font-bold px-2.5 py-1 rounded-xl bg-surface-secondary text-[#072418] border border-border-subtle truncate max-w-[200px]"
-                            >
-                              {p.title}
-                            </span>
-                          ))
-                        )}
-                      </div>
-                    </div>
+                  {/* Program yang Didanai (Inline List) */}
+                  <div className="pt-2 border-t border-slate-100 text-xs">
+                    <span className="text-slate-500 font-medium">Inisiatif Didanai: </span>
+                    <span className="text-slate-800 font-semibold">
+                      {funderPrograms.length > 0
+                        ? funderPrograms.map((p) => p.title).join(', ')
+                        : 'Belum ada program aktif'}
+                    </span>
                   </div>
                 </div>
 
-                {/* Corporate PIC & Bottom Actions */}
-                <div className="p-5 pt-3 border-t border-border-subtle flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-2 min-w-0 pr-2 text-xs">
-                    <Mail className="w-3.5 h-3.5 text-ink-muted shrink-0" />
-                    <span className="font-semibold text-ink-secondary truncate">
-                      {funder.contactPerson.name} ({funder.contactPerson.emailDemo})
-                    </span>
+                {/* Bagian Bawah: PIC & Tombol Rincian */}
+                <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between gap-3 text-xs">
+                  <div className="flex items-center gap-1.5 text-slate-500 truncate min-w-0 pr-2">
+                    <Mail className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                    <span className="truncate">{funder.contactPerson.name} ({funder.contactPerson.emailDemo})</span>
                   </div>
 
                   <button
@@ -407,10 +366,10 @@ export const FundersPage: React.FC = () => {
                       e.stopPropagation();
                       setSelectedFunder(funder);
                     }}
-                    className="px-3.5 py-1.5 rounded-xl bg-[#072418] hover:bg-[#176B4D] text-[#FDE047] font-bold text-xs transition-colors shrink-0 flex items-center gap-1 cursor-pointer"
+                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-slate-100 group-hover:bg-[#072418] text-slate-700 group-hover:text-[#FDE047] font-bold transition-colors cursor-pointer shrink-0"
                   >
-                    <span>Rincian Buku Besar</span>
-                    <ChevronRight className="w-3.5 h-3.5" />
+                    <span>Buku Besar</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </button>
                 </div>
               </div>
@@ -419,22 +378,22 @@ export const FundersPage: React.FC = () => {
         </div>
       ) : (
         /* Tabel Buku Besar TJSL Korporasi */
-        <div className="bg-surface-card rounded-3xl border border-border-subtle shadow-card overflow-hidden">
+        <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse text-xs">
               <thead>
-                <tr className="bg-[#F8FAF8] border-b border-border-subtle text-[11px] font-extrabold text-ink-secondary uppercase tracking-wider">
-                  <th className="py-3.5 px-4">Korporasi Funder</th>
-                  <th className="py-3.5 px-4">Tipe Industri</th>
-                  <th className="py-3.5 px-4">Komitmen Pagu</th>
-                  <th className="py-3.5 px-4">Tersalurkan</th>
-                  <th className="py-3.5 px-4">Saldo Bebas</th>
-                  <th className="py-3.5 px-4">Program Aktif</th>
-                  <th className="py-3.5 px-4">Status Verifikasi</th>
-                  <th className="py-3.5 px-4 text-right">Aksi</th>
+                <tr className="bg-slate-50 border-b border-slate-200 text-[11px] font-bold text-slate-600 uppercase tracking-wider">
+                  <th className="py-3 px-4">Nama Perusahaan</th>
+                  <th className="py-3 px-4">Bentuk Korporasi</th>
+                  <th className="py-3 px-4">Pagu Komitmen</th>
+                  <th className="py-3 px-4">Tersalurkan</th>
+                  <th className="py-3 px-4">Saldo Bebas</th>
+                  <th className="py-3 px-4">Program Aktif</th>
+                  <th className="py-3 px-4">Status</th>
+                  <th className="py-3 px-4 text-right">Aksi</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-border-subtle">
+              <tbody className="divide-y divide-slate-100">
                 {filteredFunders.map((funder) => {
                   const metrics = calculateFunderFunding(funder.id, fundingRecords);
                   const funderPrograms = programs.filter((p) => p.funderId === funder.id);
@@ -442,32 +401,25 @@ export const FundersPage: React.FC = () => {
                     <tr
                       key={funder.id}
                       onClick={() => setSelectedFunder(funder)}
-                      className="hover:bg-surface-secondary/50 transition-colors cursor-pointer"
+                      className="hover:bg-slate-50/70 transition-colors cursor-pointer"
                     >
-                      <td className="py-3.5 px-4">
-                        <div className="flex items-center gap-2.5">
-                          <span className="w-8 h-8 rounded-xl bg-[#072418] text-[#FDE047] font-black text-[10px] flex items-center justify-center shrink-0">
-                            {funder.code}
-                          </span>
-                          <div>
-                            <div className="font-bold text-[#072418]">{funder.name}</div>
-                            <div className="text-[10px] text-ink-muted">{funder.region}</div>
-                          </div>
-                        </div>
+                      <td className="py-3.5 px-4 font-bold text-slate-900">
+                        {funder.name}
+                        <div className="text-[10px] text-slate-400 font-normal">{funder.region}</div>
                       </td>
-                      <td className="py-3.5 px-4 font-medium text-ink-secondary">
+                      <td className="py-3.5 px-4 text-slate-600">
                         {funder.subType}
                       </td>
-                      <td className="py-3.5 px-4 font-black text-[#072418]">
+                      <td className="py-3.5 px-4 font-bold text-slate-900">
                         {formatCompactIDR(metrics.committed)}
                       </td>
                       <td className="py-3.5 px-4 font-extrabold text-[#176B4D]">
                         {formatCompactIDR(metrics.disbursed)}
                       </td>
-                      <td className="py-3.5 px-4 font-extrabold text-blue-700">
+                      <td className="py-3.5 px-4 font-bold text-slate-700">
                         {formatCompactIDR(metrics.availableBalance)}
                       </td>
-                      <td className="py-3.5 px-4 font-bold text-ink-primary">
+                      <td className="py-3.5 px-4 font-semibold text-slate-800">
                         {funderPrograms.length} Inisiatif
                       </td>
                       <td className="py-3.5 px-4">
@@ -479,9 +431,9 @@ export const FundersPage: React.FC = () => {
                             e.stopPropagation();
                             setSelectedFunder(funder);
                           }}
-                          className="px-3 py-1.5 rounded-xl bg-[#072418] text-[#FDE047] font-bold text-xs hover:bg-[#176B4D] transition-colors cursor-pointer"
+                          className="px-3 py-1.5 rounded-lg bg-[#072418] text-[#FDE047] font-bold text-xs hover:bg-[#176B4D] transition-colors cursor-pointer"
                         >
-                          Buku Besar
+                          Rincian
                         </button>
                       </td>
                     </tr>
@@ -504,22 +456,22 @@ export const FundersPage: React.FC = () => {
         >
           <div className="space-y-4 text-xs">
             <div>
-              <h4 className="font-bold text-ink-primary mb-1">Profil Korporasi & Kebijakan TJSL:</h4>
-              <p className="p-3 bg-surface-secondary/60 rounded-xl border border-border-subtle leading-relaxed text-ink-secondary">
+              <h4 className="font-bold text-slate-900 mb-1">Profil Korporasi & Kebijakan TJSL:</h4>
+              <p className="p-3 bg-slate-50 rounded-xl leading-relaxed text-slate-700">
                 {selectedFunder.description}
               </p>
             </div>
 
             <div>
-              <h4 className="font-bold text-ink-primary mb-1.5">Inisiatif Program yang Didanai:</h4>
+              <h4 className="font-bold text-slate-900 mb-1.5">Inisiatif Program yang Didanai:</h4>
               <div className="space-y-2 max-h-48 overflow-y-auto">
                 {programs
                   .filter((p) => p.funderId === selectedFunder.id)
                   .map((p) => (
-                    <div key={p.id} className="p-2.5 rounded-xl border border-border-subtle bg-surface-card flex items-center justify-between">
+                    <div key={p.id} className="p-3 rounded-xl bg-slate-50 flex items-center justify-between">
                       <div>
-                        <div className="font-bold text-ink-primary">{p.title}</div>
-                        <div className="text-[11px] text-ink-muted">
+                        <div className="font-bold text-slate-900">{p.title}</div>
+                        <div className="text-[11px] text-slate-500">
                           Alokasi: {formatCompactIDR(p.approvedBudget)} • Realisasi Serapan: {formatCompactIDR(p.disbursedAmount)}
                         </div>
                       </div>
@@ -529,17 +481,17 @@ export const FundersPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="p-3 bg-surface-secondary/40 rounded-xl border border-border-subtle space-y-1">
-              <div className="font-bold text-ink-primary">Kontak Pejabat CSR (PIC):</div>
-              <div className="text-ink-secondary">
+            <div className="p-3 bg-slate-50 rounded-xl space-y-1">
+              <div className="font-bold text-slate-900">Kontak Pejabat CSR (PIC):</div>
+              <div className="text-slate-600">
                 {selectedFunder.contactPerson.name} • {selectedFunder.contactPerson.emailDemo} • {selectedFunder.contactPerson.phoneDemo}
               </div>
             </div>
 
-            <div className="pt-3 border-t border-border-subtle flex justify-end">
+            <div className="pt-3 border-t border-slate-100 flex justify-end">
               <button
                 onClick={() => setSelectedFunder(null)}
-                className="px-4 py-2 bg-surface-secondary hover:bg-surface-muted text-ink-primary font-semibold rounded-xl cursor-pointer"
+                className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold rounded-xl cursor-pointer"
               >
                 Tutup
               </button>
@@ -558,24 +510,24 @@ export const FundersPage: React.FC = () => {
       >
         <form onSubmit={handleCreateSubmit} className="space-y-3 text-xs">
           <div>
-            <label className="block font-bold text-ink-primary mb-1">Nama Perusahaan / Korporasi *</label>
+            <label className="block font-bold text-slate-800 mb-1">Nama Perusahaan / Korporasi *</label>
             <input
               type="text"
               required
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Contoh: PT Energi Surya Nusantara Tbk"
-              className="w-full px-3 py-2 bg-surface-card border border-border-subtle focus:border-brand-primary rounded-xl text-ink-primary text-xs focus:outline-none"
+              className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-800 text-xs focus:outline-none focus:border-[#176B4D]"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block font-bold text-ink-primary mb-1">Bentuk Badan Usaha *</label>
+              <label className="block font-bold text-slate-800 mb-1">Bentuk Badan Usaha *</label>
               <select
                 value={subType}
                 onChange={(e) => setSubType(e.target.value)}
-                className="w-full px-3 py-2 bg-surface-card border border-border-subtle focus:border-brand-primary rounded-xl text-ink-primary text-xs focus:outline-none"
+                className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-800 text-xs focus:outline-none focus:border-[#176B4D]"
               >
                 <option value="BUMN">BUMN</option>
                 <option value="Swasta Nasional">Swasta Nasional</option>
@@ -586,56 +538,56 @@ export const FundersPage: React.FC = () => {
             </div>
 
             <div>
-              <label className="block font-bold text-ink-primary mb-1">Wilayah Operasional</label>
+              <label className="block font-bold text-slate-800 mb-1">Wilayah Operasional</label>
               <input
                 type="text"
                 value={region}
                 onChange={(e) => setRegion(e.target.value)}
-                className="w-full px-3 py-2 bg-surface-card border border-border-subtle focus:border-brand-primary rounded-xl text-ink-primary text-xs focus:outline-none"
+                className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-800 text-xs focus:outline-none focus:border-[#176B4D]"
               />
             </div>
           </div>
 
           <div>
-            <label className="block font-bold text-ink-primary mb-1">Fokus & Kebijakan Tanggung Jawab Sosial</label>
+            <label className="block font-bold text-slate-800 mb-1">Fokus & Kebijakan Tanggung Jawab Sosial</label>
             <textarea
               rows={2}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Jelaskan pilar keberlanjutan atau fokus CSR korporasi..."
-              className="w-full px-3 py-2 bg-surface-card border border-border-subtle focus:border-brand-primary rounded-xl text-ink-primary text-xs focus:outline-none"
+              className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-800 text-xs focus:outline-none focus:border-[#176B4D]"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block font-bold text-ink-primary mb-1">Nama PIC CSR / TJSL</label>
+              <label className="block font-bold text-slate-800 mb-1">Nama PIC CSR / TJSL</label>
               <input
                 type="text"
                 value={contactName}
                 onChange={(e) => setContactName(e.target.value)}
                 placeholder="Contoh: Dedi Mulyadi"
-                className="w-full px-3 py-2 bg-surface-card border border-border-subtle focus:border-brand-primary rounded-xl text-ink-primary text-xs focus:outline-none"
+                className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-800 text-xs focus:outline-none focus:border-[#176B4D]"
               />
             </div>
 
             <div>
-              <label className="block font-bold text-ink-primary mb-1">Email Demo PIC</label>
+              <label className="block font-bold text-slate-800 mb-1">Email Demo PIC</label>
               <input
                 type="email"
                 value={contactEmail}
                 onChange={(e) => setContactEmail(e.target.value)}
                 placeholder="dedi@perusahaan.demo"
-                className="w-full px-3 py-2 bg-surface-card border border-border-subtle focus:border-brand-primary rounded-xl text-ink-primary text-xs focus:outline-none"
+                className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-800 text-xs focus:outline-none focus:border-[#176B4D]"
               />
             </div>
           </div>
 
-          <div className="flex items-center justify-end gap-2 pt-3 border-t border-border-subtle">
+          <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100">
             <button
               type="button"
               onClick={() => setIsFormOpen(false)}
-              className="px-4 py-2 font-semibold text-ink-muted hover:text-ink-primary cursor-pointer"
+              className="px-4 py-2 font-semibold text-slate-500 hover:text-slate-800 cursor-pointer"
             >
               Batal
             </button>
@@ -643,7 +595,7 @@ export const FundersPage: React.FC = () => {
               type="submit"
               className="px-4 py-2 font-bold bg-[#072418] text-[#FDE047] rounded-xl shadow-xs cursor-pointer hover:bg-[#176B4D]"
             >
-              Simpan Funder (Demo)
+              Simpan Funder
             </button>
           </div>
         </form>

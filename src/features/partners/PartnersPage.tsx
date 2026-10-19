@@ -8,18 +8,10 @@ import {
   ShieldCheck,
   LayoutGrid,
   List,
-  Layers,
-  Coins,
-  CheckCircle2,
+  Building,
   ArrowRight,
   UserCheck,
-  Award,
-  Globe,
-  Building,
-  ExternalLink,
-  ChevronRight,
-  BadgeCheck,
-  Briefcase
+  Phone
 } from 'lucide-react';
 import { useCSRStore } from '../../context/CSRStoreContext';
 import { StatusBadge } from '../../components/ui/StatusBadge';
@@ -93,123 +85,70 @@ export const PartnersPage: React.FC = () => {
   const regionTabs = [
     { key: 'all', label: 'Semua Wilayah' },
     { key: 'Jawa', label: 'Pulau Jawa' },
-    { key: 'Sumatera', label: 'Sumatera & Riau' },
+    { key: 'Sumatera', label: 'Sumatera' },
     { key: 'Kalimantan', label: 'Kalimantan' },
     { key: 'Indonesia Timur', label: 'Sulawesi & Timur' },
   ];
 
   return (
-    <div className="space-y-5 animate-in fade-in duration-200">
-      {/* 1. Executive Header + Network Summary Ribbon */}
-      <div className="bg-surface-card rounded-3xl border border-border-subtle shadow-card p-6 space-y-5">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div className="flex items-center gap-3.5">
-            <div className="w-12 h-12 rounded-2xl bg-[#072418] text-[#FDE047] flex items-center justify-center shadow-sm shrink-0">
-              <Users className="w-6 h-6" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h1 className="text-xl sm:text-2xl font-extrabold text-[#072418] tracking-tight">
-                  Jaringan Mitra Pelaksana Lapangan
-                </h1>
-                <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-extrabold border border-emerald-300">
-                  {partners.length} Lembaga Terakreditasi
-                </span>
-              </div>
-              <p className="text-xs text-ink-muted mt-0.5">
-                Direktori yayasan, NGO, dan lembaga komunitas berlegalitas resmi dengan rekam jejak eksekusi terverifikasi.
-              </p>
-            </div>
+    <div className="space-y-6 animate-in fade-in duration-200">
+      {/* 1. Header Tenang & Rapi */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <div className="flex items-center gap-3">
+            <h1 className="text-2xl font-black text-[#072418] tracking-tight">
+              Direktori Mitra Pelaksana Lapangan
+            </h1>
+            <span className="text-xs text-slate-500 font-medium">
+              {partners.length} Lembaga Terverifikasi
+            </span>
           </div>
+          <p className="text-xs text-ink-muted mt-1 max-w-2xl leading-relaxed">
+            Jaringan yayasan sosial, lembaga konservasi, dan organisasi komunitas lokal dengan kapabilitas operasional dan legalitas terverifikasi.
+          </p>
+        </div>
 
-          <div className="flex items-center gap-2.5 self-start sm:self-auto">
-            {/* View Switcher: Paspor Kartu / Tabel */}
-            <div className="inline-flex items-center p-1 rounded-xl bg-surface-secondary border border-border-subtle">
-              <button
-                onClick={() => setViewMode('grid')}
-                className={`p-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
-                  viewMode === 'grid'
-                    ? 'bg-white text-[#072418] shadow-2xs'
-                    : 'text-ink-muted hover:text-ink-primary'
-                }`}
-                title="Tampilan Paspor Kredensial"
-              >
-                <LayoutGrid className="w-4 h-4" />
-                <span className="hidden sm:inline pr-1">Paspor Mitra</span>
-              </button>
-              <button
-                onClick={() => setViewMode('table')}
-                className={`p-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
-                  viewMode === 'table'
-                    ? 'bg-white text-[#072418] shadow-2xs'
-                    : 'text-ink-muted hover:text-ink-primary'
-                }`}
-                title="Tampilan Tabel Direktori"
-              >
-                <List className="w-4 h-4" />
-                <span className="hidden sm:inline pr-1">Tabel</span>
-              </button>
-            </div>
-
+        <div className="flex items-center gap-2.5 self-start sm:self-auto shrink-0">
+          {/* View Switcher */}
+          <div className="inline-flex items-center p-1 rounded-xl bg-slate-100">
             <button
-              onClick={() => setIsFormOpen(true)}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#072418] hover:bg-[#176B4D] text-[#FDE047] text-xs font-extrabold transition-all shadow-sm cursor-pointer"
+              onClick={() => setViewMode('grid')}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
+                viewMode === 'grid'
+                  ? 'bg-white text-[#072418] shadow-xs'
+                  : 'text-ink-muted hover:text-ink-primary'
+              }`}
             >
-              <Plus className="w-4 h-4" />
-              <span>Registrasi Mitra Baru</span>
+              <LayoutGrid className="w-3.5 h-3.5" />
+              <span>Kartu Profil</span>
+            </button>
+            <button
+              onClick={() => setViewMode('table')}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
+                viewMode === 'table'
+                  ? 'bg-white text-[#072418] shadow-xs'
+                  : 'text-ink-muted hover:text-ink-primary'
+              }`}
+            >
+              <List className="w-3.5 h-3.5" />
+              <span>Tabel</span>
             </button>
           </div>
+
+          <button
+            onClick={() => setIsFormOpen(true)}
+            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#072418] hover:bg-[#176B4D] text-[#FDE047] text-xs font-bold transition-all shadow-xs cursor-pointer"
+          >
+            <Plus className="w-4 h-4" />
+            <span>Registrasi Mitra</span>
+          </button>
         </div>
+      </div>
 
-        {/* 4-Stat Network KPI Strip */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-3 border-t border-border-subtle">
-          <div className="p-3 bg-surface-secondary/50 rounded-2xl border border-border-subtle">
-            <span className="text-[10px] font-semibold text-ink-muted uppercase tracking-wider block">
-              Mitra Terverifikasi
-            </span>
-            <span className="text-lg font-black text-[#072418] mt-0.5 block">
-              {partners.length} Organisasi
-            </span>
-            <span className="text-[10px] text-emerald-700 font-semibold flex items-center gap-1">
-              <BadgeCheck className="w-3 h-3" /> Due Diligence Lolos
-            </span>
-          </div>
-
-          <div className="p-3 bg-surface-secondary/50 rounded-2xl border border-border-subtle">
-            <span className="text-[10px] font-semibold text-ink-muted uppercase tracking-wider block">
-              Program Dikelola
-            </span>
-            <span className="text-lg font-black text-[#072418] mt-0.5 block">
-              {programs.length} Inisiatif
-            </span>
-            <span className="text-[10px] text-ink-muted">Lintas 6 Pilar Keberlanjutan</span>
-          </div>
-
-          <div className="p-3 bg-surface-secondary/50 rounded-2xl border border-border-subtle">
-            <span className="text-[10px] font-semibold text-ink-muted uppercase tracking-wider block">
-              Dana Disalurkan
-            </span>
-            <span className="text-lg font-black text-[#176B4D] mt-0.5 block">
-              {formatCompactIDR(totalPartnerDisbursed)}
-            </span>
-            <span className="text-[10px] text-ink-muted">Akuntabel & Terverifikasi</span>
-          </div>
-
-          <div className="p-3 bg-surface-secondary/50 rounded-2xl border border-border-subtle">
-            <span className="text-[10px] font-semibold text-ink-muted uppercase tracking-wider block">
-              Tingkat Kepatuhan Audit
-            </span>
-            <span className="text-lg font-black text-[#072418] mt-0.5 block">
-              99.2%
-            </span>
-            <span className="text-[10px] text-emerald-700 font-semibold flex items-center gap-1">
-              <CheckCircle2 className="w-3 h-3" /> Laporan Tepat Waktu
-            </span>
-          </div>
-        </div>
-
-        {/* Region Filter Tabs */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-1 pt-1 no-scrollbar border-t border-border-subtle">
+      {/* 2. Filter & Pencarian Sederhana */}
+      <div className="space-y-3">
+        {/* Wilayah Tabs */}
+        <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
           {regionTabs.map((tab) => {
             const isActive = regionFilter === tab.key;
             return (
@@ -218,8 +157,8 @@ export const PartnersPage: React.FC = () => {
                 onClick={() => setRegionFilter(tab.key)}
                 className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all shrink-0 cursor-pointer ${
                   isActive
-                    ? 'bg-[#072418] text-[#FDE047] shadow-xs'
-                    : 'bg-surface-secondary/70 hover:bg-surface-secondary text-ink-muted hover:text-ink-primary'
+                    ? 'bg-[#072418] text-white shadow-xs'
+                    : 'bg-white hover:bg-slate-50 text-slate-600 border border-slate-200/80'
                 }`}
               >
                 {tab.label}
@@ -227,28 +166,26 @@ export const PartnersPage: React.FC = () => {
             );
           })}
         </div>
-      </div>
 
-      {/* 2. Filter & Search Controls */}
-      <div className="bg-surface-card p-3 rounded-2xl border border-border-subtle shadow-card">
+        {/* Search Input */}
         <div className="relative">
-          <Search className="w-4 h-4 text-ink-muted absolute left-3 top-2.5" />
+          <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Cari nama lembaga, bentuk yayasan, kota/provinsi, atau kontak koordinator..."
-            className="w-full pl-9 pr-3 py-2 bg-surface-secondary/70 hover:bg-surface-secondary focus:bg-surface-card border border-border-subtle focus:border-brand-primary rounded-xl text-xs text-ink-primary placeholder:text-ink-muted focus:outline-none transition-all"
+            placeholder="Cari nama yayasan, jenis badan hukum, wilayah operasional, atau nama kontak..."
+            className="w-full pl-10 pr-3 py-2.5 bg-white border border-slate-200 rounded-xl text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#176B4D] transition-colors"
           />
         </div>
       </div>
 
-      {/* 3. Partners Content Views */}
+      {/* 3. Tampilan Konten Mitra (KONSEP INSTITUTIONAL DIRECTORY: RAPI, TENANG, HUMANIS, TANPA BORDER BERLAPIS) */}
       {filteredPartners.length === 0 ? (
         <EmptyState
           icon={Users}
           title="Mitra Tidak Ditemukan"
-          description="Tidak ada lembaga pelaksana yang cocok dengan kriteria pencarian Anda."
+          description="Tidak ada lembaga pelaksana yang cocok dengan pencarian Anda."
           actionLabel="Tampilkan Semua Mitra"
           onAction={() => {
             setSearch('');
@@ -256,8 +193,8 @@ export const PartnersPage: React.FC = () => {
           }}
         />
       ) : viewMode === 'grid' ? (
-        /* KONSEP BARU: Partner Credential Passport Cards (NO PHOTO COVERS - Distinguished Institutional Seal) */
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+        /* Institutional Cards (2 Kolom Bersih & Berwibawa) */
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {filteredPartners.map((partner) => {
             const partnerPrograms = programs.filter((p) => p.partnerId === partner.id);
             const totalDisbursed = partnerPrograms.reduce((sum, p) => sum + p.disbursedAmount, 0);
@@ -266,99 +203,81 @@ export const PartnersPage: React.FC = () => {
               <div
                 key={partner.id}
                 onClick={() => setSelectedPartner(partner)}
-                className="bg-white rounded-3xl border border-border-subtle p-5 hover:border-[#176B4D] hover:shadow-elevated transition-all duration-300 flex flex-col justify-between group cursor-pointer relative"
+                className="bg-white rounded-2xl border border-slate-200/80 p-5 hover:border-[#176B4D] hover:shadow-sm transition-all duration-200 flex flex-col justify-between group cursor-pointer"
               >
-                <div className="space-y-4">
-                  {/* Top: Embossed Crest + Tier Accreditation & Verification */}
+                <div className="space-y-3.5">
+                  {/* Top Baris: Logo Inisial + Nama Organisasi + Status */}
                   <div className="flex items-start justify-between gap-3">
-                    <div className="flex items-start gap-3">
-                      {/* Organization Crest / Monogram Seal */}
-                      <div className="w-13 h-13 rounded-2xl bg-[#072418] text-[#FDE047] font-black text-sm flex items-center justify-center shadow-md shrink-0 border border-emerald-900/40">
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className="w-11 h-11 rounded-xl bg-slate-900 text-[#FDE047] font-black text-sm flex items-center justify-center shrink-0">
                         {partner.code}
                       </div>
-
                       <div className="min-w-0">
-                        <div className="flex items-center gap-1.5 text-[10px] font-bold text-emerald-800 uppercase tracking-wider">
-                          <Award className="w-3 h-3 text-emerald-600 shrink-0" />
-                          <span>Tier 1 • Akreditasi A</span>
-                        </div>
-                        <h3 className="font-extrabold text-base text-[#072418] group-hover:text-[#176B4D] transition-colors line-clamp-1 leading-snug mt-0.5">
+                        <h3 className="font-bold text-base text-slate-900 group-hover:text-[#176B4D] transition-colors truncate">
                           {partner.name}
                         </h3>
-                        <div className="text-[11px] text-ink-muted flex items-center gap-1 mt-0.5">
-                          <Building className="w-3 h-3 text-ink-muted" />
-                          <span className="truncate">{partner.subType}</span>
-                        </div>
+                        <p className="text-xs text-slate-500 flex items-center gap-1.5 mt-0.5">
+                          <span>{partner.subType}</span>
+                          <span>•</span>
+                          <span className="flex items-center gap-1">
+                            <MapPin className="w-3 h-3 text-slate-400" /> {partner.region}
+                          </span>
+                        </p>
                       </div>
                     </div>
 
                     <StatusBadge status={partner.verificationBadge} size="sm" />
                   </div>
 
-                  {/* Coverage Territory & HQ */}
-                  <div className="flex items-center gap-1.5 text-xs text-ink-secondary bg-surface-secondary/60 px-3 py-1.5 rounded-xl">
-                    <MapPin className="w-3.5 h-3.5 text-[#176B4D] shrink-0" />
-                    <span className="font-semibold truncate">{partner.region}</span>
-                  </div>
+                  {/* Deskripsi Rekam Jejak (Enak Dibaca, Bersahaja) */}
+                  <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed">
+                    {partner.description}
+                  </p>
 
-                  {/* Focus Areas Expertise Badges */}
-                  <div className="space-y-1">
-                    <span className="text-[10px] font-semibold text-ink-muted uppercase tracking-wider block">
-                      Pilar Keahlian Lapangan:
-                    </span>
-                    <div className="flex flex-wrap gap-1.5">
-                      {partner.focusAreas.map((cat) => {
-                        const c = CATEGORY_LABELS[cat];
-                        return (
-                          <span
-                            key={cat}
-                            className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full border ${
-                              c?.badgeBg || 'bg-gray-50'
-                            }`}
-                          >
-                            {c?.label || cat}
-                          </span>
-                        );
-                      })}
-                    </div>
+                  {/* Sektor Fokus (Pills Lembut, Tanpa Border Tebal) */}
+                  <div className="flex flex-wrap gap-1.5 pt-0.5">
+                    {partner.focusAreas.map((cat) => {
+                      const c = CATEGORY_LABELS[cat];
+                      return (
+                        <span
+                          key={cat}
+                          className="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700"
+                        >
+                          {c?.label || cat}
+                        </span>
+                      );
+                    })}
                   </div>
+                </div>
 
-                  {/* Clean 3-Track Record Gauges (No heavy box containers) */}
-                  <div className="pt-3 border-t border-border-subtle grid grid-cols-3 gap-2 text-center text-xs">
+                {/* Bagian Bawah: Baris Metrik Bersih & PIC */}
+                <div className="mt-4 pt-4 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <div className="flex items-center gap-4 text-xs">
                     <div>
-                      <span className="text-[10px] text-ink-muted block font-medium">Program Aktif</span>
-                      <span className="font-black text-sm text-[#072418] mt-0.5 block">
+                      <span className="text-[10px] text-slate-400 uppercase tracking-wider block font-medium">
+                        Program Aktif
+                      </span>
+                      <span className="text-sm font-bold text-slate-800">
                         {partnerPrograms.length} Inisiatif
                       </span>
                     </div>
 
-                    <div className="border-x border-border-subtle px-1">
-                      <span className="text-[10px] text-ink-muted block font-medium">Dana Dikelola</span>
-                      <span className="font-black text-sm text-[#176B4D] mt-0.5 block">
+                    <div className="border-l border-slate-200 pl-4">
+                      <span className="text-[10px] text-slate-400 uppercase tracking-wider block font-medium">
+                        Dana Tersalurkan
+                      </span>
+                      <span className="text-sm font-extrabold text-[#176B4D]">
                         {formatCompactIDR(totalDisbursed)}
                       </span>
                     </div>
 
-                    <div>
-                      <span className="text-[10px] text-ink-muted block font-medium">Audit Mutu</span>
-                      <span className="font-black text-sm text-emerald-700 mt-0.5 block">
-                        98.5%
+                    <div className="border-l border-slate-200 pl-4 hidden sm:block">
+                      <span className="text-[10px] text-slate-400 uppercase tracking-wider block font-medium">
+                        Koordinator
                       </span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Ground Coordinator & Action CTA */}
-                <div className="mt-4 pt-3 border-t border-border-subtle flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-2 min-w-0 pr-2">
-                    <div className="w-6 h-6 rounded-full bg-brand-mint text-brand-primary text-[10px] font-bold flex items-center justify-center shrink-0">
-                      {partner.contactPerson.name.slice(0, 2).toUpperCase()}
-                    </div>
-                    <div className="truncate">
-                      <div className="text-[11px] font-bold text-ink-primary truncate">
+                      <span className="text-xs font-semibold text-slate-700 truncate max-w-[120px] block">
                         {partner.contactPerson.name}
-                      </div>
-                      <div className="text-[10px] text-ink-muted">Koordinator Lapangan</div>
+                      </span>
                     </div>
                   </div>
 
@@ -367,10 +286,10 @@ export const PartnersPage: React.FC = () => {
                       e.stopPropagation();
                       setSelectedPartner(partner);
                     }}
-                    className="px-3.5 py-1.5 rounded-xl bg-surface-secondary group-hover:bg-[#072418] text-ink-primary group-hover:text-[#FDE047] font-extrabold text-xs transition-colors shrink-0 flex items-center gap-1 cursor-pointer"
+                    className="inline-flex items-center justify-center gap-1 px-3 py-1.5 rounded-xl bg-slate-100 group-hover:bg-[#072418] text-slate-700 group-hover:text-[#FDE047] text-xs font-bold transition-colors cursor-pointer self-start sm:self-auto"
                   >
-                    <span>Paspor</span>
-                    <ChevronRight className="w-3.5 h-3.5" />
+                    <span>Profil Mitra</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </button>
                 </div>
               </div>
@@ -379,21 +298,22 @@ export const PartnersPage: React.FC = () => {
         </div>
       ) : (
         /* Tabel Direktori */
-        <div className="bg-surface-card rounded-3xl border border-border-subtle shadow-card overflow-hidden">
+        <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse text-xs">
               <thead>
-                <tr className="bg-[#F8FAF8] border-b border-border-subtle text-[11px] font-extrabold text-ink-secondary uppercase tracking-wider">
-                  <th className="py-3.5 px-4">Lembaga & Legalitas</th>
-                  <th className="py-3.5 px-4">Wilayah Operasional</th>
-                  <th className="py-3.5 px-4">Fokus Sektor</th>
-                  <th className="py-3.5 px-4">Program</th>
-                  <th className="py-3.5 px-4">Dana Tersalurkan</th>
-                  <th className="py-3.5 px-4">Status Akreditasi</th>
-                  <th className="py-3.5 px-4 text-right">Aksi</th>
+                <tr className="bg-slate-50 border-b border-slate-200 text-[11px] font-bold text-slate-600 uppercase tracking-wider">
+                  <th className="py-3 px-4">Nama Lembaga</th>
+                  <th className="py-3 px-4">Bentuk Badan Hukum</th>
+                  <th className="py-3 px-4">Wilayah Kerja</th>
+                  <th className="py-3 px-4">Program Aktif</th>
+                  <th className="py-3 px-4">Dana Terkelola</th>
+                  <th className="py-3 px-4">Koordinator</th>
+                  <th className="py-3 px-4">Status</th>
+                  <th className="py-3 px-4 text-right">Aksi</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-border-subtle">
+              <tbody className="divide-y divide-slate-100">
                 {filteredPartners.map((partner) => {
                   const partnerPrograms = programs.filter((p) => p.partnerId === partner.id);
                   const totalDisbursed = partnerPrograms.reduce((sum, p) => sum + p.disbursedAmount, 0);
@@ -401,39 +321,25 @@ export const PartnersPage: React.FC = () => {
                     <tr
                       key={partner.id}
                       onClick={() => setSelectedPartner(partner)}
-                      className="hover:bg-surface-secondary/50 transition-colors cursor-pointer"
+                      className="hover:bg-slate-50/70 transition-colors cursor-pointer"
                     >
-                      <td className="py-3.5 px-4">
-                        <div className="flex items-center gap-2.5">
-                          <span className="w-8 h-8 rounded-xl bg-[#072418] text-[#FDE047] font-black text-[10px] flex items-center justify-center shrink-0">
-                            {partner.code}
-                          </span>
-                          <div>
-                            <div className="font-bold text-[#072418]">{partner.name}</div>
-                            <div className="text-[10px] text-ink-muted">{partner.subType}</div>
-                          </div>
-                        </div>
+                      <td className="py-3.5 px-4 font-bold text-slate-900">
+                        {partner.name}
                       </td>
-                      <td className="py-3.5 px-4 font-medium text-ink-secondary">
+                      <td className="py-3.5 px-4 text-slate-600">
+                        {partner.subType}
+                      </td>
+                      <td className="py-3.5 px-4 text-slate-600">
                         {partner.region}
                       </td>
-                      <td className="py-3.5 px-4">
-                        <div className="flex flex-wrap gap-1">
-                          {partner.focusAreas.map((cat) => {
-                            const c = CATEGORY_LABELS[cat];
-                            return (
-                              <span key={cat} className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${c?.badgeBg || 'bg-gray-50'}`}>
-                                {c?.label || cat}
-                              </span>
-                            );
-                          })}
-                        </div>
-                      </td>
-                      <td className="py-3.5 px-4 font-bold text-ink-primary">
-                        {partnerPrograms.length} Inisiatif
+                      <td className="py-3.5 px-4 font-bold text-slate-800">
+                        {partnerPrograms.length}
                       </td>
                       <td className="py-3.5 px-4 font-extrabold text-[#176B4D]">
                         {formatCompactIDR(totalDisbursed)}
+                      </td>
+                      <td className="py-3.5 px-4 text-slate-600">
+                        {partner.contactPerson.name}
                       </td>
                       <td className="py-3.5 px-4">
                         <StatusBadge status={partner.verificationBadge} size="sm" />
@@ -444,9 +350,9 @@ export const PartnersPage: React.FC = () => {
                             e.stopPropagation();
                             setSelectedPartner(partner);
                           }}
-                          className="px-3 py-1.5 rounded-xl bg-[#072418] text-[#FDE047] font-bold text-xs hover:bg-[#176B4D] transition-colors cursor-pointer"
+                          className="px-3 py-1.5 rounded-lg bg-[#072418] text-[#FDE047] font-bold text-xs hover:bg-[#176B4D] transition-colors cursor-pointer"
                         >
-                          Paspor
+                          Detail
                         </button>
                       </td>
                     </tr>
@@ -468,32 +374,32 @@ export const PartnersPage: React.FC = () => {
           maxWidth="lg"
         >
           <div className="space-y-4 text-xs">
-            <div className="flex items-center justify-between p-3.5 bg-brand-mint/50 border border-emerald-200 rounded-2xl">
-              <span className="font-bold text-brand-primary flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-brand-emerald" />
-                Verifikasi Due Diligence Universa (Demo)
+            <div className="flex items-center justify-between p-3.5 bg-emerald-50 rounded-xl">
+              <span className="font-bold text-emerald-900 flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-emerald-700" />
+                Legalitas & Verifikasi Lapangan Teruji
               </span>
               <StatusBadge status={selectedPartner.verificationBadge} size="sm" />
             </div>
 
             <div>
-              <h4 className="font-bold text-ink-primary mb-1">Profil & Rekam Jejak Lapangan:</h4>
-              <p className="p-3 bg-surface-secondary/60 rounded-xl border border-border-subtle leading-relaxed text-ink-secondary">
+              <h4 className="font-bold text-slate-900 mb-1">Profil & Rekam Jejak Lembaga:</h4>
+              <p className="p-3 bg-slate-50 rounded-xl leading-relaxed text-slate-700">
                 {selectedPartner.description}
               </p>
             </div>
 
             <div>
-              <h4 className="font-bold text-ink-primary mb-1.5">Program CSR yang Sedang Dikelola:</h4>
+              <h4 className="font-bold text-slate-900 mb-1.5">Inisiatif CSR yang Dikelola:</h4>
               <div className="space-y-2 max-h-48 overflow-y-auto">
                 {programs
                   .filter((p) => p.partnerId === selectedPartner.id)
                   .map((p) => (
-                    <div key={p.id} className="p-2.5 rounded-xl border border-border-subtle bg-surface-card flex items-center justify-between">
+                    <div key={p.id} className="p-3 rounded-xl bg-slate-50 flex items-center justify-between">
                       <div>
-                        <div className="font-bold text-ink-primary">{p.title}</div>
-                        <div className="text-[11px] text-ink-muted">
-                          Pagu: {formatCompactIDR(p.approvedBudget)} • Serapan: {formatCompactIDR(p.disbursedAmount)}
+                        <div className="font-bold text-slate-900">{p.title}</div>
+                        <div className="text-[11px] text-slate-500">
+                          Pagu: {formatCompactIDR(p.approvedBudget)} • Realisasi: {formatCompactIDR(p.disbursedAmount)}
                         </div>
                       </div>
                       <StatusBadge status={p.status} size="sm" />
@@ -502,17 +408,17 @@ export const PartnersPage: React.FC = () => {
               </div>
             </div>
 
-            <div className="p-3 bg-surface-secondary/40 rounded-xl border border-border-subtle space-y-1">
-              <div className="font-bold text-ink-primary">Kontak Personel Lapangan (PIC):</div>
-              <div className="text-ink-secondary">
+            <div className="p-3 bg-slate-50 rounded-xl space-y-1">
+              <div className="font-bold text-slate-900">Kontak Personel Lapangan (PIC):</div>
+              <div className="text-slate-600">
                 {selectedPartner.contactPerson.name} • {selectedPartner.contactPerson.emailDemo} • {selectedPartner.contactPerson.phoneDemo}
               </div>
             </div>
 
-            <div className="pt-3 border-t border-border-subtle flex justify-end">
+            <div className="pt-3 border-t border-slate-100 flex justify-end">
               <button
                 onClick={() => setSelectedPartner(null)}
-                className="px-4 py-2 bg-surface-secondary hover:bg-surface-muted text-ink-primary font-semibold rounded-xl cursor-pointer"
+                className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold rounded-xl cursor-pointer"
               >
                 Tutup
               </button>
@@ -531,24 +437,24 @@ export const PartnersPage: React.FC = () => {
       >
         <form onSubmit={handleCreateSubmit} className="space-y-3 text-xs">
           <div>
-            <label className="block font-bold text-ink-primary mb-1">Nama Lembaga / Yayasan *</label>
+            <label className="block font-bold text-slate-800 mb-1">Nama Lembaga / Yayasan *</label>
             <input
               type="text"
               required
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Contoh: Yayasan Konservasi Bumi Biru"
-              className="w-full px-3 py-2 bg-surface-card border border-border-subtle focus:border-brand-primary rounded-xl text-ink-primary text-xs focus:outline-none"
+              className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-800 text-xs focus:outline-none focus:border-[#176B4D]"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block font-bold text-ink-primary mb-1">Bentuk Badan Hukum *</label>
+              <label className="block font-bold text-slate-800 mb-1">Bentuk Badan Hukum *</label>
               <select
                 value={subType}
                 onChange={(e) => setSubType(e.target.value)}
-                className="w-full px-3 py-2 bg-surface-card border border-border-subtle focus:border-brand-primary rounded-xl text-ink-primary text-xs focus:outline-none"
+                className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-800 text-xs focus:outline-none focus:border-[#176B4D]"
               >
                 <option value="Yayasan Sosial">Yayasan Sosial</option>
                 <option value="Lembaga Konservasi">Lembaga Konservasi</option>
@@ -559,69 +465,69 @@ export const PartnersPage: React.FC = () => {
             </div>
 
             <div>
-              <label className="block font-bold text-ink-primary mb-1">Wilayah Kerja / Posko *</label>
+              <label className="block font-bold text-slate-800 mb-1">Wilayah Kerja / Posko *</label>
               <input
                 type="text"
                 required
                 value={region}
                 onChange={(e) => setRegion(e.target.value)}
                 placeholder="Contoh: Jawa Barat & Banten"
-                className="w-full px-3 py-2 bg-surface-card border border-border-subtle focus:border-brand-primary rounded-xl text-ink-primary text-xs focus:outline-none"
+                className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-800 text-xs focus:outline-none focus:border-[#176B4D]"
               />
             </div>
           </div>
 
           <div>
-            <label className="block font-bold text-ink-primary mb-1">Deskripsi Singkat Profil & Pengalaman</label>
+            <label className="block font-bold text-slate-800 mb-1">Deskripsi Singkat Profil & Pengalaman</label>
             <textarea
               rows={2}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Jelaskan spesialisasi tim lapangan dan portofolio kegiatan..."
-              className="w-full px-3 py-2 bg-surface-card border border-border-subtle focus:border-brand-primary rounded-xl text-ink-primary text-xs focus:outline-none"
+              className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-800 text-xs focus:outline-none focus:border-[#176B4D]"
             />
           </div>
 
           <div className="grid grid-cols-3 gap-3">
             <div>
-              <label className="block font-bold text-ink-primary mb-1">Nama PIC Koordinator</label>
+              <label className="block font-bold text-slate-800 mb-1">Nama PIC Koordinator</label>
               <input
                 type="text"
                 value={contactName}
                 onChange={(e) => setContactName(e.target.value)}
                 placeholder="Dra. Siti Rahmawati"
-                className="w-full px-3 py-2 bg-surface-card border border-border-subtle focus:border-brand-primary rounded-xl text-ink-primary text-xs focus:outline-none"
+                className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-800 text-xs focus:outline-none focus:border-[#176B4D]"
               />
             </div>
 
             <div>
-              <label className="block font-bold text-ink-primary mb-1">Email Demo</label>
+              <label className="block font-bold text-slate-800 mb-1">Email Demo</label>
               <input
                 type="email"
                 value={contactEmail}
                 onChange={(e) => setContactEmail(e.target.value)}
                 placeholder="siti@lembaga.demo"
-                className="w-full px-3 py-2 bg-surface-card border border-border-subtle focus:border-brand-primary rounded-xl text-ink-primary text-xs focus:outline-none"
+                className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-800 text-xs focus:outline-none focus:border-[#176B4D]"
               />
             </div>
 
             <div>
-              <label className="block font-bold text-ink-primary mb-1">No. Kontak / HP</label>
+              <label className="block font-bold text-slate-800 mb-1">No. Kontak / HP</label>
               <input
                 type="text"
                 value={contactPhone}
                 onChange={(e) => setContactPhone(e.target.value)}
                 placeholder="+62 812-..."
-                className="w-full px-3 py-2 bg-surface-card border border-border-subtle focus:border-brand-primary rounded-xl text-ink-primary text-xs focus:outline-none"
+                className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-800 text-xs focus:outline-none focus:border-[#176B4D]"
               />
             </div>
           </div>
 
-          <div className="flex items-center justify-end gap-2 pt-3 border-t border-border-subtle">
+          <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100">
             <button
               type="button"
               onClick={() => setIsFormOpen(false)}
-              className="px-4 py-2 font-semibold text-ink-muted hover:text-ink-primary cursor-pointer"
+              className="px-4 py-2 font-semibold text-slate-500 hover:text-slate-800 cursor-pointer"
             >
               Batal
             </button>
@@ -629,7 +535,7 @@ export const PartnersPage: React.FC = () => {
               type="submit"
               className="px-4 py-2 font-bold bg-[#072418] text-[#FDE047] rounded-xl shadow-xs cursor-pointer hover:bg-[#176B4D]"
             >
-              Simpan Mitra (Demo)
+              Simpan Mitra
             </button>
           </div>
         </form>
