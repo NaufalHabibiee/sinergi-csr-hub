@@ -53,7 +53,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const sidebarContent = (
     <div className="flex flex-col h-full bg-surface-card border-r border-border-subtle">
       {/* Brand Logo & Wordmark */}
-      <div className="flex items-center justify-between px-5 py-4 border-b border-border-subtle">
+      <div className="flex items-center justify-between px-5 h-16 border-b border-border-subtle shrink-0">
         <NavLink 
           to="/" 
           onClick={onCloseMobile}
@@ -148,11 +148,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
     <>
       {/* Desktop Sidebar */}
       <aside
-        className={`hidden md:block transition-all duration-300 ease-in-out shrink-0 z-30 ${
+        className={`hidden md:block sticky top-0 h-screen transition-all duration-300 ease-in-out shrink-0 z-30 ${
           collapsed ? 'w-20' : 'w-64'
         }`}
       >
-        <div className="fixed top-0 bottom-0 z-30 pt-9" style={{ width: collapsed ? '5rem' : '16rem' }}>
+        <div className="h-full w-full">
           {sidebarContent}
         </div>
       </aside>
@@ -164,7 +164,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             className="fixed inset-0 bg-ink-primary/50 backdrop-blur-xs transition-opacity"
             onClick={onCloseMobile}
           />
-          <div className="fixed inset-y-0 left-0 w-72 max-w-[85vw] shadow-elevated z-50">
+          <div className="fixed inset-y-0 left-0 w-72 max-w-[85vw] shadow-elevated z-50 h-full">
             {sidebarContent}
           </div>
         </div>
