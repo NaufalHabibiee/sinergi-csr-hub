@@ -3,15 +3,13 @@ import {
   Users,
   Plus,
   Search,
-  MapPin,
-  Mail,
-  ShieldCheck,
+  SlidersHorizontal,
+  ArrowUpDown,
+  MoreHorizontal,
+  ChevronLeft,
+  ChevronRight,
   LayoutGrid,
-  List,
-  Building,
-  ArrowRight,
-  UserCheck,
-  Phone
+  List
 } from 'lucide-react';
 import { useCSRStore } from '../../context/CSRStoreContext';
 import { StatusBadge } from '../../components/ui/StatusBadge';
@@ -25,7 +23,11 @@ export const PartnersPage: React.FC = () => {
 
   const [search, setSearch] = useState('');
   const [regionFilter, setRegionFilter] = useState('all');
-  const [viewMode, setViewMode] = useState<'grid' | 'table'>('grid');
+  const [sortBy, setSortBy] = useState<'name' | 'programs'>('programs');
+  const [viewMode, setViewMode] = useState<'table' | 'grid'>('table');
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 7;
+
   const [selectedPartner, setSelectedPartner] = useState<Organization | null>(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
 
@@ -37,10 +39,10 @@ export const PartnersPage: React.FC = () => {
   const [contactName, setContactName] = useState('');
   const [contactEmail, setContactEmail] = useState('');
   const [contactPhone, setContactPhone] = useState('');
-  const [selectedFocus, setSelectedFocus] = useState<ProgramCategory[]>(['lingkungan']);
+  const [selectedFocus] = useState<ProgramCategory[]>(['lingkungan']);
 
   const filteredPartners = useMemo(() => {
-    return partners.filter((p) => {
+    const list = partners.filter((p) => {
       const matchesSearch =
         p.name.toLowerCase().includes(search.toLowerCase()) ||
         p.subType.toLowerCase().includes(search.toLowerCase()) ||
@@ -49,7 +51,20 @@ export const PartnersPage: React.FC = () => {
         regionFilter === 'all' || p.region.toLowerCase().includes(regionFilter.toLowerCase());
       return matchesSearch && matchesRegion;
     });
-  }, [partners, search, regionFilter]);
+
+    return list.sort((a, b) => {
+      if (sortBy === 'name') return a.name.localeCompare(b.name);
+      const countA = programs.filter((pr) => pr.partnerId === a.id).length;
+      const countB = programs.filter((pr) => pr.partnerId === b.id).length;
+      return countB - countA;
+    });
+  }, [partners, programs, search, regionFilter, sortBy]);
+
+  const totalPages = Math.max(1, Math.ceil(filteredPartners.length / pageSize));
+  const paginatedPartners = filteredPartners.slice(
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize
+  );
 
   const totalPartnerDisbursed = useMemo(
     () => programs.reduce((sum, p) => sum + p.disbursedAmount, 0),
@@ -82,277 +97,282 @@ export const PartnersPage: React.FC = () => {
     setRegion('');
   };
 
-  const regionTabs = [
-    { key: 'all', label: 'Semua Wilayah' },
-    { key: 'Jawa', label: 'Pulau Jawa' },
-    { key: 'Sumatera', label: 'Sumatera' },
-    { key: 'Kalimantan', label: 'Kalimantan' },
-    { key: 'Indonesia Timur', label: 'Sulawesi & Timur' },
-  ];
-
   return (
-    <div className="space-y-6 animate-in fade-in duration-200">
-      {/* 1. Header Tenang & Rapi */}
+    <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.04)] border border-slate-100/80 space-y-6 animate-in fade-in duration-200">
+      {/* 1. Header Bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <div className="flex items-center gap-3">
-            <h1 className="text-2xl font-black text-[#072418] tracking-tight">
-              Direktori Mitra Pelaksana Lapangan
-            </h1>
-            <span className="text-xs text-slate-500 font-medium">
-              {partners.length} Lembaga Terverifikasi
-            </span>
+        <h1 className="text-xl font-extrabold text-slate-900 tracking-tight">
+          Mitra Pelaksana Lapangan
+        </h1>
+
+        <button
+          onClick={() => setIsFormOpen(true)}
+          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#176B4D] hover:bg-[#0E4D36] text-white font-semibold text-xs transition-all cursor-pointer shadow-xs self-start sm:self-auto"
+        >
+          <Plus className="w-4 h-4" />
+          Registrasi Mitra Baru
+        </button>
+      </div>
+
+      {/* 2. 4 Soft Pastel Summary Cards with Sparklines */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* Card 1: Total Mitra (Soft Mint) */}
+        <div className="rounded-2xl bg-[#EBF6F1] p-5 flex items-center justify-between">
+          <div>
+            <div className="text-xs font-medium text-slate-500">Mitra Terdaftar</div>
+            <div className="text-2xl font-extrabold text-slate-900 mt-1">
+              {partners.length}
+            </div>
+            <div className="text-[11px] font-bold text-[#176B4D] mt-1">
+              +16% <span className="font-normal text-slate-400">tahun ini</span>
+            </div>
           </div>
-          <p className="text-xs text-ink-muted mt-1 max-w-2xl leading-relaxed">
-            Jaringan yayasan sosial, lembaga konservasi, dan organisasi komunitas lokal dengan kapabilitas operasional dan legalitas terverifikasi.
-          </p>
+          <svg viewBox="0 0 80 36" className="w-20 h-9 overflow-visible shrink-0">
+            <path
+              d="M2,28 C16,24 26,14 40,18 C54,22 64,6 78,8"
+              fill="none"
+              stroke="#176B4D"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+            />
+          </svg>
         </div>
 
-        <div className="flex items-center gap-2.5 self-start sm:self-auto shrink-0">
-          {/* View Switcher */}
-          <div className="inline-flex items-center p-1 rounded-xl bg-slate-100">
-            <button
-              onClick={() => setViewMode('grid')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
-                viewMode === 'grid'
-                  ? 'bg-white text-[#072418] shadow-xs'
-                  : 'text-ink-muted hover:text-ink-primary'
-              }`}
+        {/* Card 2: Terverifikasi (Soft Cream) */}
+        <div className="rounded-2xl bg-[#FEF6E7] p-5 flex items-center justify-between">
+          <div>
+            <div className="text-xs font-medium text-slate-500">Terverifikasi</div>
+            <div className="text-2xl font-extrabold text-slate-900 mt-1">
+              100%
+            </div>
+            <div className="text-[11px] font-bold text-[#D97706] mt-1">
+              Audit <span className="font-normal text-slate-400">lengkap</span>
+            </div>
+          </div>
+          <svg viewBox="0 0 80 36" className="w-20 h-9 overflow-visible shrink-0">
+            <path
+              d="M2,24 C18,16 30,26 46,14 C60,6 68,14 78,6"
+              fill="none"
+              stroke="#F59E0B"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+            />
+          </svg>
+        </div>
+
+        {/* Card 3: Program Dikelola (Soft Teal) */}
+        <div className="rounded-2xl bg-[#EBF7F5] p-5 flex items-center justify-between">
+          <div>
+            <div className="text-xs font-medium text-slate-500">Program Dikelola</div>
+            <div className="text-2xl font-extrabold text-slate-900 mt-1">
+              {programs.length}
+            </div>
+            <div className="text-[11px] font-bold text-[#0D9488] mt-1">
+              +24% <span className="font-normal text-slate-400">aktif</span>
+            </div>
+          </div>
+          <svg viewBox="0 0 80 36" className="w-20 h-9 overflow-visible shrink-0">
+            <path
+              d="M2,30 C18,26 32,18 48,14 C62,10 70,12 78,4"
+              fill="none"
+              stroke="#14B8A6"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+            />
+          </svg>
+        </div>
+
+        {/* Card 4: Dana Dikelola (Soft Lavender) */}
+        <div className="rounded-2xl bg-[#F3F1FA] p-5 flex items-center justify-between">
+          <div>
+            <div className="text-xs font-medium text-slate-500">Dana Tersalurkan</div>
+            <div className="text-xl font-extrabold text-slate-900 mt-1">
+              {formatCompactIDR(totalPartnerDisbursed)}
+            </div>
+            <div className="text-[11px] font-bold text-[#6366F1] mt-1">
+              +18% <span className="font-normal text-slate-400">realisasi</span>
+            </div>
+          </div>
+          <svg viewBox="0 0 80 36" className="w-20 h-9 overflow-visible shrink-0">
+            <path
+              d="M2,26 C18,28 28,12 44,18 C58,22 68,8 78,10"
+              fill="none"
+              stroke="#8B5CF6"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+            />
+          </svg>
+        </div>
+      </div>
+
+      {/* 3. Minimalist Search, Filter & Sort Controls */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 pt-1">
+        <div className="flex flex-wrap items-center gap-2.5 flex-1">
+          {/* Search Input */}
+          <div className="relative w-full sm:w-64">
+            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => {
+                setSearch(e.target.value);
+                setCurrentPage(1);
+              }}
+              placeholder="Cari mitra pelaksana..."
+              className="w-full pl-9 pr-4 py-2 bg-slate-50/90 rounded-xl text-xs text-slate-700 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-[#176B4D]/15 transition-all"
+            />
+          </div>
+
+          {/* Region Filter Pill */}
+          <div className="inline-flex items-center gap-1.5 px-3 py-2 bg-slate-50/90 rounded-xl text-xs text-slate-600">
+            <SlidersHorizontal className="w-3.5 h-3.5 text-slate-400" />
+            <select
+              value={regionFilter}
+              onChange={(e) => {
+                setRegionFilter(e.target.value);
+                setCurrentPage(1);
+              }}
+              className="bg-transparent font-medium text-slate-700 focus:outline-none cursor-pointer"
             >
-              <LayoutGrid className="w-3.5 h-3.5" />
-              <span>Kartu Profil</span>
-            </button>
+              <option value="all">Semua Wilayah</option>
+              <option value="Jawa">Pulau Jawa</option>
+              <option value="Sumatera">Sumatera</option>
+              <option value="Kalimantan">Kalimantan</option>
+              <option value="Indonesia Timur">Sulawesi & Timur</option>
+            </select>
+          </div>
+        </div>
+
+        {/* Right: View Mode + Sort */}
+        <div className="flex items-center gap-2 self-end md:self-auto">
+          <div className="inline-flex items-center p-1 bg-slate-50 rounded-xl">
             <button
               onClick={() => setViewMode('table')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer ${
+              className={`p-1.5 rounded-lg transition-all cursor-pointer ${
                 viewMode === 'table'
-                  ? 'bg-white text-[#072418] shadow-xs'
-                  : 'text-ink-muted hover:text-ink-primary'
+                  ? 'bg-white text-[#176B4D] shadow-2xs'
+                  : 'text-slate-400 hover:text-slate-600'
               }`}
+              title="Tampilan Tabel"
             >
               <List className="w-3.5 h-3.5" />
-              <span>Tabel</span>
+            </button>
+            <button
+              onClick={() => setViewMode('grid')}
+              className={`p-1.5 rounded-lg transition-all cursor-pointer ${
+                viewMode === 'grid'
+                  ? 'bg-white text-[#176B4D] shadow-2xs'
+                  : 'text-slate-400 hover:text-slate-600'
+              }`}
+              title="Tampilan Kartu"
+            >
+              <LayoutGrid className="w-3.5 h-3.5" />
             </button>
           </div>
 
-          <button
-            onClick={() => setIsFormOpen(true)}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#072418] hover:bg-[#176B4D] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
-          >
-            <Plus className="w-4 h-4" />
-            <span>Registrasi Mitra</span>
-          </button>
+          <div className="inline-flex items-center gap-1.5 px-3 py-2 bg-slate-50/90 rounded-xl text-xs text-slate-600">
+            <ArrowUpDown className="w-3.5 h-3.5 text-slate-400" />
+            <span className="text-slate-400">Urutkan:</span>
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value as 'name' | 'programs')}
+              className="bg-transparent font-semibold text-slate-800 focus:outline-none cursor-pointer"
+            >
+              <option value="programs">Program Terbanyak</option>
+              <option value="name">Nama Lembaga</option>
+            </select>
+          </div>
         </div>
       </div>
 
-      {/* 2. Filter & Pencarian Sederhana */}
-      <div className="space-y-3">
-        {/* Wilayah Tabs */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
-          {regionTabs.map((tab) => {
-            const isActive = regionFilter === tab.key;
-            return (
-              <button
-                key={tab.key}
-                onClick={() => setRegionFilter(tab.key)}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all shrink-0 cursor-pointer ${
-                  isActive
-                    ? 'bg-[#072418] text-white shadow-xs'
-                    : 'bg-white hover:bg-slate-50 text-slate-600 border border-slate-200/80'
-                }`}
-              >
-                {tab.label}
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Search Input */}
-        <div className="relative">
-          <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
-          <input
-            type="text"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Cari nama yayasan, jenis badan hukum, wilayah operasional, atau nama kontak..."
-            className="w-full pl-10 pr-3 py-2.5 bg-white border border-slate-200 rounded-xl text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#176B4D] transition-colors"
-          />
-        </div>
-      </div>
-
-      {/* 3. Tampilan Konten Mitra (KONSEP INSTITUTIONAL DIRECTORY: RAPI, TENANG, HUMANIS, TANPA BORDER BERLAPIS) */}
+      {/* 4. Data Display */}
       {filteredPartners.length === 0 ? (
         <EmptyState
           icon={Users}
-          title="Mitra Tidak Ditemukan"
-          description="Tidak ada lembaga pelaksana yang cocok dengan pencarian Anda."
-          actionLabel="Tampilkan Semua Mitra"
+          title="Mitra tidak ditemukan"
+          description="Tidak ada mitra pelaksana yang cocok dengan pencarian Anda."
+          actionLabel="Reset Filter"
           onAction={() => {
             setSearch('');
             setRegionFilter('all');
           }}
         />
-      ) : viewMode === 'grid' ? (
-        /* Institutional Cards (2 Kolom Bersih & Berwibawa) */
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          {filteredPartners.map((partner) => {
-            const partnerPrograms = programs.filter((p) => p.partnerId === partner.id);
-            const totalDisbursed = partnerPrograms.reduce((sum, p) => sum + p.disbursedAmount, 0);
-
-            return (
-              <div
-                key={partner.id}
-                onClick={() => setSelectedPartner(partner)}
-                className="bg-white rounded-2xl border border-slate-200/80 p-5 hover:border-[#176B4D] hover:shadow-sm transition-all duration-200 flex flex-col justify-between group cursor-pointer"
-              >
-                <div className="space-y-3.5">
-                  {/* Top Baris: Logo Inisial + Nama Organisasi + Status */}
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="flex items-center gap-3 min-w-0">
-                      <div className="w-11 h-11 rounded-xl bg-slate-900 text-white font-black text-sm flex items-center justify-center shrink-0">
-                        {partner.code}
-                      </div>
-                      <div className="min-w-0">
-                        <h3 className="font-bold text-base text-slate-900 group-hover:text-[#176B4D] transition-colors truncate">
-                          {partner.name}
-                        </h3>
-                        <p className="text-xs text-slate-500 flex items-center gap-1.5 mt-0.5">
-                          <span>{partner.subType}</span>
-                          <span>•</span>
-                          <span className="flex items-center gap-1">
-                            <MapPin className="w-3 h-3 text-slate-400" /> {partner.region}
-                          </span>
-                        </p>
-                      </div>
-                    </div>
-
-                    <StatusBadge status={partner.verificationBadge} size="sm" />
-                  </div>
-
-                  {/* Deskripsi Rekam Jejak (Enak Dibaca, Bersahaja) */}
-                  <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed">
-                    {partner.description}
-                  </p>
-
-                  {/* Sektor Fokus (Pills Lembut, Tanpa Border Tebal) */}
-                  <div className="flex flex-wrap gap-1.5 pt-0.5">
-                    {partner.focusAreas.map((cat) => {
-                      const c = CATEGORY_LABELS[cat];
-                      return (
-                        <span
-                          key={cat}
-                          className="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700"
-                        >
-                          {c?.label || cat}
-                        </span>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                {/* Bagian Bawah: Baris Metrik Bersih & PIC */}
-                <div className="mt-4 pt-4 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                  <div className="flex items-center gap-4 text-xs">
-                    <div>
-                      <span className="text-[10px] text-slate-400 uppercase tracking-wider block font-medium">
-                        Program Aktif
-                      </span>
-                      <span className="text-sm font-bold text-slate-800">
-                        {partnerPrograms.length} Inisiatif
-                      </span>
-                    </div>
-
-                    <div className="border-l border-slate-200 pl-4">
-                      <span className="text-[10px] text-slate-400 uppercase tracking-wider block font-medium">
-                        Dana Tersalurkan
-                      </span>
-                      <span className="text-sm font-extrabold text-[#176B4D]">
-                        {formatCompactIDR(totalDisbursed)}
-                      </span>
-                    </div>
-
-                    <div className="border-l border-slate-200 pl-4 hidden sm:block">
-                      <span className="text-[10px] text-slate-400 uppercase tracking-wider block font-medium">
-                        Koordinator
-                      </span>
-                      <span className="text-xs font-semibold text-slate-700 truncate max-w-[120px] block">
-                        {partner.contactPerson.name}
-                      </span>
-                    </div>
-                  </div>
-
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSelectedPartner(partner);
-                    }}
-                    className="inline-flex items-center justify-center gap-1 px-3 py-1.5 rounded-xl bg-slate-100 group-hover:bg-[#072418] text-slate-700 group-hover:text-white text-xs font-bold transition-colors cursor-pointer self-start sm:self-auto"
-                  >
-                    <span>Profil Mitra</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      ) : (
-        /* Tabel Direktori */
-        <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden">
+      ) : viewMode === 'table' ? (
+        <div>
           <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse text-xs">
+            <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-slate-50 border-b border-slate-200 text-[11px] font-bold text-slate-600 uppercase tracking-wider">
-                  <th className="py-3 px-4">Nama Lembaga</th>
-                  <th className="py-3 px-4">Bentuk Badan Hukum</th>
-                  <th className="py-3 px-4">Wilayah Kerja</th>
-                  <th className="py-3 px-4">Program Aktif</th>
-                  <th className="py-3 px-4">Dana Terkelola</th>
-                  <th className="py-3 px-4">Koordinator</th>
-                  <th className="py-3 px-4">Status</th>
-                  <th className="py-3 px-4 text-right">Aksi</th>
+                <tr className="border-b border-slate-100 text-[11px] font-medium text-slate-400">
+                  <th className="py-3.5 px-3 font-medium">Lembaga Mitra</th>
+                  <th className="py-3.5 px-3 font-medium">Koordinator PIC</th>
+                  <th className="py-3.5 px-3 font-medium">Wilayah Kerja</th>
+                  <th className="py-3.5 px-3 font-medium">Program Aktif</th>
+                  <th className="py-3.5 px-3 font-medium">Dana Dikelola</th>
+                  <th className="py-3.5 px-3 font-medium">Status</th>
+                  <th className="py-3.5 px-3 font-medium text-right"></th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
-                {filteredPartners.map((partner) => {
+              <tbody className="divide-y divide-slate-50 text-xs">
+                {paginatedPartners.map((partner) => {
                   const partnerPrograms = programs.filter((p) => p.partnerId === partner.id);
-                  const totalDisbursed = partnerPrograms.reduce((sum, p) => sum + p.disbursedAmount, 0);
+                  const totalManaged = partnerPrograms.reduce((acc, p) => acc + p.disbursedAmount, 0);
+
                   return (
                     <tr
                       key={partner.id}
                       onClick={() => setSelectedPartner(partner)}
-                      className="hover:bg-slate-50/70 transition-colors cursor-pointer"
+                      className="hover:bg-slate-50/70 transition-colors cursor-pointer group"
                     >
-                      <td className="py-3.5 px-4 font-bold text-slate-900">
-                        {partner.name}
+                      <td className="py-4 px-3">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-full bg-[#E8F6F0] text-[#176B4D] font-bold text-xs flex items-center justify-center shrink-0">
+                            {partner.name.substring(0, 2).toUpperCase()}
+                          </div>
+                          <div>
+                            <div className="font-bold text-slate-800 group-hover:text-[#176B4D] transition-colors">
+                              {partner.name}
+                            </div>
+                            <div className="text-[11px] text-slate-400">
+                              {partner.subType}
+                            </div>
+                          </div>
+                        </div>
                       </td>
-                      <td className="py-3.5 px-4 text-slate-600">
-                        {partner.subType}
+
+                      <td className="py-4 px-3">
+                        <div className="font-medium text-slate-700">
+                          {partner.contactPerson.name}
+                        </div>
+                        <div className="text-[11px] text-slate-400">
+                          {partner.contactPerson.emailDemo}
+                        </div>
                       </td>
-                      <td className="py-3.5 px-4 text-slate-600">
+
+                      <td className="py-4 px-3 text-slate-500">
                         {partner.region}
                       </td>
-                      <td className="py-3.5 px-4 font-bold text-slate-800">
-                        {partnerPrograms.length}
+
+                      <td className="py-4 px-3 font-semibold text-slate-700">
+                        {partnerPrograms.length} Program
                       </td>
-                      <td className="py-3.5 px-4 font-extrabold text-[#176B4D]">
-                        {formatCompactIDR(totalDisbursed)}
+
+                      <td className="py-4 px-3 font-bold text-slate-800">
+                        {formatCompactIDR(totalManaged)}
                       </td>
-                      <td className="py-3.5 px-4 text-slate-600">
-                        {partner.contactPerson.name}
+
+                      <td className="py-4 px-3">
+                        <StatusBadge status={partner.verificationBadge} />
                       </td>
-                      <td className="py-3.5 px-4">
-                        <StatusBadge status={partner.verificationBadge} size="sm" />
-                      </td>
-                      <td className="py-3.5 px-4 text-right">
+
+                      <td className="py-4 px-3 text-right">
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
                             setSelectedPartner(partner);
                           }}
-                          className="px-3 py-1.5 rounded-lg bg-[#072418] text-white font-bold text-xs hover:bg-[#176B4D] transition-colors cursor-pointer"
+                          className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
                         >
-                          Detail
+                          <MoreHorizontal className="w-4 h-4" />
                         </button>
                       </td>
                     </tr>
@@ -361,6 +381,83 @@ export const PartnersPage: React.FC = () => {
               </tbody>
             </table>
           </div>
+
+          {/* Minimalist Pagination Bar */}
+          <div className="flex items-center justify-between pt-5 border-t border-slate-100 text-xs text-slate-400">
+            <div>
+              {(currentPage - 1) * pageSize + 1}-
+              {Math.min(currentPage * pageSize, filteredPartners.length)} dari{' '}
+              {filteredPartners.length}
+            </div>
+
+            <div className="flex items-center gap-1">
+              <button
+                onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                disabled={currentPage === 1}
+                className="w-7 h-7 rounded-lg flex items-center justify-center text-slate-400 hover:bg-slate-100 disabled:opacity-40 cursor-pointer"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+              {Array.from({ length: totalPages }, (_, idx) => idx + 1).map((page) => (
+                <button
+                  key={page}
+                  onClick={() => setCurrentPage(page)}
+                  className={`w-7 h-7 rounded-lg text-xs font-semibold flex items-center justify-center transition-all cursor-pointer ${
+                    currentPage === page
+                      ? 'bg-[#176B4D] text-white shadow-2xs'
+                      : 'text-slate-500 hover:bg-slate-100'
+                  }`}
+                >
+                  {page}
+                </button>
+              ))}
+              <button
+                onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                disabled={currentPage === totalPages}
+                className="w-7 h-7 rounded-lg flex items-center justify-center text-slate-400 hover:bg-slate-100 disabled:opacity-40 cursor-pointer"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : (
+        /* Clean Minimalist Grid Cards */
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {filteredPartners.map((partner) => {
+            const partnerPrograms = programs.filter((p) => p.partnerId === partner.id);
+            const totalManaged = partnerPrograms.reduce((acc, p) => acc + p.disbursedAmount, 0);
+
+            return (
+              <div
+                key={partner.id}
+                onClick={() => setSelectedPartner(partner)}
+                className="rounded-2xl bg-slate-50/70 hover:bg-slate-50 p-5 transition-all cursor-pointer flex flex-col justify-between gap-4 group"
+              >
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <div className="w-9 h-9 rounded-full bg-[#E8F6F0] text-[#176B4D] font-bold text-xs flex items-center justify-center">
+                      {partner.name.substring(0, 2).toUpperCase()}
+                    </div>
+                    <StatusBadge status={partner.verificationBadge} />
+                  </div>
+                  <h3 className="text-sm font-bold text-slate-900 group-hover:text-[#176B4D] transition-colors">
+                    {partner.name}
+                  </h3>
+                  <p className="text-xs text-slate-400 mt-1">
+                    {partner.subType} • {partner.region}
+                  </p>
+                </div>
+
+                <div className="pt-3 border-t border-slate-200/60 flex items-center justify-between text-xs">
+                  <span className="text-slate-400">{partnerPrograms.length} Program</span>
+                  <span className="font-bold text-slate-800">
+                    {formatCompactIDR(totalManaged)}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
         </div>
       )}
 
@@ -374,23 +471,36 @@ export const PartnersPage: React.FC = () => {
           maxWidth="lg"
         >
           <div className="space-y-4 text-xs">
-            <div className="flex items-center justify-between p-3.5 bg-emerald-50 rounded-xl">
-              <span className="font-bold text-emerald-900 flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-emerald-700" />
-                Legalitas & Verifikasi Lapangan Teruji
+            <div className="flex items-center justify-between p-3.5 rounded-xl bg-[#EBF6F1]">
+              <span className="font-bold text-[#176B4D]">
+                Status Verifikasi Lapangan
               </span>
-              <StatusBadge status={selectedPartner.verificationBadge} size="sm" />
+              <StatusBadge status={selectedPartner.verificationBadge} />
             </div>
 
             <div>
-              <h4 className="font-bold text-slate-900 mb-1">Profil & Rekam Jejak Lembaga:</h4>
-              <p className="p-3 bg-slate-50 rounded-xl leading-relaxed text-slate-700">
+              <h4 className="font-bold text-slate-900 mb-1">Profil & Rekam Jejak Lembaga</h4>
+              <p className="p-3.5 bg-slate-50 rounded-xl leading-relaxed text-slate-600">
                 {selectedPartner.description}
               </p>
             </div>
 
             <div>
-              <h4 className="font-bold text-slate-900 mb-1.5">Inisiatif CSR yang Dikelola:</h4>
+              <h4 className="font-bold text-slate-900 mb-1.5">Fokus Sektor Keahlian</h4>
+              <div className="flex flex-wrap gap-1.5">
+                {selectedPartner.focusAreas.map((fa) => (
+                  <span
+                    key={fa}
+                    className="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 font-medium text-[11px]"
+                  >
+                    {CATEGORY_LABELS[fa].label}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h4 className="font-bold text-slate-900 mb-1.5">Inisiatif CSR yang Dikelola</h4>
               <div className="space-y-2 max-h-48 overflow-y-auto">
                 {programs
                   .filter((p) => p.partnerId === selectedPartner.id)
@@ -398,19 +508,19 @@ export const PartnersPage: React.FC = () => {
                     <div key={p.id} className="p-3 rounded-xl bg-slate-50 flex items-center justify-between">
                       <div>
                         <div className="font-bold text-slate-900">{p.title}</div>
-                        <div className="text-[11px] text-slate-500">
+                        <div className="text-[11px] text-slate-400">
                           Pagu: {formatCompactIDR(p.approvedBudget)} • Realisasi: {formatCompactIDR(p.disbursedAmount)}
                         </div>
                       </div>
-                      <StatusBadge status={p.status} size="sm" />
+                      <StatusBadge status={p.status} />
                     </div>
                   ))}
               </div>
             </div>
 
-            <div className="p-3 bg-slate-50 rounded-xl space-y-1">
-              <div className="font-bold text-slate-900">Kontak Personel Lapangan (PIC):</div>
-              <div className="text-slate-600">
+            <div className="p-3.5 bg-slate-50 rounded-xl space-y-1">
+              <div className="font-bold text-slate-900">Kontak Koordinator (PIC)</div>
+              <div className="text-slate-500">
                 {selectedPartner.contactPerson.name} • {selectedPartner.contactPerson.emailDemo} • {selectedPartner.contactPerson.phoneDemo}
               </div>
             </div>
@@ -418,7 +528,7 @@ export const PartnersPage: React.FC = () => {
             <div className="pt-3 border-t border-slate-100 flex justify-end">
               <button
                 onClick={() => setSelectedPartner(null)}
-                className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold rounded-xl cursor-pointer"
+                className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl cursor-pointer"
               >
                 Tutup
               </button>
@@ -444,7 +554,7 @@ export const PartnersPage: React.FC = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Contoh: Yayasan Konservasi Bumi Biru"
-              className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-800 text-xs focus:outline-none focus:border-[#176B4D]"
+              className="w-full px-3.5 py-2.5 bg-slate-50 rounded-xl text-slate-800 text-xs focus:outline-none focus:bg-white focus:ring-2 focus:ring-[#176B4D]/20"
             />
           </div>
 
@@ -454,7 +564,7 @@ export const PartnersPage: React.FC = () => {
               <select
                 value={subType}
                 onChange={(e) => setSubType(e.target.value)}
-                className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-800 text-xs focus:outline-none focus:border-[#176B4D]"
+                className="w-full px-3.5 py-2.5 bg-slate-50 rounded-xl text-slate-800 text-xs focus:outline-none focus:bg-white focus:ring-2 focus:ring-[#176B4D]/20"
               >
                 <option value="Yayasan Sosial">Yayasan Sosial</option>
                 <option value="Lembaga Konservasi">Lembaga Konservasi</option>
@@ -465,38 +575,38 @@ export const PartnersPage: React.FC = () => {
             </div>
 
             <div>
-              <label className="block font-bold text-slate-800 mb-1">Wilayah Kerja / Posko *</label>
+              <label className="block font-bold text-slate-800 mb-1">Wilayah Kerja *</label>
               <input
                 type="text"
                 required
                 value={region}
                 onChange={(e) => setRegion(e.target.value)}
                 placeholder="Contoh: Jawa Barat & Banten"
-                className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-800 text-xs focus:outline-none focus:border-[#176B4D]"
+                className="w-full px-3.5 py-2.5 bg-slate-50 rounded-xl text-slate-800 text-xs focus:outline-none focus:bg-white focus:ring-2 focus:ring-[#176B4D]/20"
               />
             </div>
           </div>
 
           <div>
-            <label className="block font-bold text-slate-800 mb-1">Deskripsi Singkat Profil & Pengalaman</label>
+            <label className="block font-bold text-slate-800 mb-1">Deskripsi Profil & Pengalaman</label>
             <textarea
               rows={2}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Jelaskan spesialisasi tim lapangan dan portofolio kegiatan..."
-              className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-800 text-xs focus:outline-none focus:border-[#176B4D]"
+              className="w-full px-3.5 py-2.5 bg-slate-50 rounded-xl text-slate-800 text-xs focus:outline-none focus:bg-white focus:ring-2 focus:ring-[#176B4D]/20"
             />
           </div>
 
           <div className="grid grid-cols-3 gap-3">
             <div>
-              <label className="block font-bold text-slate-800 mb-1">Nama PIC Koordinator</label>
+              <label className="block font-bold text-slate-800 mb-1">Nama PIC</label>
               <input
                 type="text"
                 value={contactName}
                 onChange={(e) => setContactName(e.target.value)}
                 placeholder="Dra. Siti Rahmawati"
-                className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-800 text-xs focus:outline-none focus:border-[#176B4D]"
+                className="w-full px-3.5 py-2.5 bg-slate-50 rounded-xl text-slate-800 text-xs focus:outline-none focus:bg-white focus:ring-2 focus:ring-[#176B4D]/20"
               />
             </div>
 
@@ -507,18 +617,18 @@ export const PartnersPage: React.FC = () => {
                 value={contactEmail}
                 onChange={(e) => setContactEmail(e.target.value)}
                 placeholder="siti@lembaga.demo"
-                className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-800 text-xs focus:outline-none focus:border-[#176B4D]"
+                className="w-full px-3.5 py-2.5 bg-slate-50 rounded-xl text-slate-800 text-xs focus:outline-none focus:bg-white focus:ring-2 focus:ring-[#176B4D]/20"
               />
             </div>
 
             <div>
-              <label className="block font-bold text-slate-800 mb-1">No. Kontak / HP</label>
+              <label className="block font-bold text-slate-800 mb-1">No. Kontak</label>
               <input
                 type="text"
                 value={contactPhone}
                 onChange={(e) => setContactPhone(e.target.value)}
                 placeholder="+62 812-..."
-                className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-slate-800 text-xs focus:outline-none focus:border-[#176B4D]"
+                className="w-full px-3.5 py-2.5 bg-slate-50 rounded-xl text-slate-800 text-xs focus:outline-none focus:bg-white focus:ring-2 focus:ring-[#176B4D]/20"
               />
             </div>
           </div>
@@ -533,7 +643,7 @@ export const PartnersPage: React.FC = () => {
             </button>
             <button
               type="submit"
-              className="px-4 py-2 font-bold bg-[#072418] text-white rounded-xl shadow-xs cursor-pointer hover:bg-[#176B4D]"
+              className="px-4 py-2 font-bold bg-[#176B4D] text-white rounded-xl shadow-xs cursor-pointer hover:bg-[#0E4D36]"
             >
               Simpan Mitra
             </button>
