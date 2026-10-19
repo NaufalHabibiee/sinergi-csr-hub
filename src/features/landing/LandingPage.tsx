@@ -59,30 +59,30 @@ export const LandingPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-surface-bg text-ink-primary font-sans selection:bg-[#F5CA44] selection:text-[#072418]">
-      {/* Dynamic Header: Transparent initially over hero, becomes floating pill capsule on scroll */}
-      <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 pointer-events-none px-4 sm:px-6">
+      {/* Dynamic Header: Transparent initially over hero, smoothly transforms to floating pill capsule on scroll */}
+      <header className="fixed top-0 left-0 right-0 z-50 flex justify-center pointer-events-none px-4 sm:px-6 transition-all duration-500 ease-out">
         <div
-          className={`mx-auto transition-all duration-300 pointer-events-auto ${
+          className={`w-full pointer-events-auto transition-all duration-500 ease-out flex items-center justify-between rounded-full ${
             isScrolled
-              ? 'max-w-6xl mt-3 py-2.5 px-6 rounded-full bg-white/95 backdrop-blur-md shadow-elevated border border-border-subtle text-ink-primary'
-              : 'max-w-7xl pt-6 pb-4 bg-transparent text-white'
+              ? 'max-w-6xl mt-3 py-2 px-6 bg-white/95 backdrop-blur-md shadow-elevated border border-black/5 text-ink-primary'
+              : 'max-w-7xl mt-0 py-5 px-4 sm:px-6 bg-transparent border border-transparent shadow-none text-white'
           }`}
         >
-          <div className="flex items-center justify-between gap-4">
+          <div className="flex items-center justify-between gap-4 w-full">
             {/* Brand Logo with logo-universa.png */}
             <Link to="/" className="flex items-center gap-3 group">
               <img
                 src="/brand/logo-universa.png"
                 alt="Universa"
-                className={`transition-all duration-300 object-contain ${
+                className={`transition-all duration-500 object-contain ${
                   isScrolled ? 'h-6 sm:h-7' : 'h-7 sm:h-8 drop-shadow-[0_2px_12px_rgba(255,255,255,0.4)]'
                 }`}
               />
               <span
-                className={`text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border transition-all ${
+                className={`text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border transition-all duration-500 ${
                   isScrolled
                     ? 'bg-brand-mint text-brand-primary border-emerald-200'
-                    : 'bg-white/15 text-[#F5CA44] border-white/20 backdrop-blur-xs'
+                    : 'bg-black/25 text-[#F5CA44] border-white/20 backdrop-blur-xs'
                 }`}
               >
                 CSR HUB
@@ -93,20 +93,20 @@ export const LandingPage: React.FC = () => {
             <nav className="hidden lg:flex items-center gap-7 text-xs font-bold">
               <a
                 href="#tentang"
-                className={`transition-colors py-1 ${
+                className={`transition-colors duration-300 py-1 ${
                   isScrolled
                     ? 'text-ink-secondary hover:text-brand-primary'
-                    : 'text-white/90 hover:text-[#F5CA44]'
+                    : 'text-white/95 hover:text-[#F5CA44] drop-shadow-xs'
                 }`}
               >
                 Tentang Kami
               </a>
               <a
                 href="#pilar"
-                className={`transition-colors py-1 ${
+                className={`transition-colors duration-300 py-1 ${
                   isScrolled
                     ? 'text-ink-secondary hover:text-brand-primary'
-                    : 'text-white/90 hover:text-[#F5CA44]'
+                    : 'text-white/95 hover:text-[#F5CA44] drop-shadow-xs'
                 }`}
               >
                 Pilar Program CSR
@@ -116,27 +116,27 @@ export const LandingPage: React.FC = () => {
                 className={`transition-colors py-1 ${
                   isScrolled
                     ? 'text-ink-secondary hover:text-brand-primary'
-                    : 'text-white/90 hover:text-[#F5CA44]'
+                    : 'text-white/95 hover:text-[#F5CA44] drop-shadow-xs'
                 }`}
               >
                 Alur Ekosistem
               </a>
               <a
                 href="#mitra"
-                className={`transition-colors py-1 ${
+                className={`transition-colors duration-300 py-1 ${
                   isScrolled
                     ? 'text-ink-secondary hover:text-brand-primary'
-                    : 'text-white/90 hover:text-[#F5CA44]'
+                    : 'text-white/95 hover:text-[#F5CA44] drop-shadow-xs'
                 }`}
               >
                 Mitra & Funder
               </a>
               <a
                 href="#dampak"
-                className={`transition-colors py-1 ${
+                className={`transition-colors duration-300 py-1 ${
                   isScrolled
                     ? 'text-ink-secondary hover:text-brand-primary'
-                    : 'text-white/90 hover:text-[#F5CA44]'
+                    : 'text-white/95 hover:text-[#F5CA44] drop-shadow-xs'
                 }`}
               >
                 Laporan Dampak
@@ -147,15 +147,15 @@ export const LandingPage: React.FC = () => {
             <div className="hidden sm:flex items-center gap-3">
               <Link
                 to="/dashboard"
-                className={`px-5 py-2.5 rounded-full text-xs font-black shadow-md hover:shadow-lg transition-all flex items-center gap-2.5 group cursor-pointer ${
+                className={`px-5 py-2.5 rounded-full text-xs font-black shadow-md hover:shadow-lg transition-all duration-500 flex items-center gap-2.5 group cursor-pointer ${
                   isScrolled
-                    ? 'bg-[#176B4D] hover:bg-[#0E4F37] text-white'
-                    : 'bg-[#F5CA44] hover:bg-[#F3C22B] text-[#072418]'
+                    ? 'bg-[#176B4D] hover:bg-[#0E4F37] text-white shadow-emerald-900/10'
+                    : 'bg-[#F5CA44] hover:bg-[#F3C22B] text-[#072418] shadow-black/20'
                 }`}
               >
                 <span>Masuk ke Dashboard</span>
                 <div
-                  className={`w-6 h-6 rounded-full flex items-center justify-center group-hover:translate-x-0.5 transition-transform ${
+                  className={`w-6 h-6 rounded-full flex items-center justify-center group-hover:translate-x-0.5 transition-transform duration-300 ${
                     isScrolled ? 'bg-white/20' : 'bg-[#072418]'
                   }`}
                 >
@@ -169,7 +169,7 @@ export const LandingPage: React.FC = () => {
             {/* Mobile menu toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`lg:hidden p-2 rounded-xl transition-colors cursor-pointer ${
+              className={`lg:hidden p-2 rounded-xl transition-colors duration-300 cursor-pointer ${
                 isScrolled
                   ? 'text-ink-primary hover:bg-surface-secondary'
                   : 'text-white hover:bg-white/10'
@@ -230,47 +230,47 @@ export const LandingPage: React.FC = () => {
         </div>
       </header>
 
-      {/* 3. Hero Section (Inspirasi Persis Econest: Full Photographic Cover, Warm Tone, Dual-Color Font, Torn Edge) */}
-      <section className="relative overflow-hidden min-h-[640px] lg:min-h-[700px] flex items-center bg-[#072418] pt-28 sm:pt-32 lg:pt-36">
-        {/* Full Photographic Background with People & Nature */}
+      {/* 3. Hero Section (Inspirasi Persis Econest: Brighter Sunlit Nature, Elevated Layout, Dual-Color Font, Torn Edge) */}
+      <section className="relative overflow-hidden min-h-[560px] lg:min-h-[620px] flex items-center bg-[#0C2D1F] pt-20 sm:pt-24 lg:pt-24 pb-14 lg:pb-18">
+        {/* Full Photographic Background with Bright Sunlit Nature & Forest */}
         <div className="absolute inset-0 z-0">
           <img
-            src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=2000&auto=format&fit=crop&q=85"
-            alt="Relawan Konservasi dan Lingkungan Sosial"
-            className="w-full h-full object-cover object-center scale-105 animate-pulse duration-10000"
+            src="https://images.unsplash.com/photo-1511497584788-87676104235f?w=2000&auto=format&fit=crop&q=85"
+            alt="Konservasi Lingkungan Alami Berkelanjutan"
+            className="w-full h-full object-cover object-center scale-105 brightness-105"
           />
-          {/* Multi-stop Left Dark Vignette Gradient so Text Stands Out */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#051A11] via-[#072418]/85 to-[#072418]/30 lg:to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#072418] via-transparent to-[#072418]/50" />
+          {/* Subtle directional gradient for text readability without darkening the whole image */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/35 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-black/15" />
         </div>
 
-        {/* Hero Content Container */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 w-full">
+        {/* Hero Content Container: Reduced top padding so text sits higher */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 pb-12 sm:pb-16 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             {/* Left Main Hero Typography */}
-            <div className="lg:col-span-8 space-y-6">
+            <div className="lg:col-span-8 space-y-5">
               {/* Top Leaf Pill Badge */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[#F5CA44] text-xs font-bold shadow-sm">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/30 backdrop-blur-md border border-white/20 text-[#F5CA44] text-xs font-bold shadow-sm">
                 <Sprout className="w-4 h-4 text-[#F5CA44]" />
                 <span>Let's Save the Environment & Society</span>
               </div>
 
-              {/* Bold Headline (Econest Style: White + Golden Yellow) */}
-              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white tracking-tight leading-[1.08] drop-shadow-sm">
+              {/* Bold Headline (Econest Style: White + Golden Yellow) with drop-shadow for sharp readability */}
+              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white tracking-tight leading-[1.08] drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
                 Shape the World with <br className="hidden sm:inline" />
                 <span className="text-[#F5CA44]">Heart's Concept</span>
               </h1>
 
               {/* Editorial Subtitle */}
-              <p className="text-sm sm:text-base text-emerald-100/90 leading-relaxed max-w-xl font-normal drop-shadow-xs">
+              <p className="text-sm sm:text-base text-emerald-100/95 leading-relaxed max-w-xl font-normal drop-shadow-[0_1px_6px_rgba(0,0,0,0.5)]">
                 Platform orkestrasi Tanggung Jawab Sosial & Lingkungan (TJSL) terintegrasi. Menghubungkan alokasi korporasi dengan mitra pelaksana terverifikasi, penyaluran terkunci milestone, dan pelaporan siap audit PROPER KLHK.
               </p>
 
               {/* Action Buttons & Social Proof */}
-              <div className="flex flex-wrap items-center gap-4 pt-3">
+              <div className="flex flex-wrap items-center gap-4 pt-2">
                 <Link
                   to="/dashboard"
-                  className="px-6 py-3.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs sm:text-sm font-black border border-white/20 backdrop-blur-md shadow-xl hover:shadow-2xl transition-all flex items-center gap-3 group cursor-pointer"
+                  className="px-6 py-3.5 rounded-full bg-black/30 hover:bg-black/50 text-white text-xs sm:text-sm font-black border border-white/25 backdrop-blur-md shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center gap-3 group cursor-pointer"
                 >
                   <span>Join Us Today</span>
                   <div className="w-7 h-7 rounded-full bg-[#F5CA44] flex items-center justify-center group-hover:translate-x-1 transition-transform">
@@ -279,15 +279,15 @@ export const LandingPage: React.FC = () => {
                 </Link>
 
                 {/* Stacked Avatars + Beneficiaries Metric */}
-                <div className="flex items-center gap-3 bg-[#072418]/70 backdrop-blur-md px-4 py-2 rounded-full border border-white/15 shadow-md">
+                <div className="flex items-center gap-3 bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 shadow-md">
                   <div className="flex -space-x-2.5">
                     <img className="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Avatar" />
                     <img className="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80" alt="Avatar" />
                     <img className="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop&q=80" alt="Avatar" />
                   </div>
                   <div className="text-left">
-                    <span className="font-extrabold text-white text-xs block leading-none">12.600+ Jiwa</span>
-                    <span className="text-[10px] text-[#F5CA44] font-medium">Penerima Manfaat Riil</span>
+                    <span className="font-extrabold text-white text-xs block leading-none drop-shadow-xs">12.600+ Jiwa</span>
+                    <span className="text-[10px] text-[#F5CA44] font-semibold drop-shadow-xs">Penerima Manfaat Riil</span>
                   </div>
                 </div>
               </div>
