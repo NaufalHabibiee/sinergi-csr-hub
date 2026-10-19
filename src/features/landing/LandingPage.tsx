@@ -108,7 +108,7 @@ export const LandingPage: React.FC = () => {
             <div className="flex items-center gap-4">
               <Link to="/" className="flex items-center group">
                 <img
-                  src={isScrolled ? '/brand/sinergicsr-logo-horizontal.png' : '/brand/sinergicsr-logo-white.svg'}
+                  src={isScrolled ? '/brand/sinergicsr-logo-horizontal.png' : '/brand/sinergicsr-logo-white.png'}
                   alt="SinergiCSR"
                   className={`transition-all duration-300 object-contain ${
                     isScrolled ? 'h-7 sm:h-8' : 'h-8 sm:h-9 drop-shadow-sm'
