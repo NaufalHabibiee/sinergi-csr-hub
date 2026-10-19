@@ -233,10 +233,10 @@ export const CSRStoreProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   };
 
   const switchRole = (role: UserRole) => {
-    let orgName = 'Universa Operator';
+    let orgName = 'SinergiCSR Operator';
     let name = 'Habibie CSR Lead';
     if (role === 'admin') {
-      orgName = 'Universa Platform Admin';
+      orgName = 'SinergiCSR Platform Admin';
       name = 'Habibie Platform Admin';
     } else if (role === 'funder') {
       orgName = 'PT Nusantara Energi Lestari';

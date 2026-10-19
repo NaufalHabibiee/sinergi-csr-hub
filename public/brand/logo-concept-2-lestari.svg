@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 96" fill="none">
+  <defs>
+    <linearGradient id="shieldGrad" x1="16" y1="12" x2="74" y2="84" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#176B4D" />
+      <stop offset="100%" stopColor="#064E3B" />
+    </linearGradient>
+    <linearGradient id="sproutGrad" x1="30" y1="20" x2="60" y2="70" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#6EE7B7" />
+      <stop offset="100%" stopColor="#10B981" />
+    </linearGradient>
+    <linearGradient id="goldAccent" x1="40" y1="20" x2="50" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#FCD34D" />
+      <stop offset="100%" stopColor="#F59E0B" />
+    </linearGradient>
+    <filter id="softShadow2" x="-10%" y="-10%" width="120%" height="120%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#176B4D" flood-opacity="0.2" />
+    </filter>
+  </defs>
+
+  <!-- Emblem: Stewardship Shield with Sprout -->
+  <g filter="url(#softShadow2)">
+    <!-- Modern Shield Base -->
+    <path
+      d="M45 14 C 62 14, 76 20, 76 38 C 76 60, 58 76, 45 84 C 32 76, 14 60, 14 38 C 14 20, 28 14, 45 14 Z"
+      fill="url(#shieldGrad)"
+    />
+    <!-- Inner Sprout / Leaves -->
+    <!-- Left Leaf -->
+    <path
+      d="M45 68 C 45 52, 28 44, 28 34 C 40 32, 45 42, 45 50 Z"
+      fill="url(#sproutGrad)"
+      opacity="0.9"
+    />
+    <!-- Right Leaf -->
+    <path
+      d="M45 58 C 45 46, 62 40, 62 30 C 50 28, 45 38, 45 46 Z"
+      fill="url(#sproutGrad)"
+    />
+    <!-- Center Sprout Stem & Golden Seed Top -->
+    <path
+      d="M43 72 L47 72 L47 40 L43 40 Z"
+      fill="#FFFFFF"
+      opacity="0.3"
+    />
+    <circle cx="45" cy="28" r="4.5" fill="url(#goldAccent)" />
+  </g>
+
+  <!-- Typography: AkarLestari -->
+  <text x="106" y="55" font-family="Plus Jakarta Sans, Inter, -apple-system, sans-serif" font-weight="900" font-size="35" fill="#0F172A" letter-spacing="-0.03em">
+    Akar<tspan fill="#176B4D">Lestari</tspan>
+  </text>
+  <!-- Tagline / Subtitle -->
+  <text x="108" y="76" font-family="Plus Jakarta Sans, Inter, -apple-system, sans-serif" font-weight="700" font-size="11" fill="#64748B" letter-spacing="0.22em">
+    AKUNTABILITAS TJSL &amp; PROPER
+  </text>
+</svg>

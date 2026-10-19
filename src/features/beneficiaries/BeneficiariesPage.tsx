@@ -147,7 +147,7 @@ export const BeneficiariesPage: React.FC = () => {
       <div className="flex items-center gap-3 px-4 py-3 rounded-2xl bg-slate-50/80 border border-slate-100 text-xs text-slate-600">
         <ShieldCheck className="w-4 h-4 text-[#176B4D] shrink-0" />
         <span className="leading-relaxed">
-          <strong className="text-slate-800">Privasi Terjaga:</strong> Universa CSR Hub tidak menyimpan identitas sensitif (NIK/KTP) pada tampilan publik. Seluruh data diverifikasi agregat dengan metodologi teruji untuk mencegah <em>double-counting</em>.
+          <strong className="text-slate-800">Privasi Terjaga:</strong> SinergiCSR tidak menyimpan identitas sensitif (NIK/KTP) pada tampilan publik. Seluruh data diverifikasi agregat dengan metodologi teruji untuk mencegah <em>double-counting</em>.
         </span>
       </div>
 

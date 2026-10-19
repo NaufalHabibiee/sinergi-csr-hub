@@ -467,7 +467,7 @@ export const ImpactReportsPage: React.FC = () => {
           isOpen={true}
           onClose={() => setSelectedReportForPreview(null)}
           title={`Dokumen Laporan: ${selectedReportForPreview.reportCode}`}
-          subtitle={`${selectedReportForPreview.reportType} • Universa CSR Hub`}
+          subtitle={`${selectedReportForPreview.reportType} • SinergiCSR Platform`}
           maxWidth="4xl"
         >
           <div className="space-y-6 text-xs text-slate-800" id="printable-report">
@@ -475,7 +475,7 @@ export const ImpactReportsPage: React.FC = () => {
             <div className="border-b-2 border-[#176B4D] pb-4 flex items-start justify-between">
               <div>
                 <div className="text-xl font-extrabold text-[#176B4D] tracking-tight">
-                  UNIVERSA CSR HUB
+                  SINERGICSR PLATFORM
                 </div>
                 <div className="text-xs font-semibold text-slate-500">
                   Social Impact Governance & ESG Reporting Verification
@@ -583,12 +583,12 @@ export const ImpactReportsPage: React.FC = () => {
               <div>
                 <div className="text-slate-400 text-[11px]">Disusun Oleh:</div>
                 <div className="font-bold text-slate-900 mt-6">{selectedReportForPreview.author}</div>
-                <div className="text-[10px] text-slate-400">Universa Lead Kurator</div>
+                <div className="text-[10px] text-slate-400">SinergiCSR Lead Kurator</div>
               </div>
               <div>
                 <div className="text-slate-400 text-[11px]">Ditinjau & Disetujui (Demo):</div>
                 <div className="font-bold text-slate-900 mt-6">Komite Tata Kelola CSR</div>
-                <div className="text-[10px] text-slate-400">Universa CSR Hub Platform</div>
+                <div className="text-[10px] text-slate-400">SinergiCSR Enterprise Platform</div>
               </div>
             </div>
 

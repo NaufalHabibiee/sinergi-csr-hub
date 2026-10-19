@@ -70,13 +70,13 @@ export const LandingPage: React.FC = () => {
           }`}
         >
           <div className="flex items-center justify-between gap-4 w-full">
-            {/* Brand Logo with logo-universa.png */}
+            {/* Brand Logo with sinergicsr-logo-horizontal.png */}
             <Link to="/" className="flex items-center gap-3 group">
               <img
-                src="/brand/logo-universa.png"
-                alt="Universa"
+                src="/brand/sinergicsr-logo-horizontal.png"
+                alt="SinergiCSR"
                 className={`transition-all duration-500 object-contain ${
-                  isScrolled ? 'h-6 sm:h-7' : 'h-7 sm:h-8 drop-shadow-[0_2px_12px_rgba(255,255,255,0.4)]'
+                  isScrolled ? 'h-7 sm:h-8' : 'h-8 sm:h-9 bg-white/95 px-3 py-1 rounded-full shadow-md'
                 }`}
               />
             </Link>
@@ -398,7 +398,7 @@ export const LandingPage: React.FC = () => {
               <div className="space-y-3">
                 <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200/80 text-xs font-extrabold uppercase tracking-wider text-[#176B4D]">
                   <Sprout className="w-4 h-4 text-[#176B4D]" />
-                  <span>About Universa CSR Hub</span>
+                  <span>About SinergiCSR</span>
                 </div>
 
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#072418] tracking-tight leading-[1.12]">
@@ -825,7 +825,7 @@ export const LandingPage: React.FC = () => {
               </div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#072418] tracking-tight leading-[1.12]">
                 Bagaimana Cara Kerja <br className="hidden sm:inline" />
-                <span className="text-[#176B4D]">Universa CSR Hub?</span>
+                <span className="text-[#176B4D]">SinergiCSR?</span>
               </h2>
             </div>
 
@@ -1224,9 +1224,9 @@ export const LandingPage: React.FC = () => {
                   className="inline-flex items-center bg-white px-4 py-2.5 rounded-2xl shadow-md hover:scale-[1.02] transition-transform"
                 >
                   <img
-                    src="/brand/logo-universa.png"
-                    alt="Universa"
-                    className="h-6 sm:h-7 object-contain"
+                    src="/brand/sinergicsr-logo-horizontal.png"
+                    alt="SinergiCSR"
+                    className="h-8 object-contain"
                   />
                 </Link>
               </div>
@@ -1378,7 +1378,7 @@ export const LandingPage: React.FC = () => {
 
           {/* Bottom Copyright & Legal Bar */}
           <div className="pt-7 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-emerald-100/60">
-            <p>© 2026 Universa. Seluruh hak cipta dilindungi.</p>
+            <p>© 2026 SinergiCSR. Seluruh hak cipta dilindungi.</p>
 
             <div className="flex flex-wrap items-center gap-4 sm:gap-6">
               <span className="inline-flex items-center gap-1.5">

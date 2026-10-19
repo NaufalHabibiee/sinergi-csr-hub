@@ -66,19 +66,20 @@ export const Sidebar: React.FC<SidebarProps> = ({
           title="Kembali ke Beranda"
         >
           {collapsed ? (
-            <div className="w-11 h-11 rounded-2xl bg-[#E8F6F0] text-[#176B4D] flex items-center justify-center font-black text-lg tracking-wider shrink-0 group-hover:bg-[#176B4D] group-hover:text-white transition-all shadow-2xs">
-              U
+            <div className="w-11 h-11 rounded-2xl bg-[#E8F6F0] flex items-center justify-center p-2 group-hover:bg-[#176B4D]/10 transition-all shadow-2xs">
+              <img
+                src="/brand/sinergicsr-icon.png"
+                alt="SinergiCSR"
+                className="w-full h-full object-contain"
+              />
             </div>
           ) : (
-            <div className="flex flex-col">
+            <div className="flex items-center">
               <img
-                src="/brand/logo-universa.png"
-                alt="Universa"
-                className="h-[30px] w-auto object-contain object-left group-hover:opacity-85 transition-opacity"
+                src="/brand/sinergicsr-logo-horizontal.png"
+                alt="SinergiCSR"
+                className="h-9 w-auto object-contain object-left group-hover:opacity-90 transition-opacity"
               />
-              <span className="text-[10px] font-semibold text-slate-400 tracking-wider mt-0.5 uppercase">
-                CSR Management
-              </span>
             </div>
           )}
         </NavLink>

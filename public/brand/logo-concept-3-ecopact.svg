@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 96" fill="none">
+  <defs>
+    <linearGradient id="nodeGrad1" x1="20" y1="20" x2="50" y2="50" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#10B981" />
+      <stop offset="100%" stopColor="#176B4D" />
+    </linearGradient>
+    <linearGradient id="nodeGrad2" x1="40" y1="40" x2="80" y2="70" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#0D9488" />
+      <stop offset="100%" stopColor="#064E3B" />
+    </linearGradient>
+    <linearGradient id="nodeGrad3" x1="15" y1="50" x2="45" y2="85" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#34D399" />
+      <stop offset="100%" stopColor="#059669" />
+    </linearGradient>
+    <filter id="softShadow3" x="-10%" y="-10%" width="120%" height="120%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#0D9488" flood-opacity="0.22" />
+    </filter>
+  </defs>
+
+  <!-- Emblem: Tri-Node Ecosystem Prism -->
+  <g filter="url(#softShadow3)">
+    <!-- Top Leaf Petal / Node (Funder) -->
+    <path
+      d="M45 14 C 58 14, 72 26, 68 44 C 54 44, 45 28, 45 14 Z"
+      fill="url(#nodeGrad1)"
+    />
+    <!-- Bottom Right Petal / Node (Partner) -->
+    <path
+      d="M72 48 C 76 64, 66 78, 48 80 C 46 64, 58 52, 72 48 Z"
+      fill="url(#nodeGrad2)"
+    />
+    <!-- Bottom Left Petal / Node (Beneficiary) -->
+    <path
+      d="M42 80 C 24 76, 16 62, 22 46 C 36 50, 42 66, 42 80 Z"
+      fill="url(#nodeGrad3)"
+    />
+    <!-- Center Dynamic Convergence Ring -->
+    <circle cx="46" cy="48" r="8" fill="#FFFFFF" />
+    <circle cx="46" cy="48" r="4.5" fill="#176B4D" />
+  </g>
+
+  <!-- Typography: Ecopact -->
+  <text x="108" y="55" font-family="Plus Jakarta Sans, Inter, -apple-system, sans-serif" font-weight="900" font-size="37" fill="#072418" letter-spacing="-0.035em">
+    Eco<tspan fill="#10B981">pact</tspan>
+  </text>
+  <!-- Tagline / Subtitle -->
+  <text x="110" y="76" font-family="Plus Jakarta Sans, Inter, -apple-system, sans-serif" font-weight="700" font-size="11" fill="#64748B" letter-spacing="0.22em">
+    COLLABORATIVE ESG PLATFORM
+  </text>
+</svg>

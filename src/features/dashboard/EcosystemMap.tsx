@@ -36,10 +36,10 @@ export const EcosystemMap: React.FC = () => {
             <span className="p-1.5 rounded-lg bg-brand-mint text-brand-primary">
               <Sparkles className="w-4 h-4" />
             </span>
-            <h1 className="text-xl font-bold text-ink-primary">Peta Alur Ekosistem Universa CSR Hub</h1>
+            <h1 className="text-xl font-bold text-ink-primary">Peta Alur Ekosistem SinergiCSR</h1>
           </div>
           <p className="text-xs text-ink-muted mt-1 max-w-2xl leading-relaxed">
-            Visualisasi interaktif aliran tata kelola: Funder Korporat ⇄ Universa CSR Hub ⇄ Mitra Pelaksana ⇄ Penerima Manfaat, dilengkapi pelaporan dampak ke Funder dan draf laporan formal ke Pemerintah (KLHK/PROPER).
+            Visualisasi interaktif aliran tata kelola: Funder Korporat ⇄ SinergiCSR ⇄ Mitra Pelaksana ⇄ Penerima Manfaat, dilengkapi pelaporan dampak ke Funder dan draf laporan formal ke Pemerintah (KLHK/PROPER).
           </p>
         </div>
 
@@ -294,7 +294,7 @@ export const EcosystemMap: React.FC = () => {
               )}
               {selectedNode === 'hub' && (
                 <p>
-                  Universa CSR Hub bertindak sebagai orkestrator netral yang memastikan due diligence legalitas mitra, kelayakan anggaran proposal, verifikasi bukti pelaksanaan di lapangan, serta konsolidasi laporan dampak terstandarisasi.
+                  SinergiCSR bertindak sebagai orkestrator netral yang memastikan due diligence legalitas mitra, kelayakan anggaran proposal, verifikasi bukti pelaksanaan di lapangan, serta konsolidasi laporan dampak terstandarisasi.
                 </p>
               )}
               {selectedNode === 'mitra' && (
