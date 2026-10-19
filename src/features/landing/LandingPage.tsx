@@ -27,7 +27,8 @@ import {
   PhoneCall,
   Coins,
   MapPin,
-  Check
+  Check,
+  Clock
 } from 'lucide-react';
 import { formatCompactIDR, formatNumber } from '../../lib/formatters';
 import { useCSRStore } from '../../context/CSRStoreContext';
@@ -381,271 +382,304 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 4. Section 2: About Us & Methodology ("Building Greener Future Together And Protect") */}
-      <section id="tentang" className="scroll-mt-20 pt-24 pb-20 lg:pt-32 lg:pb-28 bg-white relative overflow-hidden">
-        {/* Subtle organic background accents */}
-        <div className="absolute top-16 left-0 w-80 h-80 bg-emerald-50/80 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-10 right-10 w-96 h-96 bg-amber-50/60 rounded-full blur-3xl pointer-events-none" />
-
+      {/* 4. Section: Beranda / What We Offer & Core Solutions */}
+      <section id="tentang" className="scroll-mt-20 py-20 lg:py-28 bg-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
-            {/* Left Column (6 cols): Tightly Interlocked Multi-Layer Editorial Collage */}
-            <div className="lg:col-span-6">
-              <div className="relative mx-auto w-full max-w-[520px] h-[470px] sm:h-[540px]">
-                {/* Decorative Soft Ring & Dot Grid Pattern */}
-                <div className="absolute top-8 left-8 w-72 h-72 rounded-full border-2 border-dashed border-emerald-200/70 pointer-events-none" />
-                <div className="absolute bottom-6 left-2 w-36 h-36 opacity-35 pointer-events-none">
-                  <svg width="100%" height="100%" fill="none">
-                    <pattern id="dot-matrix" x="0" y="0" width="14" height="14" patternUnits="userSpaceOnUse">
-                      <circle cx="2.5" cy="2.5" r="2" fill="#176B4D" />
-                    </pattern>
-                    <rect width="100%" height="100%" fill="url(#dot-matrix)" />
-                  </svg>
-                </div>
+          {/* Eyebrow & Title */}
+          <div className="text-center max-w-2xl mx-auto space-y-3">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#E8F6F0] text-[#176B4D] text-xs font-bold uppercase tracking-wider">
+              <Sprout className="w-3.5 h-3.5 text-[#176B4D]" />
+              <span>What We Offer</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0B2518] tracking-tight leading-tight">
+              Solusi Cerdas untuk Tata Kelola CSR Modern
+            </h2>
+            <p className="text-xs sm:text-sm text-ink-secondary leading-relaxed">
+              Seluruh kapabilitas yang Anda butuhkan untuk mengorkestrasi pendanaan sosial &amp; lingkungan secara presisi, transparan, dan berdampak.
+            </p>
+          </div>
 
-                {/* 1. Primary Tall Portrait Frame: Aksi Relawan Lingkungan & Pesisir */}
-                <div className="absolute top-0 left-0 w-[68%] h-[82%] rounded-[2.25rem] overflow-hidden shadow-2xl border-4 border-white z-10 group bg-[#072418]">
-                  <img
-                    src="/images/hero_option_people_planting.jpg"
-                    alt="Relawan Konservasi Pesisir dan Lingkungan"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#072418]/80 via-transparent to-black/15" />
-
-                  {/* Live Geotag Pill at Top-Left of Primary Photo */}
-                  <div className="absolute top-4 left-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/50 backdrop-blur-md border border-white/20 text-white text-[11px] font-bold">
-                    <span className="w-2 h-2 rounded-full bg-[#FDE047] animate-pulse" />
-                    <span>Geotagging Aktif</span>
-                  </div>
+          {/* 4 Clean Solution Cards Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12 sm:mt-16">
+            {/* Card 1: Konservasi Lingkungan */}
+            <div className="bg-white rounded-2xl p-6 sm:p-7 border border-slate-200/80 shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+              <div>
+                <div className="w-14 h-14 rounded-2xl bg-[#E8F6F0] text-[#176B4D] flex items-center justify-center mb-5 group-hover:scale-105 transition-transform">
+                  <TreePine className="w-7 h-7" />
                 </div>
-
-                {/* 2. Interlocking Top-Right Lemon Yellow Experience Card */}
-                <div className="absolute top-5 right-0 bg-[#FDE047] p-4 sm:p-5 rounded-3xl shadow-xl border-4 border-white z-30 w-[195px] sm:w-[225px] hover:-translate-y-1 transition-transform">
-                  <div className="flex items-center gap-3">
-                    <div className="text-3xl sm:text-4xl font-black text-[#072418] tracking-tight leading-none">
-                      100%
-                    </div>
-                    <div className="h-8 w-px bg-[#072418]/15" />
-                    <div className="text-[11px] font-extrabold text-[#072418] leading-tight">
-                      Akuntabel &<br />Terverifikasi
-                    </div>
-                  </div>
-                  <div className="mt-2.5 pt-2 border-t border-[#072418]/10 flex items-center justify-between text-[10px] font-bold text-[#072418]/80">
-                    <span>BAST & Geotagging</span>
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#072418]" />
-                  </div>
-                </div>
-
-                {/* 3. Interlocking Bottom-Right Arched Photo with Interactive Preview */}
-                <div className="absolute bottom-0 right-0 w-[55%] h-[60%] rounded-t-full rounded-b-[2.25rem] overflow-hidden border-[6px] border-white shadow-2xl z-20 group bg-[#072418]">
-                  <img
-                    src="/images/hero_volunteer_forest.jpg"
-                    alt="Pembibitan & Konservasi Hutan"
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#072418]/85 via-black/20 to-transparent flex flex-col items-center justify-end pb-5 p-4 text-center">
-                    <Link
-                      to="/dashboard/programs"
-                      className="w-12 h-12 rounded-full bg-[#FDE047] text-[#072418] flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform mb-2.5 ring-4 ring-white/30"
-                      title="Lihat Dokumentasi Program"
-                    >
-                      <Play className="w-4 h-4 text-[#072418] fill-current ml-0.5" />
-                    </Link>
-                    <span className="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white text-[11px] font-bold tracking-wide">
-                      Dokumentasi Lapangan
-                    </span>
-                  </div>
-                </div>
-
-                {/* 4. Overlapping Bottom-Left Dark Forest PROPER Award Card */}
-                <div className="absolute bottom-6 left-0 sm:-left-3 bg-[#072418] text-white p-4 rounded-2xl shadow-2xl border border-emerald-700/70 z-30 w-[225px] sm:w-[245px] flex items-center gap-3.5 hover:-translate-y-0.5 transition-transform">
-                  <div className="w-11 h-11 rounded-xl bg-[#FDE047] text-[#072418] flex items-center justify-center shrink-0 shadow-md">
-                    <Award className="w-5 h-5 text-[#072418]" />
-                  </div>
-                  <div className="space-y-0.5">
-                    <div className="text-[10px] font-extrabold text-[#FDE047] uppercase tracking-wider">
-                      Kesiapan PROPER
-                    </div>
-                    <div className="text-xs font-extrabold text-white leading-snug">
-                      Standar KLHK Siap Evaluasi
-                    </div>
-                  </div>
-                </div>
+                <h3 className="font-bold text-base text-[#0B2518] group-hover:text-[#176B4D] transition-colors">
+                  Konservasi Lingkungan
+                </h3>
+                <p className="text-xs text-ink-secondary leading-relaxed mt-2.5">
+                  Perencanaan reboisasi, restorasi mangrove pesisir, dan monitoring bibit dengan data geotagging real-time.
+                </p>
+              </div>
+              <div className="pt-4 mt-4 border-t border-slate-100 flex items-center text-xs font-bold text-[#176B4D]">
+                <Link to="/dashboard/programs" className="inline-flex items-center gap-1.5 hover:underline">
+                  <span>Lihat Program</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
               </div>
             </div>
 
-            {/* Right Column (6 cols): Editorial Storytelling & Interactive Governance Showcase */}
-            <div className="lg:col-span-6 space-y-6">
-              <div className="space-y-3">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200/80 text-xs font-extrabold uppercase tracking-wider text-[#176B4D]">
-                  <Sprout className="w-4 h-4 text-[#176B4D]" />
-                  <span>About SinergiCSR</span>
+            {/* Card 2: Kontrol Salur & BAST */}
+            <div className="bg-white rounded-2xl p-6 sm:p-7 border border-slate-200/80 shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+              <div>
+                <div className="w-14 h-14 rounded-2xl bg-[#E8F6F0] text-[#176B4D] flex items-center justify-center mb-5 group-hover:scale-105 transition-transform">
+                  <ShieldCheck className="w-7 h-7" />
                 </div>
+                <h3 className="font-bold text-base text-[#0B2518] group-hover:text-[#176B4D] transition-colors">
+                  Kontrol Salur &amp; BAST
+                </h3>
+                <p className="text-xs text-ink-secondary leading-relaxed mt-2.5">
+                  Penyaluran bertahap per termin milestone terkunci Berita Acara, mencegah overbudget dan kebocoran dana.
+                </p>
+              </div>
+              <div className="pt-4 mt-4 border-t border-slate-100 flex items-center text-xs font-bold text-[#176B4D]">
+                <Link to="/dashboard/funding" className="inline-flex items-center gap-1.5 hover:underline">
+                  <span>Inspeksi Buku Besar</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            </div>
 
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#072418] tracking-tight leading-[1.12]">
-                  Building Greener Future <br className="hidden sm:inline" />
-                  Together And <span className="text-[#176B4D]">Protect</span>
+            {/* Card 3: Verifikasi Penerima Manfaat */}
+            <div className="bg-white rounded-2xl p-6 sm:p-7 border border-slate-200/80 shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+              <div>
+                <div className="w-14 h-14 rounded-2xl bg-[#E8F6F0] text-[#176B4D] flex items-center justify-center mb-5 group-hover:scale-105 transition-transform">
+                  <Users className="w-7 h-7" />
+                </div>
+                <h3 className="font-bold text-base text-[#0B2518] group-hover:text-[#176B4D] transition-colors">
+                  Verifikasi Penerima Manfaat
+                </h3>
+                <p className="text-xs text-ink-secondary leading-relaxed mt-2.5">
+                  Validasi identitas NIK/NIB unik bebas klaim ganda, memisahkan partisipasi kegiatan dari data individu riil.
+                </p>
+              </div>
+              <div className="pt-4 mt-4 border-t border-slate-100 flex items-center text-xs font-bold text-[#176B4D]">
+                <Link to="/dashboard/beneficiaries" className="inline-flex items-center gap-1.5 hover:underline">
+                  <span>Data Penerima</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            </div>
+
+            {/* Card 4: Evaluasi PROPER & SDGs */}
+            <div className="bg-white rounded-2xl p-6 sm:p-7 border border-slate-200/80 shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+              <div>
+                <div className="w-14 h-14 rounded-2xl bg-[#E8F6F0] text-[#176B4D] flex items-center justify-center mb-5 group-hover:scale-105 transition-transform">
+                  <Award className="w-7 h-7" />
+                </div>
+                <h3 className="font-bold text-base text-[#0B2518] group-hover:text-[#176B4D] transition-colors">
+                  Evaluasi PROPER &amp; SDGs
+                </h3>
+                <p className="text-xs text-ink-secondary leading-relaxed mt-2.5">
+                  Otomasi pelaporan audit kepatuhan KLHK dan indikator SDGs Bappenas siap cetak dengan akurasi 100%.
+                </p>
+              </div>
+              <div className="pt-4 mt-4 border-t border-slate-100 flex items-center text-xs font-bold text-[#176B4D]">
+                <Link to="/dashboard/reports" className="inline-flex items-center gap-1.5 hover:underline">
+                  <span>Generator Laporan</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* Centered CTA Link */}
+          <div className="text-center mt-10">
+            <Link
+              to="/dashboard/programs"
+              className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#176B4D] hover:text-[#0E4F37] transition-colors"
+            >
+              <span>Eksplorasi Seluruh Solusi</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+
+          {/* Dark Forest Green Stat Banner (Directly Matching Reference) */}
+          <div className="mt-16 sm:mt-20 rounded-3xl bg-[#0D3825] text-white p-7 sm:p-10 shadow-xl border border-emerald-800/40">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 items-center text-center">
+              <div className="space-y-1 sm:space-y-2">
+                <div className="w-10 h-10 rounded-full bg-white/10 mx-auto flex items-center justify-center text-[#D4F63D] mb-2">
+                  <Users className="w-5 h-5" />
+                </div>
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
+                  {formatNumber(totalReached)}+
+                </div>
+                <div className="text-xs text-emerald-100/75 font-medium">
+                  Penerima Manfaat Riil
+                </div>
+              </div>
+
+              <div className="space-y-1 sm:space-y-2 border-l border-white/15">
+                <div className="w-10 h-10 rounded-full bg-white/10 mx-auto flex items-center justify-center text-[#D4F63D] mb-2">
+                  <Coins className="w-5 h-5" />
+                </div>
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-[#D4F63D]">
+                  {formatCompactIDR(totalCommitted)}
+                </div>
+                <div className="text-xs text-emerald-100/75 font-medium">
+                  Total Komitmen Funder
+                </div>
+              </div>
+
+              <div className="space-y-1 sm:space-y-2 border-l border-white/15">
+                <div className="w-10 h-10 rounded-full bg-white/10 mx-auto flex items-center justify-center text-[#D4F63D] mb-2">
+                  <TrendingUp className="w-5 h-5" />
+                </div>
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
+                  100%
+                </div>
+                <div className="text-xs text-emerald-100/75 font-medium">
+                  Penyaluran Terverifikasi BAST
+                </div>
+              </div>
+
+              <div className="space-y-1 sm:space-y-2 border-l border-white/15">
+                <div className="w-10 h-10 rounded-full bg-white/10 mx-auto flex items-center justify-center text-[#D4F63D] mb-2">
+                  <ShieldCheck className="w-5 h-5" />
+                </div>
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
+                  {partners.length} Mitra
+                </div>
+                <div className="text-xs text-emerald-100/75 font-medium">
+                  Lembaga Pelaksana Terakreditasi
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Technology that Grows with You Showcase */}
+          <div className="mt-20 lg:mt-28 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
+            {/* Left: Content & checklist */}
+            <div className="lg:col-span-5 space-y-6">
+              <div className="space-y-3">
+                <span className="text-[#176B4D] text-xs font-bold uppercase tracking-wider flex items-center gap-1.5">
+                  <Sprout className="w-4 h-4 text-[#176B4D]" /> SMART. SIMPLE. POWERFUL.
+                </span>
+                <h2 className="text-3xl sm:text-4xl font-bold text-[#0B2518] tracking-tight leading-[1.15]">
+                  Teknologi yang bertumbuh bersama <span className="text-[#176B4D] italic">dampak Anda</span>
                 </h2>
-
                 <p className="text-xs sm:text-sm text-ink-secondary leading-relaxed">
-                  Membangun ekosistem Tanggung Jawab Sosial & Lingkungan (TJSL) korporasi yang transparan, terukur, dan berdampak jangka panjang bagi kelestarian bumi serta kemandirian masyarakat.
+                  SinergiCSR adalah partner orkestrasi TJSL Anda. Akses data lapangan real-time, milestone bergeotagging, dan pelaporan siap audit PROPER KLHK dalam satu platform terpadu.
                 </p>
               </div>
 
-              {/* Interactive Tab Switcher + Highlighted Narrative Card */}
-              <div className="space-y-3">
-                <div className="flex flex-wrap items-center gap-1.5 p-1.5 bg-[#EDF3EF] rounded-full w-fit text-xs font-bold">
-                  <button
-                    onClick={() => setActiveTab('visi')}
-                    className={`px-4 py-2 rounded-full transition-all cursor-pointer ${
-                      activeTab === 'visi'
-                        ? 'bg-[#072418] text-[#FDE047] shadow-sm font-extrabold'
-                        : 'text-ink-secondary hover:text-[#072418]'
-                    }`}
-                  >
-                    Our Vision
-                  </button>
-                  <button
-                    onClick={() => setActiveTab('misi')}
-                    className={`px-4 py-2 rounded-full transition-all cursor-pointer ${
-                      activeTab === 'misi'
-                        ? 'bg-[#072418] text-[#FDE047] shadow-sm font-extrabold'
-                        : 'text-ink-secondary hover:text-[#072418]'
-                    }`}
-                  >
-                    Our Mission
-                  </button>
-                  <button
-                    onClick={() => setActiveTab('metode')}
-                    className={`px-4 py-2 rounded-full transition-all cursor-pointer ${
-                      activeTab === 'metode'
-                        ? 'bg-[#072418] text-[#FDE047] shadow-sm font-extrabold'
-                        : 'text-ink-secondary hover:text-[#072418]'
-                    }`}
-                  >
-                    Verification Method
-                  </button>
-                </div>
-
-                {/* Rich Narrative Box with Dynamic Highlight Pills */}
-                <div className="p-5 sm:p-6 rounded-3xl bg-gradient-to-br from-[#F4F8F5] to-white border border-emerald-900/10 shadow-xs space-y-3.5">
-                  {activeTab === 'visi' && (
-                    <>
-                      <p className="text-xs sm:text-sm text-ink-secondary leading-relaxed">
-                        Menjadi infrastruktur digital utama di Indonesia yang mentransformasi dana CSR korporasi dari sekadar bantuan seremonial menjadi <strong className="text-[#072418]">investasi sosial & lingkungan terukur</strong> dengan akuntabilitas penuh per rupiah.
-                      </p>
-                      <div className="flex flex-wrap items-center gap-2 pt-1">
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-emerald-200 text-[11px] font-bold text-[#072418]">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-[#176B4D]" />
-                          Transparansi Lintas Pemangku Kepentingan
-                        </span>
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-emerald-200 text-[11px] font-bold text-[#072418]">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-[#176B4D]" />
-                          Dampak Berkelanjutan Terukur
-                        </span>
-                      </div>
-                    </>
-                  )}
-                  {activeTab === 'misi' && (
-                    <>
-                      <p className="text-xs sm:text-sm text-ink-secondary leading-relaxed">
-                        Mengeliminasi proposal fiktif melalui kurasi ketat legalitas mitra, mengunci pencairan dana secara bertahap per milestone, dan mengotomatisasi pelaporan kepatuhan <strong className="text-[#072418]">PROPER KLHK & SDGs</strong>.
-                      </p>
-                      <div className="flex flex-wrap items-center gap-2 pt-1">
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-emerald-200 text-[11px] font-bold text-[#072418]">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-[#176B4D]" />
-                          Zero Dokumen Kertas Tercecer
-                        </span>
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-emerald-200 text-[11px] font-bold text-[#072418]">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-[#176B4D]" />
-                          Validasi Berlapis Mitra Pelaksana
-                        </span>
-                      </div>
-                    </>
-                  )}
-                  {activeTab === 'metode' && (
-                    <>
-                      <p className="text-xs sm:text-sm text-ink-secondary leading-relaxed">
-                        Memisahkan secara ketat antara <strong className="text-[#072418]">Penerima Manfaat Unik</strong> (berbasis identitas NIK/NIB terverifikasi) dan <strong className="text-[#072418]">Partisipasi Kegiatan</strong>, sehingga bebas dari klaim ganda maupun penggelembungan data laporan.
-                      </p>
-                      <div className="flex flex-wrap items-center gap-2 pt-1">
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-emerald-200 text-[11px] font-bold text-[#072418]">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-[#176B4D]" />
-                          Anti-Duplikasi NIK / NIB
-                        </span>
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-emerald-200 text-[11px] font-bold text-[#072418]">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-[#176B4D]" />
-                          Audit Trail Terkunci Otomatis
-                        </span>
-                      </div>
-                    </>
-                  )}
-                </div>
-              </div>
-
-              {/* 3 Compact Bento Feature Cards (Replacing the 3 monotonous stacked full-width white boxes) */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <div className="p-4 rounded-2xl bg-white border border-border-subtle hover:border-[#176B4D] hover:shadow-md transition-all group">
-                  <div className="w-9 h-9 rounded-xl bg-[#072418] text-[#FDE047] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
-                    <ShieldCheck className="w-4 h-4" />
+              <div className="space-y-3 pt-1">
+                <div className="flex items-start gap-3">
+                  <div className="w-5 h-5 rounded-full bg-[#176B4D] text-white flex items-center justify-center shrink-0 mt-0.5">
+                    <Check className="w-3.5 h-3.5 stroke-[2.5]" />
                   </div>
-                  <div className="text-xs font-extrabold text-[#072418] leading-snug">
-                    Penyaluran Terkunci BAST
-                  </div>
-                  <p className="text-[11px] text-ink-muted mt-1 leading-relaxed">
-                    Dana cair bertahap hanya setelah bukti milestone diverifikasi.
+                  <p className="text-xs sm:text-sm text-ink-primary font-medium">
+                    <strong>Pemantauan Lapangan Real-Time</strong> dengan titik koordinat GPS otentik.
                   </p>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-white border border-border-subtle hover:border-[#176B4D] hover:shadow-md transition-all group">
-                  <div className="w-9 h-9 rounded-xl bg-emerald-100 text-[#072418] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
-                    <MapPin className="w-4 h-4 text-[#176B4D]" />
+                <div className="flex items-start gap-3">
+                  <div className="w-5 h-5 rounded-full bg-[#176B4D] text-white flex items-center justify-center shrink-0 mt-0.5">
+                    <Check className="w-3.5 h-3.5 stroke-[2.5]" />
                   </div>
-                  <div className="text-xs font-extrabold text-[#072418] leading-snug">
-                    Geotagging Presisi
-                  </div>
-                  <p className="text-[11px] text-ink-muted mt-1 leading-relaxed">
-                    Dokumentasi lapangan dilengkapi titik koordinat lokasi otentik.
+                  <p className="text-xs sm:text-sm text-ink-primary font-medium">
+                    <strong>Pelaporan Otomatis SDGs &amp; PROPER</strong> terstandarisasi bebas manipulasi.
                   </p>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-white border border-border-subtle hover:border-[#176B4D] hover:shadow-md transition-all group">
-                  <div className="w-9 h-9 rounded-xl bg-[#FDE047]/30 text-[#072418] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
-                    <Award className="w-4 h-4 text-[#072418]" />
+                <div className="flex items-start gap-3">
+                  <div className="w-5 h-5 rounded-full bg-[#176B4D] text-white flex items-center justify-center shrink-0 mt-0.5">
+                    <Check className="w-3.5 h-3.5 stroke-[2.5]" />
                   </div>
-                  <div className="text-xs font-extrabold text-[#072418] leading-snug">
-                    Siap Evaluasi PROPER
-                  </div>
-                  <p className="text-[11px] text-ink-muted mt-1 leading-relaxed">
-                    Format laporan selaras dengan kriteria penilaian KLHK.
+                  <p className="text-xs sm:text-sm text-ink-primary font-medium">
+                    <strong>Akses Kolaboratif Terpusat</strong> untuk Perusahaan Funder, Mitra Yayasan, dan Auditor.
                   </p>
                 </div>
               </div>
 
-              {/* Bottom Action & Verified Audit Score Row */}
-              <div className="flex flex-wrap items-center justify-between gap-5 pt-3 border-t border-border-subtle">
+              <div className="pt-2">
                 <Link
                   to="/dashboard"
-                  className="pl-6 pr-2.5 py-2.5 rounded-full bg-[#FDE047] hover:bg-[#facc15] text-[#072418] text-xs sm:text-sm font-extrabold shadow-md hover:shadow-lg transition-all flex items-center gap-3 group cursor-pointer"
+                  className="px-6 py-3 rounded-full bg-[#0E3D2A] hover:bg-[#176B4D] text-white font-bold text-xs sm:text-sm inline-flex items-center gap-2.5 shadow-md hover:shadow-lg transition-all cursor-pointer"
                 >
-                  <span>Explore More</span>
-                  <div className="w-8 h-8 rounded-full bg-[#072418] text-[#FDE047] flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
-                    <ArrowRight className="w-4 h-4" />
-                  </div>
+                  <span>Mulai Eksplorasi</span>
+                  <ArrowRight className="w-4 h-4" />
                 </Link>
+              </div>
+            </div>
 
-                <div className="flex items-center gap-3.5 bg-[#F8FAF8] px-4 py-2.5 rounded-2xl border border-border-subtle">
-                  <div className="flex items-center gap-0.5">
-                    <Star className="w-4 h-4 fill-current text-[#F5CA44]" />
-                    <Star className="w-4 h-4 fill-current text-[#F5CA44]" />
-                    <Star className="w-4 h-4 fill-current text-[#F5CA44]" />
-                    <Star className="w-4 h-4 fill-current text-[#F5CA44]" />
-                    <Star className="w-4 h-4 fill-current text-[#F5CA44]" />
+            {/* Right: Modern Mockup Collage */}
+            <div className="lg:col-span-7">
+              <div className="relative p-4 sm:p-6 rounded-3xl bg-[#F4F8F5] border border-emerald-900/10">
+                <div className="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center">
+                  {/* Mobile Mockup Card (5 cols) */}
+                  <div className="sm:col-span-5 bg-white rounded-3xl p-4 sm:p-5 shadow-xl border border-slate-200/80 space-y-4">
+                    <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+                      <div className="text-xs font-bold text-[#0B2518]">Halo, Evaluator 👋</div>
+                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                    </div>
+
+                    <div className="space-y-3">
+                      <div className="p-3 rounded-2xl bg-[#F8FAF8] border border-emerald-900/5">
+                        <div className="text-[10px] text-ink-muted uppercase font-bold">Kesehatan Program</div>
+                        <div className="flex items-baseline justify-between mt-1">
+                          <span className="text-xl font-extrabold text-[#0B2518]">98%</span>
+                          <span className="text-[10px] text-emerald-700 font-bold bg-emerald-100/70 px-2 py-0.5 rounded-full">Sangat Baik</span>
+                        </div>
+                      </div>
+
+                      <div className="p-3 rounded-2xl bg-[#F8FAF8] border border-emerald-900/5">
+                        <div className="text-[10px] text-ink-muted uppercase font-bold">Verifikasi Lapangan</div>
+                        <div className="flex items-baseline justify-between mt-1">
+                          <span className="text-xl font-extrabold text-[#176B4D]">100%</span>
+                          <span className="text-[10px] text-emerald-700 font-bold bg-emerald-100/70 px-2 py-0.5 rounded-full">Tervalidasi BAST</span>
+                        </div>
+                      </div>
+
+                      <div className="pt-1">
+                        <div className="text-[10px] font-bold text-ink-muted mb-1.5">Agenda Salur Berikutnya</div>
+                        <div className="flex items-center gap-2.5 p-2 rounded-xl bg-white border border-slate-100 text-xs">
+                          <Clock className="w-4 h-4 text-[#176B4D]" />
+                          <div className="truncate">
+                            <div className="font-bold text-[#0B2518] truncate">Termin II Reboisasi</div>
+                            <div className="text-[10px] text-ink-muted">Target: 15.000 bibit</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div className="h-6 w-px bg-border-subtle" />
-                  <div className="text-xs">
-                    <div className="font-extrabold text-[#072418] leading-none">Trust Score 4.9/5.0</div>
-                    <div className="text-[10px] text-ink-muted font-medium mt-0.5">Kepatuhan Audit Eksternal</div>
+
+                  {/* Desktop Dashboard Card (7 cols) */}
+                  <div className="sm:col-span-7 bg-white rounded-3xl p-5 shadow-xl border border-slate-200/80 space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div className="font-bold text-xs text-[#0B2518] flex items-center gap-2">
+                        <MapPin className="w-4 h-4 text-[#176B4D]" />
+                        <span>Pemetaan Geotagging Program</span>
+                      </div>
+                      <span className="text-[10px] text-[#176B4D] font-bold bg-[#E8F6F0] px-2 py-0.5 rounded-full">Live GPS</span>
+                    </div>
+
+                    <div className="relative h-32 rounded-2xl overflow-hidden shadow-inner">
+                      <img
+                        src="/images/hero_sinergi_farming_golden.jpg"
+                        alt="Live Geotagging"
+                        className="w-full h-full object-cover object-[center_30%]"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-2.5">
+                        <span className="text-[10px] text-white font-semibold">
+                          📍 Karangmulyo, Jawa Tengah (-7.532, 110.421)
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-2 pt-1 text-center">
+                      <div className="p-2.5 rounded-xl bg-[#F8FAF8] border border-slate-100">
+                        <div className="text-[10px] text-ink-muted">Penerima Manfaat</div>
+                        <div className="text-base font-extrabold text-[#0B2518] mt-0.5">{formatNumber(totalReached)}</div>
+                      </div>
+                      <div className="p-2.5 rounded-xl bg-[#F8FAF8] border border-slate-100">
+                        <div className="text-[10px] text-ink-muted">Status Evaluasi</div>
+                        <div className="text-base font-extrabold text-[#176B4D] mt-0.5">Siap PROPER</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -654,120 +688,27 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 5. 4 Key Numbers Bar (Refined Architectural Metric Cards) */}
-      <section className="bg-white pb-20 lg:pb-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {/* Stat 1: 98% */}
-            <div className="p-6 rounded-3xl bg-[#F8FAF8] border border-emerald-900/10 hover:border-[#176B4D] hover:bg-white hover:shadow-lg transition-all flex items-center gap-4 group">
-              <div className="w-14 h-14 rounded-2xl bg-[#072418] text-[#FDE047] flex items-center justify-center shrink-0 shadow-md group-hover:scale-105 transition-transform">
-                <TrendingUp className="w-6 h-6" />
-              </div>
-              <div>
-                <div className="text-2xl sm:text-3xl font-black text-[#072418] tracking-tight">
-                  98%
-                </div>
-                <div className="text-xs font-extrabold text-[#072418] mt-0.5">
-                  Kepatuhan Program
-                </div>
-                <div className="text-[11px] text-ink-muted">
-                  Indikator ESG Terukur
-                </div>
-              </div>
-            </div>
-
-            {/* Stat 2: Total Komitmen */}
-            <div className="p-6 rounded-3xl bg-[#F8FAF8] border border-emerald-900/10 hover:border-[#176B4D] hover:bg-white hover:shadow-lg transition-all flex items-center gap-4 group">
-              <div className="w-14 h-14 rounded-2xl bg-[#FDE047] text-[#072418] flex items-center justify-center shrink-0 shadow-md group-hover:scale-105 transition-transform">
-                <Coins className="w-6 h-6" />
-              </div>
-              <div>
-                <div className="text-2xl sm:text-3xl font-black text-[#176B4D] tracking-tight">
-                  {formatCompactIDR(totalCommitted)}
-                </div>
-                <div className="text-xs font-extrabold text-[#072418] mt-0.5">
-                  Komitmen Dana CSR
-                </div>
-                <div className="text-[11px] text-ink-muted">
-                  Alokasi Resmi Funder
-                </div>
-              </div>
-            </div>
-
-            {/* Stat 3: Penerima Manfaat */}
-            <div className="p-6 rounded-3xl bg-[#F8FAF8] border border-emerald-900/10 hover:border-[#176B4D] hover:bg-white hover:shadow-lg transition-all flex items-center gap-4 group">
-              <div className="w-14 h-14 rounded-2xl bg-emerald-100 text-[#072418] flex items-center justify-center shrink-0 shadow-xs group-hover:scale-105 transition-transform">
-                <Users className="w-6 h-6 text-[#176B4D]" />
-              </div>
-              <div>
-                <div className="text-2xl sm:text-3xl font-black text-[#072418] tracking-tight">
-                  {formatNumber(totalReached)}+
-                </div>
-                <div className="text-xs font-extrabold text-[#072418] mt-0.5">
-                  Penerima Manfaat Riil
-                </div>
-                <div className="text-[11px] text-ink-muted">
-                  Pelajar, Tani & UMKM
-                </div>
-              </div>
-            </div>
-
-            {/* Stat 4: Bebas Manipulasi */}
-            <div className="p-6 rounded-3xl bg-[#F8FAF8] border border-emerald-900/10 hover:border-[#176B4D] hover:bg-white hover:shadow-lg transition-all flex items-center gap-4 group">
-              <div className="w-14 h-14 rounded-2xl bg-[#072418] text-white flex items-center justify-center shrink-0 shadow-md group-hover:scale-105 transition-transform">
-                <ShieldCheck className="w-6 h-6 text-[#FDE047]" />
-              </div>
-              <div>
-                <div className="text-2xl sm:text-3xl font-black text-[#072418] tracking-tight">
-                  100%
-                </div>
-                <div className="text-xs font-extrabold text-[#072418] mt-0.5">
-                  Bebas Klaim Ganda
-                </div>
-                <div className="text-[11px] text-ink-muted">
-                  Deduping NIK/NIB Unik
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 6. Services & 4 Core CSR Program Pillars ("We Offer Different Services For Helped You") */}
-      <section id="pilar" className="pt-24 pb-20 lg:pb-28 bg-[#072418] text-white relative">
-        {/* Top Torn Paper Transition from White Section */}
-        <div className="absolute top-0 left-0 right-0 w-full overflow-hidden leading-none z-10 pointer-events-none -translate-y-[98%]">
-          <svg
-            viewBox="0 0 1440 60"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-full h-8 sm:h-12 lg:h-14 text-[#072418] fill-current"
-            preserveAspectRatio="none"
-          >
-            <path d="M0,60 L1440,60 L1440,32 C1380,18 1340,46 1280,24 C1220,2 1180,44 1120,22 C1060,-2 1010,42 960,24 C900,6 860,48 800,28 C740,6 700,44 640,20 C580,-4 530,50 480,28 C420,4 380,46 320,24 C260,2 210,48 160,30 C100,12 60,46 0,26 Z" />
-          </svg>
-        </div>
-
+      {/* 5. Section: Pilar Program CSR */}
+      <section id="pilar" className="scroll-mt-20 py-20 lg:py-28 bg-[#FBFDFB] border-t border-slate-150/80 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <div>
-              <span className="text-[#F5CA44] text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 mb-2">
-                <Sprout className="w-4 h-4 text-[#F5CA44]" /> What We Do • Pilar Program CSR
+              <span className="text-[#176B4D] text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 mb-2">
+                <Sprout className="w-4 h-4 text-[#176B4D]" /> Pilar Program CSR
               </span>
-              <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-white leading-tight">
-                We Offer Different Services <br className="hidden sm:inline" />
-                For Helped You
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#0B2518] leading-tight">
+                4 Pilar Utama Pemberdayaan Berkelanjutan
               </h2>
             </div>
             <div className="space-y-2 md:text-right">
-              <p className="text-xs sm:text-sm text-emerald-100/70 max-w-md leading-relaxed">
-                Advanced solutions, fast performance, and high quality CSR orchestration.
+              <p className="text-xs sm:text-sm text-ink-secondary max-w-md leading-relaxed">
+                Inisiatif strategis yang terstruktur sesuai kriteria PROPER KLHK dan 17 Tujuan Pembangunan Berkelanjutan (SDGs).
               </p>
               <Link
                 to="/dashboard/programs"
-                className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#F5CA44] hover:text-amber-200 transition-colors"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#176B4D] hover:underline"
               >
-                <span>View All Services</span>
+                <span>Lihat Seluruh Direktori Program</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
@@ -775,112 +716,112 @@ export const LandingPage: React.FC = () => {
 
           {/* Cards Grid with Photos */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Card 1: Lingkungan & Reboisasi */}
-            <div className="bg-emerald-950/70 border border-emerald-800/60 rounded-3xl overflow-hidden hover:border-emerald-500 transition-all flex flex-col justify-between group">
+            {/* Card 1: Lingkungan */}
+            <div className="bg-white border border-slate-200/80 rounded-3xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
               <div className="relative h-48 overflow-hidden">
                 <img
                   src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=600&auto=format&fit=crop&q=80"
                   alt="Reboisasi Mangrove"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <span className="absolute top-3 left-3 bg-[#072418]/80 text-[#F5CA44] border border-[#F5CA44]/30 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur-xs">
+                <span className="absolute top-3 left-3 bg-black/60 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur-md">
                   No - 01 • Lingkungan
                 </span>
               </div>
               <div className="p-5 space-y-2 flex-1 flex flex-col justify-between">
                 <div>
-                  <h3 className="font-bold text-base text-white group-hover:text-emerald-300 transition-colors">
-                    Reboisasi & Perlindungan Pesisir
+                  <h3 className="font-bold text-base text-[#0B2518] group-hover:text-[#176B4D] transition-colors">
+                    Reboisasi &amp; Perlindungan Pesisir
                   </h3>
-                  <p className="text-xs text-emerald-100/70 mt-1 leading-relaxed">
+                  <p className="text-xs text-ink-secondary mt-1 leading-relaxed">
                     Restorasi 50.000 bibit mangrove dan rehabilitasi gambut untuk menahan abrasi serta menurunkan emisi karbon.
                   </p>
                 </div>
-                <div className="pt-3 border-t border-emerald-800/60 flex items-center justify-between text-xs text-emerald-300 font-bold">
+                <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-[#176B4D] font-bold">
                   <span>3 Program Aktif</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
             </div>
 
-            {/* Card 2: Pendidikan & Beasiswa */}
-            <div className="bg-emerald-950/70 border border-emerald-800/60 rounded-3xl overflow-hidden hover:border-emerald-500 transition-all flex flex-col justify-between group">
+            {/* Card 2: Pendidikan */}
+            <div className="bg-white border border-slate-200/80 rounded-3xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
               <div className="relative h-48 overflow-hidden">
                 <img
                   src="https://images.unsplash.com/photo-1577896851231-70ef18881754?w=600&auto=format&fit=crop&q=80"
                   alt="Beasiswa & Coding Camp"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <span className="absolute top-3 left-3 bg-[#072418]/80 text-[#F5CA44] border border-[#F5CA44]/30 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur-xs">
+                <span className="absolute top-3 left-3 bg-black/60 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur-md">
                   No - 02 • Pendidikan
                 </span>
               </div>
               <div className="p-5 space-y-2 flex-1 flex flex-col justify-between">
                 <div>
-                  <h3 className="font-bold text-base text-white group-hover:text-emerald-300 transition-colors">
-                    Beasiswa Talenta & Coding Vokasi
+                  <h3 className="font-bold text-base text-[#0B2518] group-hover:text-[#176B4D] transition-colors">
+                    Beasiswa Talenta &amp; Coding Vokasi
                   </h3>
-                  <p className="text-xs text-emerald-100/70 mt-1 leading-relaxed">
+                  <p className="text-xs text-ink-secondary mt-1 leading-relaxed">
                     Bantuan biaya kuliah dan pelatihan intensif software engineering untuk pemuda prasejahtera dan disabilitas.
                   </p>
                 </div>
-                <div className="pt-3 border-t border-emerald-800/60 flex items-center justify-between text-xs text-emerald-300 font-bold">
+                <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-[#176B4D] font-bold">
                   <span>2 Program Aktif</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
             </div>
 
-            {/* Card 3: Pemberdayaan UMKM */}
-            <div className="bg-emerald-950/70 border border-emerald-800/60 rounded-3xl overflow-hidden hover:border-emerald-500 transition-all flex flex-col justify-between group">
+            {/* Card 3: UMKM */}
+            <div className="bg-white border border-slate-200/80 rounded-3xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
               <div className="relative h-48 overflow-hidden">
                 <img
                   src="https://images.unsplash.com/photo-1556742049-0a67c5574f73?w=600&auto=format&fit=crop&q=80"
                   alt="Pemberdayaan UMKM"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <span className="absolute top-3 left-3 bg-[#072418]/80 text-[#F5CA44] border border-[#F5CA44]/30 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur-xs">
+                <span className="absolute top-3 left-3 bg-black/60 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur-md">
                   No - 03 • Ekonomi UMKM
                 </span>
               </div>
               <div className="p-5 space-y-2 flex-1 flex flex-col justify-between">
                 <div>
-                  <h3 className="font-bold text-base text-white group-hover:text-emerald-300 transition-colors">
-                    Inkubasi & Halal UMKM Kuliner
+                  <h3 className="font-bold text-base text-[#0B2518] group-hover:text-[#176B4D] transition-colors">
+                    Inkubasi &amp; Halal UMKM Kuliner
                   </h3>
-                  <p className="text-xs text-emerald-100/70 mt-1 leading-relaxed">
+                  <p className="text-xs text-ink-secondary mt-1 leading-relaxed">
                     Fasilitasi sertifikasi halal, standarisasi kemasan BPOM, dan digitalisasi pencatatan omzet bagi 250 usaha mikro.
                   </p>
                 </div>
-                <div className="pt-3 border-t border-emerald-800/60 flex items-center justify-between text-xs text-emerald-300 font-bold">
+                <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-[#176B4D] font-bold">
                   <span>2 Program Aktif</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
             </div>
 
-            {/* Card 4: Infrastruktur Air Bersih & Kesehatan */}
-            <div className="bg-emerald-950/70 border border-emerald-800/60 rounded-3xl overflow-hidden hover:border-emerald-500 transition-all flex flex-col justify-between group">
+            {/* Card 4: Air Bersih */}
+            <div className="bg-white border border-slate-200/80 rounded-3xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
               <div className="relative h-48 overflow-hidden">
                 <img
                   src="https://images.unsplash.com/photo-1541888946425-d0fbb186156a?w=600&auto=format&fit=crop&q=80"
                   alt="Infrastruktur Air Bersih"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <span className="absolute top-3 left-3 bg-[#072418]/80 text-[#F5CA44] border border-[#F5CA44]/30 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur-xs">
-                  No - 04 • Air & Sanitasi
+                <span className="absolute top-3 left-3 bg-black/60 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur-md">
+                  No - 04 • Air &amp; Sanitasi
                 </span>
               </div>
               <div className="p-5 space-y-2 flex-1 flex flex-col justify-between">
                 <div>
-                  <h3 className="font-bold text-base text-white group-hover:text-emerald-300 transition-colors">
-                    Pompa Tenaga Surya & Pipanisasi
+                  <h3 className="font-bold text-base text-[#0B2518] group-hover:text-[#176B4D] transition-colors">
+                    Pompa Tenaga Surya &amp; Pipanisasi
                   </h3>
-                  <p className="text-xs text-emerald-100/70 mt-1 leading-relaxed">
+                  <p className="text-xs text-ink-secondary mt-1 leading-relaxed">
                     Penyediaan air minum higienis bebas emisi untuk 1.800 warga di desa karst langganan kekeringan Gunungkidul.
                   </p>
                 </div>
-                <div className="pt-3 border-t border-emerald-800/60 flex items-center justify-between text-xs text-emerald-300 font-bold">
+                <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-[#176B4D] font-bold">
                   <span>1 Program Aktif</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
@@ -890,43 +831,34 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 7. Ecosystem Interactive Flow Section ("Bagaimana Cara Kerja Universa CSR Hub?") */}
-      <section id="ekosistem" className="py-24 lg:py-32 bg-[#F8FAF7] relative overflow-hidden">
-        {/* Subtle decorative organic background accents */}
-        <div className="absolute top-12 right-0 w-96 h-96 bg-emerald-100/50 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-12 left-0 w-96 h-96 bg-amber-100/40 rounded-full blur-3xl pointer-events-none" />
-
+      {/* 6. Section: Ekosistem Interaktif */}
+      <section id="ekosistem" className="scroll-mt-20 py-20 lg:py-28 bg-white border-t border-slate-150/80 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          {/* Top Editorial Split Header */}
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14 lg:mb-16">
             <div className="space-y-3 max-w-2xl">
-              <div className="inline-flex items-center gap-2 text-[#176B4D] text-xs font-extrabold uppercase tracking-wider">
+              <div className="inline-flex items-center gap-2 text-[#176B4D] text-xs font-bold uppercase tracking-wider">
                 <Sprout className="w-4 h-4 text-[#176B4D]" />
-                <span>Siklus Tata Kelola 4 Pemangku Kepentingan</span>
+                <span>Siklus Tata Kelola Tertutup</span>
               </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#072418] tracking-tight leading-[1.12]">
-                Bagaimana Cara Kerja <br className="hidden sm:inline" />
-                <span className="text-[#176B4D]">SinergiCSR?</span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0B2518] tracking-tight leading-tight">
+                Bagaimana Cara Kerja <span className="text-[#176B4D]">SinergiCSR?</span>
               </h2>
             </div>
 
             <div className="flex flex-col sm:flex-row lg:flex-col items-start sm:items-center lg:items-end justify-between gap-4 max-w-md lg:text-right">
               <p className="text-xs sm:text-sm text-ink-secondary leading-relaxed">
-                Dari alokasi pendanaan awal hingga pelaporan formal ke regulator pemerintah, seluruh proses berjalan terpadu dalam satu alur hidup tanpa dokumen kertas yang tercecer.
+                Dari alokasi pendanaan awal hingga pelaporan formal ke regulator pemerintah, seluruh proses berjalan terpadu dalam satu alur hidup tanpa dokumen tercecer.
               </p>
               <Link
                 to="/dashboard/ecosystem"
-                className="inline-flex items-center gap-3 pl-5 pr-2 py-2 rounded-full bg-[#072418] hover:bg-[#176B4D] text-white text-xs font-bold shadow-lg transition-all duration-300 group shrink-0"
+                className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-[#0E3D2A] hover:bg-[#176B4D] text-white text-xs font-bold shadow-md transition-all shrink-0"
               >
-                <span>Buka Diagram Ekosistem Interaktif</span>
-                <span className="w-7 h-7 rounded-full bg-[#FDE047] text-[#072418] flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </span>
+                <span>Diagram Alur Interaktif</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
           </div>
 
-          {/* Interactive Asymmetric Split Showcase: Left Visual Collage & Live Artifact + Right Connected Pipeline */}
           {(() => {
             const ecoSteps = [
               {
@@ -936,7 +868,7 @@ export const LandingPage: React.FC = () => {
                 badge: 'Pencatatan Inflow Resmi',
                 desc: 'Perusahaan menetapkan pilar sasaran TJSL dan mencatatkan alokasi komitmen dana tahunan secara transparan ke dalam buku besar.',
                 image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=900&auto=format&fit=crop&q=85',
-                imageCaption: 'Komite ESG & Direksi Korporasi menetapkan pagu anggaran tahunan.',
+                imageCaption: 'Komite ESG menetapkan pagu anggaran tahunan.',
                 liveMetricLabel: 'Total Komitmen Terkunci',
                 liveMetricValue: formatCompactIDR(totalCommitted),
                 liveSubtext: `${funders.length} Perusahaan Mitra Aktif`,
@@ -946,7 +878,7 @@ export const LandingPage: React.FC = () => {
                   'Saldo Alokasi Real-Time & Anti-Overbudget'
                 ],
                 linkTo: '/dashboard/funding',
-                linkLabel: 'Inspeksi Buku Besar Funding',
+                linkLabel: 'Inspeksi Buku Besar',
                 icon: Coins
               },
               {
@@ -956,7 +888,7 @@ export const LandingPage: React.FC = () => {
                 badge: 'Seleksi Bebas Fiktif',
                 desc: 'Mitra mengajukan usulan kegiatan lapangan, dikurasi kelayakan RAB serta legalitasnya, lalu dikonversi otomatis menjadi Program aktif.',
                 image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=900&auto=format&fit=crop&q=85',
-                imageCaption: 'Tim Kurator & Mitra Yayasan membedah kelayakan teknis program.',
+                imageCaption: 'Tim Kurator membedah kelayakan teknis program.',
                 liveMetricLabel: 'Program Terkurasi Aktif',
                 liveMetricValue: `${programs.length} Program`,
                 liveSubtext: `${partners.length} Lembaga Pelaksana Terverifikasi`,
@@ -976,14 +908,14 @@ export const LandingPage: React.FC = () => {
                 badge: 'Audit Trail Transparan',
                 desc: 'Penyaluran dana tidak dilepas sekaligus, melainkan dikunci per termin milestone dengan validasi sisa saldo dan Berita Acara (BAST).',
                 image: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=900&auto=format&fit=crop&q=85',
-                imageCaption: 'Verifikasi fisik di titik lokasi sebelum pencairan termin berikutnya.',
+                imageCaption: 'Verifikasi fisik di titik lokasi sebelum pencairan.',
                 liveMetricLabel: 'Dana Tersalurkan via BAST',
                 liveMetricValue: formatCompactIDR(totalDisbursed),
                 liveSubtext: '100% Pencairan Terikat Bukti Fisik',
                 highlights: [
                   'Kunci Pencairan Bertahap (Termin 1, 2, Final)',
                   'Wajib Unggah Bukti Foto Geotagging & BAST',
-                  'Proteksi Otomatis dari Penyaluran Melebihi Pagu'
+                  'Proteksi Otomatis dari Salur Melebihi Pagu'
                 ],
                 linkTo: '/dashboard/programs',
                 linkLabel: 'Cek Milestone Program',
@@ -991,22 +923,22 @@ export const LandingPage: React.FC = () => {
               },
               {
                 step: '04',
-                title: 'Laporan Dampak & Kepatuhan PROPER',
+                title: 'Laporan Dampak & PROPER',
                 actor: 'Regulator KLHK & Publik',
                 badge: 'Kepatuhan Pemerintah',
                 desc: 'Seluruh jejak transaksi dan penerima manfaat unik dirangkum otomatis menjadi CSR Annual Report dan draf evaluasi PROPER KLHK.',
                 image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&auto=format&fit=crop&q=85',
-                imageCaption: 'Ringkasan audit eksekutif siap cetak untuk pelaporan regulator.',
+                imageCaption: 'Ringkasan audit eksekutif siap cetak untuk regulator.',
                 liveMetricLabel: 'Penerima Manfaat Terverifikasi',
                 liveMetricValue: `${formatNumber(totalReached)}+ Jiwa`,
-                liveSubtext: 'Bebas Klaim Ganda (NIK / NIB Unik)',
+                liveSubtext: 'Bebas Klaim Ganda (NIK/NIB Unik)',
                 highlights: [
                   'Ekspor Draf Evaluasi PROPER KLHK & SDGs',
                   'Metodologi Deduping Penerima Manfaat Riil',
                   'Rekam Jejak Siap Audit Eksternal Kapan Saja'
                 ],
                 linkTo: '/dashboard/reports',
-                linkLabel: 'Buka Generator Laporan PROPER',
+                linkLabel: 'Buka Generator Laporan',
                 icon: Award
               }
             ];
@@ -1016,46 +948,29 @@ export const LandingPage: React.FC = () => {
 
             return (
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-stretch">
-                {/* Left Column (5 cols): Dynamic Visual Collage & Live System Card */}
+                {/* Left Column: Visual Frame */}
                 <div className="lg:col-span-5 flex flex-col justify-between relative">
-                  {/* Decorative Dot Pattern Behind Image */}
-                  <div className="absolute -top-5 -left-5 w-32 h-32 opacity-35 pointer-events-none hidden sm:block">
-                    <svg width="100%" height="100%" fill="none">
-                      <pattern id="eco-dots" x="0" y="0" width="14" height="14" patternUnits="userSpaceOnUse">
-                        <circle cx="2.5" cy="2.5" r="2" fill="#176B4D" />
-                      </pattern>
-                      <rect width="100%" height="100%" fill="url(#eco-dots)" />
-                    </svg>
-                  </div>
-
-                  {/* Main Layered Visual Frame */}
-                  <div className="relative rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white bg-[#072418] h-full min-h-[460px] sm:min-h-[520px] flex flex-col justify-between group">
-                    {/* Background Step Photo */}
+                  <div className="relative rounded-3xl overflow-hidden shadow-xl border border-slate-200 bg-[#072418] h-full min-h-[460px] flex flex-col justify-between group">
                     <img
                       key={current.image}
                       src={current.image}
                       alt={current.title}
-                      className="absolute inset-0 w-full h-full object-cover opacity-85 group-hover:scale-105 transition-all duration-700"
+                      className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 transition-all duration-700"
                     />
-                    {/* Multi-stop dark gradient overlay for rich contrast */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#072418] via-[#072418]/65 to-black/30" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#072418] via-[#072418]/60 to-black/30" />
 
-                    {/* Top Floating Bar inside Visual Frame */}
                     <div className="relative z-10 p-5 sm:p-6 flex items-center justify-between gap-3">
-                      <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/55 backdrop-blur-md border border-white/20 text-white text-xs font-bold">
-                        <span className="w-2 h-2 rounded-full bg-[#FDE047] animate-pulse" />
+                      <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white text-xs font-bold">
+                        <span className="w-2 h-2 rounded-full bg-[#D4F63D] animate-pulse" />
                         Tahap {current.step} dari 04
                       </span>
-
-                      <span className="px-3.5 py-1.5 rounded-full bg-[#FDE047] text-[#072418] text-[11px] font-extrabold tracking-wide shadow-md">
+                      <span className="px-3 py-1 rounded-full bg-[#D4F63D] text-black text-[11px] font-bold">
                         {current.actor}
                       </span>
                     </div>
 
-                    {/* Bottom Live System Simulation Card inside Visual Frame */}
                     <div className="relative z-10 p-5 sm:p-6 mt-auto space-y-4">
-                      {/* Live Metric Glass Box */}
-                      <div className="p-4 sm:p-5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-between gap-4">
+                      <div className="p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-between gap-4">
                         <div>
                           <div className="text-[11px] uppercase tracking-wider text-emerald-200 font-bold">
                             {current.liveMetricLabel}
@@ -1063,36 +978,34 @@ export const LandingPage: React.FC = () => {
                           <div className="text-2xl sm:text-3xl font-black text-white mt-0.5">
                             {current.liveMetricValue}
                           </div>
-                          <div className="text-[11px] text-[#FDE047] font-semibold mt-0.5">
+                          <div className="text-[11px] text-[#D4F63D] font-semibold mt-0.5">
                             {current.liveSubtext}
                           </div>
                         </div>
-                        <div className="w-12 h-12 rounded-2xl bg-[#FDE047] text-[#072418] flex items-center justify-center shrink-0 shadow-lg">
+                        <div className="w-12 h-12 rounded-2xl bg-[#D4F63D] text-black flex items-center justify-center shrink-0 shadow-lg">
                           <CurrentIcon className="w-6 h-6" />
                         </div>
                       </div>
 
-                      {/* Verification Checklist */}
                       <div className="space-y-2 pt-1">
                         <div className="text-[11px] font-bold uppercase tracking-wider text-white/70">
-                          Standar Kendali Sistem:
+                          Standar Kendali:
                         </div>
                         {current.highlights.map((item, idx) => (
                           <div key={idx} className="flex items-center gap-2.5 text-xs text-white/95 font-medium">
-                            <CheckCircle2 className="w-4 h-4 text-[#FDE047] shrink-0" />
+                            <CheckCircle2 className="w-4 h-4 text-[#D4F63D] shrink-0" />
                             <span>{item}</span>
                           </div>
                         ))}
                       </div>
 
-                      {/* Direct Module Link Footer */}
                       <div className="pt-3 border-t border-white/15 flex items-center justify-between gap-3">
                         <span className="text-[11px] text-white/70 italic line-clamp-1">
                           {current.imageCaption}
                         </span>
                         <Link
                           to={current.linkTo}
-                          className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#FDE047] hover:underline shrink-0"
+                          className="inline-flex items-center gap-1.5 text-xs font-bold text-[#D4F63D] hover:underline shrink-0"
                         >
                           <span>{current.linkLabel}</span>
                           <ArrowRight className="w-3.5 h-3.5" />
@@ -1102,11 +1015,8 @@ export const LandingPage: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Right Column (7 cols): Interactive Connected Workflow Cards */}
-                <div className="lg:col-span-7 flex flex-col justify-between space-y-4 relative">
-                  {/* Vertical connecting line on desktop */}
-                  <div className="hidden sm:block absolute left-[27px] top-8 bottom-8 w-0.5 bg-gradient-to-b from-[#176B4D] via-emerald-300 to-[#072418]/20 pointer-events-none" />
-
+                {/* Right Column: Steps Cards */}
+                <div className="lg:col-span-7 flex flex-col justify-between space-y-4">
                   {ecoSteps.map((item, idx) => {
                     const StepIcon = item.icon;
                     const isActive = activeEcoStep === idx;
@@ -1115,93 +1025,36 @@ export const LandingPage: React.FC = () => {
                       <div
                         key={item.step}
                         onClick={() => setActiveEcoStep(idx)}
-                        onMouseEnter={() => setActiveEcoStep(idx)}
-                        className={`relative sm:pl-16 transition-all duration-300 cursor-pointer group`}
+                        className={`p-5 sm:p-6 rounded-3xl border transition-all duration-300 cursor-pointer ${
+                          isActive
+                            ? 'bg-[#F4F9F5] border-[#176B4D] shadow-md ring-1 ring-[#176B4D]/20'
+                            : 'bg-white border-slate-200 hover:border-slate-300 shadow-xs hover:shadow-sm'
+                        }`}
                       >
-                        {/* Timeline Step Node Circle (Desktop) */}
-                        <div
-                          className={`hidden sm:flex absolute left-0 top-1/2 -translate-y-1/2 w-14 h-14 rounded-2xl items-center justify-center font-black text-sm transition-all duration-300 z-10 border-2 ${
-                            isActive
-                              ? 'bg-[#072418] text-[#FDE047] border-[#FDE047] shadow-lg scale-105'
-                              : 'bg-white text-ink-secondary border-border-subtle group-hover:border-[#176B4D] group-hover:text-[#176B4D]'
-                          }`}
-                        >
-                          {item.step}
-                        </div>
-
-                        {/* Interactive Step Card */}
-                        <div
-                          className={`p-5 sm:p-6 rounded-3xl border transition-all duration-300 ${
-                            isActive
-                              ? 'bg-white border-[#176B4D] shadow-xl ring-2 ring-[#176B4D]/10 -translate-y-0.5'
-                              : 'bg-white/80 hover:bg-white border-border-subtle/80 shadow-xs hover:shadow-md'
-                          }`}
-                        >
-                          <div className="flex flex-wrap items-center justify-between gap-2 mb-2.5">
-                            <div className="flex items-center gap-2.5">
-                              {/* Mobile step badge */}
-                              <span
-                                className={`sm:hidden w-7 h-7 rounded-lg flex items-center justify-center font-black text-xs ${
-                                  isActive
-                                    ? 'bg-[#072418] text-[#FDE047]'
-                                    : 'bg-surface-secondary text-ink-secondary'
-                                }`}
-                              >
-                                {item.step}
-                              </span>
-                              <span
-                                className={`text-[11px] font-extrabold px-2.5 py-0.5 rounded-full border ${
-                                  isActive
-                                    ? 'bg-[#072418] text-[#FDE047] border-[#072418]'
-                                    : 'bg-surface-secondary text-ink-secondary border-border-subtle'
-                                }`}
-                              >
-                                {item.actor}
-                              </span>
-                              <span className="text-[11px] font-bold text-[#176B4D] bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200/80">
-                                {item.badge}
-                              </span>
-                            </div>
-
-                            <div
-                              className={`w-8 h-8 rounded-xl flex items-center justify-center transition-colors ${
+                        <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+                          <div className="flex items-center gap-2">
+                            <span
+                              className={`w-7 h-7 rounded-xl flex items-center justify-center font-bold text-xs ${
                                 isActive
-                                  ? 'bg-emerald-50 text-[#176B4D]'
-                                  : 'bg-surface-secondary/70 text-ink-muted group-hover:text-[#176B4D]'
+                                  ? 'bg-[#176B4D] text-white'
+                                  : 'bg-slate-100 text-slate-700'
                               }`}
                             >
-                              <StepIcon className="w-4 h-4" />
-                            </div>
+                              {item.step}
+                            </span>
+                            <span className="text-xs font-bold text-[#0B2518]">
+                              {item.title}
+                            </span>
+                            <span className="text-[10px] font-semibold text-[#176B4D] bg-[#E8F6F0] px-2 py-0.5 rounded-full">
+                              {item.badge}
+                            </span>
                           </div>
-
-                          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                            <div className="space-y-1 pr-2">
-                              <h3
-                                className={`font-extrabold text-base sm:text-lg transition-colors ${
-                                  isActive ? 'text-[#072418]' : 'text-ink-primary group-hover:text-[#176B4D]'
-                                }`}
-                              >
-                                {item.title}
-                              </h3>
-                              <p className="text-xs text-ink-secondary leading-relaxed">
-                                {item.desc}
-                              </p>
-                            </div>
-
-                            <Link
-                              to={item.linkTo}
-                              onClick={(e) => e.stopPropagation()}
-                              className={`inline-flex items-center gap-1.5 text-xs font-extrabold shrink-0 px-3.5 py-2 rounded-xl transition-all ${
-                                isActive
-                                  ? 'bg-[#FDE047] text-[#072418] shadow-xs hover:bg-[#facc15]'
-                                  : 'bg-surface-secondary text-ink-secondary hover:bg-emerald-50 hover:text-[#176B4D]'
-                              }`}
-                            >
-                              <span>Buka Modul</span>
-                              <ChevronRight className="w-3.5 h-3.5" />
-                            </Link>
-                          </div>
+                          <StepIcon className={`w-4 h-4 ${isActive ? 'text-[#176B4D]' : 'text-slate-400'}`} />
                         </div>
+
+                        <p className="text-xs text-ink-secondary leading-relaxed pl-9">
+                          {item.desc}
+                        </p>
                       </div>
                     );
                   })}
@@ -1212,14 +1065,107 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 8. Corporate Funders & Partners Brand Showcase */}
-      <section id="mitra" className="py-16 bg-surface-card border-y border-border-subtle">
+      {/* 7. Section: Laporan Dampak & Audit */}
+      <section id="dampak" className="scroll-mt-20 py-20 lg:py-28 bg-[#FBFDFB] border-t border-slate-150/80 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto space-y-3 mb-14">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#E8F6F0] text-[#176B4D] text-xs font-bold uppercase tracking-wider">
+              <Sprout className="w-3.5 h-3.5 text-[#176B4D]" />
+              <span>Dampak &amp; Kepatuhan Audit</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0B2518] tracking-tight leading-tight">
+              Transparansi Nyata, Teruji Hingga Lapangan
+            </h2>
+            <p className="text-xs sm:text-sm text-ink-secondary leading-relaxed">
+              Setiap data dampak dikurasi dengan metodologi identitas tunggal bebas duplikasi, siap untuk audit eksternal dan evaluasi PROPER.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Bento Card 1 */}
+            <div className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/80 shadow-xs hover:shadow-lg transition-all space-y-4">
+              <div className="w-12 h-12 rounded-2xl bg-[#E8F6F0] text-[#176B4D] flex items-center justify-center">
+                <ShieldCheck className="w-6 h-6" />
+              </div>
+              <div className="space-y-1.5">
+                <span className="text-[10px] font-bold text-[#176B4D] bg-[#E8F6F0] px-2 py-0.5 rounded-full">
+                  100% Anti-Duplikasi
+                </span>
+                <h3 className="font-bold text-base text-[#0B2518]">Validasi Identitas NIK/NIB</h3>
+                <p className="text-xs text-ink-secondary leading-relaxed">
+                  Memisahkan secara ketat antara individu penerima unik dan kehadiran acara, mencegah klaim ganda dan penggelembungan laporan.
+                </p>
+              </div>
+            </div>
+
+            {/* Bento Card 2 */}
+            <div className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/80 shadow-xs hover:shadow-lg transition-all space-y-4">
+              <div className="w-12 h-12 rounded-2xl bg-[#E8F6F0] text-[#176B4D] flex items-center justify-center">
+                <MapPin className="w-6 h-6" />
+              </div>
+              <div className="space-y-1.5">
+                <span className="text-[10px] font-bold text-[#176B4D] bg-[#E8F6F0] px-2 py-0.5 rounded-full">
+                  Geotagging Aktif
+                </span>
+                <h3 className="font-bold text-base text-[#0B2518]">Bukti Digital BAST &amp; GPS</h3>
+                <p className="text-xs text-ink-secondary leading-relaxed">
+                  Setiap pengeluaran dana termin terikat Berita Acara Serah Terima dengan dokumentasi foto dan titik koordinat asli di lokasi kegiatan.
+                </p>
+              </div>
+            </div>
+
+            {/* Bento Card 3 */}
+            <div className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/80 shadow-xs hover:shadow-lg transition-all space-y-4">
+              <div className="w-12 h-12 rounded-2xl bg-[#E8F6F0] text-[#176B4D] flex items-center justify-center">
+                <Award className="w-6 h-6" />
+              </div>
+              <div className="space-y-1.5">
+                <span className="text-[10px] font-bold text-[#176B4D] bg-[#E8F6F0] px-2 py-0.5 rounded-full">
+                  Kriteria PROPER
+                </span>
+                <h3 className="font-bold text-base text-[#0B2518]">Laporan Siap Audit KLHK</h3>
+                <p className="text-xs text-ink-secondary leading-relaxed">
+                  Generator otomatis yang memetakan kegiatan ke indikator SDGs Bappenas dan format evaluasi PROPER Emas &amp; Hijau Kementerian LHK.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Trust Score Strip */}
+          <div className="mt-10 p-5 rounded-2xl bg-white border border-slate-200 flex flex-wrap items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <div className="flex text-amber-400">
+                <Star className="w-4 h-4 fill-current" />
+                <Star className="w-4 h-4 fill-current" />
+                <Star className="w-4 h-4 fill-current" />
+                <Star className="w-4 h-4 fill-current" />
+                <Star className="w-4 h-4 fill-current" />
+              </div>
+              <div className="text-xs">
+                <span className="font-bold text-[#0B2518]">Trust Score 4.9/5.0</span>
+                <span className="text-ink-muted ml-2">• Kepatuhan Audit Eksternal Terverifikasi</span>
+              </div>
+            </div>
+
+            <Link
+              to="/dashboard/reports"
+              className="text-xs font-bold text-[#176B4D] hover:underline inline-flex items-center gap-1.5"
+            >
+              <span>Buka Generator Laporan PROPER</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 8. Section: Mitra & Corporate Funders */}
+      <section id="mitra" className="scroll-mt-20 py-16 lg:py-20 bg-white border-t border-slate-150/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8">
           <div>
-            <span className="text-ink-muted text-xs font-bold uppercase tracking-wider block mb-1">
+            <span className="text-[#176B4D] text-xs font-bold uppercase tracking-wider block mb-1">
               Jejaring Kemitraan Strategis
             </span>
-            <h3 className="text-lg sm:text-xl font-bold text-ink-primary">
+            <h3 className="text-xl sm:text-2xl font-bold text-[#0B2518]">
               Dipercaya oleh Perusahaan dan Lembaga Sosial Terkemuka
             </h3>
           </div>
@@ -1228,11 +1174,13 @@ export const LandingPage: React.FC = () => {
             {funders.map((funder) => (
               <div
                 key={funder.id}
-                className="p-4 rounded-2xl bg-surface-secondary/70 border border-border-subtle hover:border-brand-emerald transition-all text-center"
+                className="p-4 rounded-2xl bg-[#F8FAF8] border border-slate-200/80 hover:border-[#176B4D] transition-all text-center group"
               >
-                <div className="font-extrabold text-sm text-ink-primary">{funder.code}</div>
+                <div className="font-bold text-sm text-[#0B2518] group-hover:text-[#176B4D] transition-colors">
+                  {funder.code}
+                </div>
                 <div className="text-[11px] text-ink-muted truncate mt-0.5">{funder.name}</div>
-                <span className="text-[9px] px-2 py-0.5 rounded-full bg-brand-mint text-brand-primary font-bold mt-2 inline-block">
+                <span className="text-[9px] px-2 py-0.5 rounded-full bg-[#E8F6F0] text-[#176B4D] font-bold mt-2 inline-block">
                   Corporate Funder
                 </span>
               </div>
