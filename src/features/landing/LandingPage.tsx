@@ -718,9 +718,9 @@ export const LandingPage: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Card 1: Lingkungan */}
             <div className="bg-white border border-slate-200/80 rounded-3xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
-              <div className="relative h-48 overflow-hidden">
+              <div className="relative h-48 overflow-hidden bg-slate-100">
                 <img
-                  src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=600&auto=format&fit=crop&q=80"
+                  src="/images/volunteers_planting_saplings.jpg"
                   alt="Reboisasi Mangrove"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
@@ -746,9 +746,9 @@ export const LandingPage: React.FC = () => {
 
             {/* Card 2: Pendidikan */}
             <div className="bg-white border border-slate-200/80 rounded-3xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
-              <div className="relative h-48 overflow-hidden">
+              <div className="relative h-48 overflow-hidden bg-slate-100">
                 <img
-                  src="https://images.unsplash.com/photo-1577896851231-70ef18881754?w=600&auto=format&fit=crop&q=80"
+                  src="/images/program_beasiswa_vokasi.jpg"
                   alt="Beasiswa & Coding Camp"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
@@ -774,10 +774,10 @@ export const LandingPage: React.FC = () => {
 
             {/* Card 3: UMKM */}
             <div className="bg-white border border-slate-200/80 rounded-3xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
-              <div className="relative h-48 overflow-hidden">
+              <div className="relative h-48 overflow-hidden bg-slate-100">
                 <img
-                  src="https://images.unsplash.com/photo-1556742049-0a67c5574f73?w=600&auto=format&fit=crop&q=80"
-                  alt="Pemberdayaan UMKM"
+                  src="/images/program_umkm_culinary.jpg"
+                  alt="Inkubasi & Halal UMKM Kuliner"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <span className="absolute top-3 left-3 bg-black/60 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur-md">
@@ -802,10 +802,10 @@ export const LandingPage: React.FC = () => {
 
             {/* Card 4: Air Bersih */}
             <div className="bg-white border border-slate-200/80 rounded-3xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
-              <div className="relative h-48 overflow-hidden">
+              <div className="relative h-48 overflow-hidden bg-slate-100">
                 <img
-                  src="https://images.unsplash.com/photo-1541888946425-d0fbb186156a?w=600&auto=format&fit=crop&q=80"
-                  alt="Infrastruktur Air Bersih"
+                  src="/images/program_water_solar.jpg"
+                  alt="Pompa Tenaga Surya & Pipanisasi"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <span className="absolute top-3 left-3 bg-black/60 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur-md">

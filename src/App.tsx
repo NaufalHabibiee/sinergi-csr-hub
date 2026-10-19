@@ -15,6 +15,7 @@ import { FundingPage } from './features/funding/FundingPage';
 import { ImpactReportsPage } from './features/reports/ImpactReportsPage';
 import { ActivityLogPage } from './features/activity/ActivityLogPage';
 import { SettingsPage } from './features/settings/SettingsPage';
+import { AuthPage } from './features/auth/AuthPage';
 
 const ProgramIdRedirect: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -28,6 +29,8 @@ export const App: React.FC = () => {
         <Routes>
           {/* Public Introduction & Landing Page */}
           <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<AuthPage defaultMode="login" />} />
+          <Route path="/signup" element={<AuthPage defaultMode="signup" />} />
 
           {/* Platform Management Dashboard */}
           <Route path="/dashboard" element={<AppShell />}>
