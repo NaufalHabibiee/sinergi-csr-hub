@@ -230,27 +230,30 @@ export const LandingPage: React.FC = () => {
         </div>
       </header>
 
-      {/* 3. Hero Section (Inspirasi Persis Econest: Brighter Sunlit Nature, Elevated Layout, Dual-Color Font, Torn Edge) */}
-      <section className="relative overflow-hidden min-h-[560px] lg:min-h-[620px] flex items-center bg-[#0C2D1F] pt-20 sm:pt-24 lg:pt-24 pb-14 lg:pb-18">
-        {/* Full Photographic Background with Bright Sunlit Nature & Forest */}
+      {/* 3. Hero Section (Inspirasi Persis Econest: Full Photographic Cover, Warm Tone, Dual-Color Font, Torn Edge) */}
+      <section className="relative overflow-hidden min-h-[660px] lg:min-h-[740px] flex items-center bg-[#072418] pt-24 sm:pt-28 lg:pt-32 pb-20 lg:pb-24">
+        {/* Full Photographic Background with Person Holding Plant / Seedling */}
         <div className="absolute inset-0 z-0">
           <img
-            src="https://images.unsplash.com/photo-1511497584788-87676104235f?w=2000&auto=format&fit=crop&q=85"
-            alt="Konservasi Lingkungan Alami Berkelanjutan"
-            className="w-full h-full object-cover object-center scale-105 brightness-105"
+            src="/images/hero-csr.jpg"
+            alt="Relawan Konservasi Menanam Bibit Tanaman"
+            className="w-full h-full object-cover object-[72%_35%] lg:object-[75%_35%] scale-100 brightness-115 contrast-105 saturate-110"
           />
-          {/* Subtle directional gradient for text readability without darkening the whole image */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/35 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-black/15" />
+          {/* Directional gradient on left side only to protect text contrast while leaving the right side photo bright & visible */}
+          <div className="absolute inset-y-0 left-0 w-full lg:w-[62%] bg-gradient-to-r from-[#072418] via-[#072418]/85 to-transparent z-1 pointer-events-none" />
+          {/* Subtle top shade for navbar contrast */}
+          <div className="absolute top-0 inset-x-0 h-28 bg-gradient-to-b from-[#072418]/70 via-[#072418]/30 to-transparent z-1 pointer-events-none" />
+          {/* Subtle bottom shade blending cleanly into the torn paper edge */}
+          <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-[#072418]/80 to-transparent z-1 pointer-events-none" />
         </div>
 
-        {/* Hero Content Container: Reduced top padding so text sits higher */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 pb-12 sm:pb-16 w-full">
+        {/* Hero Content Container: Text block is translated upwards to eliminate excess top whitespace while preserving full background height */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 w-full -translate-y-4 sm:-translate-y-6 lg:-translate-y-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            {/* Left Main Hero Typography */}
-            <div className="lg:col-span-8 space-y-5">
+            {/* Left Main Hero Typography - elevated and tightly structured */}
+            <div className="lg:col-span-8 space-y-5 sm:space-y-6">
               {/* Top Leaf Pill Badge */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/30 backdrop-blur-md border border-white/20 text-[#F5CA44] text-xs font-bold shadow-sm">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-[#F5CA44] text-xs font-bold shadow-sm">
                 <Sprout className="w-4 h-4 text-[#F5CA44]" />
                 <span>Let's Save the Environment & Society</span>
               </div>
@@ -267,10 +270,10 @@ export const LandingPage: React.FC = () => {
               </p>
 
               {/* Action Buttons & Social Proof */}
-              <div className="flex flex-wrap items-center gap-4 pt-2">
+              <div className="flex flex-wrap items-center gap-4 pt-2 sm:pt-3">
                 <Link
                   to="/dashboard"
-                  className="px-6 py-3.5 rounded-full bg-black/30 hover:bg-black/50 text-white text-xs sm:text-sm font-black border border-white/25 backdrop-blur-md shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center gap-3 group cursor-pointer"
+                  className="px-6 py-3.5 rounded-full bg-black/40 hover:bg-black/60 text-white text-xs sm:text-sm font-black border border-white/25 backdrop-blur-md shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center gap-3 group cursor-pointer"
                 >
                   <span>Join Us Today</span>
                   <div className="w-7 h-7 rounded-full bg-[#F5CA44] flex items-center justify-center group-hover:translate-x-1 transition-transform">
