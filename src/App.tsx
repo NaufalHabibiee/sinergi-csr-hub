@@ -1,7 +1,8 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useParams } from 'react-router-dom';
 import { CSRStoreProvider } from './context/CSRStoreContext';
 import { AppShell } from './components/layout/AppShell';
+import { LandingPage } from './features/landing/LandingPage';
 import { OverviewPage } from './features/dashboard/OverviewPage';
 import { EcosystemMap } from './features/dashboard/EcosystemMap';
 import { ProgramsPage } from './features/programs/ProgramsPage';
@@ -15,12 +16,21 @@ import { ImpactReportsPage } from './features/reports/ImpactReportsPage';
 import { ActivityLogPage } from './features/activity/ActivityLogPage';
 import { SettingsPage } from './features/settings/SettingsPage';
 
+const ProgramIdRedirect: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+  return <Navigate to={`/dashboard/programs/${id}`} replace />;
+};
+
 export const App: React.FC = () => {
   return (
     <CSRStoreProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<AppShell />}>
+          {/* Public Introduction & Landing Page */}
+          <Route path="/" element={<LandingPage />} />
+
+          {/* Platform Management Dashboard */}
+          <Route path="/dashboard" element={<AppShell />}>
             <Route index element={<OverviewPage />} />
             <Route path="ecosystem" element={<EcosystemMap />} />
             <Route path="programs" element={<ProgramsPage />} />
@@ -33,8 +43,23 @@ export const App: React.FC = () => {
             <Route path="reports" element={<ImpactReportsPage />} />
             <Route path="activity" element={<ActivityLogPage />} />
             <Route path="settings" element={<SettingsPage />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
           </Route>
+
+          {/* Compatibility Redirects */}
+          <Route path="/ecosystem" element={<Navigate to="/dashboard/ecosystem" replace />} />
+          <Route path="/programs" element={<Navigate to="/dashboard/programs" replace />} />
+          <Route path="/programs/:id" element={<ProgramIdRedirect />} />
+          <Route path="/proposals" element={<Navigate to="/dashboard/proposals" replace />} />
+          <Route path="/partners" element={<Navigate to="/dashboard/partners" replace />} />
+          <Route path="/funders" element={<Navigate to="/dashboard/funders" replace />} />
+          <Route path="/beneficiaries" element={<Navigate to="/dashboard/beneficiaries" replace />} />
+          <Route path="/funding" element={<Navigate to="/dashboard/funding" replace />} />
+          <Route path="/reports" element={<Navigate to="/dashboard/reports" replace />} />
+          <Route path="/activity" element={<Navigate to="/dashboard/activity" replace />} />
+          <Route path="/settings" element={<Navigate to="/dashboard/settings" replace />} />
+
+          {/* Catch-all redirect */}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
     </CSRStoreProvider>

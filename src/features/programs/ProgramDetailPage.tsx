@@ -63,7 +63,7 @@ export const ProgramDetailPage: React.FC = () => {
         <h2 className="text-base font-bold text-ink-primary">Program Tidak Ditemukan</h2>
         <p className="text-xs text-ink-muted mt-1">ID program {id} tidak terdaftar pada sistem.</p>
         <button
-          onClick={() => navigate('/programs')}
+          onClick={() => navigate('/dashboard/programs')}
           className="mt-4 px-4 py-2 bg-brand-primary text-white text-xs font-bold rounded-xl cursor-pointer"
         >
           Kembali ke Daftar Program
@@ -108,7 +108,7 @@ export const ProgramDetailPage: React.FC = () => {
       {/* Back button */}
       <div>
         <button
-          onClick={() => navigate('/programs')}
+          onClick={() => navigate('/dashboard/programs')}
           className="inline-flex items-center gap-1.5 text-xs font-semibold text-ink-muted hover:text-ink-primary transition-colors cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4" /> Kembali ke Daftar Program
@@ -505,7 +505,7 @@ export const ProgramDetailPage: React.FC = () => {
                       <p className="text-ink-muted text-[11px] mt-0.5 line-clamp-1">{rep.summary}</p>
                     </div>
                     <Link
-                      to="/reports"
+                      to="/dashboard/reports"
                       className="px-3 py-1.5 rounded-xl bg-surface-card hover:bg-surface-muted text-ink-primary font-bold border border-border-subtle shrink-0"
                     >
                       Buka di Reports

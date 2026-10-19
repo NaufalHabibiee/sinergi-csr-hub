@@ -14,7 +14,8 @@ import {
   Network,
   ChevronLeft,
   ChevronRight,
-  Sparkles
+  Sparkles,
+  Globe
 } from 'lucide-react';
 import { useCSRStore } from '../../context/CSRStoreContext';
 
@@ -37,17 +38,17 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const activeProgramsCount = programs.filter(p => p.status === 'active').length;
 
   const navItems = [
-    { to: '/', label: 'Overview', icon: LayoutDashboard },
-    { to: '/programs', label: 'Programs', icon: Layers, badge: activeProgramsCount },
-    { to: '/proposals', label: 'Proposals', icon: FileCheck2, badge: pendingProposalsCount, badgeColor: 'bg-amber-100 text-amber-800' },
-    { to: '/partners', label: 'Partners (Mitra)', icon: Users },
-    { to: '/funders', label: 'Funders (Corporate)', icon: Building2 },
-    { to: '/beneficiaries', label: 'Penerima Manfaat', icon: HeartHandshake },
-    { to: '/funding', label: 'Funding & Penyaluran', icon: Wallet },
-    { to: '/reports', label: 'Impact & Proper Reports', icon: FileText },
-    { to: '/ecosystem', label: 'Ecosystem Map', icon: Network, highlight: true },
-    { to: '/activity', label: 'Activity Log', icon: History },
-    { to: '/settings', label: 'Settings & Reset', icon: Settings },
+    { to: '/dashboard', label: 'Overview', icon: LayoutDashboard, end: true },
+    { to: '/dashboard/programs', label: 'Programs', icon: Layers, badge: activeProgramsCount },
+    { to: '/dashboard/proposals', label: 'Proposals', icon: FileCheck2, badge: pendingProposalsCount, badgeColor: 'bg-amber-100 text-amber-800' },
+    { to: '/dashboard/partners', label: 'Partners (Mitra)', icon: Users },
+    { to: '/dashboard/funders', label: 'Funders (Corporate)', icon: Building2 },
+    { to: '/dashboard/beneficiaries', label: 'Penerima Manfaat', icon: HeartHandshake },
+    { to: '/dashboard/funding', label: 'Funding & Penyaluran', icon: Wallet },
+    { to: '/dashboard/reports', label: 'Impact & Proper Reports', icon: FileText },
+    { to: '/dashboard/ecosystem', label: 'Ecosystem Map', icon: Network, highlight: true },
+    { to: '/dashboard/activity', label: 'Activity Log', icon: History },
+    { to: '/dashboard/settings', label: 'Settings & Reset', icon: Settings },
   ];
 
   const sidebarContent = (
@@ -55,7 +56,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       {/* Brand Logo & Wordmark */}
       <div className="flex items-center justify-between px-5 h-16 border-b border-border-subtle shrink-0">
         <NavLink 
-          to="/" 
+          to="/dashboard" 
           onClick={onCloseMobile}
           className="flex items-center gap-3 group focus:outline-none"
         >
@@ -85,14 +86,33 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </button>
       </div>
 
+      {/* Switcher back to Public Website */}
+      <div className="px-3 pt-3 pb-1 shrink-0">
+        <NavLink
+          to="/"
+          onClick={onCloseMobile}
+          className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-brand-primary bg-brand-mint/60 hover:bg-brand-mint border border-emerald-200/70 transition-all shadow-2xs group"
+          title={collapsed ? 'Kembali ke Web Depan' : undefined}
+        >
+          <Globe className="w-4 h-4 text-brand-emerald shrink-0 group-hover:rotate-12 transition-transform" />
+          {!collapsed && (
+            <div className="flex items-center justify-between flex-1 truncate">
+              <span>Ke Web Utama</span>
+              <span className="text-[10px] text-brand-emerald font-semibold">Landing →</span>
+            </div>
+          )}
+        </NavLink>
+      </div>
+
       {/* Navigation Links */}
-      <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+      <nav className="flex-1 px-3 py-2 space-y-1 overflow-y-auto">
         {navItems.map((item) => {
           const Icon = item.icon;
           return (
             <NavLink
               key={item.to}
               to={item.to}
+              end={item.end}
               onClick={onCloseMobile}
               className={({ isActive }) =>
                 `flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all group relative ${

@@ -50,7 +50,7 @@ export const ProposalReviewModal: React.FC<ProposalReviewModalProps> = ({
     const createdProg = convertProposalToProgram(proposal.id, selectedFunderId, approvedBudget);
     if (createdProg) {
       onClose();
-      navigate(`/programs/${createdProg.id}`);
+      navigate(`/dashboard/programs/${createdProg.id}`);
     }
   };
 

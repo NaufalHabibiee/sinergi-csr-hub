@@ -87,11 +87,11 @@ export const Topbar: React.FC<TopbarProps> = ({ onOpenMobileSidebar }) => {
         ...programs
           .filter(p => p.title.toLowerCase().includes(globalSearchQuery.toLowerCase()) || p.code.toLowerCase().includes(globalSearchQuery.toLowerCase()))
           .slice(0, 3)
-          .map(p => ({ type: 'Program', title: p.title, subtitle: `${p.code} • ${p.location}`, link: `/programs/${p.id}` })),
+          .map(p => ({ type: 'Program', title: p.title, subtitle: `${p.code} • ${p.location}`, link: `/dashboard/programs/${p.id}` })),
         ...proposals
           .filter(p => p.title.toLowerCase().includes(globalSearchQuery.toLowerCase()) || p.code.toLowerCase().includes(globalSearchQuery.toLowerCase()))
           .slice(0, 2)
-          .map(p => ({ type: 'Proposal', title: p.title, subtitle: `${p.code} • ${p.category}`, link: `/proposals` })),
+          .map(p => ({ type: 'Proposal', title: p.title, subtitle: `${p.code} • ${p.category}`, link: `/dashboard/proposals` })),
       ]
     : [];
 

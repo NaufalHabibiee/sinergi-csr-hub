@@ -1297,7 +1297,7 @@ export const SEED_NOTIFICATIONS: InAppNotification[] = [
     type: 'action_required',
     createdAt: '2026-03-24T09:45:00Z',
     read: false,
-    linkTo: '/proposals'
+    linkTo: '/dashboard/proposals'
   },
   {
     id: 'notif_002',
@@ -1306,7 +1306,7 @@ export const SEED_NOTIFICATIONS: InAppNotification[] = [
     type: 'info',
     createdAt: '2026-03-24T11:15:00Z',
     read: false,
-    linkTo: '/programs/prg_005'
+    linkTo: '/dashboard/programs/prg_005'
   },
   {
     id: 'notif_003',
@@ -1315,7 +1315,7 @@ export const SEED_NOTIFICATIONS: InAppNotification[] = [
     type: 'warning',
     createdAt: '2026-03-22T08:00:00Z',
     read: true,
-    linkTo: '/programs/prg_001'
+    linkTo: '/dashboard/programs/prg_001'
   },
   {
     id: 'notif_004',
@@ -1324,6 +1324,6 @@ export const SEED_NOTIFICATIONS: InAppNotification[] = [
     type: 'success',
     createdAt: '2026-03-10T14:00:00Z',
     read: true,
-    linkTo: '/reports'
+    linkTo: '/dashboard/reports'
   }
 ];

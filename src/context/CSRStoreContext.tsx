@@ -288,7 +288,7 @@ export const CSRStoreProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
     setPrograms(prev => [newProgram, ...prev]);
     logActivity('Create Program', 'Program', id, `Membuat program baru: "${newProgram.title}" (${code})`);
-    addNotification('Program Baru Dibuat', `Program ${code} berhasil didaftarkan ke sistem CSR Hub.`, 'success', `/programs/${id}`);
+    addNotification('Program Baru Dibuat', `Program ${code} berhasil didaftarkan ke sistem CSR Hub.`, 'success', `/dashboard/programs/${id}`);
 
     // Update active count for partner and funder
     setOrganizations(prev => prev.map(o => {
@@ -332,7 +332,7 @@ export const CSRStoreProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       return p;
     }));
     logActivity('Update Progress', 'Program', id, `Memperbarui progres program menjadi ${progress}%.`);
-    addNotification('Progres Program Diperbarui', `Progres program kini mencapai ${progress}%.`, 'info', `/programs/${id}`);
+    addNotification('Progres Program Diperbarui', `Progres program kini mencapai ${progress}%.`, 'info', `/dashboard/programs/${id}`);
   };
 
   const addProgramEvidence = (programId: string, evidence: { title: string; category: any; url?: string }) => {
@@ -356,7 +356,7 @@ export const CSRStoreProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       return p;
     }));
     logActivity('Upload Evidence', 'Program', programId, `Mengunggah dokumen bukti kegiatan: ${evidence.title}`);
-    addNotification('Bukti Kegiatan Baru', `Dokumen "${evidence.title}" berhasil diunggah.`, 'success', `/programs/${programId}`);
+    addNotification('Bukti Kegiatan Baru', `Dokumen "${evidence.title}" berhasil diunggah.`, 'success', `/dashboard/programs/${programId}`);
   };
 
   // Proposal operations
@@ -374,7 +374,7 @@ export const CSRStoreProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
     setProposals(prev => [newProposal, ...prev]);
     logActivity('Submit Proposal', 'Proposal', id, `Mengajukan proposal: "${newProposal.title}" (${code})`);
-    addNotification('Proposal Baru Masuk', `Proposal "${newProposal.title}" menunggu review kurasi.`, 'action_required', '/proposals');
+    addNotification('Proposal Baru Masuk', `Proposal "${newProposal.title}" menunggu review kurasi.`, 'action_required', '/dashboard/proposals');
     return newProposal;
   };
 
@@ -392,7 +392,7 @@ export const CSRStoreProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       return p;
     }));
     logActivity('Review Proposal', 'Proposal', id, `${status === 'approved' ? 'Menyetujui' : 'Menolak'} proposal dengan catatan.`);
-    addNotification(`Proposal ${status === 'approved' ? 'Disetujui' : 'Ditolak'}`, `Proposal telah ditinjau dengan status ${status.toUpperCase()} (Demo).`, status === 'approved' ? 'success' : 'warning', '/proposals');
+    addNotification(`Proposal ${status === 'approved' ? 'Disetujui' : 'Ditolak'}`, `Proposal telah ditinjau dengan status ${status.toUpperCase()} (Demo).`, status === 'approved' ? 'success' : 'warning', '/dashboard/proposals');
   };
 
   const convertProposalToProgram = (proposalId: string, funderId: string, approvedBudget: number): Program | null => {
@@ -464,7 +464,7 @@ export const CSRStoreProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     }
 
     logActivity('Record Funding', 'Funding', id, `Mencatat ${data.recordType} sebesar Rp ${new Intl.NumberFormat('id-ID').format(data.amount)} (${referenceNo})`);
-    addNotification('Transaksi Pendanaan Tercatat', `Transaksi ${data.recordType} ${referenceNo} berhasil disimpan (Demo).`, 'success', '/funding');
+    addNotification('Transaksi Pendanaan Tercatat', `Transaksi ${data.recordType} ${referenceNo} berhasil disimpan (Demo).`, 'success', '/dashboard/funding');
     return newRecord;
   };
 
@@ -531,7 +531,7 @@ export const CSRStoreProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     };
     setReports(prev => [newReport, ...prev]);
     logActivity('Create Report', 'Report', id, `Menyusun ${newReport.reportType}: "${newReport.title}"`);
-    addNotification('Laporan Dampak Baru', `Laporan ${reportCode} berhasil disusun dan siap ditinjau.`, 'info', '/reports');
+    addNotification('Laporan Dampak Baru', `Laporan ${reportCode} berhasil disusun dan siap ditinjau.`, 'info', '/dashboard/reports');
     return newReport;
   };
 

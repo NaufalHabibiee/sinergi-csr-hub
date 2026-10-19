@@ -114,21 +114,21 @@ export const OverviewPage: React.FC = () => {
         {/* Quick Action Buttons */}
         <div className="flex flex-wrap items-center gap-2.5 shrink-0">
           <button
-            onClick={() => navigate('/programs?action=create')}
+            onClick={() => navigate('/dashboard/programs?action=create')}
             className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white text-brand-primary hover:bg-emerald-50 text-xs font-bold transition-all shadow-xs cursor-pointer"
           >
             <PlusCircle className="w-4 h-4 text-brand-emerald" />
             Tambah Program
           </button>
           <button
-            onClick={() => navigate('/proposals')}
+            onClick={() => navigate('/dashboard/proposals')}
             className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-800/80 hover:bg-emerald-800 text-white text-xs font-bold border border-emerald-700/50 transition-all cursor-pointer"
           >
             <FileCheck2 className="w-4 h-4" />
             Tinjau Proposal ({reviewNeededCount})
           </button>
           <button
-            onClick={() => navigate('/funding?action=create')}
+            onClick={() => navigate('/dashboard/funding?action=create')}
             className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-800/80 hover:bg-emerald-800 text-white text-xs font-bold border border-emerald-700/50 transition-all cursor-pointer"
           >
             <Wallet className="w-4 h-4" />
@@ -376,7 +376,7 @@ export const OverviewPage: React.FC = () => {
               <h3 className="font-bold text-sm text-ink-primary">Capaian Penerima Manfaat per Program (Jiwa)</h3>
               <p className="text-xs text-ink-muted mt-0.5">Perbandingan target sasaran dengan capaian riil terverifikasi</p>
             </div>
-            <Link to="/beneficiaries" className="text-xs font-semibold text-brand-primary hover:underline flex items-center gap-1">
+            <Link to="/dashboard/beneficiaries" className="text-xs font-semibold text-brand-primary hover:underline flex items-center gap-1">
               Lihat Analisis Privasi <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
@@ -430,7 +430,7 @@ export const OverviewPage: React.FC = () => {
           </div>
 
           <button
-            onClick={() => navigate('/ecosystem')}
+            onClick={() => navigate('/dashboard/ecosystem')}
             className="w-full py-2.5 px-4 rounded-xl bg-brand-primary hover:bg-brand-dark text-white text-xs font-bold flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-xs"
           >
             Buka Peta Interaktif Ekosistem <ArrowRight className="w-4 h-4" />
@@ -447,7 +447,7 @@ export const OverviewPage: React.FC = () => {
               <h3 className="font-bold text-sm text-ink-primary">Daftar Program CSR Unggulan</h3>
               <p className="text-xs text-ink-muted mt-0.5">Program dengan kegiatan aktif di lapangan</p>
             </div>
-            <Link to="/programs" className="text-xs font-semibold text-brand-primary hover:underline flex items-center gap-1">
+            <Link to="/dashboard/programs" className="text-xs font-semibold text-brand-primary hover:underline flex items-center gap-1">
               Lihat Semua ({programs.length}) <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
@@ -458,7 +458,7 @@ export const OverviewPage: React.FC = () => {
               return (
                 <div
                   key={p.id}
-                  onClick={() => navigate(`/programs/${p.id}`)}
+                  onClick={() => navigate(`/dashboard/programs/${p.id}`)}
                   className="p-4 rounded-xl border border-border-subtle hover:border-brand-emerald bg-surface-card hover:bg-surface-secondary/40 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 cursor-pointer group"
                 >
                   <div className="space-y-1">
@@ -503,7 +503,7 @@ export const OverviewPage: React.FC = () => {
                 <h3 className="font-bold text-sm text-ink-primary">Aktivitas Terkini</h3>
                 <p className="text-xs text-ink-muted mt-0.5">Jejak kegiatan & peninjauan demo</p>
               </div>
-              <Link to="/activity" className="text-xs font-semibold text-brand-primary hover:underline">
+              <Link to="/dashboard/activity" className="text-xs font-semibold text-brand-primary hover:underline">
                 Semua
               </Link>
             </div>
@@ -528,7 +528,7 @@ export const OverviewPage: React.FC = () => {
 
           <div className="pt-4 border-t border-border-subtle mt-4">
             <Link
-              to="/activity"
+              to="/dashboard/activity"
               className="w-full py-2 px-3 rounded-xl bg-surface-secondary hover:bg-surface-muted/70 text-xs font-semibold text-ink-secondary flex items-center justify-center gap-1.5 transition-colors"
             >
               <Activity className="w-3.5 h-3.5" />

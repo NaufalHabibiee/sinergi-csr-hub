@@ -231,7 +231,7 @@ export const ProgramsPage: React.FC = () => {
                   </div>
 
                   <h3
-                    onClick={() => navigate(`/programs/${p.id}`)}
+                    onClick={() => navigate(`/dashboard/programs/${p.id}`)}
                     className="font-bold text-sm text-ink-primary group-hover:text-brand-primary transition-colors cursor-pointer line-clamp-2"
                   >
                     {p.title}
@@ -298,7 +298,7 @@ export const ProgramsPage: React.FC = () => {
                       <Edit className="w-4 h-4" />
                     </button>
                     <button
-                      onClick={() => navigate(`/programs/${p.id}`)}
+                      onClick={() => navigate(`/dashboard/programs/${p.id}`)}
                       className="px-3 py-1.5 text-xs font-bold text-brand-primary bg-brand-mint hover:bg-brand-mint/80 rounded-xl transition-colors flex items-center gap-1 cursor-pointer"
                     >
                       Buka Detail <ExternalLink className="w-3.5 h-3.5" />
