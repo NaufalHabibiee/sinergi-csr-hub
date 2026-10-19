@@ -2,17 +2,12 @@ import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
 import { Topbar } from './Topbar';
-import { SimulationBanner } from './SimulationBanner';
-
 export const AppShell: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
     <div className="min-h-screen flex flex-col bg-surface-bg text-ink-primary">
-      {/* Top Banner Warning for Prototype / Simulation */}
-      <SimulationBanner />
-
       <div className="flex flex-1 w-full">
         {/* Navigation Sidebar */}
         <Sidebar

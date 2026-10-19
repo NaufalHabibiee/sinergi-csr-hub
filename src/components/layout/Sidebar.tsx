@@ -72,9 +72,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   alt="Universa"
                   className="h-6 object-contain"
                 />
-                <span className="text-[10px] font-extrabold px-1.5 py-0.5 rounded-sm bg-brand-mint text-brand-primary border border-emerald-200">
-                  HUB
-                </span>
               </div>
               <span className="text-[10px] font-medium text-ink-muted tracking-wide">
                 CSR & Social Governance

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import {
   Menu,
   Search,
@@ -10,7 +10,15 @@ import {
   Calendar,
   Sparkles,
   ExternalLink,
-  ShieldAlert
+  ShieldCheck,
+  Command,
+  ArrowRight,
+  SlidersHorizontal,
+  Clock,
+  Layers,
+  Building2,
+  FileCheck2,
+  FolderGit2
 } from 'lucide-react';
 import { useCSRStore } from '../../context/CSRStoreContext';
 import { UserRole } from '../../types/csr';
@@ -33,7 +41,9 @@ export const Topbar: React.FC<TopbarProps> = ({ onOpenMobileSidebar }) => {
     markNotificationRead,
     markAllNotificationsRead,
     programs,
-    proposals
+    proposals,
+    partners,
+    funders
   } = useCSRStore();
 
   const navigate = useNavigate();
@@ -45,19 +55,28 @@ export const Topbar: React.FC<TopbarProps> = ({ onOpenMobileSidebar }) => {
   const notifRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
-  const unreadCount = notifications.filter(n => !n.read).length;
+  const unreadCount = notifications.filter((n) => !n.read).length;
 
-  // Keyboard shortcut '/' to focus search
+  // Keyboard shortcut '/' or 'Cmd+K' to focus search
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === '/' && document.activeElement !== searchInputRef.current && (document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA')) {
+      if (
+        (e.key === '/' || ((e.metaKey || e.ctrlKey) && e.key === 'k')) &&
+        document.activeElement !== searchInputRef.current &&
+        document.activeElement?.tagName !== 'INPUT' &&
+        document.activeElement?.tagName !== 'TEXTAREA'
+      ) {
         e.preventDefault();
         searchInputRef.current?.focus();
+      }
+      if (e.key === 'Escape' && searchFocused) {
+        setSearchFocused(false);
+        searchInputRef.current?.blur();
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [searchFocused]);
 
   // Close dropdowns when clicking outside
   useEffect(() => {
@@ -73,114 +92,217 @@ export const Topbar: React.FC<TopbarProps> = ({ onOpenMobileSidebar }) => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const rolesList: { role: UserRole; title: string; desc: string }[] = [
-    { role: 'manager', title: 'CSR Manager / Universa Operator', desc: 'Kelola program, seleksi proposal, pencairan dana, review laporan' },
-    { role: 'admin', title: 'Platform Admin', desc: 'Akses penuh seluruh konfigurasi, master data, dan log aktivitas' },
-    { role: 'funder', title: 'Corporate Funder (PT NEL)', desc: 'Portofolio pendanaan perusahaan, komitmen CSR, laporan dampak' },
-    { role: 'partner', title: 'Mitra Pelaksana (YMLI)', desc: 'Profil lembaga, kirim proposal, update progres & bukti lapangan' },
-    { role: 'viewer', title: 'Viewer / Auditor ESG', desc: 'Mode read-only penuh untuk audit dan pemantauan transparansi' },
+  const rolesList: { role: UserRole; title: string; desc: string; badge: string }[] = [
+    {
+      role: 'manager',
+      title: 'CSR Manager / Hub Lead',
+      desc: 'Kelola program, seleksi proposal, alokasi dana, dan verifikasi milestone',
+      badge: 'MANAGER',
+    },
+    {
+      role: 'admin',
+      title: 'Platform Administrator',
+      desc: 'Akses konfigurasi penuh, audit governance master, dan kelola peran',
+      badge: 'ADMIN',
+    },
+    {
+      role: 'funder',
+      title: 'Corporate Funder (PT NEL)',
+      desc: 'Portofolio pendanaan perusahaan, komitmen CSR, dan realisasi dampak',
+      badge: 'FUNDER',
+    },
+    {
+      role: 'partner',
+      title: 'Mitra Pelaksana (YMLI)',
+      desc: 'Pengajuan proposal baru, update progres kegiatan, dan laporan lapangan',
+      badge: 'PARTNER',
+    },
+    {
+      role: 'viewer',
+      title: 'Auditor ESG / Publik',
+      desc: 'Mode pantau transparansi data read-only untuk audit kepatuhan',
+      badge: 'VIEWER',
+    },
   ];
 
-  // Quick search results
-  const searchResults = globalSearchQuery.trim()
-    ? [
-        ...programs
-          .filter(p => p.title.toLowerCase().includes(globalSearchQuery.toLowerCase()) || p.code.toLowerCase().includes(globalSearchQuery.toLowerCase()))
-          .slice(0, 3)
-          .map(p => ({ type: 'Program', title: p.title, subtitle: `${p.code} • ${p.location}`, link: `/dashboard/programs/${p.id}` })),
-        ...proposals
-          .filter(p => p.title.toLowerCase().includes(globalSearchQuery.toLowerCase()) || p.code.toLowerCase().includes(globalSearchQuery.toLowerCase()))
-          .slice(0, 2)
-          .map(p => ({ type: 'Proposal', title: p.title, subtitle: `${p.code} • ${p.category}`, link: `/dashboard/proposals` })),
-      ]
-    : [];
+  // Quick comprehensive search across programs, proposals, partners, and funders
+  const searchResults = useMemo(() => {
+    const q = globalSearchQuery.trim().toLowerCase();
+    if (!q) return [];
+
+    const foundPrograms = programs
+      .filter((p) => p.title.toLowerCase().includes(q) || p.code.toLowerCase().includes(q))
+      .slice(0, 3)
+      .map((p) => ({
+        type: 'Program',
+        icon: FolderGit2,
+        title: p.title,
+        subtitle: `${p.code} • ${p.location}`,
+        link: `/dashboard/programs/${p.id}`,
+        badgeBg: 'bg-emerald-50 text-emerald-800 border-emerald-200',
+      }));
+
+    const foundProposals = proposals
+      .filter((p) => p.title.toLowerCase().includes(q) || p.code.toLowerCase().includes(q))
+      .slice(0, 2)
+      .map((p) => ({
+        type: 'Proposal',
+        icon: FileCheck2,
+        title: p.title,
+        subtitle: `${p.code} • ${p.category}`,
+        link: `/dashboard/proposals`,
+        badgeBg: 'bg-amber-50 text-amber-800 border-amber-200',
+      }));
+
+    const foundPartners = partners
+      .filter((p) => p.name.toLowerCase().includes(q) || p.code.toLowerCase().includes(q))
+      .slice(0, 2)
+      .map((p) => ({
+        type: 'Mitra',
+        icon: Building2,
+        title: p.name,
+        subtitle: `${p.code} • ${p.region}`,
+        link: `/dashboard/partners`,
+        badgeBg: 'bg-blue-50 text-blue-800 border-blue-200',
+      }));
+
+    const foundFunders = funders
+      .filter((f) => f.name.toLowerCase().includes(q) || f.code.toLowerCase().includes(q))
+      .slice(0, 2)
+      .map((f) => ({
+        type: 'Funder',
+        icon: Building2,
+        title: f.name,
+        subtitle: `${f.code} • ${f.subType}`,
+        link: `/dashboard/funders`,
+        badgeBg: 'bg-purple-50 text-purple-800 border-purple-200',
+      }));
+
+    return [...foundPrograms, ...foundProposals, ...foundPartners, ...foundFunders];
+  }, [globalSearchQuery, programs, proposals, partners, funders]);
 
   return (
-    <header className="sticky top-0 z-20 bg-surface-card/90 backdrop-blur-md border-b border-border-subtle no-print">
-      <div className="flex items-center justify-between h-16 px-4 md:px-6 gap-4">
-        {/* Left: Mobile Menu & Global Search */}
-        <div className="flex items-center gap-3 flex-1 max-w-xl">
+    <header className="sticky top-0 z-30 bg-white/90 backdrop-blur-xl border-b border-border-subtle/80 shadow-2xs no-print transition-all">
+      <div className="flex items-center justify-between h-16 px-4 md:px-7 gap-3 sm:gap-6 max-w-7xl w-full mx-auto">
+        {/* Left: Mobile Menu & Enhanced Spotlight Search */}
+        <div className="flex items-center gap-3 flex-1 max-w-2xl">
           <button
             onClick={onOpenMobileSidebar}
-            className="md:hidden p-2 rounded-xl text-ink-muted hover:text-ink-primary hover:bg-surface-secondary transition-colors cursor-pointer"
-            aria-label="Buka menu"
+            className="md:hidden p-2 rounded-xl text-ink-muted hover:text-[#072418] hover:bg-surface-secondary transition-colors cursor-pointer"
+            aria-label="Buka navigasi menu"
           >
             <Menu className="w-5 h-5" />
           </button>
 
-          {/* Search Input */}
+          {/* Spotlight Search Capsule */}
           <div className="relative w-full">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-ink-muted">
+            <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#176B4D]">
               <Search className="w-4 h-4" />
             </div>
+
             <input
               ref={searchInputRef}
               type="text"
               value={globalSearchQuery}
               onChange={(e) => setGlobalSearchQuery(e.target.value)}
               onFocus={() => setSearchFocused(true)}
-              placeholder="Cari program, proposal, mitra, funder... (tekan '/' untuk cari)"
-              className="w-full pl-9 pr-10 py-2 bg-surface-secondary/70 hover:bg-surface-secondary focus:bg-surface-card border border-border-subtle focus:border-brand-primary rounded-xl text-xs text-ink-primary placeholder:text-ink-muted focus:outline-none transition-all shadow-xs"
+              placeholder="Cari program, proposal, mitra, funder..."
+              className="w-full pl-10 pr-20 py-2.5 bg-surface-secondary/60 hover:bg-surface-secondary/80 focus:bg-white border border-border-subtle focus:border-[#176B4D] focus:ring-2 focus:ring-[#176B4D]/15 rounded-2xl text-xs text-ink-primary placeholder:text-ink-muted/80 focus:outline-none transition-all duration-200 shadow-2xs"
             />
-            {globalSearchQuery && (
-              <button
-                onClick={() => setGlobalSearchQuery('')}
-                className="absolute inset-y-0 right-0 pr-3 flex items-center text-ink-muted hover:text-ink-primary text-xs font-bold cursor-pointer"
-              >
-                ✕
-              </button>
-            )}
 
-            {/* Quick Search Dropdown */}
+            {/* Clear Button or Keyboard Shortcut Badge */}
+            <div className="absolute inset-y-0 right-0 pr-3 flex items-center gap-1.5 pointer-events-auto">
+              {globalSearchQuery ? (
+                <button
+                  onClick={() => {
+                    setGlobalSearchQuery('');
+                    searchInputRef.current?.focus();
+                  }}
+                  className="w-5 h-5 rounded-full bg-gray-200 hover:bg-gray-300 text-ink-secondary flex items-center justify-center text-[10px] font-bold cursor-pointer transition-colors"
+                  title="Hapus pencarian"
+                >
+                  ✕
+                </button>
+              ) : (
+                <div className="hidden sm:inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-white border border-border-subtle text-[10px] font-mono text-ink-muted shadow-2xs">
+                  <span>⌘</span>
+                  <span>K</span>
+                </div>
+              )}
+            </div>
+
+            {/* Rich Autocomplete Spotlight Modal */}
             {searchFocused && searchResults.length > 0 && (
-              <div 
-                className="absolute left-0 right-0 top-full mt-2 bg-surface-card rounded-2xl border border-border-subtle shadow-elevated p-2 z-50 text-xs"
+              <div
+                className="absolute left-0 right-0 top-full mt-2 bg-white rounded-3xl border border-border-subtle shadow-elevated p-3 z-50 text-xs animate-in fade-in slide-in-from-top-2 duration-150"
                 onMouseDown={(e) => e.preventDefault()}
               >
-                <div className="px-3 py-1.5 text-[10px] font-bold text-ink-muted uppercase tracking-wider">
-                  Hasil Pencarian Cepat
+                <div className="flex items-center justify-between px-3 py-1.5 pb-2 text-[10px] font-extrabold text-ink-muted uppercase tracking-wider border-b border-border-subtle">
+                  <span>Hasil Pencarian Cepat ({searchResults.length})</span>
+                  <span className="text-[10px] font-mono text-ink-muted lowercase">tekan esc untuk tutup</span>
                 </div>
-                {searchResults.map((res, i) => (
-                  <button
-                    key={i}
-                    onClick={() => {
-                      navigate(res.link);
-                      setSearchFocused(false);
-                      setGlobalSearchQuery('');
-                    }}
-                    className="w-full text-left px-3 py-2 rounded-xl hover:bg-surface-secondary flex items-center justify-between group transition-colors cursor-pointer"
-                  >
-                    <div>
-                      <div className="font-semibold text-ink-primary group-hover:text-brand-primary">
-                        {res.title}
-                      </div>
-                      <div className="text-[11px] text-ink-muted">{res.subtitle}</div>
-                    </div>
-                    <span className="text-[10px] px-2 py-0.5 rounded-md bg-brand-mint text-brand-primary font-bold">
-                      {res.type}
-                    </span>
-                  </button>
-                ))}
+
+                <div className="space-y-1 mt-1.5 max-h-80 overflow-y-auto">
+                  {searchResults.map((res, i) => {
+                    const IconComponent = res.icon;
+                    return (
+                      <button
+                        key={i}
+                        onClick={() => {
+                          navigate(res.link);
+                          setSearchFocused(false);
+                          setGlobalSearchQuery('');
+                        }}
+                        className="w-full text-left px-3 py-2.5 rounded-2xl hover:bg-[#F8FAF9] flex items-center justify-between group transition-colors cursor-pointer border border-transparent hover:border-emerald-950/10"
+                      >
+                        <div className="flex items-center gap-3 min-w-0 pr-2">
+                          <div className="w-8 h-8 rounded-xl bg-surface-secondary text-[#176B4D] flex items-center justify-center shrink-0 group-hover:bg-[#072418] group-hover:text-[#FDE047] transition-colors">
+                            <IconComponent className="w-4 h-4" />
+                          </div>
+                          <div className="truncate">
+                            <div className="font-bold text-[#072418] group-hover:text-[#176B4D] transition-colors truncate">
+                              {res.title}
+                            </div>
+                            <div className="text-[11px] text-ink-muted truncate">{res.subtitle}</div>
+                          </div>
+                        </div>
+
+                        <span className={`text-[10px] font-extrabold px-2.5 py-1 rounded-full border shrink-0 ${res.badgeBg}`}>
+                          {res.type}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
             )}
           </div>
         </div>
 
-        {/* Right Action Controls: Period, Notifications, Role Switcher */}
-        <div className="flex items-center gap-2 md:gap-3 shrink-0">
-          {/* Period Selector */}
-          <div className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-surface-secondary/80 border border-border-subtle text-xs text-ink-secondary">
-            <Calendar className="w-3.5 h-3.5 text-brand-primary" />
-            <span className="text-ink-muted text-[11px]">Periode:</span>
+        {/* Center / Right: Live Status Badge, Period Filter, Notifications, Executive Profile */}
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          {/* Live Governance Telemetry Indicator */}
+          <div className="hidden xl:inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50/80 border border-emerald-200/80 text-[11px] font-bold text-emerald-900 shadow-2xs">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600"></span>
+            </span>
+            <span>Governance WTP Aktif</span>
+          </div>
+
+          {/* Period Selector Capsule */}
+          <div className="hidden lg:flex items-center gap-2 px-3 py-2 rounded-2xl bg-surface-secondary/70 hover:bg-surface-secondary border border-border-subtle text-xs text-ink-secondary transition-all">
+            <Calendar className="w-3.5 h-3.5 text-[#176B4D]" />
+            <span className="text-ink-muted text-[11px] font-medium">Periode:</span>
             <select
               value={periodFilter}
               onChange={(e) => setPeriodFilter(e.target.value)}
-              className="bg-transparent font-semibold text-ink-primary focus:outline-none cursor-pointer"
+              className="bg-transparent font-bold text-[#072418] focus:outline-none cursor-pointer pr-1"
             >
               <option value="all">Semua Waktu</option>
               <option value="2026">Tahun 2026</option>
               <option value="2025">Tahun 2025</option>
-              <option value="2026-Q1">2026 Triwulan 1</option>
+              <option value="2026-Q1">2026 Q1 (Jan-Mar)</option>
             </select>
           </div>
 
@@ -188,41 +310,43 @@ export const Topbar: React.FC<TopbarProps> = ({ onOpenMobileSidebar }) => {
           <div className="relative" ref={notifRef}>
             <button
               onClick={() => setNotifDropdownOpen(!notifDropdownOpen)}
-              className="relative p-2 rounded-xl text-ink-secondary hover:text-ink-primary hover:bg-surface-secondary transition-colors cursor-pointer"
-              title="Notifikasi"
+              className="relative w-10 h-10 rounded-2xl bg-surface-secondary/70 hover:bg-surface-secondary border border-border-subtle text-ink-secondary hover:text-[#072418] flex items-center justify-center transition-all cursor-pointer shadow-2xs"
+              title="Notifikasi Sistem"
               aria-label="Pemberitahuan"
             >
-              <Bell className="w-4 h-4" />
+              <Bell className="w-4 h-4 text-ink-secondary" />
               {unreadCount > 0 && (
-                <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-status-red ring-2 ring-surface-card" />
+                <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-amber-500 text-white text-[10px] font-black flex items-center justify-center ring-2 ring-white shadow-xs">
+                  {unreadCount}
+                </span>
               )}
             </button>
 
             {notifDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-80 md:w-96 rounded-2xl bg-surface-card border border-border-subtle shadow-elevated p-3 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
-                <div className="flex items-center justify-between pb-2.5 mb-2 border-b border-border-subtle">
+              <div className="absolute right-0 mt-3 w-80 md:w-96 rounded-3xl bg-white border border-border-subtle shadow-elevated p-4 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+                <div className="flex items-center justify-between pb-3 mb-2 border-b border-border-subtle">
                   <div className="flex items-center gap-2">
-                    <span className="font-bold text-xs text-ink-primary">Notifikasi In-App</span>
+                    <span className="font-extrabold text-xs text-[#072418]">Notifikasi & Audit Alert</span>
                     {unreadCount > 0 && (
-                      <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-brand-mint text-brand-primary">
-                        {unreadCount} baru
+                      <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-100 text-emerald-800">
+                        {unreadCount} Baru
                       </span>
                     )}
                   </div>
                   {unreadCount > 0 && (
                     <button
                       onClick={markAllNotificationsRead}
-                      className="text-[11px] font-semibold text-brand-primary hover:underline flex items-center gap-1 cursor-pointer"
+                      className="text-[11px] font-bold text-[#176B4D] hover:underline flex items-center gap-1 cursor-pointer"
                     >
                       <CheckCheck className="w-3.5 h-3.5" />
-                      Tandai semua dibaca
+                      Tandai dibaca
                     </button>
                   )}
                 </div>
 
-                <div className="max-h-72 overflow-y-auto space-y-1.5">
+                <div className="max-h-72 overflow-y-auto space-y-2">
                   {notifications.length === 0 ? (
-                    <p className="text-center py-6 text-xs text-ink-muted">Belum ada notifikasi.</p>
+                    <p className="text-center py-6 text-xs text-ink-muted">Belum ada notifikasi baru.</p>
                   ) : (
                     notifications.map((n) => (
                       <div
@@ -234,15 +358,17 @@ export const Topbar: React.FC<TopbarProps> = ({ onOpenMobileSidebar }) => {
                             setNotifDropdownOpen(false);
                           }
                         }}
-                        className={`p-2.5 rounded-xl text-xs transition-colors cursor-pointer ${
-                          n.read ? 'bg-surface-card hover:bg-surface-secondary' : 'bg-brand-mint/40 hover:bg-brand-mint/60 border border-emerald-100'
+                        className={`p-3 rounded-2xl text-xs transition-colors cursor-pointer border ${
+                          n.read
+                            ? 'bg-white hover:bg-surface-secondary/70 border-border-subtle'
+                            : 'bg-emerald-50/50 hover:bg-emerald-50 border-emerald-200'
                         }`}
                       >
                         <div className="flex items-start justify-between gap-2">
-                          <span className={`font-semibold ${n.read ? 'text-ink-primary' : 'text-brand-primary'}`}>
+                          <span className={`font-bold ${n.read ? 'text-ink-primary' : 'text-[#072418]'}`}>
                             {n.title}
                           </span>
-                          <span className="text-[10px] text-ink-muted whitespace-nowrap">
+                          <span className="text-[10px] text-ink-muted font-mono whitespace-nowrap">
                             {formatDateTimeID(n.createdAt)}
                           </span>
                         </div>
@@ -255,43 +381,49 @@ export const Topbar: React.FC<TopbarProps> = ({ onOpenMobileSidebar }) => {
             )}
           </div>
 
-          {/* Role Switcher Pill & Dropdown */}
+          {/* Executive User Capsule / Role Switcher */}
           <div className="relative" ref={roleRef}>
             <button
               onClick={() => setRoleDropdownOpen(!roleDropdownOpen)}
-              className="flex items-center gap-2 pl-2 pr-3 py-1.5 rounded-xl bg-surface-secondary hover:bg-surface-muted/70 border border-border-subtle transition-all cursor-pointer text-left"
-              title="Ganti Sudut Pandang Peran (Role Demo)"
+              className="flex items-center gap-2.5 p-1.5 pr-3 rounded-2xl bg-surface-secondary/70 hover:bg-surface-secondary border border-border-subtle hover:border-[#176B4D]/40 transition-all cursor-pointer text-left shadow-2xs group"
+              title="Ganti Sudut Pandang Peran (Demo RBAC)"
             >
-              <div className="w-7 h-7 rounded-lg bg-brand-primary text-white flex items-center justify-center text-xs font-bold shrink-0">
+              {/* Executive Monogram Avatar */}
+              <div className="w-8 h-8 rounded-xl bg-[#072418] text-[#FDE047] font-black flex items-center justify-center text-xs shadow-xs shrink-0 group-hover:scale-105 transition-transform">
                 {user.displayName[0]}
               </div>
-              <div className="hidden sm:flex flex-col">
-                <span className="text-xs font-bold text-ink-primary leading-tight flex items-center gap-1">
-                  {user.displayName}
-                  <span className="text-[9px] uppercase px-1.5 py-0.2 rounded-sm bg-brand-mint text-brand-primary font-bold border border-emerald-200">
+
+              <div className="hidden sm:flex flex-col min-w-0">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-xs font-black text-[#072418] leading-tight truncate max-w-[130px]">
+                    {user.displayName}
+                  </span>
+                  <span className="text-[9px] font-black uppercase px-1.5 py-0.2 rounded-md bg-emerald-100 text-emerald-800 border border-emerald-300">
                     {user.role}
                   </span>
-                </span>
-                <span className="text-[10px] text-ink-muted truncate max-w-[130px]">
+                </div>
+                <span className="text-[10px] text-ink-muted truncate max-w-[140px] mt-0.5">
                   {user.organizationName}
                 </span>
               </div>
-              <ChevronDown className="w-3.5 h-3.5 text-ink-muted shrink-0" />
+
+              <ChevronDown className="w-3.5 h-3.5 text-ink-muted shrink-0 group-hover:text-[#072418] transition-colors" />
             </button>
 
+            {/* RBAC Role Switcher Dropdown */}
             {roleDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-72 sm:w-84 rounded-2xl bg-surface-card border border-border-subtle shadow-elevated p-2.5 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
-                <div className="px-3 py-2 border-b border-border-subtle mb-1.5">
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-ink-primary">
-                    <UserCheck className="w-4 h-4 text-brand-primary" />
-                    <span>Ubah Peran Pengguna (Demo RBAC)</span>
+              <div className="absolute right-0 mt-3 w-80 sm:w-92 rounded-3xl bg-white border border-border-subtle shadow-elevated p-3 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+                <div className="px-3.5 py-2.5 border-b border-border-subtle mb-2">
+                  <div className="flex items-center gap-2 text-xs font-extrabold text-[#072418]">
+                    <UserCheck className="w-4 h-4 text-[#176B4D]" />
+                    <span>Simulasi Hak Akses Pengguna (RBAC)</span>
                   </div>
-                  <p className="text-[11px] text-ink-muted mt-0.5">
-                    Pilih peran untuk menguji hak akses dan batasan antarmuka.
+                  <p className="text-[11px] text-ink-muted mt-1 leading-relaxed">
+                    Ganti peran di bawah untuk menguji sudut pandang otorisasi & hak akses di platform Universa.
                   </p>
                 </div>
 
-                <div className="space-y-1">
+                <div className="space-y-1.5">
                   {rolesList.map((r) => {
                     const isActive = user.role === r.role;
                     return (
@@ -301,18 +433,27 @@ export const Topbar: React.FC<TopbarProps> = ({ onOpenMobileSidebar }) => {
                           switchRole(r.role);
                           setRoleDropdownOpen(false);
                         }}
-                        className={`w-full text-left p-2.5 rounded-xl transition-all flex items-start gap-2.5 cursor-pointer ${
+                        className={`w-full text-left p-3 rounded-2xl transition-all flex items-start gap-3 cursor-pointer ${
                           isActive
-                            ? 'bg-brand-mint text-brand-primary border border-emerald-200 font-semibold'
-                            : 'hover:bg-surface-secondary text-ink-primary'
+                            ? 'bg-emerald-50/80 text-[#072418] border border-emerald-300 shadow-2xs'
+                            : 'hover:bg-surface-secondary text-ink-primary border border-transparent'
                         }`}
                       >
-                        <div className={`w-2 h-2 rounded-full mt-1.5 shrink-0 ${isActive ? 'bg-brand-emerald ring-2 ring-brand-mint' : 'bg-border-medium'}`} />
-                        <div>
-                          <div className="text-xs font-bold">{r.title}</div>
-                          <div className="text-[10px] text-ink-muted font-normal mt-0.5 leading-snug">
-                            {r.desc}
+                        <div
+                          className={`w-2.5 h-2.5 rounded-full mt-1.5 shrink-0 ${
+                            isActive ? 'bg-[#176B4D] ring-4 ring-emerald-100' : 'bg-gray-300'
+                          }`}
+                        />
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center justify-between gap-1">
+                            <span className="text-xs font-extrabold text-[#072418]">{r.title}</span>
+                            <span className="text-[9px] font-black px-1.5 py-0.5 rounded bg-white border border-border-subtle text-ink-secondary">
+                              {r.badge}
+                            </span>
                           </div>
+                          <p className="text-[10px] text-ink-muted mt-0.5 leading-snug line-clamp-2">
+                            {r.desc}
+                          </p>
                         </div>
                       </button>
                     );
