@@ -78,15 +78,6 @@ export const LandingPage: React.FC = () => {
                   isScrolled ? 'h-6 sm:h-7' : 'h-7 sm:h-8 drop-shadow-[0_2px_12px_rgba(255,255,255,0.4)]'
                 }`}
               />
-              <span
-                className={`text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border transition-all duration-500 ${
-                  isScrolled
-                    ? 'bg-brand-mint text-brand-primary border-emerald-200'
-                    : 'bg-black/25 text-[#F5CA44] border-white/20 backdrop-blur-xs'
-                }`}
-              >
-                CSR HUB
-              </span>
             </Link>
 
             {/* Desktop Navigation Links */}
@@ -147,10 +138,10 @@ export const LandingPage: React.FC = () => {
             <div className="hidden sm:flex items-center gap-3">
               <Link
                 to="/dashboard"
-                className={`px-5 py-2.5 rounded-full text-xs font-black shadow-md hover:shadow-lg transition-all duration-500 flex items-center gap-2.5 group cursor-pointer ${
+                className={`px-5 py-2.5 rounded-full text-xs font-bold shadow-md hover:shadow-lg transition-all duration-500 flex items-center gap-2.5 group cursor-pointer ${
                   isScrolled
                     ? 'bg-[#176B4D] hover:bg-[#0E4F37] text-white shadow-emerald-900/10'
-                    : 'bg-[#F5CA44] hover:bg-[#F3C22B] text-[#072418] shadow-black/20'
+                    : 'bg-[#FDE047] hover:bg-[#FACC15] text-[#072418] shadow-black/20'
                 }`}
               >
                 <span>Masuk ke Dashboard</span>
@@ -160,7 +151,7 @@ export const LandingPage: React.FC = () => {
                   }`}
                 >
                   <ArrowRight
-                    className={`w-3.5 h-3.5 ${isScrolled ? 'text-white' : 'text-[#F5CA44]'}`}
+                    className={`w-3.5 h-3.5 ${isScrolled ? 'text-white' : 'text-[#FDE047]'}`}
                   />
                 </div>
               </Link>
@@ -185,34 +176,34 @@ export const LandingPage: React.FC = () => {
               className={`lg:hidden mt-3 pt-3 pb-4 px-4 rounded-2xl border space-y-2 text-xs font-bold shadow-elevated ${
                 isScrolled
                   ? 'bg-white text-ink-primary border-border-subtle'
-                  : 'bg-[#072418]/95 backdrop-blur-md text-white border-white/15'
+                  : 'bg-[#0B0F0D]/95 backdrop-blur-md text-white border-white/15'
               }`}
             >
               <a
                 href="#tentang"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block py-2 hover:text-[#F5CA44]"
+                className="block py-2 hover:text-[#FDE047]"
               >
                 Tentang Kami
               </a>
               <a
                 href="#pilar"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block py-2 hover:text-[#F5CA44]"
+                className="block py-2 hover:text-[#FDE047]"
               >
                 Pilar Program CSR
               </a>
               <a
                 href="#ekosistem"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block py-2 hover:text-[#F5CA44]"
+                className="block py-2 hover:text-[#FDE047]"
               >
                 Alur Ekosistem
               </a>
               <a
                 href="#mitra"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block py-2 hover:text-[#F5CA44]"
+                className="block py-2 hover:text-[#FDE047]"
               >
                 Mitra & Funder
               </a>
@@ -220,7 +211,7 @@ export const LandingPage: React.FC = () => {
                 <Link
                   to="/dashboard"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full py-2.5 px-4 rounded-full bg-[#F5CA44] text-[#072418] font-black flex items-center justify-center gap-2"
+                  className="w-full py-2.5 px-4 rounded-full bg-[#FDE047] text-[#072418] font-bold flex items-center justify-center gap-2"
                 >
                   Masuk ke Dashboard <ArrowRight className="w-4 h-4" />
                 </Link>
@@ -230,42 +221,36 @@ export const LandingPage: React.FC = () => {
         </div>
       </header>
 
-      {/* 3. Hero Section (Inspirasi Persis Econest: Full Photographic Cover, Warm Tone, Dual-Color Font, Torn Edge) */}
-      <section className="relative overflow-hidden min-h-[660px] lg:min-h-[740px] flex items-center bg-[#072418] pt-24 sm:pt-28 lg:pt-32 pb-20 lg:pb-24">
-        {/* Full Photographic Background with Person Holding Plant / Seedling */}
+      {/* 3. Hero Section (Inspirasi Persis Econest: Full Viewport Height, Pristine Natural Golden Sunlight, Professional Typography) */}
+      <section className="relative overflow-hidden min-h-screen flex items-center bg-[#0B0F0D] pt-24 sm:pt-28 pb-20 sm:pb-24">
+        {/* Full Photographic Background with Sunlit Nature - Zero Green Murky Tint */}
         <div className="absolute inset-0 z-0">
           <img
-            src="/images/hero-csr.jpg"
-            alt="Relawan Konservasi Menanam Bibit Tanaman"
-            className="w-full h-full object-cover object-[72%_35%] lg:object-[75%_35%] scale-100 brightness-115 contrast-105 saturate-110"
+            src="/images/hero_golden_hour_nature.jpg"
+            alt="Konservasi Lingkungan Hidup Berkelanjutan"
+            className="w-full h-full object-cover object-[70%_center] lg:object-[75%_center] scale-100 brightness-105 contrast-105"
           />
-          {/* Directional gradient on left side only to protect text contrast while leaving the right side photo bright & visible */}
-          <div className="absolute inset-y-0 left-0 w-full lg:w-[62%] bg-gradient-to-r from-[#072418] via-[#072418]/85 to-transparent z-1 pointer-events-none" />
-          {/* Subtle top shade for navbar contrast */}
-          <div className="absolute top-0 inset-x-0 h-28 bg-gradient-to-b from-[#072418]/70 via-[#072418]/30 to-transparent z-1 pointer-events-none" />
+          {/* Clean neutral dark gradient on left side strictly for text legibility - NO green overlay */}
+          <div className="absolute inset-y-0 left-0 w-full lg:w-[60%] bg-gradient-to-r from-black/85 via-black/45 to-transparent z-1 pointer-events-none" />
+          {/* Subtle top shade for transparent navbar */}
+          <div className="absolute top-0 inset-x-0 h-28 bg-gradient-to-b from-black/60 to-transparent z-1 pointer-events-none" />
           {/* Subtle bottom shade blending cleanly into the torn paper edge */}
-          <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-[#072418]/80 to-transparent z-1 pointer-events-none" />
+          <div className="absolute bottom-0 inset-x-0 h-20 bg-gradient-to-t from-black/50 to-transparent z-1 pointer-events-none" />
         </div>
 
-        {/* Hero Content Container: Text block is translated upwards to eliminate excess top whitespace while preserving full background height */}
+        {/* Hero Content Container: Elevated typography without the deleted pill badge */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 w-full -translate-y-4 sm:-translate-y-6 lg:-translate-y-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            {/* Left Main Hero Typography - elevated and tightly structured */}
+            {/* Left Main Hero Typography - Professional, Executive & Human-Centered */}
             <div className="lg:col-span-8 space-y-5 sm:space-y-6">
-              {/* Top Leaf Pill Badge */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-[#F5CA44] text-xs font-bold shadow-sm">
-                <Sprout className="w-4 h-4 text-[#F5CA44]" />
-                <span>Let's Save the Environment & Society</span>
-              </div>
-
-              {/* Bold Headline (Econest Style: White + Golden Yellow) with drop-shadow for sharp readability */}
-              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white tracking-tight leading-[1.08] drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">
+              {/* Bold Executive Headline with Lighter Young Yellow Highlight */}
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.12] drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
                 Shape the World with <br className="hidden sm:inline" />
-                <span className="text-[#F5CA44]">Heart's Concept</span>
+                <span className="text-[#FDE047] font-extrabold">Heart's Concept</span>
               </h1>
 
               {/* Editorial Subtitle */}
-              <p className="text-sm sm:text-base text-emerald-100/95 leading-relaxed max-w-xl font-normal drop-shadow-[0_1px_6px_rgba(0,0,0,0.5)]">
+              <p className="text-sm sm:text-base text-gray-200/90 leading-relaxed max-w-xl font-normal drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)]">
                 Platform orkestrasi Tanggung Jawab Sosial & Lingkungan (TJSL) terintegrasi. Menghubungkan alokasi korporasi dengan mitra pelaksana terverifikasi, penyaluran terkunci milestone, dan pelaporan siap audit PROPER KLHK.
               </p>
 
@@ -273,10 +258,10 @@ export const LandingPage: React.FC = () => {
               <div className="flex flex-wrap items-center gap-4 pt-2 sm:pt-3">
                 <Link
                   to="/dashboard"
-                  className="px-6 py-3.5 rounded-full bg-black/40 hover:bg-black/60 text-white text-xs sm:text-sm font-black border border-white/25 backdrop-blur-md shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center gap-3 group cursor-pointer"
+                  className="px-6 py-3.5 rounded-full bg-black/40 hover:bg-black/60 text-white text-xs sm:text-sm font-bold border border-white/25 backdrop-blur-md shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center gap-3 group cursor-pointer"
                 >
                   <span>Join Us Today</span>
-                  <div className="w-7 h-7 rounded-full bg-[#F5CA44] flex items-center justify-center group-hover:translate-x-1 transition-transform">
+                  <div className="w-7 h-7 rounded-full bg-[#FDE047] flex items-center justify-center group-hover:translate-x-1 transition-transform">
                     <ArrowRight className="w-4 h-4 text-[#072418]" />
                   </div>
                 </Link>
@@ -290,7 +275,7 @@ export const LandingPage: React.FC = () => {
                   </div>
                   <div className="text-left">
                     <span className="font-extrabold text-white text-xs block leading-none drop-shadow-xs">12.600+ Jiwa</span>
-                    <span className="text-[10px] text-[#F5CA44] font-semibold drop-shadow-xs">Penerima Manfaat Riil</span>
+                    <span className="text-[10px] text-[#FDE047] font-semibold drop-shadow-xs">Penerima Manfaat Riil</span>
                   </div>
                 </div>
               </div>
@@ -299,12 +284,12 @@ export const LandingPage: React.FC = () => {
             {/* Right Side Vertical Social & Pagination Accents */}
             <div className="hidden lg:flex lg:col-span-4 justify-end">
               <div className="flex flex-col items-center gap-4 text-white/50 text-xs">
-                <span className="[writing-mode:vertical-lr] text-[10px] font-bold uppercase tracking-widest text-[#F5CA44]">
+                <span className="[writing-mode:vertical-lr] text-[10px] font-bold uppercase tracking-widest text-[#FDE047]">
                   Join Social
                 </span>
                 <div className="w-px h-10 bg-white/20"></div>
                 <div className="flex flex-col gap-2">
-                  <span className="w-2 h-2 rounded-full bg-[#F5CA44]"></span>
+                  <span className="w-2 h-2 rounded-full bg-[#FDE047]"></span>
                   <span className="w-2 h-2 rounded-full bg-white/30"></span>
                   <span className="w-2 h-2 rounded-full bg-white/30"></span>
                 </div>
