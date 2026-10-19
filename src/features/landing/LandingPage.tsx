@@ -1083,88 +1083,236 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 9. Big Bottom CTA Banner */}
-      <section className="py-20 bg-gradient-to-r from-brand-primary via-emerald-900 to-brand-dark text-white relative overflow-hidden">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6 relative z-10">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-emerald-300 text-xs font-semibold backdrop-blur-xs border border-white/10">
-            <Sparkles className="w-3.5 h-3.5" />
-            Akses Langsung ke Sistem
-          </span>
+      {/* 9 & 10. Executive Pre-Footer Banner & Architectural Footer */}
+      <footer className="bg-[#072418] text-white relative overflow-hidden pt-16 sm:pt-20 pb-10">
+        {/* Ambient Decorative Background Accents */}
+        <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-10 w-[400px] h-[400px] bg-[#FDE047]/5 rounded-full blur-3xl pointer-events-none" />
 
-          <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight leading-tight">
-            Siap Membangun Tata Kelola CSR yang Transparan & Terukur?
-          </h2>
-
-          <p className="text-xs sm:text-sm text-emerald-100/80 max-w-2xl mx-auto leading-relaxed">
-            Masuk ke dalam dashboard Universa CSR Hub untuk menguji simulasi alokasi dana, meninjau proposal mitra, memvalidasi bukti geotagging, dan mengekspor laporan kepatuhan PROPER.
-          </p>
-
-          <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
-            <Link
-              to="/dashboard"
-              className="px-8 py-4 rounded-2xl bg-white text-brand-primary hover:bg-emerald-50 text-xs sm:text-sm font-extrabold shadow-elevated hover:scale-105 transition-all flex items-center gap-2 group cursor-pointer"
-            >
-              <span>Masuk ke Dashboard Universa CSR Hub</span>
-              <ArrowRight className="w-4 h-4 text-brand-emerald group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* 10. Footer */}
-      <footer className="bg-surface-card border-t border-border-subtle py-12 text-xs text-ink-muted">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-          <div className="flex flex-col md:flex-row items-start justify-between gap-6">
-            <div className="space-y-2 max-w-sm">
-              <div className="flex items-center gap-2.5 font-extrabold text-base text-ink-primary">
-                <img
-                  src="/brand/logo-universa.png"
-                  alt="Universa"
-                  className="h-6 object-contain"
-                />
-                <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-brand-mint text-brand-primary border border-emerald-200">
-                  CSR HUB
-                </span>
-              </div>
-              <p className="text-[11px] leading-relaxed">
-                Infrastruktur digital orkestrasi program Tanggung Jawab Sosial dan Lingkungan Perseroan (TJSL) terintegrasi di Indonesia.
-              </p>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          {/* Top Integrated Executive CTA Card (Inspired by Econest Bottom Callout Banner) */}
+          <div className="relative rounded-[2rem] bg-gradient-to-r from-[#114632] via-[#0D3828] to-[#092B1E] border border-emerald-700/60 p-7 sm:p-10 lg:p-12 shadow-2xl overflow-hidden mb-14 sm:mb-16">
+            {/* Subtle dot pattern on right side */}
+            <div className="absolute right-0 top-0 bottom-0 w-72 opacity-15 pointer-events-none">
+              <svg width="100%" height="100%" fill="none">
+                <pattern id="footer-cta-dots" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
+                  <circle cx="3" cy="3" r="2" fill="#FDE047" />
+                </pattern>
+                <rect width="100%" height="100%" fill="url(#footer-cta-dots)" />
+              </svg>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 text-[11px]">
-              <div>
-                <span className="font-bold text-ink-primary block mb-2">Akses Cepat</span>
-                <ul className="space-y-1.5">
-                  <li><Link to="/dashboard" className="hover:text-brand-primary">Dashboard Utama</Link></li>
-                  <li><Link to="/dashboard/programs" className="hover:text-brand-primary">Direktori Program</Link></li>
-                  <li><Link to="/dashboard/proposals" className="hover:text-brand-primary">Pipeline Proposal</Link></li>
-                </ul>
-              </div>
-
-              <div>
-                <span className="font-bold text-ink-primary block mb-2">Tata Kelola</span>
-                <ul className="space-y-1.5">
-                  <li><Link to="/dashboard/funding" className="hover:text-brand-primary">Buku Besar Funding</Link></li>
-                  <li><Link to="/dashboard/reports" className="hover:text-brand-primary">Laporan PROPER</Link></li>
-                  <li><Link to="/dashboard/ecosystem" className="hover:text-brand-primary">Ecosystem Map</Link></li>
-                </ul>
-              </div>
-
-              <div>
-                <span className="font-bold text-ink-primary block mb-2">Lingkungan</span>
-                <p className="text-ink-muted leading-snug">
-                  Mode Prototipe MVP.<br />Data transaksi adalah simulasi demo internal.
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+              <div className="lg:col-span-7 space-y-3 text-left">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-[#FDE047] text-xs font-bold">
+                  <Sparkles className="w-3.5 h-3.5 text-[#FDE047]" />
+                  <span>Akses Langsung ke Sistem Orkestrasi</span>
+                </div>
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight">
+                  Siap Membangun Tata Kelola CSR yang <span className="text-[#FDE047]">Transparan & Terukur?</span>
+                </h2>
+                <p className="text-xs sm:text-sm text-emerald-100/80 max-w-2xl leading-relaxed">
+                  Masuk ke dalam dashboard untuk menguji simulasi alokasi dana korporasi, meninjau proposal mitra, memvalidasi bukti geotagging BAST, dan mengekspor laporan PROPER KLHK.
                 </p>
               </div>
+
+              <div className="lg:col-span-5 flex flex-wrap lg:justify-end items-center gap-3.5">
+                <Link
+                  to="/dashboard"
+                  className="pl-6 pr-2.5 py-2.5 rounded-full bg-[#FDE047] hover:bg-[#facc15] text-[#072418] text-xs sm:text-sm font-extrabold shadow-xl hover:scale-[1.02] transition-all flex items-center gap-3 group cursor-pointer"
+                >
+                  <span>Masuk ke Dashboard</span>
+                  <span className="w-8 h-8 rounded-full bg-[#072418] text-[#FDE047] flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
+                    <ArrowRight className="w-4 h-4" />
+                  </span>
+                </Link>
+
+                <Link
+                  to="/dashboard/reports"
+                  className="px-5 py-3.5 rounded-full bg-white/10 hover:bg-white/15 text-white border border-white/20 text-xs sm:text-sm font-bold transition-all"
+                >
+                  Lihat Draf PROPER
+                </Link>
+              </div>
             </div>
           </div>
 
-          <div className="pt-6 border-t border-border-subtle flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px]">
-            <p>© 2026 Universa CSR Hub. Seluruh hak cipta dilindungi.</p>
-            <div className="flex items-center gap-4">
-              <span>Standard Kepatuhan UU PT No. 40/2007</span>
-              <span>•</span>
-              <Link to="/dashboard/settings" className="hover:underline text-brand-primary font-semibold">
+          {/* Main 4-Column Architectural Footer Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-12 border-b border-white/10">
+            {/* Column 1 (4 cols): Clean Brand Logo (without CSR HUB pill) & Mission */}
+            <div className="lg:col-span-4 space-y-5">
+              <div>
+                <Link
+                  to="/"
+                  className="inline-flex items-center bg-white px-4 py-2.5 rounded-2xl shadow-md hover:scale-[1.02] transition-transform"
+                >
+                  <img
+                    src="/brand/logo-universa.png"
+                    alt="Universa"
+                    className="h-6 sm:h-7 object-contain"
+                  />
+                </Link>
+              </div>
+
+              <p className="text-xs sm:text-sm text-emerald-100/75 leading-relaxed max-w-sm">
+                Infrastruktur digital orkestrasi program Tanggung Jawab Sosial dan Lingkungan Perseroan (TJSL) terintegrasi di Indonesia. Menjamin akuntabilitas dari pencatatan komitmen hingga bukti lapangan.
+              </p>
+
+              {/* Compliance & Framework Pills */}
+              <div className="flex flex-wrap items-center gap-2 pt-1">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-[11px] font-bold text-emerald-200">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#FDE047]" />
+                  UU PT No. 40/2007
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-[11px] font-bold text-emerald-200">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#FDE047]" />
+                  PROPER KLHK
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-[11px] font-bold text-emerald-200">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#FDE047]" />
+                  SDGs Bappenas
+                </span>
+              </div>
+            </div>
+
+            {/* Column 2 (2 cols): Eksplorasi Halaman */}
+            <div className="lg:col-span-2 space-y-4">
+              <div className="flex items-center gap-2">
+                <span className="w-1.5 h-4 rounded-full bg-[#FDE047]" />
+                <h4 className="text-xs font-extrabold uppercase tracking-wider text-white">
+                  Eksplorasi
+                </h4>
+              </div>
+              <ul className="space-y-2.5 text-xs text-emerald-100/75 font-medium">
+                <li>
+                  <a href="#tentang" className="hover:text-[#FDE047] transition-colors inline-flex items-center gap-1.5 group">
+                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#FDE047] group-hover:translate-x-0.5 transition-all" />
+                    <span>Tentang Kami</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#pilar" className="hover:text-[#FDE047] transition-colors inline-flex items-center gap-1.5 group">
+                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#FDE047] group-hover:translate-x-0.5 transition-all" />
+                    <span>Pilar Program CSR</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#ekosistem" className="hover:text-[#FDE047] transition-colors inline-flex items-center gap-1.5 group">
+                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#FDE047] group-hover:translate-x-0.5 transition-all" />
+                    <span>Alur Ekosistem</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#mitra" className="hover:text-[#FDE047] transition-colors inline-flex items-center gap-1.5 group">
+                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#FDE047] group-hover:translate-x-0.5 transition-all" />
+                    <span>Mitra & Funder</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Column 3 (3 cols): Modul Orkestrasi & Tata Kelola */}
+            <div className="lg:col-span-3 space-y-4">
+              <div className="flex items-center gap-2">
+                <span className="w-1.5 h-4 rounded-full bg-[#FDE047]" />
+                <h4 className="text-xs font-extrabold uppercase tracking-wider text-white">
+                  Modul Tata Kelola
+                </h4>
+              </div>
+              <ul className="space-y-2.5 text-xs text-emerald-100/75 font-medium">
+                <li>
+                  <Link to="/dashboard" className="hover:text-[#FDE047] transition-colors inline-flex items-center gap-1.5 group">
+                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#FDE047] group-hover:translate-x-0.5 transition-all" />
+                    <span>Dashboard Eksekutif Utama</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/programs" className="hover:text-[#FDE047] transition-colors inline-flex items-center gap-1.5 group">
+                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#FDE047] group-hover:translate-x-0.5 transition-all" />
+                    <span>Direktori & Milestone Program</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/proposals" className="hover:text-[#FDE047] transition-colors inline-flex items-center gap-1.5 group">
+                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#FDE047] group-hover:translate-x-0.5 transition-all" />
+                    <span>Pipeline Kurasi Proposal</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/funding" className="hover:text-[#FDE047] transition-colors inline-flex items-center gap-1.5 group">
+                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#FDE047] group-hover:translate-x-0.5 transition-all" />
+                    <span>Buku Besar Alokasi & Salur</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/reports" className="hover:text-[#FDE047] transition-colors inline-flex items-center gap-1.5 group">
+                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#FDE047] group-hover:translate-x-0.5 transition-all" />
+                    <span>Generator Laporan PROPER</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/ecosystem" className="hover:text-[#FDE047] transition-colors inline-flex items-center gap-1.5 group">
+                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#FDE047] group-hover:translate-x-0.5 transition-all" />
+                    <span>Diagram Alur Ekosistem</span>
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Column 4 (3 cols): Live Status & Environment Card */}
+            <div className="lg:col-span-3 space-y-4">
+              <div className="flex items-center gap-2">
+                <span className="w-1.5 h-4 rounded-full bg-[#FDE047]" />
+                <h4 className="text-xs font-extrabold uppercase tracking-wider text-white">
+                  Status Lingkungan Sistem
+                </h4>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-3">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="inline-flex items-center gap-2 text-xs font-bold text-white">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    Sistem Berjalan Normal
+                  </span>
+                  <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-md bg-[#FDE047]/20 text-[#FDE047]">
+                    MVP Demo
+                  </span>
+                </div>
+
+                <p className="text-[11px] text-emerald-100/70 leading-relaxed">
+                  Seluruh data komitmen, pencairan milestone, dan penerima manfaat terhubung secara real-time di penyimpanan lokal peramban Anda.
+                </p>
+
+                <div className="pt-2 border-t border-white/10 flex items-center justify-between text-[11px]">
+                  <span className="text-emerald-200/80 font-medium">
+                    {funders.length} Funder • {programs.length} Program
+                  </span>
+                  <Link
+                    to="/dashboard/settings"
+                    className="font-bold text-[#FDE047] hover:underline inline-flex items-center gap-1"
+                  >
+                    <span>Reset Data</span>
+                    <ArrowRight className="w-3 h-3" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Copyright & Legal Bar */}
+          <div className="pt-7 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-emerald-100/60">
+            <p>© 2026 Universa. Seluruh hak cipta dilindungi.</p>
+
+            <div className="flex flex-wrap items-center gap-4 sm:gap-6">
+              <span className="inline-flex items-center gap-1.5">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#FDE047]" />
+                <span>Audit Trail Terkunci BAST</span>
+              </span>
+              <span className="hidden sm:inline text-white/20">•</span>
+              <Link
+                to="/dashboard/settings"
+                className="hover:text-[#FDE047] text-emerald-100/80 font-semibold transition-colors"
+              >
                 Pengaturan Demo & Reset
               </Link>
             </div>
