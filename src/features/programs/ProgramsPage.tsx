@@ -102,7 +102,7 @@ export const ProgramsPage: React.FC = () => {
       <div className="bg-surface-card rounded-3xl border border-border-subtle shadow-card p-6 space-y-5">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3.5">
-            <div className="w-12 h-12 rounded-2xl bg-[#072418] text-[#FDE047] flex items-center justify-center shadow-sm shrink-0">
+            <div className="w-12 h-12 rounded-2xl bg-[#072418] text-white flex items-center justify-center shadow-sm shrink-0">
               <Layers className="w-6 h-6" />
             </div>
             <div>
@@ -148,7 +148,7 @@ export const ProgramsPage: React.FC = () => {
               onClick={openCreateModal}
               className="flex items-center gap-2 pl-4 pr-3 py-2.5 rounded-xl bg-[#072418] hover:bg-[#176B4D] text-white text-xs font-bold transition-all shadow-sm cursor-pointer"
             >
-              <Plus className="w-4 h-4 text-[#FDE047]" />
+              <Plus className="w-4 h-4 text-white" />
               <span>Program Baru</span>
             </button>
           </div>
@@ -169,7 +169,7 @@ export const ProgramsPage: React.FC = () => {
           </div>
 
           <div className="p-3.5 rounded-2xl bg-[#F8FAF8] border border-emerald-900/5 flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-[#FDE047]/35 text-[#072418] flex items-center justify-center shrink-0">
+            <div className="w-9 h-9 rounded-xl bg-emerald-100 text-[#176B4D] flex items-center justify-center shrink-0">
               <Coins className="w-4 h-4" />
             </div>
             <div>
@@ -212,7 +212,7 @@ export const ProgramsPage: React.FC = () => {
                 onClick={() => setCategoryFilter(tab.key)}
                 className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all shrink-0 cursor-pointer ${
                   isActive
-                    ? 'bg-[#072418] text-[#FDE047] shadow-2xs'
+                    ? 'bg-[#072418] text-white shadow-2xs'
                     : 'bg-surface-secondary/70 text-ink-secondary hover:bg-surface-secondary hover:text-ink-primary'
                 }`}
               >
@@ -320,7 +320,7 @@ export const ProgramsPage: React.FC = () => {
 
                     {/* Top Row on Cover: Category Badge + Status */}
                     <div className="absolute top-3 inset-x-3.5 flex items-center justify-between gap-2">
-                      <span className="px-2.5 py-1 rounded-full bg-black/55 backdrop-blur-md text-[#FDE047] border border-white/15 text-[10px] font-extrabold tracking-wide">
+                      <span className="px-2.5 py-1 rounded-full bg-black/55 backdrop-blur-md text-white border border-white/15 text-[10px] font-extrabold tracking-wide">
                         {catInfo?.label || p.category}
                       </span>
                       <StatusBadge status={p.status} size="sm" />
@@ -329,7 +329,7 @@ export const ProgramsPage: React.FC = () => {
                     {/* Bottom Row on Cover: Location + Code */}
                     <div className="absolute bottom-2.5 inset-x-3.5 flex items-center justify-between text-white text-[11px]">
                       <span className="inline-flex items-center gap-1 font-semibold truncate pr-2">
-                        <MapPin className="w-3.5 h-3.5 text-[#FDE047] shrink-0" />
+                        <MapPin className="w-3.5 h-3.5 text-emerald-300 shrink-0" />
                         <span className="truncate">{p.location}</span>
                       </span>
                       <span className="font-mono text-[10px] text-white/75 bg-white/10 px-2 py-0.5 rounded-md backdrop-blur-xs shrink-0">
@@ -347,7 +347,7 @@ export const ProgramsPage: React.FC = () => {
                     {/* Compact Funder -> Partner Chip Strip */}
                     <div className="flex items-center gap-2 text-[11px] bg-surface-secondary/70 p-2 rounded-xl border border-border-subtle/70">
                       <div className="flex items-center gap-1.5 min-w-0 flex-1">
-                        <span className="w-5 h-5 rounded-md bg-[#072418] text-[#FDE047] font-black text-[9px] flex items-center justify-center shrink-0">
+                        <span className="w-5 h-5 rounded-md bg-[#072418] text-white font-black text-[9px] flex items-center justify-center shrink-0">
                           {funder?.code?.slice(0, 3) || 'FND'}
                         </span>
                         <span className="font-bold text-ink-primary truncate" title={funder?.name}>
@@ -402,7 +402,7 @@ export const ProgramsPage: React.FC = () => {
                     <div>
                       <div className="flex items-center justify-between text-[10px] font-bold mb-1">
                         <span className="text-ink-secondary">Progres Milestone</span>
-                        <span className="text-[#072418] bg-[#FDE047] px-1.5 py-0.2 rounded font-extrabold">
+                        <span className="text-[#176B4D] bg-emerald-100 px-1.5 py-0.2 rounded font-extrabold">
                           {p.progressPercent}%
                         </span>
                       </div>
@@ -428,7 +428,7 @@ export const ProgramsPage: React.FC = () => {
                       <span>Edit</span>
                     </button>
 
-                    <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-brand-mint group-hover:bg-[#072418] text-brand-primary group-hover:text-[#FDE047] text-xs font-extrabold transition-colors">
+                    <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-brand-mint group-hover:bg-[#072418] text-brand-primary group-hover:text-white text-xs font-extrabold transition-colors">
                       <span>Buka Detail</span>
                       <ExternalLink className="w-3.5 h-3.5" />
                     </span>
@@ -503,7 +503,7 @@ export const ProgramsPage: React.FC = () => {
                             e.stopPropagation();
                             navigate(`/dashboard/programs/${p.id}`);
                           }}
-                          className="px-3 py-1.5 rounded-xl bg-brand-mint text-brand-primary font-bold text-xs hover:bg-[#072418] hover:text-[#FDE047] transition-colors cursor-pointer"
+                          className="px-3 py-1.5 rounded-xl bg-brand-mint text-brand-primary font-bold text-xs hover:bg-[#072418] hover:text-white transition-colors cursor-pointer"
                         >
                           Detail
                         </button>

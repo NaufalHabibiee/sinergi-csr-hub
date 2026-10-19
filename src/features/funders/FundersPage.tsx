@@ -136,7 +136,7 @@ export const FundersPage: React.FC = () => {
 
           <button
             onClick={() => setIsFormOpen(true)}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#072418] hover:bg-[#176B4D] text-[#FDE047] text-xs font-bold transition-all shadow-xs cursor-pointer"
+            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#072418] hover:bg-[#176B4D] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             <span>Tambah Corporate Funder</span>
@@ -366,7 +366,7 @@ export const FundersPage: React.FC = () => {
                       e.stopPropagation();
                       setSelectedFunder(funder);
                     }}
-                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-slate-100 group-hover:bg-[#072418] text-slate-700 group-hover:text-[#FDE047] font-bold transition-colors cursor-pointer shrink-0"
+                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-slate-100 group-hover:bg-[#072418] text-slate-700 group-hover:text-white font-bold transition-colors cursor-pointer shrink-0"
                   >
                     <span>Buku Besar</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -431,7 +431,7 @@ export const FundersPage: React.FC = () => {
                             e.stopPropagation();
                             setSelectedFunder(funder);
                           }}
-                          className="px-3 py-1.5 rounded-lg bg-[#072418] text-[#FDE047] font-bold text-xs hover:bg-[#176B4D] transition-colors cursor-pointer"
+                          className="px-3 py-1.5 rounded-lg bg-[#072418] text-white font-bold text-xs hover:bg-[#176B4D] transition-colors cursor-pointer"
                         >
                           Rincian
                         </button>
@@ -593,7 +593,7 @@ export const FundersPage: React.FC = () => {
             </button>
             <button
               type="submit"
-              className="px-4 py-2 font-bold bg-[#072418] text-[#FDE047] rounded-xl shadow-xs cursor-pointer hover:bg-[#176B4D]"
+              className="px-4 py-2 font-bold bg-[#072418] text-white rounded-xl shadow-xs cursor-pointer hover:bg-[#176B4D]"
             >
               Simpan Funder
             </button>

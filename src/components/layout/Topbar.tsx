@@ -256,7 +256,7 @@ export const Topbar: React.FC<TopbarProps> = ({ onOpenMobileSidebar }) => {
                         className="w-full text-left px-3 py-2.5 rounded-2xl hover:bg-[#F8FAF9] flex items-center justify-between group transition-colors cursor-pointer border border-transparent hover:border-emerald-950/10"
                       >
                         <div className="flex items-center gap-3 min-w-0 pr-2">
-                          <div className="w-8 h-8 rounded-xl bg-surface-secondary text-[#176B4D] flex items-center justify-center shrink-0 group-hover:bg-[#072418] group-hover:text-[#FDE047] transition-colors">
+                          <div className="w-8 h-8 rounded-xl bg-surface-secondary text-[#176B4D] flex items-center justify-center shrink-0 group-hover:bg-[#072418] group-hover:text-white transition-colors">
                             <IconComponent className="w-4 h-4" />
                           </div>
                           <div className="truncate">
@@ -389,7 +389,7 @@ export const Topbar: React.FC<TopbarProps> = ({ onOpenMobileSidebar }) => {
               title="Ganti Sudut Pandang Peran (Demo RBAC)"
             >
               {/* Executive Monogram Avatar */}
-              <div className="w-8 h-8 rounded-xl bg-[#072418] text-[#FDE047] font-black flex items-center justify-center text-xs shadow-xs shrink-0 group-hover:scale-105 transition-transform">
+              <div className="w-8 h-8 rounded-xl bg-[#072418] text-white font-black flex items-center justify-center text-xs shadow-xs shrink-0 group-hover:scale-105 transition-transform">
                 {user.displayName[0]}
               </div>
 

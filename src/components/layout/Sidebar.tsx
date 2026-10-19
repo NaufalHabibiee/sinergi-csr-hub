@@ -14,8 +14,7 @@ import {
   Network,
   ChevronLeft,
   ChevronRight,
-  Sparkles,
-  Globe
+  Sparkles
 } from 'lucide-react';
 import { useCSRStore } from '../../context/CSRStoreContext';
 
@@ -56,9 +55,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
       {/* Brand Logo & Wordmark */}
       <div className="flex items-center justify-between px-5 h-16 border-b border-border-subtle shrink-0">
         <NavLink 
-          to="/dashboard" 
+          to="/" 
           onClick={onCloseMobile}
           className="flex items-center gap-2.5 group focus:outline-none"
+          title="Kembali ke Beranda"
         >
           {collapsed ? (
             <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-primary to-brand-emerald flex items-center justify-center text-white shadow-xs font-black text-lg tracking-wider shrink-0 group-hover:scale-105 transition-transform">
@@ -86,24 +86,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
         >
           {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
         </button>
-      </div>
-
-      {/* Switcher back to Public Website */}
-      <div className="px-3 pt-3 pb-1 shrink-0">
-        <NavLink
-          to="/"
-          onClick={onCloseMobile}
-          className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-bold text-brand-primary bg-brand-mint/60 hover:bg-brand-mint border border-emerald-200/70 transition-all shadow-2xs group"
-          title={collapsed ? 'Kembali ke Web Depan' : undefined}
-        >
-          <Globe className="w-4 h-4 text-brand-emerald shrink-0 group-hover:rotate-12 transition-transform" />
-          {!collapsed && (
-            <div className="flex items-center justify-between flex-1 truncate">
-              <span>Ke Web Utama</span>
-              <span className="text-[10px] text-brand-emerald font-semibold">Landing →</span>
-            </div>
-          )}
-        </NavLink>
       </div>
 
       {/* Navigation Links */}

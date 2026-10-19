@@ -135,7 +135,7 @@ export const ProposalsPage: React.FC = () => {
 
           <button
             onClick={() => setIsCreateOpen(true)}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#072418] hover:bg-[#176B4D] text-[#FDE047] text-xs font-bold transition-all shadow-xs cursor-pointer"
+            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#072418] hover:bg-[#176B4D] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             <span>Usulkan Proposal</span>
@@ -325,7 +325,7 @@ export const ProposalsPage: React.FC = () => {
                     }}
                     className={`inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                       isPending
-                        ? 'bg-[#072418] hover:bg-[#176B4D] text-[#FDE047]'
+                        ? 'bg-[#072418] hover:bg-[#176B4D] text-white'
                         : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
                     }`}
                   >
@@ -490,7 +490,7 @@ export const ProposalsPage: React.FC = () => {
                             e.stopPropagation();
                             setSelectedProposalForReview(prop);
                           }}
-                          className="px-3 py-1.5 rounded-lg bg-[#072418] text-[#FDE047] font-bold text-xs hover:bg-[#176B4D] transition-colors cursor-pointer"
+                          className="px-3 py-1.5 rounded-lg bg-[#072418] text-white font-bold text-xs hover:bg-[#176B4D] transition-colors cursor-pointer"
                         >
                           Tinjau
                         </button>
