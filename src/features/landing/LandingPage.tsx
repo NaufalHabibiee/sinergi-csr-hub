@@ -36,6 +36,7 @@ export const LandingPage: React.FC = () => {
   const { funders, partners, programs, fundingRecords, beneficiaries } = useCSRStore();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<'visi' | 'misi' | 'metode'>('visi');
+  const [activeEcoStep, setActiveEcoStep] = useState<number>(0);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -732,87 +733,324 @@ export const LandingPage: React.FC = () => {
       </section>
 
       {/* 7. Ecosystem Interactive Flow Section ("Bagaimana Cara Kerja Universa CSR Hub?") */}
-      <section id="ekosistem" className="py-20 lg:py-28 bg-surface-bg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4 mb-14">
-          <span className="text-brand-primary text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-brand-mint border border-emerald-200 inline-block">
-            Siklus Tata Kelola 4 Pemangku Kepentingan
-          </span>
-          <h2 className="text-2xl sm:text-4xl font-extrabold text-ink-primary tracking-tight">
-            Bagaimana Cara Kerja Universa CSR Hub?
-          </h2>
-          <p className="text-xs sm:text-sm text-ink-muted max-w-2xl mx-auto leading-relaxed">
-            Dari alokasi pendanaan awal hingga pelaporan formal ke regulator pemerintah, seluruh proses berjalan terpadu tanpa dokumen kertas yang tercecer.
-          </p>
-        </div>
+      <section id="ekosistem" className="py-24 lg:py-32 bg-[#F8FAF7] relative overflow-hidden">
+        {/* Subtle decorative organic background accents */}
+        <div className="absolute top-12 right-0 w-96 h-96 bg-emerald-100/50 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-12 left-0 w-96 h-96 bg-amber-100/40 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
-            {/* Step 1 */}
-            <div className="bg-surface-card p-6 rounded-3xl border border-border-subtle shadow-card text-left space-y-3 relative group hover:border-brand-emerald transition-all">
-              <div className="w-12 h-12 rounded-2xl bg-emerald-100 text-brand-primary flex items-center justify-center font-extrabold text-lg">
-                1
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          {/* Top Editorial Split Header */}
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14 lg:mb-16">
+            <div className="space-y-3 max-w-2xl">
+              <div className="inline-flex items-center gap-2 text-[#176B4D] text-xs font-extrabold uppercase tracking-wider">
+                <Sprout className="w-4 h-4 text-[#176B4D]" />
+                <span>Siklus Tata Kelola 4 Pemangku Kepentingan</span>
               </div>
-              <h3 className="font-bold text-base text-ink-primary">1. Komitmen Funder</h3>
-              <p className="text-xs text-ink-muted leading-relaxed">
-                Corporate Funder menetapkan pilar sasaran CSR dan mencatatkan alokasi komitmen dana tahunan.
-              </p>
-              <div className="text-[11px] text-brand-primary font-bold pt-2 border-t border-border-subtle">
-                Pencatatan Inflow Resmi
-              </div>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#072418] tracking-tight leading-[1.12]">
+                Bagaimana Cara Kerja <br className="hidden sm:inline" />
+                <span className="text-[#176B4D]">Universa CSR Hub?</span>
+              </h2>
             </div>
 
-            {/* Step 2 */}
-            <div className="bg-surface-card p-6 rounded-3xl border border-border-subtle shadow-card text-left space-y-3 relative group hover:border-brand-emerald transition-all">
-              <div className="w-12 h-12 rounded-2xl bg-teal-100 text-teal-800 flex items-center justify-center font-extrabold text-lg">
-                2
-              </div>
-              <h3 className="font-bold text-base text-ink-primary">2. Kurasi Proposal</h3>
-              <p className="text-xs text-ink-muted leading-relaxed">
-                Mitra mengajukan usulan kegiatan, dikurasi kelayakan anggarannya, dan dikonversi ke Program aktif.
+            <div className="flex flex-col sm:flex-row lg:flex-col items-start sm:items-center lg:items-end justify-between gap-4 max-w-md lg:text-right">
+              <p className="text-xs sm:text-sm text-ink-secondary leading-relaxed">
+                Dari alokasi pendanaan awal hingga pelaporan formal ke regulator pemerintah, seluruh proses berjalan terpadu dalam satu alur hidup tanpa dokumen kertas yang tercecer.
               </p>
-              <div className="text-[11px] text-teal-700 font-bold pt-2 border-t border-border-subtle">
-                Seleksi Bebas Fiktif
-              </div>
-            </div>
-
-            {/* Step 3 */}
-            <div className="bg-surface-card p-6 rounded-3xl border border-border-subtle shadow-card text-left space-y-3 relative group hover:border-brand-emerald transition-all">
-              <div className="w-12 h-12 rounded-2xl bg-amber-100 text-amber-800 flex items-center justify-center font-extrabold text-lg">
-                3
-              </div>
-              <h3 className="font-bold text-base text-ink-primary">3. Salur per Milestone</h3>
-              <p className="text-xs text-ink-muted leading-relaxed">
-                Penyaluran bertahap dikunci dengan validasi sisa saldo dan bukti Berita Acara Serah Terima (BAST).
-              </p>
-              <div className="text-[11px] text-amber-700 font-bold pt-2 border-t border-border-subtle">
-                Audit Trail Transparan
-              </div>
-            </div>
-
-            {/* Step 4 */}
-            <div className="bg-surface-card p-6 rounded-3xl border border-border-subtle shadow-card text-left space-y-3 relative group hover:border-brand-emerald transition-all">
-              <div className="w-12 h-12 rounded-2xl bg-blue-100 text-blue-800 flex items-center justify-center font-extrabold text-lg">
-                4
-              </div>
-              <h3 className="font-bold text-base text-ink-primary">4. Laporan Dampak</h3>
-              <p className="text-xs text-ink-muted leading-relaxed">
-                Sistem menghasilkan CSR Annual Report untuk korporasi dan format draf evaluasi PROPER KLHK.
-              </p>
-              <div className="text-[11px] text-blue-700 font-bold pt-2 border-t border-border-subtle">
-                Kepatuhan Pemerintah
-              </div>
+              <Link
+                to="/dashboard/ecosystem"
+                className="inline-flex items-center gap-3 pl-5 pr-2 py-2 rounded-full bg-[#072418] hover:bg-[#176B4D] text-white text-xs font-bold shadow-lg transition-all duration-300 group shrink-0"
+              >
+                <span>Buka Diagram Ekosistem Interaktif</span>
+                <span className="w-7 h-7 rounded-full bg-[#FDE047] text-[#072418] flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </span>
+              </Link>
             </div>
           </div>
 
-          {/* Quick link button to ecosystem map in dashboard */}
-          <div className="mt-10 text-center">
-            <Link
-              to="/dashboard/ecosystem"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-surface-card hover:bg-surface-secondary text-brand-primary border border-emerald-300 font-bold text-xs shadow-2xs transition-colors"
-            >
-              Buka Diagram Ekosistem Interaktif di Dashboard <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
+          {/* Interactive Asymmetric Split Showcase: Left Visual Collage & Live Artifact + Right Connected Pipeline */}
+          {(() => {
+            const ecoSteps = [
+              {
+                step: '01',
+                title: 'Komitmen & Alokasi Funder',
+                actor: 'Corporate Funder',
+                badge: 'Pencatatan Inflow Resmi',
+                desc: 'Perusahaan menetapkan pilar sasaran TJSL dan mencatatkan alokasi komitmen dana tahunan secara transparan ke dalam buku besar.',
+                image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=900&auto=format&fit=crop&q=85',
+                imageCaption: 'Komite ESG & Direksi Korporasi menetapkan pagu anggaran tahunan.',
+                liveMetricLabel: 'Total Komitmen Terkunci',
+                liveMetricValue: formatCompactIDR(totalCommitted),
+                liveSubtext: `${funders.length} Perusahaan Mitra Aktif`,
+                highlights: [
+                  'Penetapan Pagu per Pilar SDGs & PROPER',
+                  'Kontrak Komitmen Tahunan Terverifikasi',
+                  'Saldo Alokasi Real-Time & Anti-Overbudget'
+                ],
+                linkTo: '/dashboard/funding',
+                linkLabel: 'Inspeksi Buku Besar Funding',
+                icon: Coins
+              },
+              {
+                step: '02',
+                title: 'Kurasi & Verifikasi Proposal',
+                actor: 'Mitra Pelaksana (NGO / Yayasan)',
+                badge: 'Seleksi Bebas Fiktif',
+                desc: 'Mitra mengajukan usulan kegiatan lapangan, dikurasi kelayakan RAB serta legalitasnya, lalu dikonversi otomatis menjadi Program aktif.',
+                image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=900&auto=format&fit=crop&q=85',
+                imageCaption: 'Tim Kurator & Mitra Yayasan membedah kelayakan teknis program.',
+                liveMetricLabel: 'Program Terkurasi Aktif',
+                liveMetricValue: `${programs.length} Program`,
+                liveSubtext: `${partners.length} Lembaga Pelaksana Terverifikasi`,
+                highlights: [
+                  'Due Diligence Legalitas & Rekam Jejak Mitra',
+                  'Validasi Indikator Target Penerima Manfaat',
+                  'Konversi 1-Klik dari Proposal ke Program'
+                ],
+                linkTo: '/dashboard/proposals',
+                linkLabel: 'Lihat Pipeline Proposal',
+                icon: HeartHandshake
+              },
+              {
+                step: '03',
+                title: 'Salur Bertahap per Milestone',
+                actor: 'Validator & Tim Lapangan',
+                badge: 'Audit Trail Transparan',
+                desc: 'Penyaluran dana tidak dilepas sekaligus, melainkan dikunci per termin milestone dengan validasi sisa saldo dan Berita Acara (BAST).',
+                image: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=900&auto=format&fit=crop&q=85',
+                imageCaption: 'Verifikasi fisik di titik lokasi sebelum pencairan termin berikutnya.',
+                liveMetricLabel: 'Dana Tersalurkan via BAST',
+                liveMetricValue: formatCompactIDR(totalDisbursed),
+                liveSubtext: '100% Pencairan Terikat Bukti Fisik',
+                highlights: [
+                  'Kunci Pencairan Bertahap (Termin 1, 2, Final)',
+                  'Wajib Unggah Bukti Foto Geotagging & BAST',
+                  'Proteksi Otomatis dari Penyaluran Melebihi Pagu'
+                ],
+                linkTo: '/dashboard/programs',
+                linkLabel: 'Cek Milestone Program',
+                icon: ShieldCheck
+              },
+              {
+                step: '04',
+                title: 'Laporan Dampak & Kepatuhan PROPER',
+                actor: 'Regulator KLHK & Publik',
+                badge: 'Kepatuhan Pemerintah',
+                desc: 'Seluruh jejak transaksi dan penerima manfaat unik dirangkum otomatis menjadi CSR Annual Report dan draf evaluasi PROPER KLHK.',
+                image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&auto=format&fit=crop&q=85',
+                imageCaption: 'Ringkasan audit eksekutif siap cetak untuk pelaporan regulator.',
+                liveMetricLabel: 'Penerima Manfaat Terverifikasi',
+                liveMetricValue: `${formatNumber(totalReached)}+ Jiwa`,
+                liveSubtext: 'Bebas Klaim Ganda (NIK / NIB Unik)',
+                highlights: [
+                  'Ekspor Draf Evaluasi PROPER KLHK & SDGs',
+                  'Metodologi Deduping Penerima Manfaat Riil',
+                  'Rekam Jejak Siap Audit Eksternal Kapan Saja'
+                ],
+                linkTo: '/dashboard/reports',
+                linkLabel: 'Buka Generator Laporan PROPER',
+                icon: Award
+              }
+            ];
+
+            const current = ecoSteps[activeEcoStep] || ecoSteps[0];
+            const CurrentIcon = current.icon;
+
+            return (
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-stretch">
+                {/* Left Column (5 cols): Dynamic Visual Collage & Live System Card */}
+                <div className="lg:col-span-5 flex flex-col justify-between relative">
+                  {/* Decorative Dot Pattern Behind Image */}
+                  <div className="absolute -top-5 -left-5 w-32 h-32 opacity-35 pointer-events-none hidden sm:block">
+                    <svg width="100%" height="100%" fill="none">
+                      <pattern id="eco-dots" x="0" y="0" width="14" height="14" patternUnits="userSpaceOnUse">
+                        <circle cx="2.5" cy="2.5" r="2" fill="#176B4D" />
+                      </pattern>
+                      <rect width="100%" height="100%" fill="url(#eco-dots)" />
+                    </svg>
+                  </div>
+
+                  {/* Main Layered Visual Frame */}
+                  <div className="relative rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white bg-[#072418] h-full min-h-[460px] sm:min-h-[520px] flex flex-col justify-between group">
+                    {/* Background Step Photo */}
+                    <img
+                      key={current.image}
+                      src={current.image}
+                      alt={current.title}
+                      className="absolute inset-0 w-full h-full object-cover opacity-85 group-hover:scale-105 transition-all duration-700"
+                    />
+                    {/* Multi-stop dark gradient overlay for rich contrast */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#072418] via-[#072418]/65 to-black/30" />
+
+                    {/* Top Floating Bar inside Visual Frame */}
+                    <div className="relative z-10 p-5 sm:p-6 flex items-center justify-between gap-3">
+                      <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/55 backdrop-blur-md border border-white/20 text-white text-xs font-bold">
+                        <span className="w-2 h-2 rounded-full bg-[#FDE047] animate-pulse" />
+                        Tahap {current.step} dari 04
+                      </span>
+
+                      <span className="px-3.5 py-1.5 rounded-full bg-[#FDE047] text-[#072418] text-[11px] font-extrabold tracking-wide shadow-md">
+                        {current.actor}
+                      </span>
+                    </div>
+
+                    {/* Bottom Live System Simulation Card inside Visual Frame */}
+                    <div className="relative z-10 p-5 sm:p-6 mt-auto space-y-4">
+                      {/* Live Metric Glass Box */}
+                      <div className="p-4 sm:p-5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-between gap-4">
+                        <div>
+                          <div className="text-[11px] uppercase tracking-wider text-emerald-200 font-bold">
+                            {current.liveMetricLabel}
+                          </div>
+                          <div className="text-2xl sm:text-3xl font-black text-white mt-0.5">
+                            {current.liveMetricValue}
+                          </div>
+                          <div className="text-[11px] text-[#FDE047] font-semibold mt-0.5">
+                            {current.liveSubtext}
+                          </div>
+                        </div>
+                        <div className="w-12 h-12 rounded-2xl bg-[#FDE047] text-[#072418] flex items-center justify-center shrink-0 shadow-lg">
+                          <CurrentIcon className="w-6 h-6" />
+                        </div>
+                      </div>
+
+                      {/* Verification Checklist */}
+                      <div className="space-y-2 pt-1">
+                        <div className="text-[11px] font-bold uppercase tracking-wider text-white/70">
+                          Standar Kendali Sistem:
+                        </div>
+                        {current.highlights.map((item, idx) => (
+                          <div key={idx} className="flex items-center gap-2.5 text-xs text-white/95 font-medium">
+                            <CheckCircle2 className="w-4 h-4 text-[#FDE047] shrink-0" />
+                            <span>{item}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Direct Module Link Footer */}
+                      <div className="pt-3 border-t border-white/15 flex items-center justify-between gap-3">
+                        <span className="text-[11px] text-white/70 italic line-clamp-1">
+                          {current.imageCaption}
+                        </span>
+                        <Link
+                          to={current.linkTo}
+                          className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#FDE047] hover:underline shrink-0"
+                        >
+                          <span>{current.linkLabel}</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right Column (7 cols): Interactive Connected Workflow Cards */}
+                <div className="lg:col-span-7 flex flex-col justify-between space-y-4 relative">
+                  {/* Vertical connecting line on desktop */}
+                  <div className="hidden sm:block absolute left-[27px] top-8 bottom-8 w-0.5 bg-gradient-to-b from-[#176B4D] via-emerald-300 to-[#072418]/20 pointer-events-none" />
+
+                  {ecoSteps.map((item, idx) => {
+                    const StepIcon = item.icon;
+                    const isActive = activeEcoStep === idx;
+
+                    return (
+                      <div
+                        key={item.step}
+                        onClick={() => setActiveEcoStep(idx)}
+                        onMouseEnter={() => setActiveEcoStep(idx)}
+                        className={`relative sm:pl-16 transition-all duration-300 cursor-pointer group`}
+                      >
+                        {/* Timeline Step Node Circle (Desktop) */}
+                        <div
+                          className={`hidden sm:flex absolute left-0 top-1/2 -translate-y-1/2 w-14 h-14 rounded-2xl items-center justify-center font-black text-sm transition-all duration-300 z-10 border-2 ${
+                            isActive
+                              ? 'bg-[#072418] text-[#FDE047] border-[#FDE047] shadow-lg scale-105'
+                              : 'bg-white text-ink-secondary border-border-subtle group-hover:border-[#176B4D] group-hover:text-[#176B4D]'
+                          }`}
+                        >
+                          {item.step}
+                        </div>
+
+                        {/* Interactive Step Card */}
+                        <div
+                          className={`p-5 sm:p-6 rounded-3xl border transition-all duration-300 ${
+                            isActive
+                              ? 'bg-white border-[#176B4D] shadow-xl ring-2 ring-[#176B4D]/10 -translate-y-0.5'
+                              : 'bg-white/80 hover:bg-white border-border-subtle/80 shadow-xs hover:shadow-md'
+                          }`}
+                        >
+                          <div className="flex flex-wrap items-center justify-between gap-2 mb-2.5">
+                            <div className="flex items-center gap-2.5">
+                              {/* Mobile step badge */}
+                              <span
+                                className={`sm:hidden w-7 h-7 rounded-lg flex items-center justify-center font-black text-xs ${
+                                  isActive
+                                    ? 'bg-[#072418] text-[#FDE047]'
+                                    : 'bg-surface-secondary text-ink-secondary'
+                                }`}
+                              >
+                                {item.step}
+                              </span>
+                              <span
+                                className={`text-[11px] font-extrabold px-2.5 py-0.5 rounded-full border ${
+                                  isActive
+                                    ? 'bg-[#072418] text-[#FDE047] border-[#072418]'
+                                    : 'bg-surface-secondary text-ink-secondary border-border-subtle'
+                                }`}
+                              >
+                                {item.actor}
+                              </span>
+                              <span className="text-[11px] font-bold text-[#176B4D] bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200/80">
+                                {item.badge}
+                              </span>
+                            </div>
+
+                            <div
+                              className={`w-8 h-8 rounded-xl flex items-center justify-center transition-colors ${
+                                isActive
+                                  ? 'bg-emerald-50 text-[#176B4D]'
+                                  : 'bg-surface-secondary/70 text-ink-muted group-hover:text-[#176B4D]'
+                              }`}
+                            >
+                              <StepIcon className="w-4 h-4" />
+                            </div>
+                          </div>
+
+                          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                            <div className="space-y-1 pr-2">
+                              <h3
+                                className={`font-extrabold text-base sm:text-lg transition-colors ${
+                                  isActive ? 'text-[#072418]' : 'text-ink-primary group-hover:text-[#176B4D]'
+                                }`}
+                              >
+                                {item.title}
+                              </h3>
+                              <p className="text-xs text-ink-secondary leading-relaxed">
+                                {item.desc}
+                              </p>
+                            </div>
+
+                            <Link
+                              to={item.linkTo}
+                              onClick={(e) => e.stopPropagation()}
+                              className={`inline-flex items-center gap-1.5 text-xs font-extrabold shrink-0 px-3.5 py-2 rounded-xl transition-all ${
+                                isActive
+                                  ? 'bg-[#FDE047] text-[#072418] shadow-xs hover:bg-[#facc15]'
+                                  : 'bg-surface-secondary text-ink-secondary hover:bg-emerald-50 hover:text-[#176B4D]'
+                              }`}
+                            >
+                              <span>Buka Modul</span>
+                              <ChevronRight className="w-3.5 h-3.5" />
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })()}
         </div>
       </section>
 
