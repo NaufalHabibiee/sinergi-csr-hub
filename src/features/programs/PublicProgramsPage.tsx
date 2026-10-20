@@ -125,6 +125,12 @@ export const PublicProgramsPage: React.FC = () => {
             <Link to="/" className="hover:text-[#D4F63D] transition-colors">
               Beranda
             </Link>
+            <Link to="/about" className="hover:text-[#D4F63D] transition-colors">
+              Tentang Kami
+            </Link>
+            <Link to="/programs" className="text-[#D4F63D] font-bold">
+              Program
+            </Link>
             <Link to="/#ekosistem" className="hover:text-[#D4F63D] transition-colors">
               Alur Ekosistem
             </Link>
@@ -175,6 +181,12 @@ export const PublicProgramsPage: React.FC = () => {
           <div className="md:hidden bg-black/95 border-b border-white/10 px-5 py-4 space-y-3 text-xs font-medium text-white/90 backdrop-blur-md">
             <Link to="/" onClick={() => setMobileMenuOpen(false)} className="block py-1.5 hover:text-[#D4F63D]">
               ← Kembali ke Beranda Utama
+            </Link>
+            <Link to="/about" onClick={() => setMobileMenuOpen(false)} className="block py-1.5 hover:text-[#D4F63D]">
+              Tentang Kami
+            </Link>
+            <Link to="/programs" onClick={() => setMobileMenuOpen(false)} className="block py-1.5 text-[#D4F63D] font-bold">
+              Katalog Program
             </Link>
             <Link to="/#ekosistem" onClick={() => setMobileMenuOpen(false)} className="block py-1.5 hover:text-[#D4F63D]">
               Alur Ekosistem
@@ -552,7 +564,8 @@ export const PublicProgramsPage: React.FC = () => {
 
             <div className="flex flex-wrap items-center gap-6 text-xs text-white/70">
               <Link to="/" className="hover:text-[#D4F63D] transition-colors">Beranda</Link>
-              <Link to="/#ekosistem" className="hover:text-[#D4F63D] transition-colors">Alur Ekosistem</Link>
+              <Link to="/about" className="hover:text-[#D4F63D] transition-colors">Tentang Kami</Link>
+              <Link to="/programs" className="text-[#D4F63D] font-bold">Program</Link>
               <Link to="/#dampak" className="hover:text-[#D4F63D] transition-colors">Dampak</Link>
               <Link to="/#mitra" className="hover:text-[#D4F63D] transition-colors">Mitra Funder</Link>
               <Link to="/dashboard" className="text-[#D4F63D] font-bold hover:underline">Dashboard Eksekutif</Link>

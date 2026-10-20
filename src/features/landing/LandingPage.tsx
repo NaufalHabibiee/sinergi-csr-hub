@@ -152,9 +152,9 @@ export const LandingPage: React.FC = () => {
             </div>
 
             {/* Center: Desktop Navigation Links */}
-            <nav className="hidden lg:flex items-center gap-8 text-xs font-medium tracking-wide">
-              <a
-                href="#tentang"
+            <nav className="hidden lg:flex items-center gap-7 text-xs font-medium tracking-wide">
+              <Link
+                to="/"
                 className={`transition-colors duration-200 py-1 ${
                   isScrolled
                     ? 'text-ink-secondary hover:text-brand-primary'
@@ -162,7 +162,17 @@ export const LandingPage: React.FC = () => {
                 }`}
               >
                 Beranda
-              </a>
+              </Link>
+              <Link
+                to="/about"
+                className={`transition-colors duration-200 py-1 ${
+                  isScrolled
+                    ? 'text-ink-secondary hover:text-brand-primary'
+                    : 'text-white/80 hover:text-white'
+                }`}
+              >
+                Tentang Kami
+              </Link>
               <Link
                 to="/programs"
                 className={`transition-colors duration-200 py-1 ${
@@ -249,13 +259,20 @@ export const LandingPage: React.FC = () => {
                   : 'bg-[#0B0F0D]/95 backdrop-blur-md text-white border-white/15'
               }`}
             >
-              <a
-                href="#tentang"
+              <Link
+                to="/"
                 onClick={() => setMobileMenuOpen(false)}
                 className="block py-2 hover:text-[#D4F63D]"
               >
                 Beranda
-              </a>
+              </Link>
+              <Link
+                to="/about"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block py-2 hover:text-[#D4F63D]"
+              >
+                Tentang Kami
+              </Link>
               <Link
                 to="/programs"
                 onClick={() => setMobileMenuOpen(false)}
@@ -489,6 +506,16 @@ export const LandingPage: React.FC = () => {
                     Metrik SROI dan sinkronisasi 17 target SDGs Bappenas siap diekspor untuk penilaian peringkat kepatuhan KLHK.
                   </p>
                 </div>
+              </div>
+
+              <div className="pt-2">
+                <Link
+                  to="/about"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#176B4D] hover:bg-[#0E4D36] text-white text-xs font-bold transition-all shadow-xs"
+                >
+                  <span>Pelajari Profil &amp; Filosofi SinergiCSR Selengkapnya</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
               </div>
             </div>
 

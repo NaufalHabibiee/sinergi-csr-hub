@@ -23,6 +23,9 @@ interface RegulationDoc {
   categoryLabel: string;
   number: string;
   title: string;
+  shortTitle: string;
+  tagline: string;
+  scope: string;
   year: number;
   promulgatedBy: string;
   keyArticles: {
@@ -42,6 +45,9 @@ export const REGULATIONS_DATA: RegulationDoc[] = [
     categoryLabel: 'Undang-Undang',
     number: 'UU No. 40 Tahun 2007',
     title: 'Undang-Undang Republik Indonesia tentang Perseroan Terbatas (Pasal 74 TJSL)',
+    shortTitle: 'Mandat Wajib TJSL & Kepatutan Beban Perseroan',
+    tagline: 'Beban Biaya Sah & Kepatuhan Audit RUPS',
+    scope: 'Nasional • Perseroan SDA',
     year: 2007,
     promulgatedBy: 'Presiden Republik Indonesia & DPR RI',
     keyArticles: [
@@ -67,6 +73,9 @@ export const REGULATIONS_DATA: RegulationDoc[] = [
     categoryLabel: 'Peraturan Pemerintah',
     number: 'PP No. 47 Tahun 2012',
     title: 'Peraturan Pemerintah tentang Tanggung Jawab Sosial dan Lingkungan Perseroan Terbatas',
+    shortTitle: 'Rencana Kerja Tahunan & Apresiasi Pemerintah',
+    tagline: 'ESG Governance & Dasar Hukum CSR Award',
+    scope: 'Pemerintah RI • Perseroan Terbatas',
     year: 2012,
     promulgatedBy: 'Pemerintah Republik Indonesia',
     keyArticles: [
@@ -90,8 +99,11 @@ export const REGULATIONS_DATA: RegulationDoc[] = [
     id: 'reg_03',
     category: 'perda',
     categoryLabel: 'Peraturan Daerah (Perda)',
-    number: 'Perda Jabar No. 2 Tahun 2013',
+    number: 'Perda Jabar No. 2/2013',
     title: 'Peraturan Daerah Provinsi Jawa Barat tentang Pedoman Pengelolaan TJSLP & PKBL',
+    shortTitle: 'Tim Fasilitasi Kemitraan CSR & Sinkronisasi Daerah',
+    tagline: 'Bebas Pungutan Liar & Selaras Musrenbang',
+    scope: 'Pemerintah Daerah • Bebas Overlap',
     year: 2013,
     promulgatedBy: 'Gubernur & DPRD Provinsi Jawa Barat',
     keyArticles: [
@@ -115,8 +127,11 @@ export const REGULATIONS_DATA: RegulationDoc[] = [
     id: 'reg_04',
     category: 'perda',
     categoryLabel: 'Peraturan Gubernur (Pergub)',
-    number: 'Pergub Jabar No. 30 Tahun 2018',
+    number: 'Pergub Jabar No. 30/2018',
     title: 'Petunjuk Pelaksanaan Pengelolaan Tanggung Jawab Sosial dan Lingkungan Perusahaan',
+    shortTitle: 'Tata Kelola Berita Acara Serah Terima (BAST)',
+    tagline: 'Syarat Mutlak Validasi Bebas Sengketa',
+    scope: 'Dokumen Kunci Penutupan Proyek',
     year: 2018,
     promulgatedBy: 'Gubernur Jawa Barat',
     keyArticles: [
@@ -134,8 +149,11 @@ export const REGULATIONS_DATA: RegulationDoc[] = [
     id: 'reg_05',
     category: 'permen',
     categoryLabel: 'Peraturan Menteri',
-    number: 'Permen BUMN No. PER-05/MBU/04/2021',
+    number: 'Permen BUMN No. 05/2021',
     title: 'Program Tanggung Jawab Sosial dan Lingkungan Badan Usaha Milik Negara',
+    shortTitle: 'Prioritas 3 Pilar TJSL & Pengukuran Dampak SROI',
+    tagline: 'Fokus Pendidikan, Lingkungan & UMKM',
+    scope: 'Badan Usaha Milik Negara',
     year: 2021,
     promulgatedBy: 'Menteri Badan Usaha Milik Negara RI',
     keyArticles: [
@@ -159,8 +177,11 @@ export const REGULATIONS_DATA: RegulationDoc[] = [
     id: 'reg_06',
     category: 'permen',
     categoryLabel: 'Peraturan Menteri',
-    number: 'Permen LHK No. 1 Tahun 2021',
+    number: 'Permen LHK No. 1/2021',
     title: 'Program Penilaian Peringkat Kinerja Perusahaan dalam Pengelolaan Lingkungan Hidup (PROPER)',
+    shortTitle: 'Inovasi Sosial Peringkat PROPER Emas & Hijau',
+    tagline: 'Kepatuhan Audit Lingkungan Hidup Tertinggi',
+    scope: 'Kementerian Lingkungan Hidup',
     year: 2021,
     promulgatedBy: 'Menteri Lingkungan Hidup dan Kehutanan RI',
     keyArticles: [
@@ -180,6 +201,9 @@ export const REGULATIONS_DATA: RegulationDoc[] = [
     categoryLabel: 'Peraturan Pemerintah (Pajak)',
     number: 'PP No. 93 Tahun 2010',
     title: 'Sumbangan Fasilitas Pendidikan, Bencana & Litbang yang Dapat Dikurangkan dari Penghasilan Bruto (Tax Deduction)',
+    shortTitle: 'Insentif Pemotongan Pajak Bruto (Tax Deduction)',
+    tagline: 'Pengurang Penghasilan Bruto Maksimal 5%',
+    scope: 'Kementerian Keuangan RI',
     year: 2010,
     promulgatedBy: 'Presiden Republik Indonesia',
     keyArticles: [
@@ -302,74 +326,72 @@ export const CSRRegulationsSection: React.FC = () => {
         {/* Regulations Grid Directly on Page */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredDocs.map((doc) => {
-            const primaryArticle = doc.keyArticles[0];
-            const copyKey = `${doc.id}_0`;
-            const isCopied = copiedArticle === copyKey;
-            const citationText = `[Dasar Hukum] ${doc.number} - ${primaryArticle?.article || ''}: "${primaryArticle?.excerpt || doc.title}"`;
+            const isCopied = copiedArticle === doc.id;
+            const citationText = `[Regulasi] ${doc.number} - ${doc.shortTitle || doc.title}`;
 
             return (
               <div
                 key={doc.id}
-                className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/80 shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group space-y-5"
+                className="bg-[#F8FAF9] hover:bg-white hover:shadow-xl rounded-3xl p-6 sm:p-7 transition-all duration-300 flex flex-col justify-between group space-y-5"
               >
-                <div className="space-y-4">
+                <div className="space-y-3.5">
                   {/* Category Pill & Year */}
                   <div className="flex items-center justify-between">
-                    <span className="text-[11px] font-bold px-3 py-1 rounded-full bg-[#E8F6F0] text-[#176B4D]">
+                    <span
+                      className={`text-[11px] font-bold px-3 py-1 rounded-full ${
+                        doc.category === 'uu'
+                          ? 'bg-rose-100/80 text-rose-800'
+                          : doc.category === 'pp'
+                          ? 'bg-blue-100/80 text-blue-800'
+                          : doc.category === 'perda'
+                          ? 'bg-amber-100/80 text-amber-800'
+                          : 'bg-purple-100/80 text-purple-800'
+                      }`}
+                    >
                       {doc.categoryLabel}
                     </span>
-                    <span className="text-xs font-semibold text-slate-400 font-mono">
+                    <span className="text-xs font-mono font-bold text-slate-400">
                       Tahun {doc.year}
                     </span>
                   </div>
 
-                  {/* Regulation Number, Title & Promulgator */}
+                  {/* Regulation Number, Short Title & Scope */}
                   <div className="space-y-1">
                     <div className="text-xs font-mono font-bold text-[#176B4D]">
                       {doc.number}
                     </div>
-                    <h3 className="font-bold text-base text-[#0B2518] group-hover:text-[#176B4D] transition-colors leading-snug line-clamp-2">
-                      {doc.title}
+                    <h3 className="font-extrabold text-base text-[#0B2518] group-hover:text-[#176B4D] transition-colors leading-snug">
+                      {doc.shortTitle || doc.title}
                     </h3>
-                    <p className="text-xs text-slate-400">
-                      {doc.promulgatedBy}
+                    <p className="text-[11px] text-slate-400 font-medium">
+                      {doc.scope || doc.promulgatedBy}
                     </p>
                   </div>
 
-                  {/* Clean Excerpt */}
-                  {primaryArticle && (
-                    <p className="text-xs text-slate-600 line-clamp-3 leading-relaxed">
-                      &ldquo;{primaryArticle.excerpt}&rdquo;
-                    </p>
-                  )}
-
-                  {/* Compliance & Tax Highlight */}
-                  <div className="pt-3 border-t border-slate-100 flex items-start gap-2.5 text-xs text-slate-600">
-                    <ShieldCheck className="w-4 h-4 text-[#176B4D] shrink-0 mt-0.5" />
-                    <span className="line-clamp-2 leading-relaxed">
-                      <strong className="text-slate-800">Implikasi: </strong>
-                      {doc.taxOrComplianceImplication}
-                    </span>
+                  {/* Single Punchy Takeaway Chip (No Long Paragraphs!) */}
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white text-[#176B4D] text-xs font-bold shadow-2xs">
+                    <ShieldCheck className="w-3.5 h-3.5 text-[#176B4D] shrink-0" />
+                    <span>{doc.tagline || doc.taxOrComplianceImplication}</span>
                   </div>
                 </div>
 
-                {/* Bottom Action Row */}
-                <div className="pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+                {/* Bottom Action Row (Zero Internal Borders!) */}
+                <div className="pt-2 flex items-center justify-between gap-3">
                   <button
                     type="button"
-                    onClick={() => handleCopyCitation(citationText, copyKey)}
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-[#176B4D] transition-colors cursor-pointer"
-                    title="Salin kutipan hukum untuk proposal"
+                    onClick={() => handleCopyCitation(citationText, doc.id)}
+                    className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-400 hover:text-slate-800 transition-colors cursor-pointer"
+                    title="Salin rujukan hukum"
                   >
                     {isCopied ? (
                       <>
                         <Check className="w-3.5 h-3.5 text-emerald-600" />
-                        <span className="text-emerald-700 font-bold">Tersalin!</span>
+                        <span className="text-emerald-700 font-bold">Tersalin</span>
                       </>
                     ) : (
                       <>
-                        <Copy className="w-3.5 h-3.5 text-slate-400" />
-                        <span>Salin Kutipan</span>
+                        <Copy className="w-3.5 h-3.5" />
+                        <span>Salin</span>
                       </>
                     )}
                   </button>
@@ -377,9 +399,9 @@ export const CSRRegulationsSection: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => handleDownload(doc)}
-                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-900 hover:bg-[#176B4D] text-white text-xs font-bold transition-all cursor-pointer shadow-xs active:scale-95"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#0B2518] hover:bg-[#176B4D] text-white text-xs font-bold transition-all cursor-pointer shadow-xs active:scale-95"
                   >
-                    <Download className="w-3.5 h-3.5 text-emerald-300" />
+                    <Download className="w-3.5 h-3.5 text-[#D4F63D]" />
                     <span>Unduh PDF</span>
                     <span className="text-[10px] text-white/50 font-normal">({doc.fileSize})</span>
                   </button>
