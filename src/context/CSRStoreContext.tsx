@@ -13,7 +13,9 @@ import {
   ProgramStatus,
   ProposalStatus,
   FundingRecordStatus,
-  ReportStatus
+  ReportStatus,
+  CommunityAspiration,
+  AspirationStatus
 } from '../types/csr';
 import {
   INITIAL_USER,
@@ -25,7 +27,8 @@ import {
   SEED_BENEFICIARIES,
   SEED_IMPACT_REPORTS,
   SEED_ACTIVITIES,
-  SEED_NOTIFICATIONS
+  SEED_NOTIFICATIONS,
+  SEED_ASPIRATIONS
 } from '../data/seedData';
 
 const LOCAL_STORAGE_KEY = 'universa_csr_hub_state_v1';
@@ -46,6 +49,7 @@ interface CSRStoreContextType {
   reports: ImpactReport[];
   activities: ActivityEvent[];
   notifications: InAppNotification[];
+  aspirations: CommunityAspiration[];
 
   funders: Organization[];
   partners: Organization[];
@@ -59,6 +63,9 @@ interface CSRStoreContextType {
   createProposal: (data: Omit<Proposal, 'id' | 'code' | 'status' | 'submittedAt'>) => Proposal;
   reviewProposal: (id: string, status: 'approved' | 'rejected', notes: string) => void;
   convertProposalToProgram: (proposalId: string, funderId: string, approvedBudget: number) => Program | null;
+
+  createAspiration: (data: Omit<CommunityAspiration, 'id' | 'ticketCode' | 'status' | 'submittedAt'>) => CommunityAspiration;
+  updateAspirationStatus: (id: string, status: AspirationStatus, notes?: string) => void;
 
   createFundingRecord: (data: Omit<FundingRecord, 'id' | 'referenceNo' | 'createdBy'>) => FundingRecord;
   updateFundingStatus: (id: string, status: FundingRecordStatus) => void;
@@ -156,6 +163,15 @@ export const CSRStoreProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     }
   });
 
+  const [aspirations, setAspirations] = useState<CommunityAspiration[]>(() => {
+    try {
+      const saved = localStorage.getItem(`${LOCAL_STORAGE_KEY}_aspirations`);
+      return saved ? JSON.parse(saved) : SEED_ASPIRATIONS;
+    } catch {
+      return SEED_ASPIRATIONS;
+    }
+  });
+
   // Sync to localStorage
   useEffect(() => {
     try {
@@ -204,6 +220,12 @@ export const CSRStoreProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       localStorage.setItem(`${LOCAL_STORAGE_KEY}_notifications`, JSON.stringify(notifications));
     } catch {}
   }, [notifications]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(`${LOCAL_STORAGE_KEY}_aspirations`, JSON.stringify(aspirations));
+    } catch {}
+  }, [aspirations]);
 
   const logActivity = (action: string, entityType: ActivityEvent['entityType'], entityId: string, summary: string) => {
     const newAct: ActivityEvent = {
@@ -435,6 +457,30 @@ export const CSRStoreProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     return newProg;
   };
 
+  // Community Aspirations (Musrenbang CSR / Desa)
+  const createAspiration = (data: Omit<CommunityAspiration, 'id' | 'ticketCode' | 'status' | 'submittedAt'>): CommunityAspiration => {
+    const id = `asp_${Date.now()}`;
+    const nextNum = aspirations.length + 1;
+    const ticketCode = `ASP-DESA-2026-${String(nextNum).padStart(3, '0')}`;
+    const newAspiration: CommunityAspiration = {
+      ...data,
+      id,
+      ticketCode,
+      status: 'menunggu_telaah',
+      submittedAt: new Date().toISOString().split('T')[0]
+    };
+    setAspirations(prev => [newAspiration, ...prev]);
+    logActivity('Submit Aspiration', 'Proposal', id, `Mengajukan aspirasi desa: "${newAspiration.title}" (${ticketCode})`);
+    addNotification('Aspirasi Desa Baru Masuk', `Aspirasi "${newAspiration.title}" dari ${newAspiration.village} menunggu telaah kurasi.`, 'action_required', '/dashboard/proposals');
+    return newAspiration;
+  };
+
+  const updateAspirationStatus = (id: string, status: AspirationStatus, notes?: string) => {
+    setAspirations(prev => prev.map(a => (a.id === id ? { ...a, status, notes: notes || a.notes, verifiedBy: user.displayName } : a)));
+    logActivity('Review Aspiration', 'Proposal', id, `Mengubah status aspirasi ${id} menjadi ${status}`);
+    addNotification('Status Aspirasi Diperbarui', `Aspirasi ${id} kini berstatus: ${status.toUpperCase()} (Demo).`, 'info', '/dashboard/proposals');
+  };
+
   // Funding records
   const createFundingRecord = (data: any): FundingRecord => {
     const id = `fndrec_${Date.now()}`;
@@ -568,6 +614,7 @@ export const CSRStoreProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     setReports(SEED_IMPACT_REPORTS);
     setActivities(SEED_ACTIVITIES);
     setNotifications(SEED_NOTIFICATIONS);
+    setAspirations(SEED_ASPIRATIONS);
     setUser(INITIAL_USER);
 
     try {
@@ -579,6 +626,7 @@ export const CSRStoreProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       localStorage.removeItem(`${LOCAL_STORAGE_KEY}_reports`);
       localStorage.removeItem(`${LOCAL_STORAGE_KEY}_activities`);
       localStorage.removeItem(`${LOCAL_STORAGE_KEY}_notifications`);
+      localStorage.removeItem(`${LOCAL_STORAGE_KEY}_aspirations`);
     } catch {}
 
     addNotification('Data Demo Direset', 'Semua data simulasi telah dikembalikan ke kondisi awal.', 'warning');
@@ -602,6 +650,7 @@ export const CSRStoreProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         reports,
         activities,
         notifications,
+        aspirations,
 
         funders,
         partners,
@@ -614,6 +663,9 @@ export const CSRStoreProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         createProposal,
         reviewProposal,
         convertProposalToProgram,
+
+        createAspiration,
+        updateAspirationStatus,
 
         createFundingRecord,
         updateFundingStatus,

@@ -10,18 +10,29 @@ import {
   ChevronRight,
   LayoutGrid,
   List,
-  Kanban
+  Kanban,
+  Building2,
+  MapPin,
+  Users,
+  Send,
+  CheckCircle2,
+  ShieldCheck,
+  AlertTriangle,
+  Compass
 } from 'lucide-react';
 import { useCSRStore } from '../../context/CSRStoreContext';
 import { StatusBadge } from '../../components/ui/StatusBadge';
 import { EmptyState } from '../../components/ui/EmptyState';
 import { ProposalFormModal } from './ProposalFormModal';
 import { ProposalReviewModal } from './ProposalReviewModal';
-import { formatCompactIDR, formatDateID, CATEGORY_LABELS } from '../../lib/formatters';
-import { Proposal } from '../../types/csr';
+import { CommunityAspirationModal } from '../programs/CommunityAspirationModal';
+import { formatCompactIDR, formatIDR, formatDateID, CATEGORY_LABELS } from '../../lib/formatters';
+import { Proposal, CommunityAspiration } from '../../types/csr';
 
 export const ProposalsPage: React.FC = () => {
-  const { proposals, partners } = useCSRStore();
+  const { proposals, partners, aspirations, updateAspirationStatus } = useCSRStore();
+  const [activeTab, setActiveTab] = useState<'proposals' | 'aspirations'>('proposals');
+  const [isAspirationModalOpen, setIsAspirationModalOpen] = useState(false);
 
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
@@ -63,20 +74,212 @@ export const ProposalsPage: React.FC = () => {
 
   return (
     <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.04)] border border-slate-100/80 space-y-6 animate-in fade-in duration-200">
-      {/* 1. Header Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <h1 className="text-xl font-extrabold text-slate-900 tracking-tight">
-          Proposal Hibah CSR
-        </h1>
+      {/* 1. Header & Tab Switcher Bar */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-xl font-extrabold text-slate-900 tracking-tight">
+            {activeTab === 'proposals' ? 'Proposal Kemitraan CSR' : 'Kanal Aspirasi Kebutuhan Desa (Musrenbang CSR)'}
+          </h1>
+          <p className="text-xs text-slate-500 mt-0.5">
+            {activeTab === 'proposals'
+              ? 'Kurasi usulan program kemitraan dari Lembaga & Yayasan Pelaksana (NGO)'
+              : 'Daftar usulan kebutuhan pembangunan daerah langsung dari Pemerintah Desa & Komunitas'}
+          </p>
+        </div>
 
-        <button
-          onClick={() => setIsCreateOpen(true)}
-          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#176B4D] hover:bg-[#0E4D36] text-white font-semibold text-xs transition-all cursor-pointer shadow-xs self-start sm:self-auto"
-        >
-          <Plus className="w-4 h-4" />
-          Ajukan Proposal Baru
-        </button>
+        <div className="flex flex-wrap items-center gap-2.5">
+          <div className="inline-flex items-center p-1 bg-slate-100/90 rounded-2xl">
+            <button
+              onClick={() => setActiveTab('proposals')}
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                activeTab === 'proposals'
+                  ? 'bg-white text-[#176B4D] shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              Proposal Mitra ({proposals.length})
+            </button>
+            <button
+              onClick={() => setActiveTab('aspirations')}
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                activeTab === 'aspirations'
+                  ? 'bg-white text-[#176B4D] shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              Aspirasi Desa ({aspirations.length})
+            </button>
+          </div>
+
+          {activeTab === 'proposals' ? (
+            <button
+              onClick={() => setIsCreateOpen(true)}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#176B4D] hover:bg-[#0E4D36] text-white font-semibold text-xs transition-all cursor-pointer shadow-xs"
+            >
+              <Plus className="w-4 h-4" />
+              <span>Ajukan Proposal Baru</span>
+            </button>
+          ) : (
+            <button
+              onClick={() => setIsAspirationModalOpen(true)}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#176B4D] hover:bg-[#0E4D36] text-white font-semibold text-xs transition-all cursor-pointer shadow-xs"
+            >
+              <Send className="w-4 h-4" />
+              <span>Ajukan Kebutuhan Desa</span>
+            </button>
+          )}
+        </div>
       </div>
+
+      {activeTab === 'aspirations' ? (
+        /* Aspirations Community View */
+        <div className="space-y-6">
+          {/* Aspirations KPI Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="rounded-2xl bg-amber-50/90 border border-amber-200/80 p-5">
+              <span className="text-xs font-semibold text-amber-800 block">Menunggu Telaah</span>
+              <div className="flex items-baseline gap-2 mt-2">
+                <span className="text-2xl font-extrabold text-amber-950">
+                  {aspirations.filter(a => a.status === 'menunggu_telaah').length}
+                </span>
+                <span className="text-[10px] text-amber-700">Usulan Desa</span>
+              </div>
+            </div>
+
+            <div className="rounded-2xl bg-blue-50/90 border border-blue-200/80 p-5">
+              <span className="text-xs font-semibold text-blue-800 block">Terverifikasi Bappeda</span>
+              <div className="flex items-baseline gap-2 mt-2">
+                <span className="text-2xl font-extrabold text-blue-950">
+                  {aspirations.filter(a => a.status === 'diverifikasi').length}
+                </span>
+                <span className="text-[10px] text-blue-700">Siap Fasilitasi</span>
+              </div>
+            </div>
+
+            <div className="rounded-2xl bg-[#EBF6F1] border border-emerald-200/80 p-5">
+              <span className="text-xs font-semibold text-[#176B4D] block">Masuk Buku Menu Kemitraan</span>
+              <div className="flex items-baseline gap-2 mt-2">
+                <span className="text-2xl font-extrabold text-[#072418]">
+                  {aspirations.filter(a => a.status === 'masuk_buku_menu').length}
+                </span>
+                <span className="text-[10px] text-emerald-600 font-bold">Siap Didanai Funder</span>
+              </div>
+            </div>
+
+            <div className="rounded-2xl bg-purple-50/90 border border-purple-200/80 p-5">
+              <span className="text-xs font-semibold text-purple-800 block">Didukung Funder (Didanai)</span>
+              <div className="flex items-baseline gap-2 mt-2">
+                <span className="text-2xl font-extrabold text-purple-950">
+                  {aspirations.filter(a => a.status === 'didukung_funder').length}
+                </span>
+                <span className="text-[10px] text-purple-700 font-bold">Terdanai Penuh</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Aspirations Table */}
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse text-xs">
+              <thead>
+                <tr className="border-b border-slate-150 text-[11px] font-semibold text-slate-400">
+                  <th className="py-3 px-3">Tiket &amp; Pengusul</th>
+                  <th className="py-3 px-3">Desa / Wilayah</th>
+                  <th className="py-3 px-3">Judul Usulan Kebutuhan</th>
+                  <th className="py-3 px-3">Estimasi Biaya</th>
+                  <th className="py-3 px-3">Sasaran</th>
+                  <th className="py-3 px-3">Tingkat Urgensi</th>
+                  <th className="py-3 px-3">Status Telaah</th>
+                  <th className="py-3 px-2 text-right">Aksi</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100">
+                {aspirations.map((asp) => (
+                  <tr key={asp.id} className="hover:bg-slate-50/80 transition-colors">
+                    <td className="py-3.5 px-3">
+                      <span className="font-mono font-bold text-slate-900 block">{asp.ticketCode}</span>
+                      <span className="text-[11px] text-slate-500">{asp.applicantName} ({asp.applicantRole})</span>
+                    </td>
+                    <td className="py-3.5 px-3">
+                      <span className="font-semibold text-slate-800 block">{asp.village}</span>
+                      <span className="text-[11px] text-slate-400">{asp.district}, {asp.regency}</span>
+                    </td>
+                    <td className="py-3.5 px-3 max-w-[260px]">
+                      <span className="font-bold text-slate-800 block leading-snug">{asp.title}</span>
+                      <span className="text-[11px] text-slate-500 line-clamp-1">{asp.problemDescription}</span>
+                    </td>
+                    <td className="py-3.5 px-3 font-extrabold text-[#176B4D] whitespace-nowrap">
+                      {formatCompactIDR(asp.estimatedBudget)}
+                    </td>
+                    <td className="py-3.5 px-3 text-slate-600 whitespace-nowrap">
+                      {asp.estimatedBeneficiaries.toLocaleString('id-ID')} Warga
+                    </td>
+                    <td className="py-3.5 px-3 whitespace-nowrap">
+                      <span
+                        className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full border ${
+                          asp.urgencyLevel === 'sangat_mendesak'
+                            ? 'bg-rose-50 text-rose-700 border-rose-200'
+                            : asp.urgencyLevel === 'tinggi'
+                            ? 'bg-amber-50 text-amber-700 border-amber-200'
+                            : 'bg-slate-50 text-slate-600 border-slate-200'
+                        }`}
+                      >
+                        {asp.urgencyLevel === 'sangat_mendesak'
+                          ? 'Sangat Mendesak'
+                          : asp.urgencyLevel === 'tinggi'
+                          ? 'Tinggi'
+                          : 'Sedang'}
+                      </span>
+                    </td>
+                    <td className="py-3.5 px-3 whitespace-nowrap">
+                      <span
+                        className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full ${
+                          asp.status === 'masuk_buku_menu'
+                            ? 'bg-emerald-100 text-emerald-800'
+                            : asp.status === 'didukung_funder'
+                            ? 'bg-purple-100 text-purple-800'
+                            : asp.status === 'diverifikasi'
+                            ? 'bg-blue-100 text-blue-800'
+                            : 'bg-amber-100 text-amber-800'
+                        }`}
+                      >
+                        {asp.status === 'masuk_buku_menu'
+                          ? 'Masuk Buku Menu'
+                          : asp.status === 'didukung_funder'
+                          ? 'Didukung Funder'
+                          : asp.status === 'diverifikasi'
+                          ? 'Diverifikasi Bappeda'
+                          : 'Menunggu Telaah'}
+                      </span>
+                    </td>
+                    <td className="py-3.5 px-2 text-right whitespace-nowrap">
+                      {asp.status === 'menunggu_telaah' && (
+                        <button
+                          onClick={() => updateAspirationStatus(asp.id, 'diverifikasi')}
+                          className="px-2.5 py-1 rounded-lg bg-blue-50 text-blue-700 hover:bg-blue-100 text-[11px] font-bold cursor-pointer transition-colors"
+                        >
+                          Verifikasi
+                        </button>
+                      )}
+                      {asp.status === 'diverifikasi' && (
+                        <button
+                          onClick={() => updateAspirationStatus(asp.id, 'masuk_buku_menu')}
+                          className="px-2.5 py-1 rounded-lg bg-emerald-50 text-[#176B4D] hover:bg-emerald-100 text-[11px] font-bold cursor-pointer transition-colors"
+                        >
+                          + Buku Menu
+                        </button>
+                      )}
+                      {asp.status === 'masuk_buku_menu' && (
+                        <span className="text-[10px] text-emerald-600 font-semibold">Terkurasi</span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      ) : (
+        <div className="space-y-6">
 
       {/* 2. 4 Soft Pastel Status Summary Cards with Sparklines */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -524,6 +727,8 @@ export const ProposalsPage: React.FC = () => {
           })}
         </div>
       )}
+      </div>
+      )}
 
       {/* Modals */}
       <ProposalFormModal
@@ -535,6 +740,12 @@ export const ProposalsPage: React.FC = () => {
         isOpen={!!selectedProposalForReview}
         onClose={() => setSelectedProposalForReview(null)}
         proposal={selectedProposalForReview}
+      />
+
+      {/* Community Aspiration (Musrenbang CSR) Modal */}
+      <CommunityAspirationModal
+        isOpen={isAspirationModalOpen}
+        onClose={() => setIsAspirationModalOpen(false)}
       />
     </div>
   );

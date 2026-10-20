@@ -7,7 +7,8 @@ import {
   ImpactReport,
   ActivityEvent,
   InAppNotification,
-  UserProfile
+  UserProfile,
+  CommunityAspiration
 } from '../types/csr';
 
 export const INITIAL_USER: UserProfile = {
@@ -1325,5 +1326,110 @@ export const SEED_NOTIFICATIONS: InAppNotification[] = [
     createdAt: '2026-03-10T14:00:00Z',
     read: true,
     linkTo: '/dashboard/reports'
+  }
+];
+
+export const SEED_ASPIRATIONS: CommunityAspiration[] = [
+  {
+    id: 'asp_001',
+    ticketCode: 'ASP-DESA-2026-001',
+    applicantName: 'H. Suryana, S.Sos.',
+    applicantRole: 'Kepala Desa Sukajaya',
+    contactPhone: '+62 813-8877-6655',
+    email: 'kades.sukajaya@cianjurkab.demo',
+    village: 'Desa Sukajaya',
+    district: 'Kecamatan Cugenang',
+    regency: 'Kabupaten Cianjur',
+    province: 'Jawa Barat',
+    title: 'Pembangunan 15 Sarana Sanitasi & MCK Komunal Pascagempa',
+    category: 'infrastruktur',
+    problemDescription: 'Warga di 3 RT masih menggunakan sarana sanitasi darurat setelah musibah gempa. Dibutuhkan MCK higienis permanen dan septic tank biofilter.',
+    estimatedBeneficiaries: 450,
+    estimatedBudget: 85_000_000,
+    urgencyLevel: 'sangat_mendesak',
+    status: 'masuk_buku_menu',
+    submittedAt: '2026-02-10',
+    verifiedBy: 'Tim Fasilitasi TJSL Bapperida Cianjur',
+    notes: 'Telah lolos verifikasi lapangan, siap dipasangkan dengan Funder BUMN Konstruksi.'
+  },
+  {
+    id: 'asp_002',
+    ticketCode: 'ASP-DESA-2026-002',
+    applicantName: 'M. Taufik Ismail',
+    applicantRole: 'Ketua Karang Taruna Pesisir',
+    contactPhone: '+62 856-7788-9900',
+    village: 'Desa Ciparagejaya',
+    district: 'Kecamatan Tempuran',
+    regency: 'Kabupaten Karawang',
+    province: 'Jawa Barat',
+    title: 'Pelatihan Olahan Ikan Asin Higienis & Bantuan Rumah Pengering Higienis',
+    category: 'ekonomi_umkm',
+    problemDescription: 'Kelompok istri nelayan membutuhkan solar dryer dome (alat pengering higienis) agar tidak menjemur ikan asin di pinggir jalan yang berdebu.',
+    estimatedBeneficiaries: 120,
+    estimatedBudget: 65_000_000,
+    urgencyLevel: 'tinggi',
+    status: 'diverifikasi',
+    submittedAt: '2026-02-18',
+    verifiedBy: 'Bappeda Karawang Bidang Ekososbud',
+    notes: 'Prioritas pemulihan ekonomi pesisir utara Karawang.'
+  },
+  {
+    id: 'asp_003',
+    ticketCode: 'ASP-DESA-2026-003',
+    applicantName: 'Wayan Suwandi',
+    applicantRole: 'Ketua Pengelola Air Dusun Karst',
+    contactPhone: '+62 878-5544-3322',
+    village: 'Desa Giricahyo',
+    district: 'Kecamatan Purwosari',
+    regency: 'Kabupaten Gunungkidul',
+    province: 'DI Yogyakarta',
+    title: 'Perluasan Jaringan Pipa Gravitasi & Tandon Penampung Air Hujan',
+    category: 'infrastruktur',
+    problemDescription: 'Menghubungkan sumber air bawah tanah ke 2 dusun terpencil langganan kekeringan ekstrem sepanjang musim kemarau.',
+    estimatedBeneficiaries: 680,
+    estimatedBudget: 110_000_000,
+    urgencyLevel: 'tinggi',
+    status: 'menunggu_telaah',
+    submittedAt: '2026-03-01'
+  },
+  {
+    id: 'asp_004',
+    ticketCode: 'ASP-DESA-2026-004',
+    applicantName: 'Maria Yohana Bria',
+    applicantRole: 'Bidan Koordinator Puskesmas Pembantu',
+    contactPhone: '+62 821-4433-2211',
+    village: 'Desa Oenino',
+    district: 'Kecamatan Oenino',
+    regency: 'Kabupaten Timor Tengah Selatan',
+    province: 'Nusa Tenggara Timur',
+    title: 'Paket Timbangan Bayi Digital Antropometri & PMT Telur Balita',
+    category: 'kesehatan',
+    problemDescription: 'Timbangan gantung dacin di 5 posyandu sudah usang dan tidak akurat. Diperlukan timbangan digital standar Kemenkes dan asupan pangan lokal kaya protein telur.',
+    estimatedBeneficiaries: 240,
+    estimatedBudget: 45_000_000,
+    urgencyLevel: 'sangat_mendesak',
+    status: 'didukung_funder',
+    submittedAt: '2026-01-28',
+    verifiedBy: 'Dinas Kesehatan TTS',
+    notes: 'Didukung oleh komitmen alokasi Kimia Farma (PRG-2026-004).'
+  },
+  {
+    id: 'asp_005',
+    ticketCode: 'ASP-DESA-2026-005',
+    applicantName: 'Bambang Supriyanto',
+    applicantRole: 'Ketua Forum Tani Lestari',
+    contactPhone: '+62 812-9988-7766',
+    village: 'Desa Sambak',
+    district: 'Kecamatan Kajoran',
+    regency: 'Kabupaten Magelang',
+    province: 'Jawa Tengah',
+    title: 'Mesin Pencacah Limbah Jerami untuk Sentra Kompos Pupuk Organik',
+    category: 'lingkungan',
+    problemDescription: 'Petani kekurangan mesin perajang jerami dan kotoran ternak sehingga pembakaran jerami masih sering terjadi.',
+    estimatedBeneficiaries: 180,
+    estimatedBudget: 55_000_000,
+    urgencyLevel: 'sedang',
+    status: 'menunggu_telaah',
+    submittedAt: '2026-03-15'
   }
 ];

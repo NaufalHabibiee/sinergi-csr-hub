@@ -69,6 +69,31 @@ export interface Program {
 
 export type ProposalStatus = 'draft' | 'submitted' | 'under_review' | 'approved' | 'rejected' | 'converted';
 
+export type AspirationStatus = 'menunggu_telaah' | 'diverifikasi' | 'masuk_buku_menu' | 'didukung_funder' | 'ditolak';
+
+export interface CommunityAspiration {
+  id: string;
+  ticketCode: string;
+  applicantName: string;
+  applicantRole: string;
+  contactPhone: string;
+  email?: string;
+  village: string;
+  district: string;
+  regency: string;
+  province: string;
+  title: string;
+  category: ProgramCategory;
+  problemDescription: string;
+  estimatedBeneficiaries: number;
+  estimatedBudget: number;
+  urgencyLevel: 'sangat_mendesak' | 'tinggi' | 'sedang';
+  status: AspirationStatus;
+  submittedAt: string;
+  verifiedBy?: string;
+  notes?: string;
+}
+
 export interface Proposal {
   id: string;
   code: string;

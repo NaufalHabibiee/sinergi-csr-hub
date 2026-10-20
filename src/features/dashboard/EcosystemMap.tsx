@@ -13,64 +13,115 @@ import {
   DollarSign,
   Info,
   Sparkles,
-  ShieldCheck
+  ShieldCheck,
+  MapPin,
+  GitFork,
+  Compass
 } from 'lucide-react';
 import { useCSRStore } from '../../context/CSRStoreContext';
 import { formatCompactIDR, formatNumber } from '../../lib/formatters';
 import { calculatePlatformFunding, calculateBeneficiariesMetrics } from '../../lib/calculations';
+import { GISProjectMap } from './GISProjectMap';
+import { ProjectBookingModal } from '../programs/ProjectBookingModal';
+import { Program } from '../../types/csr';
 
 export const EcosystemMap: React.FC = () => {
   const { funders, partners, programs, fundingRecords, beneficiaries, reports } = useCSRStore();
+  const [activeTab, setActiveTab] = useState<'gis_map' | 'workflow'>('gis_map');
   const [activeFlow, setActiveFlow] = useState<'all' | 'funding' | 'reporting'>('all');
   const [selectedNode, setSelectedNode] = useState<'funder' | 'hub' | 'mitra' | 'beneficiaries' | 'gov' | null>(null);
+
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+  const [selectedBookingProgram, setSelectedBookingProgram] = useState<Program | null>(null);
 
   const fundingMetrics = calculatePlatformFunding(fundingRecords);
   const benMetrics = calculateBeneficiariesMetrics(beneficiaries);
 
   return (
     <div className="space-y-6">
-      {/* Header & Controls */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-surface-card p-6 rounded-2xl border border-border-subtle shadow-card">
-        <div>
-          <div className="flex items-center gap-2">
-            <span className="p-1.5 rounded-lg bg-brand-mint text-brand-primary">
-              <Sparkles className="w-4 h-4" />
-            </span>
-            <h1 className="text-xl font-bold text-ink-primary">Peta Alur Ekosistem SinergiCSR</h1>
-          </div>
-          <p className="text-xs text-ink-muted mt-1 max-w-2xl leading-relaxed">
-            Visualisasi interaktif aliran tata kelola: Funder Korporat ⇄ SinergiCSR ⇄ Mitra Pelaksana ⇄ Penerima Manfaat, dilengkapi pelaporan dampak ke Funder dan draf laporan formal ke Pemerintah (KLHK/PROPER).
-          </p>
+      {/* Top View Mode Switcher */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-3 sm:p-4 rounded-3xl border border-slate-100 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.03)]">
+        <div className="flex items-center gap-1.5 p-1 bg-slate-100/80 rounded-2xl w-full sm:w-auto">
+          <button
+            onClick={() => setActiveTab('gis_map')}
+            className={`flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+              activeTab === 'gis_map'
+                ? 'bg-white text-[#176B4D] shadow-xs'
+                : 'text-slate-600 hover:text-slate-900'
+            }`}
+          >
+            <Compass className="w-4 h-4 text-[#176B4D]" />
+            <span>Peta Spasial Geografis (GIS Map)</span>
+          </button>
+          <button
+            onClick={() => setActiveTab('workflow')}
+            className={`flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+              activeTab === 'workflow'
+                ? 'bg-white text-[#176B4D] shadow-xs'
+                : 'text-slate-600 hover:text-slate-900'
+            }`}
+          >
+            <Sparkles className="w-4 h-4 text-[#176B4D]" />
+            <span>Diagram Alur Tata Kelola Ekosistem</span>
+          </button>
         </div>
 
-        {/* Filter Flow Mode */}
-        <div className="flex items-center gap-1.5 p-1 bg-surface-secondary rounded-xl border border-border-subtle text-xs font-semibold self-start sm:self-auto">
-          <button
-            onClick={() => setActiveFlow('all')}
-            className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
-              activeFlow === 'all' ? 'bg-surface-card text-brand-primary shadow-xs font-bold' : 'text-ink-muted hover:text-ink-primary'
-            }`}
-          >
-            Semua Alur
-          </button>
-          <button
-            onClick={() => setActiveFlow('funding')}
-            className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
-              activeFlow === 'funding' ? 'bg-brand-primary text-white shadow-xs font-bold' : 'text-ink-muted hover:text-ink-primary'
-            }`}
-          >
-            Aliran Dana
-          </button>
-          <button
-            onClick={() => setActiveFlow('reporting')}
-            className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
-              activeFlow === 'reporting' ? 'bg-brand-emerald text-white shadow-xs font-bold' : 'text-ink-muted hover:text-ink-primary'
-            }`}
-          >
-            Aliran Laporan
-          </button>
-        </div>
+        <span className="text-xs text-slate-400 font-medium px-2">
+          {activeTab === 'gis_map' ? 'Peta Interaktif Sebaran Titik Proyek CSR' : 'Visualisasi Siklus Hidup Tata Kelola CSR'}
+        </span>
       </div>
+
+      {activeTab === 'gis_map' ? (
+        <GISProjectMap
+          onSelectBooking={(p) => {
+            setSelectedBookingProgram(p);
+            setIsBookingModalOpen(true);
+          }}
+        />
+      ) : (
+        <div className="space-y-6">
+          {/* Header & Controls */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-surface-card p-6 rounded-2xl border border-border-subtle shadow-card">
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="p-1.5 rounded-lg bg-brand-mint text-brand-primary">
+                  <Sparkles className="w-4 h-4" />
+                </span>
+                <h1 className="text-xl font-bold text-ink-primary">Peta Alur Ekosistem SinergiCSR</h1>
+              </div>
+              <p className="text-xs text-ink-muted mt-1 max-w-2xl leading-relaxed">
+                Visualisasi interaktif aliran tata kelola: Funder Korporat ⇄ SinergiCSR ⇄ Mitra Pelaksana ⇄ Penerima Manfaat, dilengkapi pelaporan dampak ke Funder dan draf laporan formal ke Pemerintah (KLHK/PROPER).
+              </p>
+            </div>
+
+            {/* Filter Flow Mode */}
+            <div className="flex items-center gap-1.5 p-1 bg-surface-secondary rounded-xl border border-border-subtle text-xs font-semibold self-start sm:self-auto">
+              <button
+                onClick={() => setActiveFlow('all')}
+                className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
+                  activeFlow === 'all' ? 'bg-surface-card text-brand-primary shadow-xs font-bold' : 'text-ink-muted hover:text-ink-primary'
+                }`}
+              >
+                Semua Alur
+              </button>
+              <button
+                onClick={() => setActiveFlow('funding')}
+                className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
+                  activeFlow === 'funding' ? 'bg-brand-primary text-white shadow-xs font-bold' : 'text-ink-muted hover:text-ink-primary'
+                }`}
+              >
+                Aliran Dana
+              </button>
+              <button
+                onClick={() => setActiveFlow('reporting')}
+                className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
+                  activeFlow === 'reporting' ? 'bg-brand-emerald text-white shadow-xs font-bold' : 'text-ink-muted hover:text-ink-primary'
+                }`}
+              >
+                Alur Bukti &amp; Pelaporan
+              </button>
+            </div>
+          </div>
 
       {/* Interactive Diagram Canvas */}
       <div className="bg-surface-card p-6 md:p-10 rounded-2xl border border-border-subtle shadow-card relative overflow-hidden">
@@ -316,6 +367,15 @@ export const EcosystemMap: React.FC = () => {
           </div>
         )}
       </div>
+    </div>
+  )}
+
+      {/* Project Booking / Letter of Intent Modal */}
+      <ProjectBookingModal
+        isOpen={isBookingModalOpen}
+        onClose={() => setIsBookingModalOpen(false)}
+        program={selectedBookingProgram}
+      />
     </div>
   );
 };

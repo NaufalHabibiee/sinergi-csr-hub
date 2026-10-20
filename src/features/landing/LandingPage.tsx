@@ -30,12 +30,15 @@ import {
   Check,
   Clock,
   BookOpen,
-  Handshake
+  Handshake,
+  Compass,
+  Send
 } from 'lucide-react';
 import { formatCompactIDR, formatNumber } from '../../lib/formatters';
 import { useCSRStore } from '../../context/CSRStoreContext';
 import { CSRMenuBookModal } from '../programs/CSRMenuBookModal';
 import { ProjectBookingModal } from '../programs/ProjectBookingModal';
+import { CommunityAspirationModal } from '../programs/CommunityAspirationModal';
 import { Program } from '../../types/csr';
 
 const heroMissions = [
@@ -73,6 +76,7 @@ export const LandingPage: React.FC = () => {
   const [isMenuBookOpen, setIsMenuBookOpen] = useState(false);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [selectedBookingProgram, setSelectedBookingProgram] = useState<Program | null>(null);
+  const [isAspirationModalOpen, setIsAspirationModalOpen] = useState(false);
 
   const handlePrevMission = () => {
     setMissionIndex((prev) => (prev === 0 ? heroMissions.length - 1 : prev - 1));
@@ -875,6 +879,39 @@ export const LandingPage: React.FC = () => {
               </Link>
             ))}
           </div>
+
+          {/* Bottom Callout: Musrenbang CSR (Usulan Desa) & GIS Spatial Map */}
+          <div className="mt-12 bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-8 shadow-xs flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            <div className="space-y-1.5 max-w-2xl">
+              <span className="text-[10px] font-extrabold uppercase tracking-widest px-3 py-1 rounded-full bg-emerald-50 text-[#176B4D] border border-emerald-200 inline-block mb-1">
+                Kanal Partisipasi Daerah &amp; Komunitas (Musrenbang CSR)
+              </span>
+              <h3 className="text-xl sm:text-2xl font-bold text-[#0B2518] tracking-tight">
+                Pemerintah Desa atau Warga Memiliki Kebutuhan Pembangunan?
+              </h3>
+              <p className="text-xs sm:text-sm text-ink-secondary leading-relaxed">
+                Daftarkan usulan kebutuhan sarana air bersih, perbaikan Rutilahu, pencegahan stunting, atau modal UMKM desa Anda agar dapat dikurasi oleh Bappeda dan dihubungkan ke Funder Korporat.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3 shrink-0">
+              <button
+                type="button"
+                onClick={() => setIsAspirationModalOpen(true)}
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#176B4D] hover:bg-[#0E4D36] text-white text-xs font-bold transition-all shadow-md shadow-[#176B4D]/25 cursor-pointer"
+              >
+                <Send className="w-3.5 h-3.5" />
+                <span>Ajukan Kebutuhan Desa</span>
+              </button>
+              <Link
+                to="/dashboard/ecosystem"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-bold transition-all cursor-pointer"
+              >
+                <Compass className="w-3.5 h-3.5 text-[#176B4D]" />
+                <span>Buka Peta Spasial (GIS)</span>
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -1488,6 +1525,12 @@ export const LandingPage: React.FC = () => {
         isOpen={isBookingModalOpen}
         onClose={() => setIsBookingModalOpen(false)}
         program={selectedBookingProgram}
+      />
+
+      {/* Community Aspiration (Musrenbang CSR) Modal */}
+      <CommunityAspirationModal
+        isOpen={isAspirationModalOpen}
+        onClose={() => setIsAspirationModalOpen(false)}
       />
     </div>
   );
