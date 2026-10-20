@@ -10,12 +10,17 @@ import {
   ChevronLeft,
   ChevronRight,
   ChevronDown,
-  MapPin
+  MapPin,
+  BookOpen,
+  Handshake
 } from 'lucide-react';
 import { useCSRStore } from '../../context/CSRStoreContext';
 import { StatusBadge } from '../../components/ui/StatusBadge';
 import { EmptyState } from '../../components/ui/EmptyState';
 import { ProgramFormModal } from './ProgramFormModal';
+import { CSRMenuBookModal } from './CSRMenuBookModal';
+import { ProjectBookingModal } from './ProjectBookingModal';
+import { Program } from '../../types/csr';
 import { formatCompactIDR, formatDateID, formatNumber, CATEGORY_LABELS } from '../../lib/formatters';
 
 export const ProgramsPage: React.FC = () => {
@@ -25,6 +30,9 @@ export const ProgramsPage: React.FC = () => {
 
   const isCreateOpen = searchParams.get('action') === 'create';
   const [editingProgram, setEditingProgram] = useState<any>(null);
+  const [isMenuBookOpen, setIsMenuBookOpen] = useState(false);
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+  const [selectedBookingProgram, setSelectedBookingProgram] = useState<Program | null>(null);
 
   const [search, setSearch] = useState('');
   const [categoryFilter, setCategoryFilter] = useState<string>('all');
@@ -70,17 +78,32 @@ export const ProgramsPage: React.FC = () => {
       <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.04)] border border-slate-100/80 space-y-6">
         {/* 1. Top Header & Primary Button */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <h1 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight">
-            Manajemen Program CSR
-          </h1>
+          <div>
+            <h1 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight">
+              Manajemen Program CSR
+            </h1>
+            <p className="text-xs text-slate-500 mt-0.5">
+              Direktori program kemitraan terverifikasi siap komitmen &amp; realisasi
+            </p>
+          </div>
 
-          <button
-            onClick={openCreateModal}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#176B4D] hover:bg-[#0E4D36] text-white text-xs font-semibold transition-all shadow-sm shadow-[#176B4D]/20 cursor-pointer self-start sm:self-auto"
-          >
-            <span>Program Baru</span>
-            <Plus className="w-4 h-4" />
-          </button>
+          <div className="flex items-center gap-2.5 self-start sm:self-auto">
+            <button
+              onClick={() => setIsMenuBookOpen(true)}
+              className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold transition-all shadow-2xs cursor-pointer"
+            >
+              <BookOpen className="w-4 h-4 text-[#176B4D]" />
+              <span>Buku Menu Kemitraan</span>
+            </button>
+
+            <button
+              onClick={openCreateModal}
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#176B4D] hover:bg-[#0E4D36] text-white text-xs font-semibold transition-all shadow-sm shadow-[#176B4D]/20 cursor-pointer"
+            >
+              <span>Program Baru</span>
+              <Plus className="w-4 h-4" />
+            </button>
+          </div>
         </div>
 
         {/* 2. Row of 4 Tinted Pastel KPI Cards with Subtle Sparkline */}
@@ -327,16 +350,30 @@ export const ProgramsPage: React.FC = () => {
                         <StatusBadge status={p.status} size="sm" />
                       </td>
                       <td className="py-3.5 px-2 text-right">
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setEditingProgram(p);
-                          }}
-                          className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
-                          title="Edit Program"
-                        >
-                          <MoreHorizontal className="w-4 h-4" />
-                        </button>
+                        <div className="flex items-center justify-end gap-1.5">
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setSelectedBookingProgram(p);
+                              setIsBookingModalOpen(true);
+                            }}
+                            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-[#176B4D] text-[#176B4D] hover:text-white border border-emerald-200/90 text-[11px] font-bold transition-colors cursor-pointer"
+                            title="Booking Proyek / Nyatakan Minat"
+                          >
+                            <Handshake className="w-3 h-3" />
+                            <span>Booking</span>
+                          </button>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setEditingProgram(p);
+                            }}
+                            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
+                            title="Edit Program"
+                          >
+                            <MoreHorizontal className="w-4 h-4" />
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   );
@@ -378,6 +415,21 @@ export const ProgramsPage: React.FC = () => {
                         style={{ width: `${p.progressPercent}%` }}
                       />
                     </div>
+                    <div className="pt-1 flex items-center justify-between gap-2">
+                      <span className="text-[11px] text-slate-400">{p.progressPercent}% terealisasi</span>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setSelectedBookingProgram(p);
+                          setIsBookingModalOpen(true);
+                        }}
+                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-[#176B4D] text-[#176B4D] hover:text-white border border-emerald-200/90 text-[11px] font-bold transition-colors cursor-pointer"
+                      >
+                        <Handshake className="w-3 h-3" />
+                        <span>Booking</span>
+                      </button>
+                    </div>
                   </div>
                 </div>
               );
@@ -416,6 +468,23 @@ export const ProgramsPage: React.FC = () => {
           initialData={editingProgram}
         />
       )}
+
+      {/* CSR Menu Book Modal */}
+      <CSRMenuBookModal
+        isOpen={isMenuBookOpen}
+        onClose={() => setIsMenuBookOpen(false)}
+        onSelectProgramForBooking={(prog) => {
+          setSelectedBookingProgram(prog);
+          setIsBookingModalOpen(true);
+        }}
+      />
+
+      {/* Project Booking / Letter of Intent Modal */}
+      <ProjectBookingModal
+        isOpen={isBookingModalOpen}
+        onClose={() => setIsBookingModalOpen(false)}
+        program={selectedBookingProgram}
+      />
     </div>
   );
 };

@@ -16,11 +16,13 @@ import {
   ExternalLink,
   ShieldCheck,
   Edit,
-  Sparkles
+  Sparkles,
+  Handshake
 } from 'lucide-react';
 import { useCSRStore } from '../../context/CSRStoreContext';
 import { StatusBadge } from '../../components/ui/StatusBadge';
 import { Modal } from '../../components/ui/Modal';
+import { ProjectBookingModal } from './ProjectBookingModal';
 import {
   formatCompactIDR,
   formatIDR,
@@ -56,6 +58,7 @@ export const ProgramDetailPage: React.FC = () => {
   const [isEvidenceModalOpen, setIsEvidenceModalOpen] = useState(false);
   const [evidenceTitle, setEvidenceTitle] = useState('');
   const [evidenceCategory, setEvidenceCategory] = useState<any>('foto_kegiatan');
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
 
   if (!program) {
     return (
@@ -131,7 +134,14 @@ export const ProgramDetailPage: React.FC = () => {
             )}
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              onClick={() => setIsBookingModalOpen(true)}
+              className="px-3.5 py-1.5 rounded-xl bg-[#0B2518] hover:bg-[#176B4D] text-white text-xs font-bold shadow-xs transition-colors flex items-center gap-1.5 cursor-pointer"
+            >
+              <Handshake className="w-3.5 h-3.5 text-[#D4F63D]" />
+              <span>Booking / Nyatakan Minat (LoI)</span>
+            </button>
             <button
               onClick={() => {
                 setProgressVal(program.progressPercent);
@@ -143,7 +153,7 @@ export const ProgramDetailPage: React.FC = () => {
               className="px-3.5 py-1.5 rounded-xl bg-brand-primary hover:bg-brand-dark text-white text-xs font-bold shadow-xs transition-colors flex items-center gap-1.5 cursor-pointer"
             >
               <TrendingUp className="w-3.5 h-3.5" />
-              Perbarui Progres & Indikator
+              Perbarui Progres &amp; Indikator
             </button>
             <button
               onClick={() => setIsEvidenceModalOpen(true)}
@@ -666,6 +676,13 @@ export const ProgramDetailPage: React.FC = () => {
           </div>
         </form>
       </Modal>
+
+      {/* Project Booking / Letter of Intent Modal */}
+      <ProjectBookingModal
+        isOpen={isBookingModalOpen}
+        onClose={() => setIsBookingModalOpen(false)}
+        program={program}
+      />
     </div>
   );
 };

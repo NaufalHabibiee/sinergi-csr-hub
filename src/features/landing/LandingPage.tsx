@@ -28,10 +28,15 @@ import {
   Coins,
   MapPin,
   Check,
-  Clock
+  Clock,
+  BookOpen,
+  Handshake
 } from 'lucide-react';
 import { formatCompactIDR, formatNumber } from '../../lib/formatters';
 import { useCSRStore } from '../../context/CSRStoreContext';
+import { CSRMenuBookModal } from '../programs/CSRMenuBookModal';
+import { ProjectBookingModal } from '../programs/ProjectBookingModal';
+import { Program } from '../../types/csr';
 
 const heroMissions = [
   {
@@ -65,6 +70,9 @@ export const LandingPage: React.FC = () => {
   const [activeEcoStep, setActiveEcoStep] = useState<number>(0);
   const [isScrolled, setIsScrolled] = useState(false);
   const [missionIndex, setMissionIndex] = useState(0);
+  const [isMenuBookOpen, setIsMenuBookOpen] = useState(false);
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+  const [selectedBookingProgram, setSelectedBookingProgram] = useState<Program | null>(null);
 
   const handlePrevMission = () => {
     setMissionIndex((prev) => (prev === 0 ? heroMissions.length - 1 : prev - 1));
@@ -700,17 +708,27 @@ export const LandingPage: React.FC = () => {
                 8 Program Unggulan Pemberdayaan Berkelanjutan
               </h2>
             </div>
-            <div className="space-y-2 md:text-right">
+            <div className="space-y-3 md:text-right">
               <p className="text-xs sm:text-sm text-ink-secondary max-w-md leading-relaxed">
                 Inisiatif strategis yang terstruktur sesuai kriteria PROPER KLHK dan 17 Tujuan Pembangunan Berkelanjutan (SDGs).
               </p>
-              <Link
-                to="/dashboard/programs"
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#176B4D] hover:underline"
-              >
-                <span>Buka Seluruh Direktori Program</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
+              <div className="flex flex-wrap items-center md:justify-end gap-3 pt-1">
+                <button
+                  type="button"
+                  onClick={() => setIsMenuBookOpen(true)}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 text-[#176B4D] hover:bg-emerald-100 border border-emerald-200/90 text-xs font-bold transition-all shadow-2xs cursor-pointer"
+                >
+                  <BookOpen className="w-3.5 h-3.5 text-[#176B4D]" />
+                  <span>Buka Buku Menu Kemitraan (Menu Book)</span>
+                </button>
+                <Link
+                  to="/dashboard/programs"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#176B4D] hover:underline"
+                >
+                  <span>Direktori Program</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
             </div>
           </div>
 
@@ -833,10 +851,23 @@ export const LandingPage: React.FC = () => {
                       {prog.description}
                     </p>
                   </div>
-                  <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-[#176B4D] font-bold">
-                    <span className="text-[11px] text-slate-500 font-medium truncate max-w-[150px]">{prog.metric}</span>
-                    <span className="flex items-center gap-1">
-                      <span>Detail Program</span>
+                  <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold gap-2">
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const match = programs.find((p) => p.id === prog.id) || null;
+                        setSelectedBookingProgram(match);
+                        setIsBookingModalOpen(true);
+                      }}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 text-[#176B4D] hover:bg-[#176B4D] hover:text-white border border-emerald-200/90 text-xs font-bold transition-all shadow-2xs cursor-pointer"
+                    >
+                      <Handshake className="w-3.5 h-3.5" />
+                      <span>Booking / Minat</span>
+                    </button>
+                    <span className="flex items-center gap-1 text-[#176B4D]">
+                      <span>Detail</span>
                       <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                     </span>
                   </div>
@@ -1441,6 +1472,23 @@ export const LandingPage: React.FC = () => {
           </div>
         </div>
       </footer>
+
+      {/* CSR Menu Book (Buku Kemitraan) Modal */}
+      <CSRMenuBookModal
+        isOpen={isMenuBookOpen}
+        onClose={() => setIsMenuBookOpen(false)}
+        onSelectProgramForBooking={(prog) => {
+          setSelectedBookingProgram(prog);
+          setIsBookingModalOpen(true);
+        }}
+      />
+
+      {/* Project Booking / Letter of Intent Modal */}
+      <ProjectBookingModal
+        isOpen={isBookingModalOpen}
+        onClose={() => setIsBookingModalOpen(false)}
+        program={selectedBookingProgram}
+      />
     </div>
   );
 };
