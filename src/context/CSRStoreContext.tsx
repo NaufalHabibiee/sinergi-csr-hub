@@ -31,7 +31,7 @@ import {
   SEED_ASPIRATIONS
 } from '../data/seedData';
 
-const LOCAL_STORAGE_KEY = 'universa_csr_hub_state_v1';
+const LOCAL_STORAGE_KEY = 'universa_csr_hub_state_v4';
 
 interface CSRStoreContextType {
   user: UserProfile;
@@ -93,8 +93,19 @@ export const CSRStoreProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   const [programs, setPrograms] = useState<Program[]>(() => {
     try {
+      // Clear legacy cache keys
+      localStorage.removeItem('universa_csr_hub_state_v1_programs');
+      localStorage.removeItem('universa_csr_hub_state_v2_programs');
+      localStorage.removeItem('universa_csr_hub_state_v3_programs');
+
       const saved = localStorage.getItem(`${LOCAL_STORAGE_KEY}_programs`);
-      return saved ? JSON.parse(saved) : SEED_PROGRAMS;
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length >= SEED_PROGRAMS.length) {
+          return parsed;
+        }
+      }
+      return SEED_PROGRAMS;
     } catch {
       return SEED_PROGRAMS;
     }

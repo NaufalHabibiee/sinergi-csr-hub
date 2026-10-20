@@ -23,6 +23,7 @@ import {
   X
 } from 'lucide-react';
 import { useCSRStore } from '../../context/CSRStoreContext';
+import { SEED_PROGRAMS } from '../../data/seedData';
 import { Program, ProgramCategory } from '../../types/csr';
 import {
   formatCompactIDR,
@@ -35,7 +36,10 @@ import { CSRMenuBookModal } from './CSRMenuBookModal';
 
 export const PublicProgramsPage: React.FC = () => {
   const navigate = useNavigate();
-  const { programs, funders, partners } = useCSRStore();
+  const { programs: rawPrograms, funders, partners } = useCSRStore();
+  const programs = useMemo(() => {
+    return rawPrograms && rawPrograms.length >= SEED_PROGRAMS.length ? rawPrograms : SEED_PROGRAMS;
+  }, [rawPrograms]);
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -200,19 +204,19 @@ export const PublicProgramsPage: React.FC = () => {
 
       {/* 2. Hero Header Banner */}
       <section className="relative text-white py-16 sm:py-20 overflow-hidden bg-[#0A120D]">
-        {/* Thematic Background Photography & Cinematic Overlays */}
+        {/* Thematic Background Photography & Cinematic Overlays (Brighter & Distinct Photo) */}
         <div className="absolute inset-0 z-0">
           <img
-            src="/images/hero_sinergi_farming_golden.jpg"
-            alt="Lanskap Pertanian & Konservasi SinergiCSR"
-            className="w-full h-full object-cover object-[center_35%]"
+            src="/images/hero_programs_bright_landscape.jpg"
+            alt="Lanskap Terasering Sawah dan Perbukitan Asri Indonesia"
+            className="w-full h-full object-cover object-[center_42%]"
           />
-          {/* Dark gradient overlay for pristine contrast and theme harmony */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/85 to-[#05170f]/90" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0A120D] via-transparent to-black/70" />
-          {/* Subtle ambient radial glows */}
-          <div className="absolute top-0 right-1/4 w-96 h-96 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-10 w-96 h-96 bg-[#D4F63D]/10 rounded-full blur-3xl pointer-events-none" />
+          {/* Much brighter and lighter contrast overlay so the sunlit green landscape and mountains shine through */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/40 to-black/20" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />
+          {/* Soft ambient lighting */}
+          <div className="absolute top-0 right-1/4 w-96 h-96 bg-emerald-400/20 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-10 w-96 h-96 bg-[#D4F63D]/15 rounded-full blur-3xl pointer-events-none" />
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-8">

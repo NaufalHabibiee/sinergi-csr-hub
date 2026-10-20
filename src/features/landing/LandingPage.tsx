@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   ArrowRight,
@@ -39,6 +39,7 @@ import {
 } from 'lucide-react';
 import { formatCompactIDR, formatNumber } from '../../lib/formatters';
 import { useCSRStore } from '../../context/CSRStoreContext';
+import { SEED_PROGRAMS } from '../../data/seedData';
 import { CSRMenuBookModal } from '../programs/CSRMenuBookModal';
 import { ProjectBookingModal } from '../programs/ProjectBookingModal';
 import { CommunityAspirationModal } from '../programs/CommunityAspirationModal';
@@ -73,7 +74,10 @@ const heroMissions = [
 
 export const LandingPage: React.FC = () => {
   const navigate = useNavigate();
-  const { funders, partners, programs, fundingRecords, beneficiaries } = useCSRStore();
+  const { funders, partners, programs: storePrograms, fundingRecords, beneficiaries } = useCSRStore();
+  const programs = useMemo(() => {
+    return storePrograms.length >= SEED_PROGRAMS.length ? storePrograms : SEED_PROGRAMS;
+  }, [storePrograms]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<'visi' | 'misi' | 'metode'>('visi');
   const [activeEcoStep, setActiveEcoStep] = useState<number>(0);
@@ -159,8 +163,8 @@ export const LandingPage: React.FC = () => {
               >
                 Beranda
               </a>
-              <a
-                href="#pilar"
+              <Link
+                to="/programs"
                 className={`transition-colors duration-200 py-1 ${
                   isScrolled
                     ? 'text-ink-secondary hover:text-brand-primary'
@@ -168,7 +172,7 @@ export const LandingPage: React.FC = () => {
                 }`}
               >
                 Program
-              </a>
+              </Link>
               <a
                 href="#ekosistem"
                 className={`transition-colors duration-200 py-1 ${
@@ -252,13 +256,13 @@ export const LandingPage: React.FC = () => {
               >
                 Beranda
               </a>
-              <a
-                href="#pilar"
+              <Link
+                to="/programs"
                 onClick={() => setMobileMenuOpen(false)}
                 className="block py-2 hover:text-[#D4F63D]"
               >
                 Program
-              </a>
+              </Link>
               <a
                 href="#ekosistem"
                 onClick={() => setMobileMenuOpen(false)}
@@ -415,8 +419,125 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 4. Section: Beranda / What We Offer & Core Solutions */}
-      <section id="tentang" className="scroll-mt-20 py-20 lg:py-28 bg-white relative overflow-hidden">
+      {/* 4. Section: About Us (Tentang Kami) - Clean, Elegant & Thematic */}
+      <section id="tentang" className="scroll-mt-20 py-20 lg:py-28 bg-[#FBFDFB] relative overflow-hidden border-b border-slate-200/70">
+        {/* Subtle decorative background glow */}
+        <div className="absolute top-1/2 left-0 -translate-y-1/2 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-14">
+          {/* Eyebrow & Headline Header */}
+          <div className="max-w-3xl space-y-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E8F6F0] text-[#176B4D] text-xs font-bold uppercase tracking-wider">
+              <Compass className="w-3.5 h-3.5 text-[#176B4D]" />
+              <span>About Us • Tentang SinergiCSR</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0B2518] tracking-tight leading-tight">
+              Membangun Ekosistem Kemitraan Berkelanjutan yang <span className="text-[#176B4D]">Transparan &amp; Berdampak Nyata</span>
+            </h2>
+            <p className="text-xs sm:text-sm text-ink-secondary leading-relaxed">
+              SinergiCSR adalah platform orkestrasi dampak sosial dan tata kelola ESG pertama di Indonesia yang menghubungkan komitmen pendanaan korporasi dan BUMN dengan inisiatif pemberdayaan masyarakat yang terkurasi, berpayung hukum sah, serta terikat standar akuntabilitas BAST.
+            </p>
+          </div>
+
+          {/* Two-Column Showcase Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            {/* Left Column: Mission Narrative & 3 Core Value Pillars */}
+            <div className="lg:col-span-7 space-y-6">
+              <div className="prose prose-slate max-w-none text-xs sm:text-sm text-slate-600 leading-relaxed space-y-3">
+                <p>
+                  Didirikan dengan semangat gotong royong dan kepatuhan regulasi, kami mengatasi tantangan klasik penyaluran CSR—mulai dari klaim fiktif, program tumpang-tindih (overlapping), hingga minimnya data pengukuran dampak jangka panjang.
+                </p>
+                <p>
+                  Melalui sistem verifikasi multipihak (Pentahelix), setiap program yang terdaftar di SinergiCSR melalui uji kelayakan ketat, sinkronisasi dengan Buku Menu Prioritas Daerah, dan integrasi kriteria PROPER Kementerian LHK.
+                </p>
+              </div>
+
+              {/* 3 Core Value Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+                <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs hover:shadow-md transition-shadow space-y-2.5">
+                  <div className="w-10 h-10 rounded-xl bg-[#E8F6F0] text-[#176B4D] flex items-center justify-center font-bold">
+                    <ShieldCheck className="w-5 h-5 text-[#176B4D]" />
+                  </div>
+                  <h3 className="font-bold text-xs sm:text-sm text-[#0B2518]">
+                    Transparansi BAST
+                  </h3>
+                  <p className="text-[11px] text-slate-500 leading-relaxed">
+                    Pencairan bertahap terkunci Berita Acara resmi demi kepastian audit dan syarat insentif pajak (tax deduction).
+                  </p>
+                </div>
+
+                <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs hover:shadow-md transition-shadow space-y-2.5">
+                  <div className="w-10 h-10 rounded-xl bg-[#E8F6F0] text-[#176B4D] flex items-center justify-center font-bold">
+                    <Users className="w-5 h-5 text-[#176B4D]" />
+                  </div>
+                  <h3 className="font-bold text-xs sm:text-sm text-[#0B2518]">
+                    Validasi NIK/NIB
+                  </h3>
+                  <p className="text-[11px] text-slate-500 leading-relaxed">
+                    Identitas penerima manfaat terverifikasi tunggal, menjamin nol klaim ganda dan bebas data penerima fiktif.
+                  </p>
+                </div>
+
+                <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs hover:shadow-md transition-shadow space-y-2.5">
+                  <div className="w-10 h-10 rounded-xl bg-[#E8F6F0] text-[#176B4D] flex items-center justify-center font-bold">
+                    <Award className="w-5 h-5 text-[#176B4D]" />
+                  </div>
+                  <h3 className="font-bold text-xs sm:text-sm text-[#0B2518]">
+                    Audit PROPER &amp; SDGs
+                  </h3>
+                  <p className="text-[11px] text-slate-500 leading-relaxed">
+                    Metrik SROI dan sinkronisasi 17 target SDGs Bappenas siap diekspor untuk penilaian peringkat kepatuhan KLHK.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Visual Brand Card with Live Stats & Imagery */}
+            <div className="lg:col-span-5 relative">
+              <div className="relative rounded-3xl overflow-hidden border border-slate-200/90 shadow-xl bg-slate-900 group">
+                <img
+                  src="/images/volunteers_planting_field.jpg"
+                  alt="Aktivitas Kolaborasi Komunitas SinergiCSR"
+                  className="w-full h-80 sm:h-96 object-cover object-center group-hover:scale-103 transition-transform duration-500 opacity-90"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
+
+                {/* Floating Frosted Pill at Top */}
+                <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-[11px] font-semibold border border-white/20">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#D4F63D]" />
+                    <span>Orkestrator CSR Terstandarisasi</span>
+                  </div>
+                  <span className="text-[10px] font-bold text-emerald-300 font-mono bg-black/40 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/10">
+                    EST. 2026
+                  </span>
+                </div>
+
+                {/* Floating Metric Card at Bottom */}
+                <div className="absolute bottom-4 inset-x-4 p-4 rounded-2xl bg-black/60 backdrop-blur-md border border-white/15 text-white space-y-2.5">
+                  <div className="grid grid-cols-3 gap-2 text-center divide-x divide-white/15">
+                    <div>
+                      <span className="text-[10px] text-white/60 block">Inisiatif</span>
+                      <span className="text-base sm:text-lg font-black text-[#D4F63D]">{programs.length} Program</span>
+                    </div>
+                    <div>
+                      <span className="text-[10px] text-white/60 block">Kepatuhan</span>
+                      <span className="text-base sm:text-lg font-black text-white">100% BAST</span>
+                    </div>
+                    <div>
+                      <span className="text-[10px] text-white/60 block">Mitra Funder</span>
+                      <span className="text-base sm:text-lg font-black text-emerald-300">{funders.length} Korporasi</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Section: What We Offer & Core Solutions */}
+      <section id="solusi" className="scroll-mt-20 py-20 lg:py-28 bg-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Eyebrow & Title */}
           <div className="text-center max-w-2xl mx-auto space-y-3">
