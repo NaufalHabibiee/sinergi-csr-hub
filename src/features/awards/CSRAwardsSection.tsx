@@ -34,7 +34,7 @@ export interface AwardeeCompany {
   dateAwarded: string;
 }
 
-export const SEED_AWARDEES_2025: AwardeeCompany[] = [
+const SEED_AWARDEES_2025: AwardeeCompany[] = [
   {
     id: 'awd_01',
     rank: 1,
