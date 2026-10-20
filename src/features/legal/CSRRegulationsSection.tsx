@@ -38,7 +38,7 @@ interface RegulationDoc {
   fileSize: string;
 }
 
-export const REGULATIONS_DATA: RegulationDoc[] = [
+const REGULATIONS_DATA: RegulationDoc[] = [
   {
     id: 'reg_01',
     category: 'uu',
