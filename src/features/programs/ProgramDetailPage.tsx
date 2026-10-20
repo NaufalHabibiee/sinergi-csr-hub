@@ -24,6 +24,7 @@ import { useCSRStore } from '../../context/CSRStoreContext';
 import { StatusBadge } from '../../components/ui/StatusBadge';
 import { Modal } from '../../components/ui/Modal';
 import { ProjectBookingModal } from './ProjectBookingModal';
+import { ProgramProposalModal } from './ProgramProposalModal';
 import { BASTGeneratorModal } from '../reports/BASTGeneratorModal';
 import {
   formatCompactIDR,
@@ -62,6 +63,7 @@ export const ProgramDetailPage: React.FC = () => {
   const [evidenceCategory, setEvidenceCategory] = useState<any>('foto_kegiatan');
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [isBastModalOpen, setIsBastModalOpen] = useState(false);
+  const [isProposalModalOpen, setIsProposalModalOpen] = useState(false);
 
   if (!program) {
     return (
@@ -138,6 +140,14 @@ export const ProgramDetailPage: React.FC = () => {
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setIsProposalModalOpen(true)}
+              className="px-3.5 py-1.5 rounded-xl bg-white hover:bg-slate-50 text-[#176B4D] border border-slate-200 text-xs font-bold transition-colors flex items-center gap-1.5 cursor-pointer shadow-2xs"
+            >
+              <FileText className="w-3.5 h-3.5 text-[#176B4D]" />
+              <span>Dokumen Proposal</span>
+            </button>
             <button
               onClick={() => setIsBookingModalOpen(true)}
               className="px-3.5 py-1.5 rounded-xl bg-[#0B2518] hover:bg-[#176B4D] text-white text-xs font-bold shadow-xs transition-colors flex items-center gap-1.5 cursor-pointer"
@@ -699,6 +709,14 @@ export const ProgramDetailPage: React.FC = () => {
         isOpen={isBastModalOpen}
         onClose={() => setIsBastModalOpen(false)}
         preselectedProgramId={program.id}
+      />
+
+      {/* Program Proposal Document Modal */}
+      <ProgramProposalModal
+        isOpen={isProposalModalOpen}
+        onClose={() => setIsProposalModalOpen(false)}
+        program={program}
+        onOpenBooking={() => setIsBookingModalOpen(true)}
       />
     </div>
   );

@@ -20,7 +20,8 @@ import {
   TrendingUp,
   Tag,
   Menu,
-  X
+  X,
+  FileText
 } from 'lucide-react';
 import { useCSRStore } from '../../context/CSRStoreContext';
 import { SEED_PROGRAMS } from '../../data/seedData';
@@ -33,6 +34,7 @@ import {
 } from '../../lib/formatters';
 import { ProjectBookingModal } from './ProjectBookingModal';
 import { CSRMenuBookModal } from './CSRMenuBookModal';
+import { ProgramProposalModal } from './ProgramProposalModal';
 import { HeaderUserProfile, HeaderUserProfileMobile } from '../../components/layout/HeaderUserProfile';
 
 export const PublicProgramsPage: React.FC = () => {
@@ -53,6 +55,8 @@ export const PublicProgramsPage: React.FC = () => {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [selectedBookingProgram, setSelectedBookingProgram] = useState<Program | null>(null);
   const [isMenuBookOpen, setIsMenuBookOpen] = useState(false);
+  const [isProposalModalOpen, setIsProposalModalOpen] = useState(false);
+  const [selectedProposalProgram, setSelectedProposalProgram] = useState<Program | null>(null);
 
   // Distinct province list extracted from active programs
   const provinceList = useMemo(() => {
@@ -490,20 +494,34 @@ export const PublicProgramsPage: React.FC = () => {
                         setSelectedBookingProgram(prog);
                         setIsBookingModalOpen(true);
                       }}
-                      className="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-[#176B4D] hover:bg-[#0E4D36] text-white text-xs font-bold transition-all cursor-pointer shadow-xs"
+                      className="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-[#176B4D] hover:bg-[#0E4D36] text-white text-xs font-bold transition-all cursor-pointer shadow-xs active:scale-98"
                     >
                       <Handshake className="w-3.5 h-3.5 text-[#D4F63D]" />
                       <span>Booking &amp; LOI Minat</span>
                     </button>
 
-                    <button
-                      type="button"
-                      onClick={() => navigate(`/dashboard/programs/${prog.id}`)}
-                      className="w-full inline-flex items-center justify-center gap-1 px-3 py-2 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold transition-all cursor-pointer"
-                    >
-                      <span>Buka Detail Lengkap</span>
-                      <ArrowRight className="w-3 h-3" />
-                    </button>
+                    <div className="grid grid-cols-2 gap-2">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSelectedProposalProgram(prog);
+                          setIsProposalModalOpen(true);
+                        }}
+                        className="inline-flex items-center justify-center gap-1.5 px-2.5 py-2 rounded-xl border border-slate-200 hover:border-[#176B4D]/50 hover:bg-[#E8F6F0]/50 text-[#176B4D] text-xs font-bold transition-all cursor-pointer shadow-2xs"
+                      >
+                        <FileText className="w-3.5 h-3.5" />
+                        <span>Proposal</span>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => navigate(`/dashboard/programs/${prog.id}`)}
+                        className="inline-flex items-center justify-center gap-1 px-2.5 py-2 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold transition-all cursor-pointer"
+                      >
+                        <span>Detail</span>
+                        <ArrowRight className="w-3 h-3" />
+                      </button>
+                    </div>
                   </div>
                 </div>
               );
@@ -590,6 +608,17 @@ export const PublicProgramsPage: React.FC = () => {
         isOpen={isMenuBookOpen}
         onClose={() => setIsMenuBookOpen(false)}
         onSelectProgramForBooking={(p) => {
+          setSelectedBookingProgram(p);
+          setIsBookingModalOpen(true);
+        }}
+      />
+
+      {/* Program Proposal Modal */}
+      <ProgramProposalModal
+        isOpen={isProposalModalOpen}
+        onClose={() => setIsProposalModalOpen(false)}
+        program={selectedProposalProgram}
+        onOpenBooking={(p) => {
           setSelectedBookingProgram(p);
           setIsBookingModalOpen(true);
         }}
