@@ -9,7 +9,8 @@ import {
   FolderGit2,
   FileCheck2,
   Building2,
-  SlidersHorizontal
+  SlidersHorizontal,
+  LogOut
 } from 'lucide-react';
 import { useCSRStore } from '../../context/CSRStoreContext';
 import { UserRole } from '../../types/csr';
@@ -23,6 +24,7 @@ interface TopbarProps {
 export const Topbar: React.FC<TopbarProps> = ({ onOpenMobileSidebar }) => {
   const {
     user,
+    logout,
     switchRole,
     globalSearchQuery,
     setGlobalSearchQuery,
@@ -392,6 +394,22 @@ export const Topbar: React.FC<TopbarProps> = ({ onOpenMobileSidebar }) => {
                       </button>
                     );
                   })}
+                </div>
+
+                {/* Logout Button */}
+                <div className="pt-2 mt-2 border-t border-slate-100">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      logout();
+                      setRoleDropdownOpen(false);
+                      navigate('/login');
+                    }}
+                    className="w-full text-left p-2.5 rounded-2xl transition-all flex items-center gap-2.5 text-rose-600 hover:bg-rose-50 text-xs font-bold cursor-pointer"
+                  >
+                    <LogOut className="w-4 h-4 text-rose-500" />
+                    <span>Keluar dari Akun (Logout)</span>
+                  </button>
                 </div>
               </div>
             )}

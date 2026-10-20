@@ -1,6 +1,6 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate, useParams } from 'react-router-dom';
-import { CSRStoreProvider } from './context/CSRStoreContext';
+import { BrowserRouter, Routes, Route, Navigate, useParams, useLocation } from 'react-router-dom';
+import { CSRStoreProvider, useCSRStore } from './context/CSRStoreContext';
 import { AppShell } from './components/layout/AppShell';
 import { LandingPage } from './features/landing/LandingPage';
 import { OverviewPage } from './features/dashboard/OverviewPage';
@@ -24,6 +24,17 @@ const ProgramIdRedirect: React.FC = () => {
   return <Navigate to={`/dashboard/programs/${id}`} replace />;
 };
 
+const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const { isAuthenticated } = useCSRStore();
+  const location = useLocation();
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+
+  return <>{children}</>;
+};
+
 export const App: React.FC = () => {
   return (
     <CSRStoreProvider>
@@ -34,9 +45,17 @@ export const App: React.FC = () => {
           <Route path="/about" element={<PublicAboutPage />} />
           <Route path="/login" element={<AuthPage defaultMode="login" />} />
           <Route path="/signup" element={<AuthPage defaultMode="signup" />} />
+          <Route path="/auth" element={<Navigate to="/login" replace />} />
 
-          {/* Platform Management Dashboard */}
-          <Route path="/dashboard" element={<AppShell />}>
+          {/* Platform Management Dashboard (Protected by AuthGuard) */}
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <AppShell />
+              </ProtectedRoute>
+            }
+          >
             <Route index element={<OverviewPage />} />
             <Route path="ecosystem" element={<EcosystemMap />} />
             <Route path="programs" element={<ProgramsPage />} />

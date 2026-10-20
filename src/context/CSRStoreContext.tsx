@@ -35,6 +35,9 @@ const LOCAL_STORAGE_KEY = 'universa_csr_hub_state_v4';
 
 interface CSRStoreContextType {
   user: UserProfile;
+  isAuthenticated: boolean;
+  login: (role: UserRole, email?: string, name?: string, org?: string) => void;
+  logout: () => void;
   switchRole: (role: UserRole) => void;
   periodFilter: string;
   setPeriodFilter: (p: string) => void;
@@ -87,7 +90,26 @@ interface CSRStoreContextType {
 const CSRStoreContext = createContext<CSRStoreContextType | null>(null);
 
 export const CSRStoreProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<UserProfile>(INITIAL_USER);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
+    try {
+      return localStorage.getItem(`${LOCAL_STORAGE_KEY}_isAuthenticated`) === 'true';
+    } catch {
+      return false;
+    }
+  });
+
+  const [user, setUser] = useState<UserProfile>(() => {
+    try {
+      const savedAuth = localStorage.getItem(`${LOCAL_STORAGE_KEY}_isAuthenticated`) === 'true';
+      const savedUser = localStorage.getItem(`${LOCAL_STORAGE_KEY}_user`);
+      if (savedAuth && savedUser) {
+        return JSON.parse(savedUser);
+      }
+      return INITIAL_USER;
+    } catch {
+      return INITIAL_USER;
+    }
+  });
   const [periodFilter, setPeriodFilter] = useState<string>('all');
   const [globalSearchQuery, setGlobalSearchQuery] = useState<string>('');
 
@@ -265,6 +287,54 @@ export const CSRStoreProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     setNotifications(prev => [newNotif, ...prev]);
   };
 
+  const login = (role: UserRole, email?: string, name?: string, org?: string) => {
+    let orgName = org;
+    let displayName = name;
+    let userEmail = email || `${role}@sinergicsr.id`;
+
+    if (!orgName) {
+      if (role === 'admin') orgName = 'SinergiCSR Platform Admin';
+      else if (role === 'funder') orgName = 'PT Telkom Indonesia (Persero) Tbk';
+      else if (role === 'partner') orgName = 'Yayasan Mangrove Lestari';
+      else if (role === 'viewer') orgName = 'Inspektorat / BPK RI';
+      else orgName = 'SinergiCSR Operator';
+    }
+
+    if (!displayName) {
+      if (role === 'admin') displayName = 'Habibie Platform Admin';
+      else if (role === 'funder') displayName = 'Rian Kurniawan (VP TJSL)';
+      else if (role === 'partner') displayName = 'Hendra Gunawan (Direktur)';
+      else if (role === 'viewer') displayName = 'Dimas Anggoro (Auditor ESG)';
+      else displayName = 'Habibie CSR Lead';
+    }
+
+    const newUser: UserProfile = {
+      id: `usr_${role}`,
+      displayName,
+      role,
+      organizationName: orgName,
+      emailDemo: userEmail,
+    };
+
+    setUser(newUser);
+    setIsAuthenticated(true);
+    try {
+      localStorage.setItem(`${LOCAL_STORAGE_KEY}_isAuthenticated`, 'true');
+      localStorage.setItem(`${LOCAL_STORAGE_KEY}_user`, JSON.stringify(newUser));
+    } catch {}
+
+    addNotification('Login Berhasil', `Selamat datang kembali, ${displayName} (${orgName})`, 'success');
+  };
+
+  const logout = () => {
+    setIsAuthenticated(false);
+    try {
+      localStorage.removeItem(`${LOCAL_STORAGE_KEY}_isAuthenticated`);
+      localStorage.removeItem(`${LOCAL_STORAGE_KEY}_user`);
+    } catch {}
+    addNotification('Logout Berhasil', 'Sesi login telah ditutup.', 'info');
+  };
+
   const switchRole = (role: UserRole) => {
     let orgName = 'SinergiCSR Operator';
     let name = 'Habibie CSR Lead';
@@ -281,13 +351,17 @@ export const CSRStoreProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       orgName = 'Kantor Akuntan Publik / Auditor';
       name = 'Dimas Anggoro (Auditor ESG)';
     }
-    setUser({
+    const updatedUser: UserProfile = {
       id: `usr_${role}`,
       displayName: name,
       role,
       organizationName: orgName,
       emailDemo: `${role}@universa.demo`,
-    });
+    };
+    setUser(updatedUser);
+    try {
+      localStorage.setItem(`${LOCAL_STORAGE_KEY}_user`, JSON.stringify(updatedUser));
+    } catch {}
     addNotification('Role Diganti (Demo)', `Anda sekarang beralih ke sudut pandang peran: ${role.toUpperCase()}`, 'info');
   };
 
@@ -647,6 +721,9 @@ export const CSRStoreProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     <CSRStoreContext.Provider
       value={{
         user,
+        isAuthenticated,
+        login,
+        logout,
         switchRole,
         periodFilter,
         setPeriodFilter,
