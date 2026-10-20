@@ -274,7 +274,7 @@ export const CSRRegulationsSection: React.FC = () => {
             </div>
             <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
               <span className="text-slate-400 block text-[10px]">Insentif Pajak:</span>
-              <span className="font-extrabold text-amber-700 text-sm">Max 5% Tax Cut</span>
+              <span className="font-extrabold text-[#176B4D] text-sm">Max 5% Tax Cut</span>
             </div>
           </div>
         </div>
@@ -337,18 +337,9 @@ export const CSRRegulationsSection: React.FC = () => {
                 <div className="space-y-3.5">
                   {/* Category Pill & Year */}
                   <div className="flex items-center justify-between">
-                    <span
-                      className={`text-[11px] font-bold px-3 py-1 rounded-full ${
-                        doc.category === 'uu'
-                          ? 'bg-rose-100/80 text-rose-800'
-                          : doc.category === 'pp'
-                          ? 'bg-blue-100/80 text-blue-800'
-                          : doc.category === 'perda'
-                          ? 'bg-amber-100/80 text-amber-800'
-                          : 'bg-purple-100/80 text-purple-800'
-                      }`}
-                    >
-                      {doc.categoryLabel}
+                    <span className="text-[11px] font-bold px-3 py-1 rounded-full bg-[#E8F6F0] text-[#176B4D] border border-emerald-200/60 inline-flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#176B4D]" />
+                      <span>{doc.categoryLabel}</span>
                     </span>
                     <span className="text-xs font-mono font-bold text-slate-400">
                       Tahun {doc.year}
