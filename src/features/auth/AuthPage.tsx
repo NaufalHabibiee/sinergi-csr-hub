@@ -437,4 +437,3 @@ export const AuthPage: React.FC<AuthPageProps> = ({ defaultMode = 'login' }) => 
     </div>
   );
 };
-export default AuthPage;
