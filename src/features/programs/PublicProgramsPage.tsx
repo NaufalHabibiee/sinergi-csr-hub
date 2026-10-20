@@ -99,29 +99,27 @@ export const PublicProgramsPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-[#FBFDFB] text-slate-800 font-sans selection:bg-[#D4F63D] selection:text-black">
       {/* 1. Universal Top Navigation Bar */}
-      <header className="sticky top-0 z-40 bg-[#092216] border-b border-white/10 text-white backdrop-blur-md">
+      <header className="sticky top-0 z-40 bg-black border-b border-white/10 text-white backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           {/* Logo & Brand */}
-          <div className="flex items-center gap-6">
-            <Link to="/" className="inline-flex items-center bg-white px-3.5 py-2 rounded-2xl shadow-sm hover:scale-102 transition-transform">
+          <div className="flex items-center gap-4">
+            <Link to="/" className="inline-flex items-center hover:opacity-90 transition-opacity">
               <img
-                src="/brand/sinergicsr-logo-horizontal.png"
+                src="/brand/sinergicsr-logo-white.png"
                 alt="SinergiCSR"
-                className="h-7 sm:h-8 object-contain"
+                className="h-8 sm:h-9 object-contain"
               />
             </Link>
 
-            <div className="hidden lg:flex items-center gap-2 text-xs text-emerald-200/60 border-l border-white/10 pl-5">
-              <span>Sub Halaman:</span>
-              <span className="font-bold text-white">Katalog Direktori Program Kemitraan</span>
+            <div className="hidden xl:flex items-center text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white/10 text-emerald-300 border border-white/10">
+              <span>Katalog Direktori Program</span>
             </div>
           </div>
 
           {/* Desktop Nav Links */}
-          <nav className="hidden md:flex items-center gap-6 text-xs font-semibold text-white/80">
-            <Link to="/" className="hover:text-[#D4F63D] transition-colors inline-flex items-center gap-1">
-              <ArrowLeft className="w-3.5 h-3.5" />
-              <span>Beranda Utama</span>
+          <nav className="hidden md:flex items-center gap-7 text-xs font-semibold text-white/80">
+            <Link to="/" className="hover:text-[#D4F63D] transition-colors">
+              Beranda
             </Link>
             <Link to="/#ekosistem" className="hover:text-[#D4F63D] transition-colors">
               Alur Ekosistem
@@ -130,13 +128,7 @@ export const PublicProgramsPage: React.FC = () => {
               Dampak
             </Link>
             <Link to="/#mitra" className="hover:text-[#D4F63D] transition-colors">
-              Mitra Funder
-            </Link>
-            <Link to="/#award" className="hover:text-[#D4F63D] transition-colors">
-              CSR Award
-            </Link>
-            <Link to="/#regulasi" className="hover:text-[#D4F63D] transition-colors">
-              Regulasi
+              Mitra
             </Link>
           </nav>
 
@@ -149,6 +141,13 @@ export const PublicProgramsPage: React.FC = () => {
               <BookOpen className="w-3.5 h-3.5 text-[#D4F63D]" />
               <span>Buku Menu CSR</span>
             </button>
+
+            <Link
+              to="/auth"
+              className="hidden sm:inline-flex text-xs font-medium text-white/80 hover:text-white px-2 py-1.5 transition-colors"
+            >
+              Masuk
+            </Link>
 
             <Link
               to="/dashboard"
@@ -169,21 +168,18 @@ export const PublicProgramsPage: React.FC = () => {
 
         {/* Mobile Dropdown Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-[#0B2518] border-b border-white/10 px-5 py-4 space-y-3 text-xs font-medium text-white/90">
+          <div className="md:hidden bg-black/95 border-b border-white/10 px-5 py-4 space-y-3 text-xs font-medium text-white/90 backdrop-blur-md">
             <Link to="/" onClick={() => setMobileMenuOpen(false)} className="block py-1.5 hover:text-[#D4F63D]">
               ← Kembali ke Beranda Utama
             </Link>
             <Link to="/#ekosistem" onClick={() => setMobileMenuOpen(false)} className="block py-1.5 hover:text-[#D4F63D]">
               Alur Ekosistem
             </Link>
+            <Link to="/#dampak" onClick={() => setMobileMenuOpen(false)} className="block py-1.5 hover:text-[#D4F63D]">
+              Dampak
+            </Link>
             <Link to="/#mitra" onClick={() => setMobileMenuOpen(false)} className="block py-1.5 hover:text-[#D4F63D]">
               Mitra Funder
-            </Link>
-            <Link to="/#award" onClick={() => setMobileMenuOpen(false)} className="block py-1.5 hover:text-[#D4F63D]">
-              CSR Award
-            </Link>
-            <Link to="/#regulasi" onClick={() => setMobileMenuOpen(false)} className="block py-1.5 hover:text-[#D4F63D]">
-              Dasar Hukum &amp; Regulasi
             </Link>
             <button
               onClick={() => {
@@ -195,59 +191,73 @@ export const PublicProgramsPage: React.FC = () => {
               <BookOpen className="w-3.5 h-3.5 text-[#D4F63D]" />
               <span>Buka Buku Menu CSR</span>
             </button>
+            <Link to="/auth" onClick={() => setMobileMenuOpen(false)} className="block py-1.5 hover:text-[#D4F63D]">
+              Halaman Masuk
+            </Link>
           </div>
         )}
       </header>
 
       {/* 2. Hero Header Banner */}
-      <section className="bg-gradient-to-b from-[#092216] via-[#0E3D2A] to-[#124B35] text-white py-14 sm:py-18 relative overflow-hidden">
-        {/* Subtle Ambient Radial Lighting */}
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-10 w-96 h-96 bg-[#D4F63D]/5 rounded-full blur-3xl pointer-events-none" />
+      <section className="relative text-white py-16 sm:py-20 overflow-hidden bg-[#0A120D]">
+        {/* Thematic Background Photography & Cinematic Overlays */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="/images/hero_sinergi_farming_golden.jpg"
+            alt="Lanskap Pertanian & Konservasi SinergiCSR"
+            className="w-full h-full object-cover object-[center_35%]"
+          />
+          {/* Dark gradient overlay for pristine contrast and theme harmony */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/85 to-[#05170f]/90" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A120D] via-transparent to-black/70" />
+          {/* Subtle ambient radial glows */}
+          <div className="absolute top-0 right-1/4 w-96 h-96 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-10 w-96 h-96 bg-[#D4F63D]/10 rounded-full blur-3xl pointer-events-none" />
+        </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-8">
           <div className="max-w-3xl space-y-3">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-[#D4F63D] text-xs font-bold border border-white/15">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-[#D4F63D] text-xs font-bold border border-white/15">
               <Sparkles className="w-3.5 h-3.5 text-[#D4F63D]" />
               <span>DIREKTORI KATALOG RESMI PROGRAM CSR 2026</span>
             </div>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight text-white drop-shadow-md">
               Portofolio Program Kemitraan <br className="hidden sm:inline" />
               <span className="text-[#D4F63D]">Pemberdayaan Berkelanjutan</span>
             </h1>
-            <p className="text-xs sm:text-sm text-emerald-100/80 leading-relaxed max-w-2xl">
+            <p className="text-xs sm:text-sm text-white/85 leading-relaxed max-w-2xl drop-shadow-xs">
               Eksplorasi seluruh inisiatif terkurasi siap didanai lintas pilar Lingkungan, Pendidikan, UMKM, Kesehatan, dan Infrastruktur Air. Siap audit PROPER KLHK dan terikat BAST transparan.
             </p>
           </div>
 
           {/* Quick Metrics Bar */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-white/10 text-xs">
-            <div className="bg-white/5 p-4 rounded-2xl border border-white/10 backdrop-blur-xs">
-              <span className="text-white/60 block text-[11px]">Total Program Aktif</span>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-white/15 text-xs">
+            <div className="bg-white/10 hover:bg-white/15 p-4 sm:p-5 rounded-2xl border border-white/15 backdrop-blur-md transition-all shadow-lg">
+              <span className="text-white/70 block text-[11px] font-medium">Total Program Aktif</span>
               <span className="text-xl sm:text-2xl font-black text-white mt-1 block">
                 {programs.length} Inisiatif
               </span>
               <span className="text-[10px] text-emerald-300 font-medium">Bebas klaim fiktif</span>
             </div>
 
-            <div className="bg-white/5 p-4 rounded-2xl border border-white/10 backdrop-blur-xs">
-              <span className="text-white/60 block text-[11px]">Total Pagu Anggaran</span>
+            <div className="bg-white/10 hover:bg-white/15 p-4 sm:p-5 rounded-2xl border border-white/15 backdrop-blur-md transition-all shadow-lg">
+              <span className="text-white/70 block text-[11px] font-medium">Total Pagu Anggaran</span>
               <span className="text-xl sm:text-2xl font-black text-[#D4F63D] mt-1 block">
                 {formatCompactIDR(totalBudget)}
               </span>
               <span className="text-[10px] text-emerald-300 font-medium">Alokasi terstandar RAB</span>
             </div>
 
-            <div className="bg-white/5 p-4 rounded-2xl border border-white/10 backdrop-blur-xs">
-              <span className="text-white/60 block text-[11px]">Target Penerima Manfaat</span>
+            <div className="bg-white/10 hover:bg-white/15 p-4 sm:p-5 rounded-2xl border border-white/15 backdrop-blur-md transition-all shadow-lg">
+              <span className="text-white/70 block text-[11px] font-medium">Target Penerima Manfaat</span>
               <span className="text-xl sm:text-2xl font-black text-white mt-1 block">
                 {formatNumber(totalBeneficiaries)} Jiwa
               </span>
               <span className="text-[10px] text-emerald-300 font-medium">NIK/NIB terverifikasi</span>
             </div>
 
-            <div className="bg-white/5 p-4 rounded-2xl border border-white/10 backdrop-blur-xs">
-              <span className="text-white/60 block text-[11px]">Provinsi Terjangkau</span>
+            <div className="bg-white/10 hover:bg-white/15 p-4 sm:p-5 rounded-2xl border border-white/15 backdrop-blur-md transition-all shadow-lg">
+              <span className="text-white/70 block text-[11px] font-medium">Provinsi Terjangkau</span>
               <span className="text-xl sm:text-2xl font-black text-white mt-1 block">
                 {provinceList.length} Wilayah
               </span>
@@ -525,24 +535,22 @@ export const PublicProgramsPage: React.FC = () => {
       </section>
 
       {/* 4. Footer */}
-      <footer className="bg-[#072418] text-white pt-14 pb-8 border-t border-emerald-950">
+      <footer className="bg-black text-white pt-14 pb-8 border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-white/10">
-            <Link to="/" className="inline-flex items-center bg-white px-3.5 py-2 rounded-2xl shadow-sm">
+            <Link to="/" className="inline-flex items-center hover:opacity-90 transition-opacity">
               <img
-                src="/brand/sinergicsr-logo-horizontal.png"
+                src="/brand/sinergicsr-logo-white.png"
                 alt="SinergiCSR"
-                className="h-7 object-contain"
+                className="h-8 object-contain"
               />
             </Link>
 
-            <div className="flex flex-wrap items-center gap-6 text-xs text-emerald-100/75">
+            <div className="flex flex-wrap items-center gap-6 text-xs text-white/70">
               <Link to="/" className="hover:text-[#D4F63D] transition-colors">Beranda</Link>
               <Link to="/#ekosistem" className="hover:text-[#D4F63D] transition-colors">Alur Ekosistem</Link>
-              <Link to="/#dampak" className="hover:text-[#D4F63D] transition-colors">Dampak &amp; Audit</Link>
+              <Link to="/#dampak" className="hover:text-[#D4F63D] transition-colors">Dampak</Link>
               <Link to="/#mitra" className="hover:text-[#D4F63D] transition-colors">Mitra Funder</Link>
-              <Link to="/#award" className="hover:text-[#D4F63D] transition-colors">CSR Award</Link>
-              <Link to="/#regulasi" className="hover:text-[#D4F63D] transition-colors">Regulasi</Link>
               <Link to="/dashboard" className="text-[#D4F63D] font-bold hover:underline">Dashboard Eksekutif</Link>
             </div>
           </div>

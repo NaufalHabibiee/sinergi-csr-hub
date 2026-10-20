@@ -264,8 +264,8 @@ export const CSRRegulationsSection: React.FC = () => {
         )}
 
         {/* Search & Category Filter Toolbar */}
-        <div className="bg-slate-50 p-4 sm:p-5 rounded-3xl border border-slate-200/90 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex flex-wrap items-center gap-1.5 w-full md:w-auto text-xs">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex flex-wrap items-center gap-2 w-full md:w-auto text-xs">
             {[
               { id: 'all', label: 'Semua Regulasi' },
               { id: 'uu', label: 'Undang-Undang' },
@@ -276,10 +276,10 @@ export const CSRRegulationsSection: React.FC = () => {
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id as any)}
-                className={`px-3.5 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${
+                className={`px-4 py-2 rounded-full font-bold text-xs transition-all cursor-pointer ${
                   selectedCategory === cat.id
-                    ? 'bg-[#176B4D] text-white shadow-xs'
-                    : 'bg-white hover:bg-slate-200/80 text-slate-600 border border-slate-200'
+                    ? 'bg-[#0B2518] text-white shadow-xs'
+                    : 'bg-white hover:bg-slate-100 text-slate-600 border border-slate-200'
                 }`}
               >
                 {cat.label}
@@ -287,118 +287,106 @@ export const CSRRegulationsSection: React.FC = () => {
             ))}
           </div>
 
-          <div className="relative w-full md:w-72">
+          <div className="relative w-full md:w-80">
             <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
-              placeholder="Cari nomor regulasi / topik..."
+              placeholder="Cari regulasi atau topik hukum..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-3.5 py-2 bg-white border border-slate-200 rounded-2xl text-xs text-slate-900 focus:outline-none focus:border-[#176B4D]"
+              className="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-full text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#176B4D] transition-colors"
             />
           </div>
         </div>
 
         {/* Regulations Grid Directly on Page */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredDocs.map((doc) => (
-            <div
-              key={doc.id}
-              className="bg-white rounded-3xl p-6 border border-slate-200/90 hover:border-[#176B4D] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group space-y-4"
-            >
-              <div className="space-y-3.5">
-                {/* Header Tag */}
-                <div className="flex items-center justify-between">
-                  <span
-                    className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full ${
-                      doc.category === 'uu'
-                        ? 'bg-rose-50 text-rose-700 border border-rose-200'
-                        : doc.category === 'pp'
-                        ? 'bg-blue-50 text-blue-700 border border-blue-200'
-                        : doc.category === 'perda'
-                        ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
-                        : 'bg-purple-50 text-purple-700 border border-purple-200'
-                    }`}
+          {filteredDocs.map((doc) => {
+            const primaryArticle = doc.keyArticles[0];
+            const copyKey = `${doc.id}_0`;
+            const isCopied = copiedArticle === copyKey;
+            const citationText = `[Dasar Hukum] ${doc.number} - ${primaryArticle?.article || ''}: "${primaryArticle?.excerpt || doc.title}"`;
+
+            return (
+              <div
+                key={doc.id}
+                className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/80 shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group space-y-5"
+              >
+                <div className="space-y-4">
+                  {/* Category Pill & Year */}
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] font-bold px-3 py-1 rounded-full bg-[#E8F6F0] text-[#176B4D]">
+                      {doc.categoryLabel}
+                    </span>
+                    <span className="text-xs font-semibold text-slate-400 font-mono">
+                      Tahun {doc.year}
+                    </span>
+                  </div>
+
+                  {/* Regulation Number, Title & Promulgator */}
+                  <div className="space-y-1">
+                    <div className="text-xs font-mono font-bold text-[#176B4D]">
+                      {doc.number}
+                    </div>
+                    <h3 className="font-bold text-base text-[#0B2518] group-hover:text-[#176B4D] transition-colors leading-snug line-clamp-2">
+                      {doc.title}
+                    </h3>
+                    <p className="text-xs text-slate-400">
+                      {doc.promulgatedBy}
+                    </p>
+                  </div>
+
+                  {/* Clean Excerpt */}
+                  {primaryArticle && (
+                    <p className="text-xs text-slate-600 line-clamp-3 leading-relaxed">
+                      &ldquo;{primaryArticle.excerpt}&rdquo;
+                    </p>
+                  )}
+
+                  {/* Compliance & Tax Highlight */}
+                  <div className="pt-3 border-t border-slate-100 flex items-start gap-2.5 text-xs text-slate-600">
+                    <ShieldCheck className="w-4 h-4 text-[#176B4D] shrink-0 mt-0.5" />
+                    <span className="line-clamp-2 leading-relaxed">
+                      <strong className="text-slate-800">Implikasi: </strong>
+                      {doc.taxOrComplianceImplication}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Bottom Action Row */}
+                <div className="pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+                  <button
+                    type="button"
+                    onClick={() => handleCopyCitation(citationText, copyKey)}
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-[#176B4D] transition-colors cursor-pointer"
+                    title="Salin kutipan hukum untuk proposal"
                   >
-                    {doc.categoryLabel}
-                  </span>
-                  <span className="text-[11px] font-mono text-slate-400 font-bold">
-                    Tahun {doc.year}
-                  </span>
-                </div>
+                    {isCopied ? (
+                      <>
+                        <Check className="w-3.5 h-3.5 text-emerald-600" />
+                        <span className="text-emerald-700 font-bold">Tersalin!</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-3.5 h-3.5 text-slate-400" />
+                        <span>Salin Kutipan</span>
+                      </>
+                    )}
+                  </button>
 
-                {/* Regulation Number & Title */}
-                <div>
-                  <div className="text-xs font-mono font-bold text-[#176B4D]">
-                    {doc.number}
-                  </div>
-                  <h3 className="font-bold text-sm sm:text-base text-slate-900 group-hover:text-[#176B4D] transition-colors leading-snug mt-0.5 line-clamp-2">
-                    {doc.title}
-                  </h3>
-                  <div className="text-[11px] text-slate-400 mt-1">
-                    {doc.promulgatedBy}
-                  </div>
-                </div>
-
-                {/* Compliance / Tax Implication Box */}
-                <div className="p-3 rounded-xl bg-amber-50/70 border border-amber-200/80 text-[11px] text-amber-900 leading-relaxed">
-                  <span className="font-bold block mb-0.5 text-amber-950 flex items-center gap-1">
-                    <ShieldCheck className="w-3.5 h-3.5 text-amber-700" />
-                    <span>Implikasi Akuntansi &amp; Pajak:</span>
-                  </span>
-                  {doc.taxOrComplianceImplication}
-                </div>
-
-                {/* Key Excerpts */}
-                <div className="space-y-2 pt-1 border-t border-slate-100">
-                  {doc.keyArticles.slice(0, 1).map((art, idx) => {
-                    const copyKey = `${doc.id}_${idx}`;
-                    const isCopied = copiedArticle === copyKey;
-                    const citationText = `[Dasar Hukum] ${doc.number} - ${art.article}: "${art.excerpt}"`;
-
-                    return (
-                      <div key={idx} className="p-3 rounded-xl bg-slate-50 border border-slate-200/70 space-y-1.5 text-xs">
-                        <div className="flex items-center justify-between font-bold text-slate-800 text-[11px]">
-                          <span>{art.article}: {art.headline}</span>
-                          <button
-                            type="button"
-                            onClick={() => handleCopyCitation(citationText, copyKey)}
-                            title="Salin kutipan legal untuk proposal ke Direksi"
-                            className="inline-flex items-center gap-1 text-[10px] text-[#176B4D] hover:underline cursor-pointer"
-                          >
-                            {isCopied ? (
-                              <span className="text-emerald-700 font-bold">Tersalin!</span>
-                            ) : (
-                              <>
-                                <Copy className="w-3 h-3" />
-                                <span>Salin</span>
-                              </>
-                            )}
-                          </button>
-                        </div>
-                        <p className="italic text-slate-600 text-[11px] line-clamp-2">
-                          &ldquo;{art.excerpt}&rdquo;
-                        </p>
-                      </div>
-                    );
-                  })}
+                  <button
+                    type="button"
+                    onClick={() => handleDownload(doc)}
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-900 hover:bg-[#176B4D] text-white text-xs font-bold transition-all cursor-pointer shadow-xs active:scale-95"
+                  >
+                    <Download className="w-3.5 h-3.5 text-emerald-300" />
+                    <span>Unduh PDF</span>
+                    <span className="text-[10px] text-white/50 font-normal">({doc.fileSize})</span>
+                  </button>
                 </div>
               </div>
-
-              {/* Action Buttons */}
-              <div className="pt-2 border-t border-slate-100 flex items-center justify-between gap-2">
-                <span className="text-[10px] text-slate-400">{doc.fileSize} PDF</span>
-                <button
-                  type="button"
-                  onClick={() => handleDownload(doc)}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#176B4D] hover:bg-[#0E4D36] text-white text-xs font-bold transition-all cursor-pointer shadow-xs"
-                >
-                  <Download className="w-3.5 h-3.5" />
-                  <span>Unduh Dokumen PDF</span>
-                </button>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
