@@ -46,6 +46,7 @@ import { CommunityAspirationModal } from '../programs/CommunityAspirationModal';
 import { CSRAwardsSection } from '../awards/CSRAwardsSection';
 import { CSRRegulationsSection } from '../legal/CSRRegulationsSection';
 import { BASTGeneratorModal } from '../reports/BASTGeneratorModal';
+import { HeaderUserProfile, HeaderUserProfileMobile } from '../../components/layout/HeaderUserProfile';
 import { Program } from '../../types/csr';
 
 const heroMissions = [
@@ -215,18 +216,9 @@ export const LandingPage: React.FC = () => {
               </a>
             </nav>
 
-            {/* Right: Masuk link + Vibrant Lime Pill Button */}
-            <div className="hidden sm:flex items-center gap-5">
-              <Link
-                to="/login"
-                className={`text-xs font-medium transition-colors ${
-                  isScrolled
-                    ? 'text-ink-secondary hover:text-ink-primary'
-                    : 'text-white/85 hover:text-white'
-                }`}
-              >
-                Masuk
-              </Link>
+            {/* Right: Masuk / Profile link + Vibrant Lime Pill Button */}
+            <div className="hidden sm:flex items-center gap-4">
+              <HeaderUserProfile isDarkNavbar={!isScrolled} />
               <Link
                 to="/dashboard"
                 className="px-4 py-2 sm:px-5 sm:py-2 rounded-full text-xs font-bold bg-[#D4F63D] hover:bg-[#C2E82E] text-black transition-all flex items-center gap-2 shadow-sm active:scale-95 cursor-pointer"
@@ -315,23 +307,10 @@ export const LandingPage: React.FC = () => {
               >
                 Regulasi
               </a>
-              <div className="pt-2 border-t border-border-subtle/40 flex flex-col gap-2">
-                <Link
-                  to="/login"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="w-full py-2 text-center text-xs font-medium text-white/80 hover:text-white"
-                >
-                  Masuk
-                </Link>
-                <Link
-                  to="/dashboard"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="w-full py-2.5 px-4 rounded-full bg-[#D4F63D] text-black font-bold flex items-center justify-center gap-2"
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-black inline-block" />
-                  <span>Buka Dashboard</span>
-                </Link>
-              </div>
+              <HeaderUserProfileMobile
+                onClose={() => setMobileMenuOpen(false)}
+                isDarkTheme={!isScrolled}
+              />
             </div>
           )}
         </div>

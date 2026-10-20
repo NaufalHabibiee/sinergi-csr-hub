@@ -138,10 +138,10 @@ export const AuthPage: React.FC<AuthPageProps> = ({ defaultMode = 'login' }) => 
         </div>
 
         {/* RIGHT COLUMN: Full Bleed Clean Form Panel (Reaches all 4 edges, no border, no scroll) */}
-        <div className="lg:col-span-7 h-full flex flex-col justify-between p-6 sm:p-10 xl:p-14 bg-white relative overflow-y-auto lg:overflow-hidden">
+        <div className="lg:col-span-7 h-full flex flex-col justify-between px-6 py-4 sm:px-10 sm:py-5 xl:px-12 xl:py-6 bg-white relative overflow-y-auto lg:overflow-hidden">
           
-          {/* Top Bar inside Form Panel */}
-          <div className="flex items-center justify-between w-full">
+          {/* Top Bar inside Form Panel (Moved closer to top edge) */}
+          <div className="flex items-center justify-between w-full pb-1">
             <Link
               to="/"
               className="inline-flex items-center gap-2 text-xs font-bold text-slate-500 hover:text-[#176B4D] transition-colors"
@@ -161,30 +161,14 @@ export const AuthPage: React.FC<AuthPageProps> = ({ defaultMode = 'login' }) => 
             </span>
           </div>
 
-          {/* Center Login Form Content Container */}
-          <div className="w-full max-w-md mx-auto my-auto space-y-5">
-            {/* If user is already authenticated, show friendly notice */}
-            {isAuthenticated && (
-              <div className="p-3.5 rounded-2xl bg-[#E8F6F0] border border-emerald-300 text-xs text-[#0B2518] flex items-center justify-between gap-3">
-                <div className="truncate">
-                  <span className="font-bold block">Sesi login aktif:</span>
-                  <span className="text-slate-600 truncate">{user.displayName} ({user.organizationName})</span>
-                </div>
-                <Link
-                  to="/dashboard"
-                  className="px-3 py-1.5 rounded-full bg-[#176B4D] text-white text-[11px] font-bold shrink-0 hover:bg-[#0E4D36] transition-colors"
-                >
-                  Ke Dashboard &rarr;
-                </Link>
-              </div>
-            )}
-
+          {/* Center Login Form Content Container (Shifted up & no active session box) */}
+          <div className="w-full max-w-md mx-auto mt-1 sm:mt-2 mb-auto space-y-3">
             {/* Mode Switcher Tabs (Masuk vs Daftar) */}
             <div className="flex items-center p-1 bg-slate-100 rounded-2xl w-full">
               <button
                 type="button"
                 onClick={() => setMode('login')}
-                className={`flex-1 py-2 text-xs sm:text-sm font-bold rounded-xl transition-all cursor-pointer ${
+                className={`flex-1 py-1.5 text-xs font-bold rounded-xl transition-all cursor-pointer ${
                   mode === 'login'
                     ? 'bg-white text-[#0B2518] shadow-xs'
                     : 'text-slate-500 hover:text-slate-900'
@@ -195,7 +179,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({ defaultMode = 'login' }) => 
               <button
                 type="button"
                 onClick={() => setMode('signup')}
-                className={`flex-1 py-2 text-xs sm:text-sm font-bold rounded-xl transition-all cursor-pointer ${
+                className={`flex-1 py-1.5 text-xs font-bold rounded-xl transition-all cursor-pointer ${
                   mode === 'signup'
                     ? 'bg-white text-[#0B2518] shadow-xs'
                     : 'text-slate-500 hover:text-slate-900'
@@ -206,8 +190,8 @@ export const AuthPage: React.FC<AuthPageProps> = ({ defaultMode = 'login' }) => 
             </div>
 
             {/* Heading & Subtitle */}
-            <div className="space-y-1">
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0B2518] tracking-tight">
+            <div className="space-y-0.5">
+              <h1 className="text-xl sm:text-2xl font-extrabold text-[#0B2518] tracking-tight">
                 {mode === 'login' ? 'Selamat Datang Kembali 👋' : 'Bergabung dengan SinergiCSR 🌱'}
               </h1>
               <p className="text-xs text-slate-500">
@@ -218,7 +202,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({ defaultMode = 'login' }) => 
             </div>
 
             {/* Role Selection (Funder, Mitra, Auditor) */}
-            <div className="space-y-1.5">
+            <div className="space-y-1">
               <label className="text-xs font-bold text-slate-700 block">
                 Pilih Peran Akun Anda:
               </label>
@@ -226,7 +210,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({ defaultMode = 'login' }) => 
                 <button
                   type="button"
                   onClick={() => setSelectedRole('funder')}
-                  className={`p-3 rounded-2xl border text-left transition-all cursor-pointer flex flex-col gap-1 ${
+                  className={`p-2.5 rounded-2xl border text-left transition-all cursor-pointer flex flex-col gap-1 ${
                     selectedRole === 'funder'
                       ? 'border-[#176B4D] bg-[#E8F6F0] text-[#0B2518] ring-1 ring-[#176B4D]'
                       : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300'
@@ -242,7 +226,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({ defaultMode = 'login' }) => 
                 <button
                   type="button"
                   onClick={() => setSelectedRole('partner')}
-                  className={`p-3 rounded-2xl border text-left transition-all cursor-pointer flex flex-col gap-1 ${
+                  className={`p-2.5 rounded-2xl border text-left transition-all cursor-pointer flex flex-col gap-1 ${
                     selectedRole === 'partner'
                       ? 'border-[#176B4D] bg-[#E8F6F0] text-[#0B2518] ring-1 ring-[#176B4D]'
                       : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300'
@@ -258,7 +242,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({ defaultMode = 'login' }) => 
                 <button
                   type="button"
                   onClick={() => setSelectedRole('viewer')}
-                  className={`p-3 rounded-2xl border text-left transition-all cursor-pointer flex flex-col gap-1 ${
+                  className={`p-2.5 rounded-2xl border text-left transition-all cursor-pointer flex flex-col gap-1 ${
                     selectedRole === 'viewer'
                       ? 'border-[#176B4D] bg-[#E8F6F0] text-[#0B2518] ring-1 ring-[#176B4D]'
                       : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300'
@@ -274,11 +258,11 @@ export const AuthPage: React.FC<AuthPageProps> = ({ defaultMode = 'login' }) => 
             </div>
 
             {/* Authentication Form */}
-            <form onSubmit={handleSubmit} className="space-y-3">
+            <form onSubmit={handleSubmit} className="space-y-2.5">
               {mode === 'signup' && (
                 <>
                   <div>
-                    <label className="text-xs font-semibold text-slate-700 block mb-1">
+                    <label className="text-xs font-semibold text-slate-700 block mb-0.5">
                       Nama Lengkap
                     </label>
                     <input
@@ -287,12 +271,12 @@ export const AuthPage: React.FC<AuthPageProps> = ({ defaultMode = 'login' }) => 
                       placeholder="e.g. Raden Arya Wijaya"
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
-                      className="w-full px-3.5 py-2 rounded-xl border border-slate-200 focus:outline-none focus:border-[#176B4D] focus:ring-1 focus:ring-[#176B4D] text-xs sm:text-sm"
+                      className="w-full px-3.5 py-1.5 rounded-xl border border-slate-200 focus:outline-none focus:border-[#176B4D] focus:ring-1 focus:ring-[#176B4D] text-xs sm:text-sm"
                     />
                   </div>
 
                   <div>
-                    <label className="text-xs font-semibold text-slate-700 block mb-1">
+                    <label className="text-xs font-semibold text-slate-700 block mb-0.5">
                       Nama Perusahaan / Lembaga
                     </label>
                     <input
@@ -301,14 +285,14 @@ export const AuthPage: React.FC<AuthPageProps> = ({ defaultMode = 'login' }) => 
                       placeholder="e.g. PT Telkom Indonesia / Yayasan Lestari"
                       value={orgName}
                       onChange={(e) => setOrgName(e.target.value)}
-                      className="w-full px-3.5 py-2 rounded-xl border border-slate-200 focus:outline-none focus:border-[#176B4D] focus:ring-1 focus:ring-[#176B4D] text-xs sm:text-sm"
+                      className="w-full px-3.5 py-1.5 rounded-xl border border-slate-200 focus:outline-none focus:border-[#176B4D] focus:ring-1 focus:ring-[#176B4D] text-xs sm:text-sm"
                     />
                   </div>
                 </>
               )}
 
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">
+                <label className="text-xs font-semibold text-slate-700 block mb-0.5">
                   Email Perusahaan / Lembaga
                 </label>
                 <div className="relative">
@@ -325,7 +309,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({ defaultMode = 'login' }) => 
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-1">
+                <label className="text-xs font-semibold text-slate-700 block mb-0.5">
                   Kata Sandi
                 </label>
                 <div className="relative">
@@ -377,7 +361,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({ defaultMode = 'login' }) => 
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full py-3 px-6 rounded-full bg-[#D4F63D] hover:bg-[#C2E82E] text-black font-extrabold text-xs sm:text-sm shadow-md transition-all flex items-center justify-center gap-3 cursor-pointer active:scale-98 disabled:opacity-70 mt-1"
+                className="w-full py-2.5 px-6 rounded-full bg-[#D4F63D] hover:bg-[#C2E82E] text-black font-extrabold text-xs sm:text-sm shadow-md transition-all flex items-center justify-center gap-3 cursor-pointer active:scale-98 disabled:opacity-70 mt-1"
               >
                 <span>{isLoading ? 'Memvalidasi Sesi...' : mode === 'login' ? 'Masuk ke Dashboard' : 'Daftar Akun Baru'}</span>
                 <span className="w-6 h-6 rounded-full bg-black text-[#D4F63D] flex items-center justify-center">
@@ -387,7 +371,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({ defaultMode = 'login' }) => 
             </form>
 
             {/* Quick Demo Access (1-Click Login) */}
-            <div className="pt-4 border-t border-slate-100 space-y-2">
+            <div className="pt-3 border-t border-slate-100 space-y-1.5">
               <div className="flex items-center justify-between">
                 <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
                   Uji Coba Instan (Akses Cepat Demo)
@@ -401,7 +385,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({ defaultMode = 'login' }) => 
                 <button
                   type="button"
                   onClick={() => handleQuickDemoLogin('funder')}
-                  className="p-2.5 rounded-xl border border-slate-200 hover:border-[#176B4D] hover:bg-[#F4F9F5] text-left transition-all text-xs cursor-pointer group"
+                  className="p-2 rounded-xl border border-slate-200 hover:border-[#176B4D] hover:bg-[#F4F9F5] text-left transition-all text-xs cursor-pointer group"
                 >
                   <div className="font-bold text-[#0B2518] group-hover:text-[#176B4D] text-xs">🏢 Telkom Funder</div>
                   <div className="text-[10px] text-slate-400">Pagu &amp; BAST</div>
@@ -410,7 +394,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({ defaultMode = 'login' }) => 
                 <button
                   type="button"
                   onClick={() => handleQuickDemoLogin('partner')}
-                  className="p-2.5 rounded-xl border border-slate-200 hover:border-[#176B4D] hover:bg-[#F4F9F5] text-left transition-all text-xs cursor-pointer group"
+                  className="p-2 rounded-xl border border-slate-200 hover:border-[#176B4D] hover:bg-[#F4F9F5] text-left transition-all text-xs cursor-pointer group"
                 >
                   <div className="font-bold text-[#0B2518] group-hover:text-[#176B4D] text-xs">🤝 Yayasan Mitra</div>
                   <div className="text-[10px] text-slate-400">Proposal &amp; Salur</div>
@@ -419,7 +403,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({ defaultMode = 'login' }) => 
                 <button
                   type="button"
                   onClick={() => handleQuickDemoLogin('viewer')}
-                  className="p-2.5 rounded-xl border border-slate-200 hover:border-[#176B4D] hover:bg-[#F4F9F5] text-left transition-all text-xs cursor-pointer group"
+                  className="p-2 rounded-xl border border-slate-200 hover:border-[#176B4D] hover:bg-[#F4F9F5] text-left transition-all text-xs cursor-pointer group"
                 >
                   <div className="font-bold text-[#0B2518] group-hover:text-[#176B4D] text-xs">⚖️ Auditor KLHK</div>
                   <div className="text-[10px] text-slate-400">Evaluasi PROPER</div>

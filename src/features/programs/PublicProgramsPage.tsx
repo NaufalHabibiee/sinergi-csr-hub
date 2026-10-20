@@ -33,6 +33,7 @@ import {
 } from '../../lib/formatters';
 import { ProjectBookingModal } from './ProjectBookingModal';
 import { CSRMenuBookModal } from './CSRMenuBookModal';
+import { HeaderUserProfile, HeaderUserProfileMobile } from '../../components/layout/HeaderUserProfile';
 
 export const PublicProgramsPage: React.FC = () => {
   const navigate = useNavigate();
@@ -152,12 +153,7 @@ export const PublicProgramsPage: React.FC = () => {
               <span>Buku Menu CSR</span>
             </button>
 
-            <Link
-              to="/auth"
-              className="hidden sm:inline-flex text-xs font-medium text-white/80 hover:text-white px-2 py-1.5 transition-colors"
-            >
-              Masuk
-            </Link>
+            <HeaderUserProfile isDarkNavbar={true} />
 
             <Link
               to="/dashboard"
@@ -207,9 +203,10 @@ export const PublicProgramsPage: React.FC = () => {
               <BookOpen className="w-3.5 h-3.5 text-[#D4F63D]" />
               <span>Buka Buku Menu CSR</span>
             </button>
-            <Link to="/auth" onClick={() => setMobileMenuOpen(false)} className="block py-1.5 hover:text-[#D4F63D]">
-              Halaman Masuk
-            </Link>
+            <HeaderUserProfileMobile
+              onClose={() => setMobileMenuOpen(false)}
+              isDarkTheme={true}
+            />
           </div>
         )}
       </header>
