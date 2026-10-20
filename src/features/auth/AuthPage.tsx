@@ -138,10 +138,10 @@ export const AuthPage: React.FC<AuthPageProps> = ({ defaultMode = 'login' }) => 
         </div>
 
         {/* RIGHT COLUMN: Full Bleed Clean Form Panel (Reaches all 4 edges, no border, no scroll) */}
-        <div className="lg:col-span-7 h-full flex flex-col justify-between px-6 py-4 sm:px-10 sm:py-5 xl:px-12 xl:py-6 bg-white relative overflow-y-auto lg:overflow-hidden">
+        <div className="lg:col-span-7 h-full flex flex-col justify-between px-6 py-5 sm:px-10 sm:py-6 xl:px-14 xl:py-8 bg-white relative overflow-y-auto lg:overflow-hidden">
           
-          {/* Top Bar inside Form Panel (Moved closer to top edge) */}
-          <div className="flex items-center justify-between w-full pb-1">
+          {/* Top Bar inside Form Panel */}
+          <div className="flex items-center justify-between w-full">
             <Link
               to="/"
               className="inline-flex items-center gap-2 text-xs font-bold text-slate-500 hover:text-[#176B4D] transition-colors"
@@ -161,16 +161,16 @@ export const AuthPage: React.FC<AuthPageProps> = ({ defaultMode = 'login' }) => 
             </span>
           </div>
 
-          {/* Center Login Form Content Container (Shifted up & no active session box) */}
-          <div className="w-full max-w-md mx-auto mt-1 sm:mt-2 mb-auto space-y-3">
-            {/* Mode Switcher Tabs (Masuk vs Daftar) */}
-            <div className="flex items-center p-1 bg-slate-100 rounded-2xl w-full">
+          {/* Center Login Form Content Container (Balanced vertical positioning & elegant typography) */}
+          <div className="w-full max-w-md mx-auto my-auto py-2 sm:py-4 space-y-4">
+            {/* Mode Switcher Tabs (Masuk vs Daftar - Sleek Pill Design) */}
+            <div className="flex items-center p-1 bg-slate-100/80 rounded-full border border-slate-200/60 max-w-xs mx-auto">
               <button
                 type="button"
                 onClick={() => setMode('login')}
-                className={`flex-1 py-1.5 text-xs font-bold rounded-xl transition-all cursor-pointer ${
+                className={`flex-1 py-1.5 px-4 text-xs font-semibold rounded-full transition-all cursor-pointer ${
                   mode === 'login'
-                    ? 'bg-white text-[#0B2518] shadow-xs'
+                    ? 'bg-white text-slate-900 shadow-sm'
                     : 'text-slate-500 hover:text-slate-900'
                 }`}
               >
@@ -179,79 +179,98 @@ export const AuthPage: React.FC<AuthPageProps> = ({ defaultMode = 'login' }) => 
               <button
                 type="button"
                 onClick={() => setMode('signup')}
-                className={`flex-1 py-1.5 text-xs font-bold rounded-xl transition-all cursor-pointer ${
+                className={`flex-1 py-1.5 px-4 text-xs font-semibold rounded-full transition-all cursor-pointer ${
                   mode === 'signup'
-                    ? 'bg-white text-[#0B2518] shadow-xs'
+                    ? 'bg-white text-slate-900 shadow-sm'
                     : 'text-slate-500 hover:text-slate-900'
                 }`}
               >
-                Daftar Akun Baru
+                Daftar Baru
               </button>
             </div>
 
             {/* Heading & Subtitle */}
-            <div className="space-y-0.5">
-              <h1 className="text-xl sm:text-2xl font-extrabold text-[#0B2518] tracking-tight">
-                {mode === 'login' ? 'Selamat Datang Kembali 👋' : 'Bergabung dengan SinergiCSR 🌱'}
+            <div className="space-y-1 text-center sm:text-left">
+              <h1 className="text-2xl sm:text-[28px] font-bold text-slate-900 tracking-tight leading-tight">
+                {mode === 'login' ? (
+                  <>Selamat Datang <span className="text-[#176B4D]">Kembali</span> 👋</>
+                ) : (
+                  <>Bergabung dengan <span className="text-[#176B4D]">SinergiCSR</span> 🌱</>
+                )}
               </h1>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs sm:text-[13px] text-slate-500 font-normal leading-relaxed">
                 {mode === 'login'
-                  ? 'Masuk ke portal orkestrasi dampak dan laporan keberlanjutan Anda.'
+                  ? 'Masuk ke portal orkestrasi dampak dan pelaporan ESG terintegrasi.'
                   : 'Daftarkan instansi atau lembaga Anda untuk memulai kolaborasi dampak.'}
               </p>
             </div>
 
             {/* Role Selection (Funder, Mitra, Auditor) */}
-            <div className="space-y-1">
-              <label className="text-xs font-bold text-slate-700 block">
-                Pilih Peran Akun Anda:
-              </label>
+            <div className="space-y-1.5">
+              <div className="flex items-center justify-between">
+                <label className="text-[11px] font-bold tracking-wider uppercase text-slate-500 block">
+                  Pilih Peran Akun:
+                </label>
+                <span className="text-[10px] text-slate-400 font-medium">Multi-Stakeholder</span>
+              </div>
               <div className="grid grid-cols-3 gap-2">
                 <button
                   type="button"
                   onClick={() => setSelectedRole('funder')}
-                  className={`p-2.5 rounded-2xl border text-left transition-all cursor-pointer flex flex-col gap-1 ${
+                  className={`p-2.5 rounded-2xl border text-left transition-all cursor-pointer flex flex-col gap-1.5 ${
                     selectedRole === 'funder'
-                      ? 'border-[#176B4D] bg-[#E8F6F0] text-[#0B2518] ring-1 ring-[#176B4D]'
-                      : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300'
+                      ? 'border-[#176B4D] bg-[#176B4D]/5 text-slate-900 shadow-xs ring-1 ring-[#176B4D]'
+                      : 'border-slate-200/80 bg-white text-slate-600 hover:border-slate-300 hover:bg-slate-50/50'
                   }`}
                 >
-                  <Building2 className={`w-4 h-4 ${selectedRole === 'funder' ? 'text-[#176B4D]' : 'text-slate-400'}`} />
+                  <div className={`w-7 h-7 rounded-xl flex items-center justify-center transition-colors ${
+                    selectedRole === 'funder' ? 'bg-[#176B4D] text-[#D4F63D]' : 'bg-slate-100 text-slate-500'
+                  }`}>
+                    <Building2 className="w-3.5 h-3.5" />
+                  </div>
                   <div>
-                    <div className="text-xs font-bold leading-tight">Funder</div>
-                    <div className="text-[10px] text-slate-500">Korporasi</div>
+                    <div className="text-xs font-bold leading-tight text-slate-900">Funder</div>
+                    <div className="text-[10px] text-slate-400 font-medium">Korporasi</div>
                   </div>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => setSelectedRole('partner')}
-                  className={`p-2.5 rounded-2xl border text-left transition-all cursor-pointer flex flex-col gap-1 ${
+                  className={`p-2.5 rounded-2xl border text-left transition-all cursor-pointer flex flex-col gap-1.5 ${
                     selectedRole === 'partner'
-                      ? 'border-[#176B4D] bg-[#E8F6F0] text-[#0B2518] ring-1 ring-[#176B4D]'
-                      : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300'
+                      ? 'border-[#176B4D] bg-[#176B4D]/5 text-slate-900 shadow-xs ring-1 ring-[#176B4D]'
+                      : 'border-slate-200/80 bg-white text-slate-600 hover:border-slate-300 hover:bg-slate-50/50'
                   }`}
                 >
-                  <Users className={`w-4 h-4 ${selectedRole === 'partner' ? 'text-[#176B4D]' : 'text-slate-400'}`} />
+                  <div className={`w-7 h-7 rounded-xl flex items-center justify-center transition-colors ${
+                    selectedRole === 'partner' ? 'bg-[#176B4D] text-[#D4F63D]' : 'bg-slate-100 text-slate-500'
+                  }`}>
+                    <Users className="w-3.5 h-3.5" />
+                  </div>
                   <div>
-                    <div className="text-xs font-bold leading-tight">Mitra</div>
-                    <div className="text-[10px] text-slate-500">Yayasan / NGO</div>
+                    <div className="text-xs font-bold leading-tight text-slate-900">Mitra</div>
+                    <div className="text-[10px] text-slate-400 font-medium">Yayasan / NGO</div>
                   </div>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => setSelectedRole('viewer')}
-                  className={`p-2.5 rounded-2xl border text-left transition-all cursor-pointer flex flex-col gap-1 ${
+                  className={`p-2.5 rounded-2xl border text-left transition-all cursor-pointer flex flex-col gap-1.5 ${
                     selectedRole === 'viewer'
-                      ? 'border-[#176B4D] bg-[#E8F6F0] text-[#0B2518] ring-1 ring-[#176B4D]'
-                      : 'border-slate-200 bg-white text-slate-600 hover:border-slate-300'
+                      ? 'border-[#176B4D] bg-[#176B4D]/5 text-slate-900 shadow-xs ring-1 ring-[#176B4D]'
+                      : 'border-slate-200/80 bg-white text-slate-600 hover:border-slate-300 hover:bg-slate-50/50'
                   }`}
                 >
-                  <ShieldCheck className={`w-4 h-4 ${selectedRole === 'viewer' ? 'text-[#176B4D]' : 'text-slate-400'}`} />
+                  <div className={`w-7 h-7 rounded-xl flex items-center justify-center transition-colors ${
+                    selectedRole === 'viewer' ? 'bg-[#176B4D] text-[#D4F63D]' : 'bg-slate-100 text-slate-500'
+                  }`}>
+                    <ShieldCheck className="w-3.5 h-3.5" />
+                  </div>
                   <div>
-                    <div className="text-xs font-bold leading-tight">Auditor</div>
-                    <div className="text-[10px] text-slate-500">Regulator / BPK</div>
+                    <div className="text-xs font-bold leading-tight text-slate-900">Auditor</div>
+                    <div className="text-[10px] text-slate-400 font-medium">Regulator / BPK</div>
                   </div>
                 </button>
               </div>
@@ -262,7 +281,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({ defaultMode = 'login' }) => 
               {mode === 'signup' && (
                 <>
                   <div>
-                    <label className="text-xs font-semibold text-slate-700 block mb-0.5">
+                    <label className="text-[11px] font-bold tracking-wide uppercase text-slate-600 block mb-1">
                       Nama Lengkap
                     </label>
                     <input
@@ -271,12 +290,12 @@ export const AuthPage: React.FC<AuthPageProps> = ({ defaultMode = 'login' }) => 
                       placeholder="e.g. Raden Arya Wijaya"
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
-                      className="w-full px-3.5 py-1.5 rounded-xl border border-slate-200 focus:outline-none focus:border-[#176B4D] focus:ring-1 focus:ring-[#176B4D] text-xs sm:text-sm"
+                      className="w-full px-3.5 py-2 rounded-xl border border-slate-200/80 bg-slate-50/40 focus:bg-white focus:outline-none focus:border-[#176B4D] focus:ring-2 focus:ring-[#176B4D]/10 text-xs sm:text-sm text-slate-900 transition-all placeholder:text-slate-400"
                     />
                   </div>
 
                   <div>
-                    <label className="text-xs font-semibold text-slate-700 block mb-0.5">
+                    <label className="text-[11px] font-bold tracking-wide uppercase text-slate-600 block mb-1">
                       Nama Perusahaan / Lembaga
                     </label>
                     <input
@@ -285,14 +304,14 @@ export const AuthPage: React.FC<AuthPageProps> = ({ defaultMode = 'login' }) => 
                       placeholder="e.g. PT Telkom Indonesia / Yayasan Lestari"
                       value={orgName}
                       onChange={(e) => setOrgName(e.target.value)}
-                      className="w-full px-3.5 py-1.5 rounded-xl border border-slate-200 focus:outline-none focus:border-[#176B4D] focus:ring-1 focus:ring-[#176B4D] text-xs sm:text-sm"
+                      className="w-full px-3.5 py-2 rounded-xl border border-slate-200/80 bg-slate-50/40 focus:bg-white focus:outline-none focus:border-[#176B4D] focus:ring-2 focus:ring-[#176B4D]/10 text-xs sm:text-sm text-slate-900 transition-all placeholder:text-slate-400"
                     />
                   </div>
                 </>
               )}
 
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-0.5">
+                <label className="text-[11px] font-bold tracking-wide uppercase text-slate-600 block mb-1">
                   Email Perusahaan / Lembaga
                 </label>
                 <div className="relative">
@@ -303,13 +322,13 @@ export const AuthPage: React.FC<AuthPageProps> = ({ defaultMode = 'login' }) => 
                     placeholder="nama@organisasi.id"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full pl-10 pr-4 py-2 rounded-xl border border-slate-200 focus:outline-none focus:border-[#176B4D] focus:ring-1 focus:ring-[#176B4D] text-xs sm:text-sm"
+                    className="w-full pl-10 pr-4 py-2 rounded-xl border border-slate-200/80 bg-slate-50/40 focus:bg-white focus:outline-none focus:border-[#176B4D] focus:ring-2 focus:ring-[#176B4D]/10 text-xs sm:text-sm text-slate-900 transition-all placeholder:text-slate-400"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="text-xs font-semibold text-slate-700 block mb-0.5">
+                <label className="text-[11px] font-bold tracking-wide uppercase text-slate-600 block mb-1">
                   Kata Sandi
                 </label>
                 <div className="relative">
@@ -320,7 +339,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({ defaultMode = 'login' }) => 
                     placeholder="Minimal 8 karakter"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full pl-10 pr-10 py-2 rounded-xl border border-slate-200 focus:outline-none focus:border-[#176B4D] focus:ring-1 focus:ring-[#176B4D] text-xs sm:text-sm"
+                    className="w-full pl-10 pr-10 py-2 rounded-xl border border-slate-200/80 bg-slate-50/40 focus:bg-white focus:outline-none focus:border-[#176B4D] focus:ring-2 focus:ring-[#176B4D]/10 text-xs sm:text-sm text-slate-900 transition-all placeholder:text-slate-400"
                   />
                   <button
                     type="button"
@@ -334,14 +353,14 @@ export const AuthPage: React.FC<AuthPageProps> = ({ defaultMode = 'login' }) => 
 
               {mode === 'login' && (
                 <div className="flex items-center justify-between text-xs pt-0.5">
-                  <label className="flex items-center gap-2 cursor-pointer text-slate-600">
+                  <label className="flex items-center gap-2 cursor-pointer text-slate-600 select-none">
                     <input
                       type="checkbox"
                       checked={rememberMe}
                       onChange={(e) => setRememberMe(e.target.checked)}
                       className="rounded text-[#176B4D] focus:ring-[#176B4D]"
                     />
-                    <span>Ingat saya</span>
+                    <span className="text-slate-500 font-medium">Ingat saya</span>
                   </label>
 
                   <a
@@ -350,7 +369,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({ defaultMode = 'login' }) => 
                       e.preventDefault();
                       alert('Untuk mode demo, Anda dapat langsung mengklik salah satu tombol "Uji Coba Instan" di bawah.');
                     }}
-                    className="text-[#176B4D] font-semibold hover:underline"
+                    className="text-[#176B4D] hover:text-[#0f4e37] font-semibold hover:underline"
                   >
                     Lupa kata sandi?
                   </a>
@@ -361,17 +380,17 @@ export const AuthPage: React.FC<AuthPageProps> = ({ defaultMode = 'login' }) => 
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full py-2.5 px-6 rounded-full bg-[#D4F63D] hover:bg-[#C2E82E] text-black font-extrabold text-xs sm:text-sm shadow-md transition-all flex items-center justify-center gap-3 cursor-pointer active:scale-98 disabled:opacity-70 mt-1"
+                className="w-full py-2.5 px-6 rounded-full bg-[#D4F63D] hover:bg-[#C2E82E] text-slate-950 font-bold text-xs sm:text-sm shadow-xs hover:shadow-sm transition-all flex items-center justify-center gap-2.5 cursor-pointer active:scale-98 disabled:opacity-70 mt-1"
               >
                 <span>{isLoading ? 'Memvalidasi Sesi...' : mode === 'login' ? 'Masuk ke Dashboard' : 'Daftar Akun Baru'}</span>
-                <span className="w-6 h-6 rounded-full bg-black text-[#D4F63D] flex items-center justify-center">
+                <span className="w-6 h-6 rounded-full bg-slate-950 text-[#D4F63D] flex items-center justify-center shadow-xs">
                   <ArrowRight className="w-3.5 h-3.5" />
                 </span>
               </button>
             </form>
 
             {/* Quick Demo Access (1-Click Login) */}
-            <div className="pt-3 border-t border-slate-100 space-y-1.5">
+            <div className="pt-3 border-t border-slate-100 space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
                   Uji Coba Instan (Akses Cepat Demo)
@@ -385,28 +404,28 @@ export const AuthPage: React.FC<AuthPageProps> = ({ defaultMode = 'login' }) => 
                 <button
                   type="button"
                   onClick={() => handleQuickDemoLogin('funder')}
-                  className="p-2 rounded-xl border border-slate-200 hover:border-[#176B4D] hover:bg-[#F4F9F5] text-left transition-all text-xs cursor-pointer group"
+                  className="p-2.5 rounded-xl border border-slate-200/80 hover:border-[#176B4D] hover:bg-[#F4F9F5] text-left transition-all text-xs cursor-pointer group bg-white shadow-2xs"
                 >
-                  <div className="font-bold text-[#0B2518] group-hover:text-[#176B4D] text-xs">🏢 Telkom Funder</div>
-                  <div className="text-[10px] text-slate-400">Pagu &amp; BAST</div>
+                  <div className="font-bold text-slate-800 group-hover:text-[#176B4D] text-xs">🏢 Telkom Funder</div>
+                  <div className="text-[10px] text-slate-400 mt-0.5">Pagu &amp; BAST</div>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => handleQuickDemoLogin('partner')}
-                  className="p-2 rounded-xl border border-slate-200 hover:border-[#176B4D] hover:bg-[#F4F9F5] text-left transition-all text-xs cursor-pointer group"
+                  className="p-2.5 rounded-xl border border-slate-200/80 hover:border-[#176B4D] hover:bg-[#F4F9F5] text-left transition-all text-xs cursor-pointer group bg-white shadow-2xs"
                 >
-                  <div className="font-bold text-[#0B2518] group-hover:text-[#176B4D] text-xs">🤝 Yayasan Mitra</div>
-                  <div className="text-[10px] text-slate-400">Proposal &amp; Salur</div>
+                  <div className="font-bold text-slate-800 group-hover:text-[#176B4D] text-xs">🤝 Yayasan Mitra</div>
+                  <div className="text-[10px] text-slate-400 mt-0.5">Proposal &amp; Salur</div>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => handleQuickDemoLogin('viewer')}
-                  className="p-2 rounded-xl border border-slate-200 hover:border-[#176B4D] hover:bg-[#F4F9F5] text-left transition-all text-xs cursor-pointer group"
+                  className="p-2.5 rounded-xl border border-slate-200/80 hover:border-[#176B4D] hover:bg-[#F4F9F5] text-left transition-all text-xs cursor-pointer group bg-white shadow-2xs"
                 >
-                  <div className="font-bold text-[#0B2518] group-hover:text-[#176B4D] text-xs">⚖️ Auditor KLHK</div>
-                  <div className="text-[10px] text-slate-400">Evaluasi PROPER</div>
+                  <div className="font-bold text-slate-800 group-hover:text-[#176B4D] text-xs">⚖️ Auditor KLHK</div>
+                  <div className="text-[10px] text-slate-400 mt-0.5">Evaluasi PROPER</div>
                 </button>
               </div>
             </div>
