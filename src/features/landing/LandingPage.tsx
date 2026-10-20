@@ -53,7 +53,7 @@ const heroMissions = [
     title: 'Our Mission',
     description:
       'Memberdayakan petani lokal, komunitas pedesaan, dan mitra penggerak dengan ekosistem pelaporan dampak yang transparan, presisi, dan berkelanjutan.',
-    link: '#tentang',
+    link: '/about',
     linkText: 'Pelajari Selengkapnya'
   },
   {
@@ -430,133 +430,6 @@ export const LandingPage: React.FC = () => {
                   <span>{heroMissions[missionIndex].linkText}</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. Section: About Us (Tentang Kami) - Clean, Elegant & Thematic */}
-      <section id="tentang" className="scroll-mt-20 py-20 lg:py-28 bg-[#FBFDFB] relative overflow-hidden border-b border-slate-200/70">
-        {/* Subtle decorative background glow */}
-        <div className="absolute top-1/2 left-0 -translate-y-1/2 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-14">
-          {/* Eyebrow & Headline Header */}
-          <div className="max-w-3xl space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E8F6F0] text-[#176B4D] text-xs font-bold uppercase tracking-wider">
-              <Compass className="w-3.5 h-3.5 text-[#176B4D]" />
-              <span>About Us • Tentang SinergiCSR</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0B2518] tracking-tight leading-tight">
-              Membangun Ekosistem Kemitraan Berkelanjutan yang <span className="text-[#176B4D]">Transparan &amp; Berdampak Nyata</span>
-            </h2>
-            <p className="text-xs sm:text-sm text-ink-secondary leading-relaxed">
-              SinergiCSR adalah platform orkestrasi dampak sosial dan tata kelola ESG pertama di Indonesia yang menghubungkan komitmen pendanaan korporasi dan BUMN dengan inisiatif pemberdayaan masyarakat yang terkurasi, berpayung hukum sah, serta terikat standar akuntabilitas BAST.
-            </p>
-          </div>
-
-          {/* Two-Column Showcase Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-            {/* Left Column: Mission Narrative & 3 Core Value Pillars */}
-            <div className="lg:col-span-7 space-y-6">
-              <div className="prose prose-slate max-w-none text-xs sm:text-sm text-slate-600 leading-relaxed space-y-3">
-                <p>
-                  Didirikan dengan semangat gotong royong dan kepatuhan regulasi, kami mengatasi tantangan klasik penyaluran CSR—mulai dari klaim fiktif, program tumpang-tindih (overlapping), hingga minimnya data pengukuran dampak jangka panjang.
-                </p>
-                <p>
-                  Melalui sistem verifikasi multipihak (Pentahelix), setiap program yang terdaftar di SinergiCSR melalui uji kelayakan ketat, sinkronisasi dengan Buku Menu Prioritas Daerah, dan integrasi kriteria PROPER Kementerian LHK.
-                </p>
-              </div>
-
-              {/* 3 Core Value Cards */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-                <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs hover:shadow-md transition-shadow space-y-2.5">
-                  <div className="w-10 h-10 rounded-xl bg-[#E8F6F0] text-[#176B4D] flex items-center justify-center font-bold">
-                    <ShieldCheck className="w-5 h-5 text-[#176B4D]" />
-                  </div>
-                  <h3 className="font-bold text-xs sm:text-sm text-[#0B2518]">
-                    Transparansi BAST
-                  </h3>
-                  <p className="text-[11px] text-slate-500 leading-relaxed">
-                    Pencairan bertahap terkunci Berita Acara resmi demi kepastian audit dan syarat insentif pajak (tax deduction).
-                  </p>
-                </div>
-
-                <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs hover:shadow-md transition-shadow space-y-2.5">
-                  <div className="w-10 h-10 rounded-xl bg-[#E8F6F0] text-[#176B4D] flex items-center justify-center font-bold">
-                    <Users className="w-5 h-5 text-[#176B4D]" />
-                  </div>
-                  <h3 className="font-bold text-xs sm:text-sm text-[#0B2518]">
-                    Validasi NIK/NIB
-                  </h3>
-                  <p className="text-[11px] text-slate-500 leading-relaxed">
-                    Identitas penerima manfaat terverifikasi tunggal, menjamin nol klaim ganda dan bebas data penerima fiktif.
-                  </p>
-                </div>
-
-                <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs hover:shadow-md transition-shadow space-y-2.5">
-                  <div className="w-10 h-10 rounded-xl bg-[#E8F6F0] text-[#176B4D] flex items-center justify-center font-bold">
-                    <Award className="w-5 h-5 text-[#176B4D]" />
-                  </div>
-                  <h3 className="font-bold text-xs sm:text-sm text-[#0B2518]">
-                    Audit PROPER &amp; SDGs
-                  </h3>
-                  <p className="text-[11px] text-slate-500 leading-relaxed">
-                    Metrik SROI dan sinkronisasi 17 target SDGs Bappenas siap diekspor untuk penilaian peringkat kepatuhan KLHK.
-                  </p>
-                </div>
-              </div>
-
-              <div className="pt-2">
-                <Link
-                  to="/about"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#176B4D] hover:bg-[#0E4D36] text-white text-xs font-bold transition-all shadow-xs"
-                >
-                  <span>Pelajari Profil &amp; Filosofi SinergiCSR Selengkapnya</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-              </div>
-            </div>
-
-            {/* Right Column: Visual Brand Card with Live Stats & Imagery */}
-            <div className="lg:col-span-5 relative">
-              <div className="relative rounded-3xl overflow-hidden border border-slate-200/90 shadow-xl bg-slate-900 group">
-                <img
-                  src="/images/volunteers_planting_field.jpg"
-                  alt="Aktivitas Kolaborasi Komunitas SinergiCSR"
-                  className="w-full h-80 sm:h-96 object-cover object-center group-hover:scale-103 transition-transform duration-500 opacity-90"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
-
-                {/* Floating Frosted Pill at Top */}
-                <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-[11px] font-semibold border border-white/20">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#D4F63D]" />
-                    <span>Orkestrator CSR Terstandarisasi</span>
-                  </div>
-                  <span className="text-[10px] font-bold text-emerald-300 font-mono bg-black/40 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/10">
-                    EST. 2026
-                  </span>
-                </div>
-
-                {/* Floating Metric Card at Bottom */}
-                <div className="absolute bottom-4 inset-x-4 p-4 rounded-2xl bg-black/60 backdrop-blur-md border border-white/15 text-white space-y-2.5">
-                  <div className="grid grid-cols-3 gap-2 text-center divide-x divide-white/15">
-                    <div>
-                      <span className="text-[10px] text-white/60 block">Inisiatif</span>
-                      <span className="text-base sm:text-lg font-black text-[#D4F63D]">{programs.length} Program</span>
-                    </div>
-                    <div>
-                      <span className="text-[10px] text-white/60 block">Kepatuhan</span>
-                      <span className="text-base sm:text-lg font-black text-white">100% BAST</span>
-                    </div>
-                    <div>
-                      <span className="text-[10px] text-white/60 block">Mitra Funder</span>
-                      <span className="text-base sm:text-lg font-black text-emerald-300">{funders.length} Korporasi</span>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -1507,7 +1380,7 @@ export const LandingPage: React.FC = () => {
       <footer className="bg-[#072418] text-white relative overflow-hidden pt-16 sm:pt-20 pb-10">
         {/* Ambient Decorative Background Accents */}
         <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-10 w-[400px] h-[400px] bg-[#FDE047]/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-10 w-[400px] h-[400px] bg-[#D4F63D]/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Top Integrated Executive CTA Card (Inspired by Econest Bottom Callout Banner) */}
@@ -1516,7 +1389,7 @@ export const LandingPage: React.FC = () => {
             <div className="absolute right-0 top-0 bottom-0 w-72 opacity-15 pointer-events-none">
               <svg width="100%" height="100%" fill="none">
                 <pattern id="footer-cta-dots" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
-                  <circle cx="3" cy="3" r="2" fill="#FDE047" />
+                  <circle cx="3" cy="3" r="2" fill="#D4F63D" />
                 </pattern>
                 <rect width="100%" height="100%" fill="url(#footer-cta-dots)" />
               </svg>
@@ -1524,12 +1397,12 @@ export const LandingPage: React.FC = () => {
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
               <div className="lg:col-span-7 space-y-3 text-left">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-[#FDE047] text-xs font-bold">
-                  <Sparkles className="w-3.5 h-3.5 text-[#FDE047]" />
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-[#D4F63D] text-xs font-bold">
+                  <Sparkles className="w-3.5 h-3.5 text-[#D4F63D]" />
                   <span>Akses Langsung ke Sistem Orkestrasi</span>
                 </div>
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight">
-                  Siap Membangun Tata Kelola CSR yang <span className="text-[#FDE047]">Transparan & Terukur?</span>
+                  Siap Membangun Tata Kelola CSR yang <span className="text-[#D4F63D]">Transparan &amp; Terukur?</span>
                 </h2>
                 <p className="text-xs sm:text-sm text-emerald-100/80 max-w-2xl leading-relaxed">
                   Masuk ke dalam dashboard untuk menguji simulasi alokasi dana korporasi, meninjau proposal mitra, memvalidasi bukti geotagging BAST, dan mengekspor laporan PROPER KLHK.
@@ -1539,10 +1412,10 @@ export const LandingPage: React.FC = () => {
               <div className="lg:col-span-5 flex flex-wrap lg:justify-end items-center gap-3.5">
                 <Link
                   to="/dashboard"
-                  className="pl-6 pr-2.5 py-2.5 rounded-full bg-[#FDE047] hover:bg-[#facc15] text-[#072418] text-xs sm:text-sm font-extrabold shadow-xl hover:scale-[1.02] transition-all flex items-center gap-3 group cursor-pointer"
+                  className="pl-6 pr-2.5 py-2.5 rounded-full bg-[#D4F63D] hover:bg-[#C2E82E] text-[#072418] text-xs sm:text-sm font-extrabold shadow-xl hover:scale-[1.02] transition-all flex items-center gap-3 group cursor-pointer"
                 >
                   <span>Masuk ke Dashboard</span>
-                  <span className="w-8 h-8 rounded-full bg-[#072418] text-[#FDE047] flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
+                  <span className="w-8 h-8 rounded-full bg-[#072418] text-[#D4F63D] flex items-center justify-center group-hover:translate-x-0.5 transition-transform">
                     <ArrowRight className="w-4 h-4" />
                   </span>
                 </Link>
@@ -1559,15 +1432,15 @@ export const LandingPage: React.FC = () => {
 
           {/* Main 4-Column Architectural Footer Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-12 border-b border-white/10">
-            {/* Column 1 (4 cols): Clean Brand Logo (without CSR HUB pill) & Mission */}
+            {/* Column 1 (4 cols): Clean Brand Logo & Mission */}
             <div className="lg:col-span-4 space-y-5">
               <div>
                 <Link
                   to="/"
-                  className="inline-flex items-center bg-white px-4 py-2.5 rounded-2xl shadow-md hover:scale-[1.02] transition-transform"
+                  className="inline-flex items-center hover:opacity-90 transition-opacity"
                 >
                   <img
-                    src="/brand/sinergicsr-logo-horizontal.png"
+                    src="/brand/sinergicsr-logo-white.png"
                     alt="SinergiCSR"
                     className="h-8 object-contain"
                   />
@@ -1581,15 +1454,15 @@ export const LandingPage: React.FC = () => {
               {/* Compliance & Framework Pills */}
               <div className="flex flex-wrap items-center gap-2 pt-1">
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-[11px] font-bold text-emerald-200">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#FDE047]" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#D4F63D]" />
                   UU PT No. 40/2007
                 </span>
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-[11px] font-bold text-emerald-200">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#FDE047]" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#D4F63D]" />
                   PROPER KLHK
                 </span>
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-[11px] font-bold text-emerald-200">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#FDE047]" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#D4F63D]" />
                   SDGs Bappenas
                 </span>
               </div>
@@ -1598,51 +1471,51 @@ export const LandingPage: React.FC = () => {
             {/* Column 2 (2 cols): Eksplorasi Halaman */}
             <div className="lg:col-span-2 space-y-4">
               <div className="flex items-center gap-2">
-                <span className="w-1.5 h-4 rounded-full bg-[#FDE047]" />
+                <span className="w-1.5 h-4 rounded-full bg-[#D4F63D]" />
                 <h4 className="text-xs font-extrabold uppercase tracking-wider text-white">
                   Eksplorasi
                 </h4>
               </div>
               <ul className="space-y-2.5 text-xs text-emerald-100/75 font-medium">
                 <li>
-                  <a href="#tentang" className="hover:text-[#FDE047] transition-colors inline-flex items-center gap-1.5 group">
-                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#FDE047] group-hover:translate-x-0.5 transition-all" />
+                  <Link to="/about" className="hover:text-[#D4F63D] transition-colors inline-flex items-center gap-1.5 group">
+                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#D4F63D] group-hover:translate-x-0.5 transition-all" />
                     <span>Tentang Kami</span>
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#pilar" className="hover:text-[#FDE047] transition-colors inline-flex items-center gap-1.5 group">
-                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#FDE047] group-hover:translate-x-0.5 transition-all" />
+                  <a href="#pilar" className="hover:text-[#D4F63D] transition-colors inline-flex items-center gap-1.5 group">
+                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#D4F63D] group-hover:translate-x-0.5 transition-all" />
                     <span>Pilar Program CSR</span>
                   </a>
                 </li>
                 <li>
-                  <a href="#ekosistem" className="hover:text-[#FDE047] transition-colors inline-flex items-center gap-1.5 group">
-                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#FDE047] group-hover:translate-x-0.5 transition-all" />
+                  <a href="#ekosistem" className="hover:text-[#D4F63D] transition-colors inline-flex items-center gap-1.5 group">
+                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#D4F63D] group-hover:translate-x-0.5 transition-all" />
                     <span>Alur Ekosistem</span>
                   </a>
                 </li>
                 <li>
-                  <Link to="/programs" className="hover:text-[#FDE047] transition-colors inline-flex items-center gap-1.5 group">
-                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#FDE047] group-hover:translate-x-0.5 transition-all" />
+                  <Link to="/programs" className="hover:text-[#D4F63D] transition-colors inline-flex items-center gap-1.5 group">
+                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#D4F63D] group-hover:translate-x-0.5 transition-all" />
                     <span>Sub Halaman Katalog Program</span>
                   </Link>
                 </li>
                 <li>
-                  <a href="#mitra" className="hover:text-[#FDE047] transition-colors inline-flex items-center gap-1.5 group">
-                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#FDE047] group-hover:translate-x-0.5 transition-all" />
+                  <a href="#mitra" className="hover:text-[#D4F63D] transition-colors inline-flex items-center gap-1.5 group">
+                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#D4F63D] group-hover:translate-x-0.5 transition-all" />
                     <span>Mitra &amp; Funder</span>
                   </a>
                 </li>
                 <li>
-                  <a href="#award" className="hover:text-[#FDE047] transition-colors inline-flex items-center gap-1.5 group">
-                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#FDE047] group-hover:translate-x-0.5 transition-all" />
+                  <a href="#award" className="hover:text-[#D4F63D] transition-colors inline-flex items-center gap-1.5 group">
+                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#D4F63D] group-hover:translate-x-0.5 transition-all" />
                     <span>Galeri CSR Award</span>
                   </a>
                 </li>
                 <li>
-                  <a href="#regulasi" className="hover:text-[#FDE047] transition-colors inline-flex items-center gap-1.5 group">
-                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#FDE047] group-hover:translate-x-0.5 transition-all" />
+                  <a href="#regulasi" className="hover:text-[#D4F63D] transition-colors inline-flex items-center gap-1.5 group">
+                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#D4F63D] group-hover:translate-x-0.5 transition-all" />
                     <span>Dasar Hukum &amp; Regulasi</span>
                   </a>
                 </li>
@@ -1650,7 +1523,7 @@ export const LandingPage: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => setIsBastModalOpen(true)}
-                    className="hover:text-[#FDE047] transition-colors inline-flex items-center gap-1.5 group cursor-pointer text-left"
+                    className="hover:text-[#D4F63D] transition-colors inline-flex items-center gap-1.5 group cursor-pointer text-left"
                   >
                     <FileCheck2 className="w-3.5 h-3.5 text-emerald-400 group-hover:scale-110 transition-transform" />
                     <span>Generator BAST Resmi</span>
@@ -1662,45 +1535,45 @@ export const LandingPage: React.FC = () => {
             {/* Column 3 (3 cols): Modul Orkestrasi & Tata Kelola */}
             <div className="lg:col-span-3 space-y-4">
               <div className="flex items-center gap-2">
-                <span className="w-1.5 h-4 rounded-full bg-[#FDE047]" />
+                <span className="w-1.5 h-4 rounded-full bg-[#D4F63D]" />
                 <h4 className="text-xs font-extrabold uppercase tracking-wider text-white">
                   Modul Tata Kelola
                 </h4>
               </div>
               <ul className="space-y-2.5 text-xs text-emerald-100/75 font-medium">
                 <li>
-                  <Link to="/dashboard" className="hover:text-[#FDE047] transition-colors inline-flex items-center gap-1.5 group">
-                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#FDE047] group-hover:translate-x-0.5 transition-all" />
+                  <Link to="/dashboard" className="hover:text-[#D4F63D] transition-colors inline-flex items-center gap-1.5 group">
+                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#D4F63D] group-hover:translate-x-0.5 transition-all" />
                     <span>Dashboard Eksekutif Utama</span>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/programs" className="hover:text-[#FDE047] transition-colors inline-flex items-center gap-1.5 group">
-                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#FDE047] group-hover:translate-x-0.5 transition-all" />
-                    <span>Direktori & Milestone Program</span>
+                  <Link to="/dashboard/programs" className="hover:text-[#D4F63D] transition-colors inline-flex items-center gap-1.5 group">
+                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#D4F63D] group-hover:translate-x-0.5 transition-all" />
+                    <span>Direktori &amp; Milestone Program</span>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/proposals" className="hover:text-[#FDE047] transition-colors inline-flex items-center gap-1.5 group">
-                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#FDE047] group-hover:translate-x-0.5 transition-all" />
+                  <Link to="/dashboard/proposals" className="hover:text-[#D4F63D] transition-colors inline-flex items-center gap-1.5 group">
+                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#D4F63D] group-hover:translate-x-0.5 transition-all" />
                     <span>Pipeline Kurasi Proposal</span>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/funding" className="hover:text-[#FDE047] transition-colors inline-flex items-center gap-1.5 group">
-                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#FDE047] group-hover:translate-x-0.5 transition-all" />
-                    <span>Buku Besar Alokasi & Salur</span>
+                  <Link to="/dashboard/funding" className="hover:text-[#D4F63D] transition-colors inline-flex items-center gap-1.5 group">
+                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#D4F63D] group-hover:translate-x-0.5 transition-all" />
+                    <span>Buku Besar Alokasi &amp; Salur</span>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/reports" className="hover:text-[#FDE047] transition-colors inline-flex items-center gap-1.5 group">
-                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#FDE047] group-hover:translate-x-0.5 transition-all" />
+                  <Link to="/dashboard/reports" className="hover:text-[#D4F63D] transition-colors inline-flex items-center gap-1.5 group">
+                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#D4F63D] group-hover:translate-x-0.5 transition-all" />
                     <span>Generator Laporan PROPER</span>
                   </Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/ecosystem" className="hover:text-[#FDE047] transition-colors inline-flex items-center gap-1.5 group">
-                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#FDE047] group-hover:translate-x-0.5 transition-all" />
+                  <Link to="/dashboard/ecosystem" className="hover:text-[#D4F63D] transition-colors inline-flex items-center gap-1.5 group">
+                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#D4F63D] group-hover:translate-x-0.5 transition-all" />
                     <span>Diagram Alur Ekosistem</span>
                   </Link>
                 </li>
@@ -1710,7 +1583,7 @@ export const LandingPage: React.FC = () => {
             {/* Column 4 (3 cols): Live Status & Environment Card */}
             <div className="lg:col-span-3 space-y-4">
               <div className="flex items-center gap-2">
-                <span className="w-1.5 h-4 rounded-full bg-[#FDE047]" />
+                <span className="w-1.5 h-4 rounded-full bg-[#D4F63D]" />
                 <h4 className="text-xs font-extrabold uppercase tracking-wider text-white">
                   Status Lingkungan Sistem
                 </h4>
@@ -1722,7 +1595,7 @@ export const LandingPage: React.FC = () => {
                     <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                     Sistem Berjalan Normal
                   </span>
-                  <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-md bg-[#FDE047]/20 text-[#FDE047]">
+                  <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-md bg-[#D4F63D]/20 text-[#D4F63D]">
                     MVP Demo
                   </span>
                 </div>
@@ -1737,7 +1610,7 @@ export const LandingPage: React.FC = () => {
                   </span>
                   <Link
                     to="/dashboard/settings"
-                    className="font-bold text-[#FDE047] hover:underline inline-flex items-center gap-1"
+                    className="font-bold text-[#D4F63D] hover:underline inline-flex items-center gap-1"
                   >
                     <span>Reset Data</span>
                     <ArrowRight className="w-3 h-3" />
@@ -1749,19 +1622,19 @@ export const LandingPage: React.FC = () => {
 
           {/* Bottom Copyright & Legal Bar */}
           <div className="pt-7 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-emerald-100/60">
-            <p>© 2026 SinergiCSR. Seluruh hak cipta dilindungi.</p>
+            <p>&copy; {new Date().getFullYear()} SinergiCSR. Seluruh hak cipta dilindungi.</p>
 
             <div className="flex flex-wrap items-center gap-4 sm:gap-6">
               <span className="inline-flex items-center gap-1.5">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#FDE047]" />
+                <ShieldCheck className="w-3.5 h-3.5 text-[#D4F63D]" />
                 <span>Audit Trail Terkunci BAST</span>
               </span>
-              <span className="hidden sm:inline text-white/20">•</span>
+              <span className="hidden sm:inline text-white/20">&bull;</span>
               <Link
                 to="/dashboard/settings"
-                className="hover:text-[#FDE047] text-emerald-100/80 font-semibold transition-colors"
+                className="hover:text-[#D4F63D] text-emerald-100/80 font-semibold transition-colors"
               >
-                Pengaturan Demo & Reset
+                Pengaturan Demo &amp; Reset
               </Link>
             </div>
           </div>
