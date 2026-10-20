@@ -119,10 +119,6 @@ export const PublicProgramsPage: React.FC = () => {
                 className="h-8 sm:h-9 object-contain"
               />
             </Link>
-
-            <div className="hidden xl:flex items-center text-xs font-semibold px-2.5 py-0.5 rounded-full bg-white/10 text-emerald-300 border border-white/10">
-              <span>Katalog Direktori Program</span>
-            </div>
           </div>
 
           {/* Desktop Nav Links */}
@@ -149,14 +145,6 @@ export const PublicProgramsPage: React.FC = () => {
 
           {/* Action CTAs */}
           <div className="flex items-center gap-3">
-            <button
-              onClick={() => setIsMenuBookOpen(true)}
-              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white/10 hover:bg-white/15 text-white text-xs font-bold transition-all cursor-pointer border border-white/10"
-            >
-              <BookOpen className="w-3.5 h-3.5 text-[#D4F63D]" />
-              <span>Buku Menu CSR</span>
-            </button>
-
             <HeaderUserProfile isDarkNavbar={true} />
 
             <Link
@@ -663,6 +651,24 @@ export const PublicProgramsPage: React.FC = () => {
           setIsBookingModalOpen(true);
         }}
       />
+
+      {/* Floating Action Button: Buku Menu CSR */}
+      <aside aria-label="Akses Cepat Buku Menu CSR" className="fixed bottom-6 right-6 z-40 group">
+        <button
+          onClick={() => setIsMenuBookOpen(true)}
+          className="flex items-center gap-2.5 px-4 py-3 rounded-full bg-[#0B2518] hover:bg-[#176B4D] text-white shadow-2xl border border-[#D4F63D]/40 backdrop-blur-md transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
+          title="Buka Buku Menu CSR & Pedoman Program"
+        >
+          <span className="relative flex h-2.5 w-2.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D4F63D] opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#D4F63D]"></span>
+          </span>
+          <div className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-[#D4F63D]/20 transition-colors">
+            <BookOpen className="w-3.5 h-3.5 text-[#D4F63D]" />
+          </div>
+          <span className="text-xs font-bold tracking-wide">Buku Menu CSR</span>
+        </button>
+      </aside>
     </div>
   );
 };
