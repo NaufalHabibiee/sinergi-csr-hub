@@ -1,0 +1,406 @@
+import React, { useState } from 'react';
+import {
+  Scale,
+  BookOpen,
+  FileText,
+  Download,
+  Copy,
+  Check,
+  Search,
+  ExternalLink,
+  ShieldCheck,
+  Info,
+  Calendar,
+  Building2,
+  BookmarkCheck,
+  Layers,
+  ArrowRight
+} from 'lucide-react';
+
+interface RegulationDoc {
+  id: string;
+  category: 'uu' | 'pp' | 'perda' | 'permen';
+  categoryLabel: string;
+  number: string;
+  title: string;
+  year: number;
+  promulgatedBy: string;
+  keyArticles: {
+    article: string;
+    headline: string;
+    excerpt: string;
+    practicalAdvice: string;
+  }[];
+  taxOrComplianceImplication: string;
+  fileSize: string;
+}
+
+export const REGULATIONS_DATA: RegulationDoc[] = [
+  {
+    id: 'reg_01',
+    category: 'uu',
+    categoryLabel: 'Undang-Undang',
+    number: 'UU No. 40 Tahun 2007',
+    title: 'Undang-Undang Republik Indonesia tentang Perseroan Terbatas (Pasal 74 TJSL)',
+    year: 2007,
+    promulgatedBy: 'Presiden Republik Indonesia & DPR RI',
+    keyArticles: [
+      {
+        article: 'Pasal 74 Ayat (1)',
+        headline: 'Mandat Wajib TJSL bagi Perseroan Berbasis SDA',
+        excerpt: 'Perseroan yang menjalankan kegiatan usahanya di bidang dan/atau berkaitan dengan sumber daya alam wajib melaksanakan Tanggung Jawab Sosial dan Lingkungan.',
+        practicalAdvice: 'Wajib mengalokasikan program bina lingkungan dan konservasi secara berkala dalam RKAP tahunan.'
+      },
+      {
+        article: 'Pasal 74 Ayat (2)',
+        headline: 'Anggaran TJSL Diperhitungkan sebagai Biaya Perseroan',
+        excerpt: 'Tanggung Jawab Sosial dan Lingkungan sebagaimana dimaksud pada ayat (1) merupakan kewajiban Perseroan yang dianggarkan dan diperhitungkan sebagai biaya Perseroan yang pelaksanaannya dilakukan dengan memperhatikan kepatutan dan kewajaran.',
+        practicalAdvice: 'Alokasi dana CSR sah dicatat dalam pos beban operasional perseroan yang wajar dan dapat diaudit.'
+      }
+    ],
+    taxOrComplianceImplication: 'Wajib dicantumkan dalam Laporan Tahunan Direksi kepada RUPS dan kepatuhan audit akuntan publik.',
+    fileSize: '1.4 MB'
+  },
+  {
+    id: 'reg_02',
+    category: 'pp',
+    categoryLabel: 'Peraturan Pemerintah',
+    number: 'PP No. 47 Tahun 2012',
+    title: 'Peraturan Pemerintah tentang Tanggung Jawab Sosial dan Lingkungan Perseroan Terbatas',
+    year: 2012,
+    promulgatedBy: 'Pemerintah Republik Indonesia',
+    keyArticles: [
+      {
+        article: 'Pasal 3 & 4',
+        headline: 'Penyusunan Rencana Kerja & Kepatutan Anggaran',
+        excerpt: 'TJSL dilaksanakan oleh Direksi berdasarkan rencana kerja tahunan Perseroan setelah mendapat persetujuan Dewan Komisaris atau RUPS. Rencana kerja memuat rencana kegiatan dan anggaran yang dibutuhkan.',
+        practicalAdvice: 'Menjamin kepastian legalitas bagi Dewan Direksi sebelum mencairkan dana kemitraan kepada mitra pelaksana.'
+      },
+      {
+        article: 'Pasal 6',
+        headline: 'Laporan Pelaksanaan & Hak Apresiasi Pemerintah',
+        excerpt: 'Pelaksanaan TJSL dimuat dalam laporan tahunan Perseroan dan dipertanggungjawabkan kepada RUPS. Perseroan yang berperan serta dapat diberikan penghargaan oleh instansi yang berwenang.',
+        practicalAdvice: 'Dasar hukum penganugerahan CSR Award dan sertifikat apresiasi resmi kepala daerah.'
+      }
+    ],
+    taxOrComplianceImplication: 'Memenuhi syarat transparansi pelaporan non-keuangan (ESG Governance Pillar).',
+    fileSize: '820 KB'
+  },
+  {
+    id: 'reg_03',
+    category: 'perda',
+    categoryLabel: 'Peraturan Daerah (Perda)',
+    number: 'Perda Jabar No. 2 Tahun 2013',
+    title: 'Peraturan Daerah Provinsi Jawa Barat tentang Pedoman Pengelolaan TJSLP & PKBL',
+    year: 2013,
+    promulgatedBy: 'Gubernur & DPRD Provinsi Jawa Barat',
+    keyArticles: [
+      {
+        article: 'Pasal 8 & 9',
+        headline: 'Pembentukan Tim Fasilitasi CSR Kemitraan Daerah',
+        excerpt: 'Pemerintah Daerah membentuk Tim Fasilitasi Kemitraan CSR untuk menyelaraskan prioritas pembangunan daerah dengan program tanggung jawab sosial korporasi tanpa membebani perusahaan dengan pungutan liar.',
+        practicalAdvice: 'Platform SinergiCSR bertindak sebagai hub sinkronisasi antara Buku Menu Daerah dan komitmen korporasi.'
+      },
+      {
+        article: 'Pasal 14',
+        headline: 'Sinergi Musrenbang Desa & Daerah',
+        excerpt: 'Program kemitraan diarahkan untuk menjawab aspirasi kebutuhan riil masyarakat yang dihimpun dari musyawarah perencanaan pembangunan (Musrenbang).',
+        practicalAdvice: 'Menjamin program yang didanai korporasi tepat sasaran dan tidak tumpang-tindih (zero overlap) dengan APBD.'
+      }
+    ],
+    taxOrComplianceImplication: 'Mendapat perlindungan regulasi daerah dan prioritas rekomendasi penghargaan gubernur.',
+    fileSize: '2.1 MB'
+  },
+  {
+    id: 'reg_04',
+    category: 'perda',
+    categoryLabel: 'Peraturan Gubernur (Pergub)',
+    number: 'Pergub Jabar No. 30 Tahun 2018',
+    title: 'Petunjuk Pelaksanaan Pengelolaan Tanggung Jawab Sosial dan Lingkungan Perusahaan',
+    year: 2018,
+    promulgatedBy: 'Gubernur Jawa Barat',
+    keyArticles: [
+      {
+        article: 'Pasal 12 & 15',
+        headline: 'Penerbitan Berita Acara Serah Terima (BAST)',
+        excerpt: 'Setiap penyelesaian program fisik maupun non-fisik wajib dituangkan dalam Berita Acara Serah Terima (BAST) antara perusahaan, mitra pelaksana, dan kelompok penerima manfaat yang diketahui Tim Fasilitasi.',
+        practicalAdvice: 'BAST resmi adalah dokumen pertanggungjawaban final yang wajib diunggah pada platform pelaporan.'
+      }
+    ],
+    taxOrComplianceImplication: 'BAST menjadi prasyarat validasi bebas sengketa dan penerbitan piagam kemitraan resmi.',
+    fileSize: '950 KB'
+  },
+  {
+    id: 'reg_05',
+    category: 'permen',
+    categoryLabel: 'Peraturan Menteri',
+    number: 'Permen BUMN No. PER-05/MBU/04/2021',
+    title: 'Program Tanggung Jawab Sosial dan Lingkungan Badan Usaha Milik Negara',
+    year: 2021,
+    promulgatedBy: 'Menteri Badan Usaha Milik Negara RI',
+    keyArticles: [
+      {
+        article: 'Pasal 4',
+        headline: '3 Pilar Utama Sasaran TJSL BUMN',
+        excerpt: 'Program TJSL BUMN wajib memprioritaskan 3 pilar: (1) Pendidikan berkualitas, (2) Lingkungan hidup berkelanjutan, dan (3) Pengembangan Usaha Mikro dan Kecil (UMKM).',
+        practicalAdvice: 'Sangat cocok dengan program Beasiswa Vokasi, Restorasi Mangrove, dan Sentra UMKM SinergiCSR.'
+      },
+      {
+        article: 'Pasal 18',
+        headline: 'Pengukuran Dampak Berbasis SROI & SDGs',
+        excerpt: 'Pelaksanaan program TJSL BUMN dinilai berdasarkan indikator pencapaian Tujuan Pembangunan Berkelanjutan (TPB/SDGs) dan rasio pengembalian sosial atas investasi (Social Return on Investment).',
+        practicalAdvice: 'Metrik SROI platform ini telah memenuhi pedoman kementerian BUMN.'
+      }
+    ],
+    taxOrComplianceImplication: 'Standar audit BPK & Kementerian BUMN atas pengelolaan dana TJSL BUMN.',
+    fileSize: '1.8 MB'
+  },
+  {
+    id: 'reg_06',
+    category: 'permen',
+    categoryLabel: 'Peraturan Menteri',
+    number: 'Permen LHK No. 1 Tahun 2021',
+    title: 'Program Penilaian Peringkat Kinerja Perusahaan dalam Pengelolaan Lingkungan Hidup (PROPER)',
+    year: 2021,
+    promulgatedBy: 'Menteri Lingkungan Hidup dan Kehutanan RI',
+    keyArticles: [
+      {
+        article: 'Lampiran V',
+        headline: 'Kriteria Inovasi Sosial Penilaian PROPER Hijau & Emas',
+        excerpt: 'Peringkat Emas diberikan kepada perusahaan yang melakukan pemberdayaan masyarakat melalui program inovasi sosial yang menjawab akar masalah kemiskinan dan kelestarian ekosistem lokal.',
+        practicalAdvice: 'Program Gambut Pelalawan dan Mangrove Muara Gembong dirancang memenuhi standar dokumen ringkasan kinerja (DRK) PROPER.'
+      }
+    ],
+    taxOrComplianceImplication: 'Memperoleh predikat PROPER Hijau / Emas dari Kementerian LHK RI.',
+    fileSize: '3.2 MB'
+  },
+  {
+    id: 'reg_07',
+    category: 'pp',
+    categoryLabel: 'Peraturan Pemerintah (Pajak)',
+    number: 'PP No. 93 Tahun 2010',
+    title: 'Sumbangan Fasilitas Pendidikan, Bencana & Litbang yang Dapat Dikurangkan dari Penghasilan Bruto (Tax Deduction)',
+    year: 2010,
+    promulgatedBy: 'Presiden Republik Indonesia',
+    keyArticles: [
+      {
+        article: 'Pasal 1 & 2',
+        headline: 'Pengurang Penghasilan Bruto (Gross Income Tax Deduction)',
+        excerpt: 'Sumbangan fasilitas pendidikan dan penelitian yang disalurkan melalui lembaga berbadan hukum sah dapat dikurangkan dari penghasilan bruto perseroan maksimal 5% dari penghasilan neto tahun sebelumnya.',
+        practicalAdvice: 'SinergiCSR menyediakan bukti potong dan rekapitulasi BAST terverifikasi untuk pelaporan SPT Badan.'
+      }
+    ],
+    taxOrComplianceImplication: 'Insentif pengurang beban pajak penghasilan badan resmi (PPh Badan).',
+    fileSize: '740 KB'
+  }
+];
+
+export const CSRRegulationsSection: React.FC = () => {
+  const [selectedCategory, setSelectedCategory] = useState<'all' | 'uu' | 'pp' | 'perda' | 'permen'>('all');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [copiedArticle, setCopiedArticle] = useState<string | null>(null);
+  const [downloadSuccessToast, setDownloadSuccessToast] = useState<string | null>(null);
+
+  const filteredDocs = REGULATIONS_DATA.filter((doc) => {
+    const matchesCat = selectedCategory === 'all' || doc.category === selectedCategory;
+    const matchesSearch =
+      doc.number.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      doc.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      doc.keyArticles.some(
+        (a) =>
+          a.headline.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          a.excerpt.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    return matchesCat && matchesSearch;
+  });
+
+  const handleCopyCitation = (text: string, id: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedArticle(id);
+    setTimeout(() => setCopiedArticle(null), 2500);
+  };
+
+  const handleDownload = (doc: RegulationDoc) => {
+    setDownloadSuccessToast(`Mengunduh salinan resmi ${doc.number}... Dokumen PDF siap dibuka.`);
+    setTimeout(() => setDownloadSuccessToast(null), 4000);
+  };
+
+  return (
+    <section id="regulasi" className="scroll-mt-20 py-20 lg:py-28 bg-white border-t border-slate-150/80 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div className="space-y-3 max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E8F6F0] text-[#176B4D] text-xs font-bold uppercase tracking-wider">
+              <Scale className="w-4 h-4 text-[#176B4D]" />
+              <span>Dasar Hukum &amp; Kepatuhan Audit PROPER</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0B2518] tracking-tight leading-tight">
+              Pusat Regulasi Kemitraan CSR &amp; <span className="text-[#176B4D]">Tax Deduction</span>
+            </h2>
+            <p className="text-xs sm:text-sm text-ink-secondary leading-relaxed">
+              Landasan legalitas formal Undang-Undang PT, Peraturan Pemerintah, Perda Tim Fasilitasi, Permen BUMN, dan Kriteria PROPER KLHK sebagai payung hukum sah dan insentif pemotongan pajak (tax deduction).
+            </p>
+          </div>
+
+          <div className="flex items-center gap-3 text-xs">
+            <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
+              <span className="text-slate-400 block text-[10px]">Total Payung Hukum:</span>
+              <span className="font-extrabold text-[#176B4D] text-sm">7 Regulasi Utama</span>
+            </div>
+            <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
+              <span className="text-slate-400 block text-[10px]">Insentif Pajak:</span>
+              <span className="font-extrabold text-amber-700 text-sm">Max 5% Tax Cut</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Download Toast Notification */}
+        {downloadSuccessToast && (
+          <div className="p-3.5 rounded-2xl bg-emerald-50 border border-emerald-300 text-xs text-emerald-900 font-semibold flex items-center gap-2.5 animate-fadeIn">
+            <BookmarkCheck className="w-4 h-4 text-[#176B4D]" />
+            <span>{downloadSuccessToast}</span>
+          </div>
+        )}
+
+        {/* Search & Category Filter Toolbar */}
+        <div className="bg-slate-50 p-4 sm:p-5 rounded-3xl border border-slate-200/90 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex flex-wrap items-center gap-1.5 w-full md:w-auto text-xs">
+            {[
+              { id: 'all', label: 'Semua Regulasi' },
+              { id: 'uu', label: 'Undang-Undang' },
+              { id: 'pp', label: 'PP & Tax Deduction' },
+              { id: 'perda', label: 'Perda & Pergub' },
+              { id: 'permen', label: 'Permen BUMN / KLHK' }
+            ].map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setSelectedCategory(cat.id as any)}
+                className={`px-3.5 py-1.5 rounded-xl font-bold transition-all cursor-pointer ${
+                  selectedCategory === cat.id
+                    ? 'bg-[#176B4D] text-white shadow-xs'
+                    : 'bg-white hover:bg-slate-200/80 text-slate-600 border border-slate-200'
+                }`}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
+
+          <div className="relative w-full md:w-72">
+            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <input
+              type="text"
+              placeholder="Cari nomor regulasi / topik..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-10 pr-3.5 py-2 bg-white border border-slate-200 rounded-2xl text-xs text-slate-900 focus:outline-none focus:border-[#176B4D]"
+            />
+          </div>
+        </div>
+
+        {/* Regulations Grid Directly on Page */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredDocs.map((doc) => (
+            <div
+              key={doc.id}
+              className="bg-white rounded-3xl p-6 border border-slate-200/90 hover:border-[#176B4D] hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group space-y-4"
+            >
+              <div className="space-y-3.5">
+                {/* Header Tag */}
+                <div className="flex items-center justify-between">
+                  <span
+                    className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full ${
+                      doc.category === 'uu'
+                        ? 'bg-rose-50 text-rose-700 border border-rose-200'
+                        : doc.category === 'pp'
+                        ? 'bg-blue-50 text-blue-700 border border-blue-200'
+                        : doc.category === 'perda'
+                        ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
+                        : 'bg-purple-50 text-purple-700 border border-purple-200'
+                    }`}
+                  >
+                    {doc.categoryLabel}
+                  </span>
+                  <span className="text-[11px] font-mono text-slate-400 font-bold">
+                    Tahun {doc.year}
+                  </span>
+                </div>
+
+                {/* Regulation Number & Title */}
+                <div>
+                  <div className="text-xs font-mono font-bold text-[#176B4D]">
+                    {doc.number}
+                  </div>
+                  <h3 className="font-bold text-sm sm:text-base text-slate-900 group-hover:text-[#176B4D] transition-colors leading-snug mt-0.5 line-clamp-2">
+                    {doc.title}
+                  </h3>
+                  <div className="text-[11px] text-slate-400 mt-1">
+                    {doc.promulgatedBy}
+                  </div>
+                </div>
+
+                {/* Compliance / Tax Implication Box */}
+                <div className="p-3 rounded-xl bg-amber-50/70 border border-amber-200/80 text-[11px] text-amber-900 leading-relaxed">
+                  <span className="font-bold block mb-0.5 text-amber-950 flex items-center gap-1">
+                    <ShieldCheck className="w-3.5 h-3.5 text-amber-700" />
+                    <span>Implikasi Akuntansi &amp; Pajak:</span>
+                  </span>
+                  {doc.taxOrComplianceImplication}
+                </div>
+
+                {/* Key Excerpts */}
+                <div className="space-y-2 pt-1 border-t border-slate-100">
+                  {doc.keyArticles.slice(0, 1).map((art, idx) => {
+                    const copyKey = `${doc.id}_${idx}`;
+                    const isCopied = copiedArticle === copyKey;
+                    const citationText = `[Dasar Hukum] ${doc.number} - ${art.article}: "${art.excerpt}"`;
+
+                    return (
+                      <div key={idx} className="p-3 rounded-xl bg-slate-50 border border-slate-200/70 space-y-1.5 text-xs">
+                        <div className="flex items-center justify-between font-bold text-slate-800 text-[11px]">
+                          <span>{art.article}: {art.headline}</span>
+                          <button
+                            type="button"
+                            onClick={() => handleCopyCitation(citationText, copyKey)}
+                            title="Salin kutipan legal untuk proposal ke Direksi"
+                            className="inline-flex items-center gap-1 text-[10px] text-[#176B4D] hover:underline cursor-pointer"
+                          >
+                            {isCopied ? (
+                              <span className="text-emerald-700 font-bold">Tersalin!</span>
+                            ) : (
+                              <>
+                                <Copy className="w-3 h-3" />
+                                <span>Salin</span>
+                              </>
+                            )}
+                          </button>
+                        </div>
+                        <p className="italic text-slate-600 text-[11px] line-clamp-2">
+                          &ldquo;{art.excerpt}&rdquo;
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="pt-2 border-t border-slate-100 flex items-center justify-between gap-2">
+                <span className="text-[10px] text-slate-400">{doc.fileSize} PDF</span>
+                <button
+                  type="button"
+                  onClick={() => handleDownload(doc)}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#176B4D] hover:bg-[#0E4D36] text-white text-xs font-bold transition-all cursor-pointer shadow-xs"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  <span>Unduh Dokumen PDF</span>
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};

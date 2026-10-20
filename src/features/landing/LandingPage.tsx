@@ -42,8 +42,8 @@ import { useCSRStore } from '../../context/CSRStoreContext';
 import { CSRMenuBookModal } from '../programs/CSRMenuBookModal';
 import { ProjectBookingModal } from '../programs/ProjectBookingModal';
 import { CommunityAspirationModal } from '../programs/CommunityAspirationModal';
-import { CSRAwardsModal } from '../awards/CSRAwardsModal';
-import { CSRRegulationsModal } from '../legal/CSRRegulationsModal';
+import { CSRAwardsSection } from '../awards/CSRAwardsSection';
+import { CSRRegulationsSection } from '../legal/CSRRegulationsSection';
 import { BASTGeneratorModal } from '../reports/BASTGeneratorModal';
 import { Program } from '../../types/csr';
 
@@ -83,8 +83,6 @@ export const LandingPage: React.FC = () => {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [selectedBookingProgram, setSelectedBookingProgram] = useState<Program | null>(null);
   const [isAspirationModalOpen, setIsAspirationModalOpen] = useState(false);
-  const [isAwardsModalOpen, setIsAwardsModalOpen] = useState(false);
-  const [isRegulationsModalOpen, setIsRegulationsModalOpen] = useState(false);
   const [isBastModalOpen, setIsBastModalOpen] = useState(false);
 
   const handlePrevMission = () => {
@@ -201,30 +199,6 @@ export const LandingPage: React.FC = () => {
               >
                 Mitra
               </a>
-              <button
-                type="button"
-                onClick={() => setIsAwardsModalOpen(true)}
-                className={`transition-colors duration-200 py-1 cursor-pointer flex items-center gap-1 font-semibold ${
-                  isScrolled
-                    ? 'text-amber-800 hover:text-amber-900'
-                    : 'text-amber-300 hover:text-amber-200'
-                }`}
-              >
-                <Trophy className="w-3.5 h-3.5" />
-                <span>CSR Award</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => setIsRegulationsModalOpen(true)}
-                className={`transition-colors duration-200 py-1 cursor-pointer flex items-center gap-1 ${
-                  isScrolled
-                    ? 'text-ink-secondary hover:text-brand-primary'
-                    : 'text-white/80 hover:text-white'
-                }`}
-              >
-                <Scale className="w-3.5 h-3.5" />
-                <span>Regulasi</span>
-              </button>
             </nav>
 
             {/* Right: Masuk link + Vibrant Lime Pill Button */}
@@ -306,39 +280,20 @@ export const LandingPage: React.FC = () => {
               >
                 Mitra
               </a>
-              <button
-                type="button"
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  setIsAwardsModalOpen(true);
-                }}
-                className="w-full text-left py-2 hover:text-amber-300 flex items-center gap-2 cursor-pointer text-amber-300 font-bold"
+              <a
+                href="#award"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block py-2 hover:text-[#D4F63D]"
               >
-                <Trophy className="w-4 h-4" />
-                <span>CSR Award 2025/2026</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  setIsRegulationsModalOpen(true);
-                }}
-                className="w-full text-left py-2 hover:text-[#D4F63D] flex items-center gap-2 cursor-pointer"
+                CSR Award
+              </a>
+              <a
+                href="#regulasi"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block py-2 hover:text-[#D4F63D]"
               >
-                <Scale className="w-4 h-4" />
-                <span>Pusat Regulasi &amp; Dasar Hukum</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  setIsBastModalOpen(true);
-                }}
-                className="w-full text-left py-2 hover:text-[#D4F63D] flex items-center gap-2 cursor-pointer"
-              >
-                <FileCheck2 className="w-4 h-4" />
-                <span>Generator BAST Terstandar</span>
-              </button>
+                Regulasi
+              </a>
               <div className="pt-2 border-t border-border-subtle/40 flex flex-col gap-2">
                 <Link
                   to="/login"
@@ -792,10 +747,10 @@ export const LandingPage: React.FC = () => {
                   <span>Buka Buku Menu Kemitraan (Menu Book)</span>
                 </button>
                 <Link
-                  to="/dashboard/programs"
+                  to="/programs"
                   className="inline-flex items-center gap-1.5 text-xs font-bold text-[#176B4D] hover:underline"
                 >
-                  <span>Direktori Program</span>
+                  <span>Sub Halaman Katalog Program</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
@@ -970,11 +925,11 @@ export const LandingPage: React.FC = () => {
                 <span>Ajukan Kebutuhan Desa</span>
               </button>
               <Link
-                to="/dashboard/ecosystem"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-bold transition-all cursor-pointer"
+                to="/programs"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#D4F63D] hover:bg-[#C2E82E] text-black text-xs font-bold transition-all shadow-xs cursor-pointer"
               >
-                <Compass className="w-3.5 h-3.5 text-[#176B4D]" />
-                <span>Buka Peta Spasial (GIS)</span>
+                <span>Buka Sub Halaman Katalog Program</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
           </div>
@@ -1294,15 +1249,14 @@ export const LandingPage: React.FC = () => {
                 </div>
               </div>
               <div className="pt-2 border-t border-slate-100">
-                <button
-                  type="button"
-                  onClick={() => setIsRegulationsModalOpen(true)}
+                <a
+                  href="#regulasi"
                   className="inline-flex items-center gap-1.5 text-xs font-bold text-[#176B4D] hover:underline cursor-pointer"
                 >
                   <Scale className="w-3.5 h-3.5" />
-                  <span>Dasar Hukum &amp; Regulasi</span>
+                  <span>Lihat Dasar Hukum &amp; Regulasi</span>
                   <ArrowRight className="w-3 h-3" />
-                </button>
+                </a>
               </div>
             </div>
           </div>
@@ -1383,19 +1337,25 @@ export const LandingPage: React.FC = () => {
               </div>
             </div>
 
-            <button
-              type="button"
-              onClick={() => setIsAwardsModalOpen(true)}
+            <a
+              href="#award"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-amber-400 hover:bg-amber-300 text-amber-950 font-bold text-xs shadow-md transition-all cursor-pointer shrink-0 relative z-10"
             >
               <Trophy className="w-4 h-4" />
-              <span>Buka Galeri CSR Award</span>
-            </button>
+              <span>Lihat Galeri CSR Award Di Bawah</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </a>
           </div>
         </div>
       </section>
 
-      {/* 9 & 10. Executive Pre-Footer Banner & Architectural Footer */}
+      {/* 9. Section: Galeri CSR Award & Leaderboard Mitra Unggul */}
+      <CSRAwardsSection />
+
+      {/* 10. Section: Pusat Regulasi & Dasar Hukum Kemitraan */}
+      <CSRRegulationsSection />
+
+      {/* 11. Executive Pre-Footer Banner & Architectural Footer */}
       <footer className="bg-[#072418] text-white relative overflow-hidden pt-16 sm:pt-20 pb-10">
         {/* Ambient Decorative Background Accents */}
         <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
@@ -1515,30 +1475,28 @@ export const LandingPage: React.FC = () => {
                   </a>
                 </li>
                 <li>
+                  <Link to="/programs" className="hover:text-[#FDE047] transition-colors inline-flex items-center gap-1.5 group">
+                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#FDE047] group-hover:translate-x-0.5 transition-all" />
+                    <span>Sub Halaman Katalog Program</span>
+                  </Link>
+                </li>
+                <li>
                   <a href="#mitra" className="hover:text-[#FDE047] transition-colors inline-flex items-center gap-1.5 group">
                     <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#FDE047] group-hover:translate-x-0.5 transition-all" />
-                    <span>Mitra & Funder</span>
+                    <span>Mitra &amp; Funder</span>
                   </a>
                 </li>
                 <li>
-                  <button
-                    type="button"
-                    onClick={() => setIsAwardsModalOpen(true)}
-                    className="hover:text-[#FDE047] text-amber-300 font-semibold transition-colors inline-flex items-center gap-1.5 group cursor-pointer"
-                  >
-                    <Trophy className="w-3.5 h-3.5 text-amber-400 group-hover:scale-110 transition-transform" />
+                  <a href="#award" className="hover:text-[#FDE047] transition-colors inline-flex items-center gap-1.5 group">
+                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#FDE047] group-hover:translate-x-0.5 transition-all" />
                     <span>Galeri CSR Award</span>
-                  </button>
+                  </a>
                 </li>
                 <li>
-                  <button
-                    type="button"
-                    onClick={() => setIsRegulationsModalOpen(true)}
-                    className="hover:text-[#FDE047] transition-colors inline-flex items-center gap-1.5 group cursor-pointer text-left"
-                  >
-                    <Scale className="w-3.5 h-3.5 text-emerald-400 group-hover:scale-110 transition-transform" />
+                  <a href="#regulasi" className="hover:text-[#FDE047] transition-colors inline-flex items-center gap-1.5 group">
+                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#FDE047] group-hover:translate-x-0.5 transition-all" />
                     <span>Dasar Hukum &amp; Regulasi</span>
-                  </button>
+                  </a>
                 </li>
                 <li>
                   <button
@@ -1683,18 +1641,6 @@ export const LandingPage: React.FC = () => {
       <CommunityAspirationModal
         isOpen={isAspirationModalOpen}
         onClose={() => setIsAspirationModalOpen(false)}
-      />
-
-      {/* Point 5: CSR Awards & Hall of Fame Modal */}
-      <CSRAwardsModal
-        isOpen={isAwardsModalOpen}
-        onClose={() => setIsAwardsModalOpen(false)}
-      />
-
-      {/* Point 6: CSR Legal Regulations & Basis Modal */}
-      <CSRRegulationsModal
-        isOpen={isRegulationsModalOpen}
-        onClose={() => setIsRegulationsModalOpen(false)}
       />
 
       {/* Point 7: Standardized BAST Generator Modal */}

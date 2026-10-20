@@ -319,7 +319,8 @@ export const SEED_PROGRAMS: Program[] = [
       { id: 'evi_003', title: 'Daftar Presensi Pelatihan Pembibitan Nelayan', date: '2026-03-15', category: 'daftar_hadir', url: '#', uploadedBy: 'Hendra Gunawan', verifiedDemo: true }
     ],
     createdAt: '2026-01-10',
-    updatedAt: '2026-03-25'
+    updatedAt: '2026-03-25',
+    thumbnailUrl: '/images/volunteers_planting_saplings.jpg'
   },
   {
     id: 'prg_002',
@@ -352,7 +353,8 @@ export const SEED_PROGRAMS: Program[] = [
       { id: 'evi_005', title: 'Dokumentasi Penyerahan Laptop Edukasi', date: '2026-02-18', category: 'foto_kegiatan', url: '#', uploadedBy: 'Nurul Hidayati', verifiedDemo: true }
     ],
     createdAt: '2026-01-20',
-    updatedAt: '2026-03-20'
+    updatedAt: '2026-03-20',
+    thumbnailUrl: '/images/program_beasiswa_vokasi.jpg'
   },
   {
     id: 'prg_003',
@@ -384,7 +386,8 @@ export const SEED_PROGRAMS: Program[] = [
       { id: 'evi_006', title: 'Laporan Fasilitasi Audit Halal Tahap 1', date: '2026-03-01', category: 'laporan_keuangan', url: '#', uploadedBy: 'Siti Aminah', verifiedDemo: true }
     ],
     createdAt: '2026-02-01',
-    updatedAt: '2026-03-18'
+    updatedAt: '2026-03-18',
+    thumbnailUrl: '/images/program_umkm_culinary.jpg'
   },
   {
     id: 'prg_004',
@@ -416,7 +419,8 @@ export const SEED_PROGRAMS: Program[] = [
       { id: 'evi_007', title: 'Hasil Skrining Awal Puskesmas Niki-Niki', date: '2026-02-12', category: 'laporan_keuangan', url: '#', uploadedBy: 'Farhan Malik', verifiedDemo: true }
     ],
     createdAt: '2026-01-18',
-    updatedAt: '2026-03-10'
+    updatedAt: '2026-03-10',
+    thumbnailUrl: '/images/program_stunting_posyandu.jpg'
   },
   {
     id: 'prg_005',
@@ -448,7 +452,8 @@ export const SEED_PROGRAMS: Program[] = [
       { id: 'evi_008', title: 'Sertifikat Uji Kelayakan Kualitas Air Labkesda', date: '2026-03-02', category: 'berita_acara', url: '#', uploadedBy: 'Agus Wibowo', verifiedDemo: true }
     ],
     createdAt: '2026-01-02',
-    updatedAt: '2026-03-24'
+    updatedAt: '2026-03-24',
+    thumbnailUrl: '/images/program_water_solar.jpg'
   },
   {
     id: 'prg_006',
@@ -480,7 +485,8 @@ export const SEED_PROGRAMS: Program[] = [
       { id: 'evi_009', title: 'MoU Kemitraan Restorasi dengan KPH Riau', date: '2026-02-14', category: 'berita_acara', url: '#', uploadedBy: 'Yohanes Ronald', verifiedDemo: true }
     ],
     createdAt: '2026-02-05',
-    updatedAt: '2026-03-22'
+    updatedAt: '2026-03-22',
+    thumbnailUrl: '/images/program_peatland_patrol.jpg'
   },
   {
     id: 'prg_007',
@@ -512,7 +518,8 @@ export const SEED_PROGRAMS: Program[] = [
       { id: 'evi_010', title: 'Laporan Evaluasi Akhir & Daftar Penempatan Kerja', date: '2026-03-01', category: 'laporan_keuangan', url: '#', uploadedBy: 'Lestari Rahayu', verifiedDemo: true }
     ],
     createdAt: '2025-08-15',
-    updatedAt: '2026-03-02'
+    updatedAt: '2026-03-02',
+    thumbnailUrl: '/images/program_vokasi_disabilitas.jpg'
   },
   {
     id: 'prg_008',
@@ -541,7 +548,128 @@ export const SEED_PROGRAMS: Program[] = [
     ],
     evidenceList: [],
     createdAt: '2026-02-25',
-    updatedAt: '2026-03-20'
+    updatedAt: '2026-03-20',
+    thumbnailUrl: '/images/program_lumbung_organik.jpg'
+  },
+  {
+    id: 'prg_009',
+    code: 'PRG-2026-009',
+    title: 'Elektrifikasi Pembangkit Listrik Tenaga Mikrohidro (PLTMH) Desa Tertinggal',
+    summary: 'Pembangunan turbin mikrohidro 15 kW memanfaatkan aliran sungai pegunungan untuk menerangi 120 kepala keluarga dan sentra penggilingan kopi rakyat.',
+    category: 'infrastruktur',
+    location: 'Rancakalong, Sumedang',
+    province: 'Jawa Barat',
+    partnerId: 'ptr_002',
+    funderId: 'fnd_001',
+    proposedBudget: 600_000_000,
+    approvedBudget: 600_000_000,
+    committedAmount: 600_000_000,
+    allocatedAmount: 600_000_000,
+    disbursedAmount: 350_000_000,
+    targetBeneficiaries: 650,
+    reachedBeneficiaries: 480,
+    startDate: '2026-02-01',
+    endDate: '2026-11-30',
+    status: 'active',
+    progressPercent: 58,
+    indicators: [
+      { id: 'ind_9_1', label: 'Rumah Tangga Teraliri Listrik Mandiri', target: 120, current: 85, unit: 'KK' },
+      { id: 'ind_9_2', label: 'Daya Listrik Bersih Terpasang', target: 15, current: 15, unit: 'kW' }
+    ],
+    evidenceList: [],
+    createdAt: '2026-01-20',
+    updatedAt: '2026-03-15',
+    thumbnailUrl: '/images/forest_sunbeam_epic.jpg'
+  },
+  {
+    id: 'prg_010',
+    code: 'PRG-2026-010',
+    title: 'Rehabilitasi Terumbu Karang & Ekowisata Bahari Pesisir Karangsong',
+    summary: 'Transplantasi 3.000 fragmen karang dengan media biorock serta pelatihan pemandu wisata konservasi bahari bagi kelompok pemuda pesisir.',
+    category: 'lingkungan',
+    location: 'Karangsong, Indramayu',
+    province: 'Jawa Barat',
+    partnerId: 'ptr_001',
+    funderId: 'fnd_003',
+    proposedBudget: 450_000_000,
+    approvedBudget: 450_000_000,
+    committedAmount: 450_000_000,
+    allocatedAmount: 450_000_000,
+    disbursedAmount: 180_000_000,
+    targetBeneficiaries: 950,
+    reachedBeneficiaries: 400,
+    startDate: '2026-03-15',
+    endDate: '2026-12-15',
+    status: 'active',
+    progressPercent: 40,
+    indicators: [
+      { id: 'ind_10_1', label: 'Fragmen Karang Tertanam', target: 3000, current: 1200, unit: 'fragmen' },
+      { id: 'ind_10_2', label: 'Pemuda Tersertifikasi Pemandu Wisata', target: 35, current: 20, unit: 'orang' }
+    ],
+    evidenceList: [],
+    createdAt: '2026-02-10',
+    updatedAt: '2026-03-25',
+    thumbnailUrl: '/images/sunlit_mangrove_drone.jpg'
+  },
+  {
+    id: 'prg_011',
+    code: 'PRG-2026-011',
+    title: 'Inkubasi Santripreneur Olahan Rempah & Kopi Lereng Gunung Slamet',
+    summary: 'Penyediaan mesin roasting kopi modern, alat pengering higienis rempah kapulaga, dan fasilitasi izin edar BPOM untuk 4 pondok pesantren sentra agribisnis.',
+    category: 'ekonomi_umkm',
+    location: 'Baturraden, Banyumas',
+    province: 'Jawa Tengah',
+    partnerId: 'ptr_003',
+    funderId: 'fnd_002',
+    proposedBudget: 380_000_000,
+    approvedBudget: 380_000_000,
+    committedAmount: 380_000_000,
+    allocatedAmount: 380_000_000,
+    disbursedAmount: 220_000_000,
+    targetBeneficiaries: 520,
+    reachedBeneficiaries: 380,
+    startDate: '2026-01-15',
+    endDate: '2026-09-30',
+    status: 'active',
+    progressPercent: 62,
+    indicators: [
+      { id: 'ind_11_1', label: 'Santri & Pemuda Terlatih Barista/Roaster', target: 80, current: 65, unit: 'santri' },
+      { id: 'ind_11_2', label: 'Produk Terdaftar P-IRT & Halal', target: 8, current: 6, unit: 'SKU' }
+    ],
+    evidenceList: [],
+    createdAt: '2026-01-05',
+    updatedAt: '2026-03-18',
+    thumbnailUrl: '/images/community_garden_pot.jpg'
+  },
+  {
+    id: 'prg_012',
+    code: 'PRG-2026-012',
+    title: 'Kapal Klinik Terapung & Pelayanan Kesehatan Kepulauan Terpencil 3T',
+    summary: 'Pengadaan perahu cepat medis dilengkapi USG portabel dan solar panel untuk menjangkau ibu hamil dan balita di 16 pulau terpencil kawasan Alor & Flores Timur.',
+    category: 'kesehatan',
+    location: 'Kalabahi, Alor',
+    province: 'Nusa Tenggara Timur',
+    partnerId: 'ptr_004',
+    funderId: 'fnd_004',
+    proposedBudget: 720_000_000,
+    approvedBudget: 720_000_000,
+    committedAmount: 720_000_000,
+    allocatedAmount: 720_000_000,
+    disbursedAmount: 500_000_000,
+    targetBeneficiaries: 2400,
+    reachedBeneficiaries: 1850,
+    startDate: '2025-11-01',
+    endDate: '2026-10-31',
+    status: 'active',
+    progressPercent: 78,
+    indicators: [
+      { id: 'ind_12_1', label: 'Ibu Hamil & Balita Terperiksa USG', target: 1200, current: 950, unit: 'jiwa' },
+      { id: 'ind_12_2', label: 'Desa Terjangkau Rute Kapal Medis', target: 16, current: 14, unit: 'desa' }
+    ],
+    evidenceList: [],
+    createdAt: '2025-10-15',
+    updatedAt: '2026-03-22',
+    thumbnailUrl: '/images/smiling_volunteer_forest.jpg'
   }
 ];
 

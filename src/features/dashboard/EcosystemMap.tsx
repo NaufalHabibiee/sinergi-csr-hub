@@ -16,7 +16,6 @@ import {
   ShieldCheck,
   MapPin,
   GitFork,
-  Compass,
   Trophy,
   Scale,
   FileCheck2
@@ -24,7 +23,6 @@ import {
 import { useCSRStore } from '../../context/CSRStoreContext';
 import { formatCompactIDR, formatNumber } from '../../lib/formatters';
 import { calculatePlatformFunding, calculateBeneficiariesMetrics } from '../../lib/calculations';
-import { GISProjectMap } from './GISProjectMap';
 import { ProjectBookingModal } from '../programs/ProjectBookingModal';
 import { CSRAwardsModal } from '../awards/CSRAwardsModal';
 import { CSRRegulationsModal } from '../legal/CSRRegulationsModal';
@@ -33,7 +31,6 @@ import { Program } from '../../types/csr';
 
 export const EcosystemMap: React.FC = () => {
   const { funders, partners, programs, fundingRecords, beneficiaries, reports } = useCSRStore();
-  const [activeTab, setActiveTab] = useState<'gis_map' | 'workflow'>('gis_map');
   const [activeFlow, setActiveFlow] = useState<'all' | 'funding' | 'reporting'>('all');
   const [selectedNode, setSelectedNode] = useState<'funder' | 'hub' | 'mitra' | 'beneficiaries' | 'gov' | null>(null);
 
@@ -48,34 +45,21 @@ export const EcosystemMap: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      {/* Top View Mode Switcher */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-3 sm:p-4 rounded-3xl border border-slate-100 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.03)]">
-        <div className="flex items-center gap-1.5 p-1 bg-slate-100/80 rounded-2xl w-full sm:w-auto">
-          <button
-            onClick={() => setActiveTab('gis_map')}
-            className={`flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-              activeTab === 'gis_map'
-                ? 'bg-white text-[#176B4D] shadow-xs'
-                : 'text-slate-600 hover:text-slate-900'
-            }`}
-          >
-            <Compass className="w-4 h-4 text-[#176B4D]" />
-            <span>Peta Spasial Geografis (GIS Map)</span>
-          </button>
-          <button
-            onClick={() => setActiveTab('workflow')}
-            className={`flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-              activeTab === 'workflow'
-                ? 'bg-white text-[#176B4D] shadow-xs'
-                : 'text-slate-600 hover:text-slate-900'
-            }`}
-          >
-            <Sparkles className="w-4 h-4 text-[#176B4D]" />
-            <span>Diagram Alur Tata Kelola Ekosistem</span>
-          </button>
+      {/* Header & Controls */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-3xl border border-slate-100 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.03)]">
+        <div>
+          <div className="flex items-center gap-2">
+            <span className="p-1.5 rounded-lg bg-emerald-50 text-[#176B4D]">
+              <Sparkles className="w-4 h-4" />
+            </span>
+            <h1 className="text-xl font-bold text-slate-900">Peta Alur Ekosistem SinergiCSR</h1>
+          </div>
+          <p className="text-xs text-slate-500 mt-1 max-w-2xl leading-relaxed">
+            Visualisasi interaktif aliran tata kelola: Funder Korporat ⇄ SinergiCSR ⇄ Mitra Pelaksana ⇄ Penerima Manfaat, dilengkapi pelaporan dampak ke Funder dan draf laporan formal ke Pemerintah (KLHK/PROPER).
+          </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto">
           <button
             type="button"
             onClick={() => setIsAwardsOpen(true)}
@@ -103,31 +87,12 @@ export const EcosystemMap: React.FC = () => {
         </div>
       </div>
 
-      {activeTab === 'gis_map' ? (
-        <GISProjectMap
-          onSelectBooking={(p) => {
-            setSelectedBookingProgram(p);
-            setIsBookingModalOpen(true);
-          }}
-        />
-      ) : (
-        <div className="space-y-6">
-          {/* Header & Controls */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-surface-card p-6 rounded-2xl border border-border-subtle shadow-card">
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="p-1.5 rounded-lg bg-brand-mint text-brand-primary">
-                  <Sparkles className="w-4 h-4" />
-                </span>
-                <h1 className="text-xl font-bold text-ink-primary">Peta Alur Ekosistem SinergiCSR</h1>
-              </div>
-              <p className="text-xs text-ink-muted mt-1 max-w-2xl leading-relaxed">
-                Visualisasi interaktif aliran tata kelola: Funder Korporat ⇄ SinergiCSR ⇄ Mitra Pelaksana ⇄ Penerima Manfaat, dilengkapi pelaporan dampak ke Funder dan draf laporan formal ke Pemerintah (KLHK/PROPER).
-              </p>
-            </div>
-
-            {/* Filter Flow Mode */}
-            <div className="flex items-center gap-1.5 p-1 bg-surface-secondary rounded-xl border border-border-subtle text-xs font-semibold self-start sm:self-auto">
+      <div className="space-y-6">
+        {/* Filter Flow Mode Toolbar */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-surface-card p-4 rounded-2xl border border-border-subtle shadow-card">
+          <div className="text-xs text-ink-muted">
+            <span className="font-bold text-ink-primary">Filter Alur Operasional:</span> Pilih jalur transaksi untuk menyorot aliran dana atau laporan.
+          </div>
               <button
                 onClick={() => setActiveFlow('all')}
                 className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer ${
@@ -399,8 +364,6 @@ export const EcosystemMap: React.FC = () => {
           </div>
         )}
       </div>
-    </div>
-  )}
 
       {/* Project Booking / Letter of Intent Modal */}
       <ProjectBookingModal

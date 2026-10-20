@@ -16,6 +16,7 @@ import { ImpactReportsPage } from './features/reports/ImpactReportsPage';
 import { ActivityLogPage } from './features/activity/ActivityLogPage';
 import { SettingsPage } from './features/settings/SettingsPage';
 import { AuthPage } from './features/auth/AuthPage';
+import { PublicProgramsPage } from './features/programs/PublicProgramsPage';
 
 const ProgramIdRedirect: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -50,7 +51,8 @@ export const App: React.FC = () => {
 
           {/* Compatibility Redirects */}
           <Route path="/ecosystem" element={<Navigate to="/dashboard/ecosystem" replace />} />
-          <Route path="/programs" element={<Navigate to="/dashboard/programs" replace />} />
+          {/* Public Sub-Page for Programs Catalog */}
+          <Route path="/programs" element={<PublicProgramsPage />} />
           <Route path="/programs/:id" element={<ProgramIdRedirect />} />
           <Route path="/proposals" element={<Navigate to="/dashboard/proposals" replace />} />
           <Route path="/partners" element={<Navigate to="/dashboard/partners" replace />} />

@@ -62,6 +62,7 @@ export interface Program {
   progressPercent: number;
   indicators: ProgramIndicator[];
   evidenceList: ProgramEvidence[];
+  thumbnailUrl?: string;
   sourceProposalId?: string;
   createdAt: string;
   updatedAt: string;
