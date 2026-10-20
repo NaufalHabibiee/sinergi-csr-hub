@@ -10,7 +10,6 @@ import {
   Building2,
   Users,
   ShieldCheck,
-  CheckCircle2,
   Sparkles,
   Award
 } from 'lucide-react';
@@ -93,37 +92,6 @@ export const AuthPage: React.FC<AuthPageProps> = ({ defaultMode = 'login' }) => 
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-[#D4F63D] text-[11px] font-bold">
               <Sparkles className="w-3.5 h-3.5 text-[#D4F63D]" />
               <span>Enterprise Impact Hub</span>
-            </div>
-          </div>
-
-          {/* Middle Value Proposition & Proven Impact */}
-          <div className="relative z-10 space-y-5 my-auto max-w-lg">
-            <div className="space-y-2.5">
-              <span className="text-[11px] font-bold uppercase tracking-widest text-[#D4F63D] block">
-                Sistem Tata Kelola TJSL &amp; ESG
-              </span>
-              <h2 className="text-2xl xl:text-3xl font-extrabold text-white tracking-tight leading-tight">
-                Kelola CSR dengan Transparansi &amp; Integritas Penuh.
-              </h2>
-              <p className="text-xs xl:text-sm text-emerald-100/80 leading-relaxed font-normal">
-                Satu infrastruktur digital yang menyatukan alokasi korporasi, verifikasi termin BAST bergeotagging, dan pelaporan siap audit PROPER KLHK.
-              </p>
-            </div>
-
-            {/* 3 Verified Trust Highlights */}
-            <div className="space-y-2.5 pt-2">
-              <div className="flex items-center gap-2.5 text-xs text-white/90">
-                <CheckCircle2 className="w-4 h-4 text-[#D4F63D] shrink-0" />
-                <span>100% Bebas Klaim Ganda NIK / NIB</span>
-              </div>
-              <div className="flex items-center gap-2.5 text-xs text-white/90">
-                <CheckCircle2 className="w-4 h-4 text-[#D4F63D] shrink-0" />
-                <span>Audit Trail Otomatis Termin Milestone BAST</span>
-              </div>
-              <div className="flex items-center gap-2.5 text-xs text-white/90">
-                <CheckCircle2 className="w-4 h-4 text-[#D4F63D] shrink-0" />
-                <span>Sinkronisasi Kriteria PROPER &amp; 17 SDGs Bappenas</span>
-              </div>
             </div>
           </div>
 
