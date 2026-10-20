@@ -17,12 +17,14 @@ import {
   ShieldCheck,
   Edit,
   Sparkles,
-  Handshake
+  Handshake,
+  FileCheck2
 } from 'lucide-react';
 import { useCSRStore } from '../../context/CSRStoreContext';
 import { StatusBadge } from '../../components/ui/StatusBadge';
 import { Modal } from '../../components/ui/Modal';
 import { ProjectBookingModal } from './ProjectBookingModal';
+import { BASTGeneratorModal } from '../reports/BASTGeneratorModal';
 import {
   formatCompactIDR,
   formatIDR,
@@ -59,6 +61,7 @@ export const ProgramDetailPage: React.FC = () => {
   const [evidenceTitle, setEvidenceTitle] = useState('');
   const [evidenceCategory, setEvidenceCategory] = useState<any>('foto_kegiatan');
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+  const [isBastModalOpen, setIsBastModalOpen] = useState(false);
 
   if (!program) {
     return (
@@ -161,6 +164,13 @@ export const ProgramDetailPage: React.FC = () => {
             >
               <UploadCloud className="w-3.5 h-3.5 text-brand-primary" />
               Unggah Bukti
+            </button>
+            <button
+              onClick={() => setIsBastModalOpen(true)}
+              className="px-3.5 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-[#176B4D] border border-emerald-200 text-xs font-bold transition-colors flex items-center gap-1.5 cursor-pointer"
+            >
+              <FileCheck2 className="w-3.5 h-3.5 text-[#176B4D]" />
+              <span>Cetak BAST Resmi</span>
             </button>
           </div>
         </div>
@@ -682,6 +692,13 @@ export const ProgramDetailPage: React.FC = () => {
         isOpen={isBookingModalOpen}
         onClose={() => setIsBookingModalOpen(false)}
         program={program}
+      />
+
+      {/* Point 7: Standardized BAST Generator Modal */}
+      <BASTGeneratorModal
+        isOpen={isBastModalOpen}
+        onClose={() => setIsBastModalOpen(false)}
+        preselectedProgramId={program.id}
       />
     </div>
   );

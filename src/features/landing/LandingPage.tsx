@@ -32,13 +32,19 @@ import {
   BookOpen,
   Handshake,
   Compass,
-  Send
+  Send,
+  Trophy,
+  Scale,
+  FileCheck2
 } from 'lucide-react';
 import { formatCompactIDR, formatNumber } from '../../lib/formatters';
 import { useCSRStore } from '../../context/CSRStoreContext';
 import { CSRMenuBookModal } from '../programs/CSRMenuBookModal';
 import { ProjectBookingModal } from '../programs/ProjectBookingModal';
 import { CommunityAspirationModal } from '../programs/CommunityAspirationModal';
+import { CSRAwardsModal } from '../awards/CSRAwardsModal';
+import { CSRRegulationsModal } from '../legal/CSRRegulationsModal';
+import { BASTGeneratorModal } from '../reports/BASTGeneratorModal';
 import { Program } from '../../types/csr';
 
 const heroMissions = [
@@ -77,6 +83,9 @@ export const LandingPage: React.FC = () => {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [selectedBookingProgram, setSelectedBookingProgram] = useState<Program | null>(null);
   const [isAspirationModalOpen, setIsAspirationModalOpen] = useState(false);
+  const [isAwardsModalOpen, setIsAwardsModalOpen] = useState(false);
+  const [isRegulationsModalOpen, setIsRegulationsModalOpen] = useState(false);
+  const [isBastModalOpen, setIsBastModalOpen] = useState(false);
 
   const handlePrevMission = () => {
     setMissionIndex((prev) => (prev === 0 ? heroMissions.length - 1 : prev - 1));
@@ -192,6 +201,30 @@ export const LandingPage: React.FC = () => {
               >
                 Mitra
               </a>
+              <button
+                type="button"
+                onClick={() => setIsAwardsModalOpen(true)}
+                className={`transition-colors duration-200 py-1 cursor-pointer flex items-center gap-1 font-semibold ${
+                  isScrolled
+                    ? 'text-amber-800 hover:text-amber-900'
+                    : 'text-amber-300 hover:text-amber-200'
+                }`}
+              >
+                <Trophy className="w-3.5 h-3.5" />
+                <span>CSR Award</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setIsRegulationsModalOpen(true)}
+                className={`transition-colors duration-200 py-1 cursor-pointer flex items-center gap-1 ${
+                  isScrolled
+                    ? 'text-ink-secondary hover:text-brand-primary'
+                    : 'text-white/80 hover:text-white'
+                }`}
+              >
+                <Scale className="w-3.5 h-3.5" />
+                <span>Regulasi</span>
+              </button>
             </nav>
 
             {/* Right: Masuk link + Vibrant Lime Pill Button */}
@@ -273,6 +306,39 @@ export const LandingPage: React.FC = () => {
               >
                 Mitra
               </a>
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  setIsAwardsModalOpen(true);
+                }}
+                className="w-full text-left py-2 hover:text-amber-300 flex items-center gap-2 cursor-pointer text-amber-300 font-bold"
+              >
+                <Trophy className="w-4 h-4" />
+                <span>CSR Award 2025/2026</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  setIsRegulationsModalOpen(true);
+                }}
+                className="w-full text-left py-2 hover:text-[#D4F63D] flex items-center gap-2 cursor-pointer"
+              >
+                <Scale className="w-4 h-4" />
+                <span>Pusat Regulasi &amp; Dasar Hukum</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  setIsBastModalOpen(true);
+                }}
+                className="w-full text-left py-2 hover:text-[#D4F63D] flex items-center gap-2 cursor-pointer"
+              >
+                <FileCheck2 className="w-4 h-4" />
+                <span>Generator BAST Terstandar</span>
+              </button>
               <div className="pt-2 border-t border-border-subtle/40 flex flex-col gap-2">
                 <Link
                   to="/login"
@@ -1183,34 +1249,60 @@ export const LandingPage: React.FC = () => {
             </div>
 
             {/* Bento Card 2 */}
-            <div className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/80 shadow-xs hover:shadow-lg transition-all space-y-4">
-              <div className="w-12 h-12 rounded-2xl bg-[#E8F6F0] text-[#176B4D] flex items-center justify-center">
-                <MapPin className="w-6 h-6" />
+            <div className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/80 shadow-xs hover:shadow-lg transition-all space-y-4 flex flex-col justify-between">
+              <div>
+                <div className="w-12 h-12 rounded-2xl bg-[#E8F6F0] text-[#176B4D] flex items-center justify-center mb-4">
+                  <MapPin className="w-6 h-6" />
+                </div>
+                <div className="space-y-1.5">
+                  <span className="text-[10px] font-bold text-[#176B4D] bg-[#E8F6F0] px-2 py-0.5 rounded-full">
+                    Geotagging Aktif
+                  </span>
+                  <h3 className="font-bold text-base text-[#0B2518]">Bukti Digital BAST &amp; GPS</h3>
+                  <p className="text-xs text-ink-secondary leading-relaxed">
+                    Setiap pengeluaran dana termin terikat Berita Acara Serah Terima dengan dokumentasi foto dan titik koordinat asli di lokasi kegiatan.
+                  </p>
+                </div>
               </div>
-              <div className="space-y-1.5">
-                <span className="text-[10px] font-bold text-[#176B4D] bg-[#E8F6F0] px-2 py-0.5 rounded-full">
-                  Geotagging Aktif
-                </span>
-                <h3 className="font-bold text-base text-[#0B2518]">Bukti Digital BAST &amp; GPS</h3>
-                <p className="text-xs text-ink-secondary leading-relaxed">
-                  Setiap pengeluaran dana termin terikat Berita Acara Serah Terima dengan dokumentasi foto dan titik koordinat asli di lokasi kegiatan.
-                </p>
+              <div className="pt-2 border-t border-slate-100">
+                <button
+                  type="button"
+                  onClick={() => setIsBastModalOpen(true)}
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#176B4D] hover:underline cursor-pointer"
+                >
+                  <FileCheck2 className="w-3.5 h-3.5" />
+                  <span>Generator BAST Terstandar</span>
+                  <ArrowRight className="w-3 h-3" />
+                </button>
               </div>
             </div>
 
             {/* Bento Card 3 */}
-            <div className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/80 shadow-xs hover:shadow-lg transition-all space-y-4">
-              <div className="w-12 h-12 rounded-2xl bg-[#E8F6F0] text-[#176B4D] flex items-center justify-center">
-                <Award className="w-6 h-6" />
+            <div className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/80 shadow-xs hover:shadow-lg transition-all space-y-4 flex flex-col justify-between">
+              <div>
+                <div className="w-12 h-12 rounded-2xl bg-[#E8F6F0] text-[#176B4D] flex items-center justify-center mb-4">
+                  <Award className="w-6 h-6" />
+                </div>
+                <div className="space-y-1.5">
+                  <span className="text-[10px] font-bold text-[#176B4D] bg-[#E8F6F0] px-2 py-0.5 rounded-full">
+                    Kriteria PROPER
+                  </span>
+                  <h3 className="font-bold text-base text-[#0B2518]">Laporan Siap Audit KLHK</h3>
+                  <p className="text-xs text-ink-secondary leading-relaxed">
+                    Generator otomatis yang memetakan kegiatan ke indikator SDGs Bappenas dan format evaluasi PROPER Emas &amp; Hijau Kementerian LHK.
+                  </p>
+                </div>
               </div>
-              <div className="space-y-1.5">
-                <span className="text-[10px] font-bold text-[#176B4D] bg-[#E8F6F0] px-2 py-0.5 rounded-full">
-                  Kriteria PROPER
-                </span>
-                <h3 className="font-bold text-base text-[#0B2518]">Laporan Siap Audit KLHK</h3>
-                <p className="text-xs text-ink-secondary leading-relaxed">
-                  Generator otomatis yang memetakan kegiatan ke indikator SDGs Bappenas dan format evaluasi PROPER Emas &amp; Hijau Kementerian LHK.
-                </p>
+              <div className="pt-2 border-t border-slate-100">
+                <button
+                  type="button"
+                  onClick={() => setIsRegulationsModalOpen(true)}
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#176B4D] hover:underline cursor-pointer"
+                >
+                  <Scale className="w-3.5 h-3.5" />
+                  <span>Dasar Hukum &amp; Regulasi</span>
+                  <ArrowRight className="w-3 h-3" />
+                </button>
               </div>
             </div>
           </div>
@@ -1269,6 +1361,36 @@ export const LandingPage: React.FC = () => {
                 </span>
               </div>
             ))}
+          </div>
+
+          {/* Annual CSR Award Hall of Fame Callout */}
+          <div className="mt-10 p-6 sm:p-7 rounded-3xl bg-gradient-to-r from-[#0E3D2A] via-[#176B4D] to-[#0B2518] text-white flex flex-col md:flex-row items-center justify-between gap-6 text-left shadow-lg border border-emerald-800/60 relative overflow-hidden">
+            <div className="flex items-center gap-4 relative z-10">
+              <div className="w-14 h-14 rounded-2xl bg-amber-400/20 text-amber-300 flex items-center justify-center shrink-0 border border-amber-400/30">
+                <Trophy className="w-7 h-7" />
+              </div>
+              <div className="space-y-1">
+                <div className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-300">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>Jawa Barat &amp; National CSR Award 2025/2026</span>
+                </div>
+                <h4 className="text-base sm:text-lg font-bold text-white">
+                  Galeri Penganugerahan &amp; Leaderboard Mitra Unggul
+                </h4>
+                <p className="text-xs text-emerald-100/80 max-w-xl">
+                  Apresiasi resmi kategori Platinum, Gold, dan Silver bagi korporasi dengan kontribusi TJSL terbesar, sertifikat digital resmi, dan 100% kepatuhan audit BAST.
+                </p>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setIsAwardsModalOpen(true)}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-amber-400 hover:bg-amber-300 text-amber-950 font-bold text-xs shadow-md transition-all cursor-pointer shrink-0 relative z-10"
+            >
+              <Trophy className="w-4 h-4" />
+              <span>Buka Galeri CSR Award</span>
+            </button>
           </div>
         </div>
       </section>
@@ -1397,6 +1519,36 @@ export const LandingPage: React.FC = () => {
                     <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#FDE047] group-hover:translate-x-0.5 transition-all" />
                     <span>Mitra & Funder</span>
                   </a>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => setIsAwardsModalOpen(true)}
+                    className="hover:text-[#FDE047] text-amber-300 font-semibold transition-colors inline-flex items-center gap-1.5 group cursor-pointer"
+                  >
+                    <Trophy className="w-3.5 h-3.5 text-amber-400 group-hover:scale-110 transition-transform" />
+                    <span>Galeri CSR Award</span>
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => setIsRegulationsModalOpen(true)}
+                    className="hover:text-[#FDE047] transition-colors inline-flex items-center gap-1.5 group cursor-pointer text-left"
+                  >
+                    <Scale className="w-3.5 h-3.5 text-emerald-400 group-hover:scale-110 transition-transform" />
+                    <span>Dasar Hukum &amp; Regulasi</span>
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    onClick={() => setIsBastModalOpen(true)}
+                    className="hover:text-[#FDE047] transition-colors inline-flex items-center gap-1.5 group cursor-pointer text-left"
+                  >
+                    <FileCheck2 className="w-3.5 h-3.5 text-emerald-400 group-hover:scale-110 transition-transform" />
+                    <span>Generator BAST Resmi</span>
+                  </button>
                 </li>
               </ul>
             </div>
@@ -1531,6 +1683,24 @@ export const LandingPage: React.FC = () => {
       <CommunityAspirationModal
         isOpen={isAspirationModalOpen}
         onClose={() => setIsAspirationModalOpen(false)}
+      />
+
+      {/* Point 5: CSR Awards & Hall of Fame Modal */}
+      <CSRAwardsModal
+        isOpen={isAwardsModalOpen}
+        onClose={() => setIsAwardsModalOpen(false)}
+      />
+
+      {/* Point 6: CSR Legal Regulations & Basis Modal */}
+      <CSRRegulationsModal
+        isOpen={isRegulationsModalOpen}
+        onClose={() => setIsRegulationsModalOpen(false)}
+      />
+
+      {/* Point 7: Standardized BAST Generator Modal */}
+      <BASTGeneratorModal
+        isOpen={isBastModalOpen}
+        onClose={() => setIsBastModalOpen(false)}
       />
     </div>
   );

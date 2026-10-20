@@ -16,13 +16,19 @@ import {
   ShieldCheck,
   MapPin,
   GitFork,
-  Compass
+  Compass,
+  Trophy,
+  Scale,
+  FileCheck2
 } from 'lucide-react';
 import { useCSRStore } from '../../context/CSRStoreContext';
 import { formatCompactIDR, formatNumber } from '../../lib/formatters';
 import { calculatePlatformFunding, calculateBeneficiariesMetrics } from '../../lib/calculations';
 import { GISProjectMap } from './GISProjectMap';
 import { ProjectBookingModal } from '../programs/ProjectBookingModal';
+import { CSRAwardsModal } from '../awards/CSRAwardsModal';
+import { CSRRegulationsModal } from '../legal/CSRRegulationsModal';
+import { BASTGeneratorModal } from '../reports/BASTGeneratorModal';
 import { Program } from '../../types/csr';
 
 export const EcosystemMap: React.FC = () => {
@@ -33,6 +39,9 @@ export const EcosystemMap: React.FC = () => {
 
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [selectedBookingProgram, setSelectedBookingProgram] = useState<Program | null>(null);
+  const [isAwardsOpen, setIsAwardsOpen] = useState(false);
+  const [isRegulationsOpen, setIsRegulationsOpen] = useState(false);
+  const [isBastOpen, setIsBastOpen] = useState(false);
 
   const fundingMetrics = calculatePlatformFunding(fundingRecords);
   const benMetrics = calculateBeneficiariesMetrics(beneficiaries);
@@ -66,9 +75,32 @@ export const EcosystemMap: React.FC = () => {
           </button>
         </div>
 
-        <span className="text-xs text-slate-400 font-medium px-2">
-          {activeTab === 'gis_map' ? 'Peta Interaktif Sebaran Titik Proyek CSR' : 'Visualisasi Siklus Hidup Tata Kelola CSR'}
-        </span>
+        <div className="flex flex-wrap items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setIsAwardsOpen(true)}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200/90 text-xs font-bold transition-all cursor-pointer"
+          >
+            <Trophy className="w-3.5 h-3.5 text-amber-600" />
+            <span>CSR Award</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setIsRegulationsOpen(true)}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 text-xs font-bold transition-all cursor-pointer"
+          >
+            <Scale className="w-3.5 h-3.5 text-slate-500" />
+            <span>Dasar Hukum</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setIsBastOpen(true)}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-[#176B4D] border border-emerald-200 text-xs font-bold transition-all cursor-pointer"
+          >
+            <FileCheck2 className="w-3.5 h-3.5 text-[#176B4D]" />
+            <span>Generator BAST</span>
+          </button>
+        </div>
       </div>
 
       {activeTab === 'gis_map' ? (
@@ -375,6 +407,24 @@ export const EcosystemMap: React.FC = () => {
         isOpen={isBookingModalOpen}
         onClose={() => setIsBookingModalOpen(false)}
         program={selectedBookingProgram}
+      />
+
+      {/* Point 5: CSR Awards & Hall of Fame Modal */}
+      <CSRAwardsModal
+        isOpen={isAwardsOpen}
+        onClose={() => setIsAwardsOpen(false)}
+      />
+
+      {/* Point 6: CSR Legal Regulations & Basis Modal */}
+      <CSRRegulationsModal
+        isOpen={isRegulationsOpen}
+        onClose={() => setIsRegulationsOpen(false)}
+      />
+
+      {/* Point 7: Standardized BAST Generator Modal */}
+      <BASTGeneratorModal
+        isOpen={isBastOpen}
+        onClose={() => setIsBastOpen(false)}
       />
     </div>
   );

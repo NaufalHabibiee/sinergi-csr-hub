@@ -9,12 +9,14 @@ import {
   ChevronLeft,
   ChevronRight,
   LayoutGrid,
-  List
+  List,
+  Trophy
 } from 'lucide-react';
 import { useCSRStore } from '../../context/CSRStoreContext';
 import { StatusBadge } from '../../components/ui/StatusBadge';
 import { Modal } from '../../components/ui/Modal';
 import { EmptyState } from '../../components/ui/EmptyState';
+import { CSRAwardsModal } from '../awards/CSRAwardsModal';
 import { Organization, ProgramCategory } from '../../types/csr';
 import { formatCompactIDR, CATEGORY_LABELS } from '../../lib/formatters';
 
@@ -30,6 +32,7 @@ export const PartnersPage: React.FC = () => {
 
   const [selectedPartner, setSelectedPartner] = useState<Organization | null>(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const [isAwardsOpen, setIsAwardsOpen] = useState(false);
 
   // Form state
   const [name, setName] = useState('');
@@ -105,13 +108,23 @@ export const PartnersPage: React.FC = () => {
           Mitra Pelaksana Lapangan
         </h1>
 
-        <button
-          onClick={() => setIsFormOpen(true)}
-          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#176B4D] hover:bg-[#0E4D36] text-white font-semibold text-xs transition-all cursor-pointer shadow-xs self-start sm:self-auto"
-        >
-          <Plus className="w-4 h-4" />
-          Registrasi Mitra Baru
-        </button>
+        <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto">
+          <button
+            onClick={() => setIsAwardsOpen(true)}
+            className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200/90 font-bold text-xs transition-all cursor-pointer shadow-xs"
+          >
+            <Trophy className="w-4 h-4 text-amber-600" />
+            <span>Galeri CSR Award</span>
+          </button>
+
+          <button
+            onClick={() => setIsFormOpen(true)}
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#176B4D] hover:bg-[#0E4D36] text-white font-semibold text-xs transition-all cursor-pointer shadow-xs"
+          >
+            <Plus className="w-4 h-4" />
+            Registrasi Mitra Baru
+          </button>
+        </div>
       </div>
 
       {/* 2. 4 Soft Pastel Summary Cards with Sparklines */}
@@ -650,6 +663,12 @@ export const PartnersPage: React.FC = () => {
           </div>
         </form>
       </Modal>
+
+      {/* Point 5: CSR Awards & Hall of Fame Modal */}
+      <CSRAwardsModal
+        isOpen={isAwardsOpen}
+        onClose={() => setIsAwardsOpen(false)}
+      />
     </div>
   );
 };

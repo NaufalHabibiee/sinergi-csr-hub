@@ -24,6 +24,7 @@ import { EmptyState } from '../../components/ui/EmptyState';
 import { ImpactReport, ReportScopeType } from '../../types/csr';
 import { formatDateID, formatCompactIDR, formatIDR } from '../../lib/formatters';
 import { exportToCSV } from '../../lib/csvExport';
+import { BASTGeneratorModal } from './BASTGeneratorModal';
 
 export const ImpactReportsPage: React.FC = () => {
   const { reports, programs, createImpactReport, updateReportStatus } = useCSRStore();
@@ -33,6 +34,7 @@ export const ImpactReportsPage: React.FC = () => {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [selectedReportForPreview, setSelectedReportForPreview] = useState<ImpactReport | null>(null);
   const [isCreateOpen, setIsCreateOpen] = useState(false);
+  const [isBastOpen, setIsBastOpen] = useState(false);
 
   // Form state
   const [title, setTitle] = useState('');
@@ -162,6 +164,14 @@ export const ImpactReportsPage: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-2.5 self-start sm:self-auto shrink-0">
+          <button
+            onClick={() => setIsBastOpen(true)}
+            className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-[#176B4D] border border-emerald-200 text-xs font-bold transition-all cursor-pointer shadow-2xs"
+          >
+            <FileCheck2 className="w-3.5 h-3.5 text-[#176B4D]" />
+            <span>Generator BAST</span>
+          </button>
+
           <button
             onClick={handleExportCSV}
             className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 text-xs font-semibold transition-colors cursor-pointer"
@@ -729,6 +739,12 @@ export const ImpactReportsPage: React.FC = () => {
           </div>
         </form>
       </Modal>
+
+      {/* Point 7: Standardized BAST Generator Modal */}
+      <BASTGeneratorModal
+        isOpen={isBastOpen}
+        onClose={() => setIsBastOpen(false)}
+      />
     </div>
   );
 };
