@@ -39,7 +39,7 @@ import { HeaderUserProfile, HeaderUserProfileMobile } from '../../components/lay
 
 export const PublicProgramsPage: React.FC = () => {
   const navigate = useNavigate();
-  const { programs: rawPrograms, funders, partners } = useCSRStore();
+  const { programs: rawPrograms, funders, partners, isAuthenticated } = useCSRStore();
   const programs = useMemo(() => {
     return rawPrograms && rawPrograms.length >= SEED_PROGRAMS.length ? rawPrograms : SEED_PROGRAMS;
   }, [rawPrograms]);
@@ -491,6 +491,15 @@ export const PublicProgramsPage: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => {
+                        if (!isAuthenticated) {
+                          navigate('/login', {
+                            state: {
+                              from: '/programs',
+                              message: 'Silakan masuk terlebih dahulu untuk melakukan Booking & LOI Minat pendanaan CSR.'
+                            }
+                          });
+                          return;
+                        }
                         setSelectedBookingProgram(prog);
                         setIsBookingModalOpen(true);
                       }}
@@ -515,7 +524,18 @@ export const PublicProgramsPage: React.FC = () => {
 
                       <button
                         type="button"
-                        onClick={() => navigate(`/dashboard/programs/${prog.id}`)}
+                        onClick={() => {
+                          if (!isAuthenticated) {
+                            navigate('/login', {
+                              state: {
+                                from: `/dashboard/programs/${prog.id}`,
+                                message: 'Silakan masuk terlebih dahulu untuk melihat rincian lengkap program.'
+                              }
+                            });
+                            return;
+                          }
+                          navigate(`/dashboard/programs/${prog.id}`);
+                        }}
                         className="inline-flex items-center justify-center gap-1 px-2.5 py-2 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold transition-all cursor-pointer"
                       >
                         <span>Detail</span>
@@ -608,6 +628,16 @@ export const PublicProgramsPage: React.FC = () => {
         isOpen={isMenuBookOpen}
         onClose={() => setIsMenuBookOpen(false)}
         onSelectProgramForBooking={(p) => {
+          if (!isAuthenticated) {
+            setIsMenuBookOpen(false);
+            navigate('/login', {
+              state: {
+                from: '/programs',
+                message: 'Silakan masuk terlebih dahulu untuk melakukan Booking pendanaan CSR.'
+              }
+            });
+            return;
+          }
           setSelectedBookingProgram(p);
           setIsBookingModalOpen(true);
         }}
@@ -619,6 +649,16 @@ export const PublicProgramsPage: React.FC = () => {
         onClose={() => setIsProposalModalOpen(false)}
         program={selectedProposalProgram}
         onOpenBooking={(p) => {
+          if (!isAuthenticated) {
+            setIsProposalModalOpen(false);
+            navigate('/login', {
+              state: {
+                from: '/programs',
+                message: 'Silakan masuk terlebih dahulu untuk melakukan Booking LOI pendanaan CSR.'
+              }
+            });
+            return;
+          }
           setSelectedBookingProgram(p);
           setIsBookingModalOpen(true);
         }}

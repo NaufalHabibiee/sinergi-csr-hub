@@ -44,7 +44,6 @@ import { CSRMenuBookModal } from '../programs/CSRMenuBookModal';
 import { ProjectBookingModal } from '../programs/ProjectBookingModal';
 import { CommunityAspirationModal } from '../programs/CommunityAspirationModal';
 import { CSRAwardsSection } from '../awards/CSRAwardsSection';
-import { CSRRegulationsSection } from '../legal/CSRRegulationsSection';
 import { BASTGeneratorModal } from '../reports/BASTGeneratorModal';
 import { HeaderUserProfile, HeaderUserProfileMobile } from '../../components/layout/HeaderUserProfile';
 import { Program } from '../../types/csr';
@@ -75,7 +74,7 @@ const heroMissions = [
 
 export const LandingPage: React.FC = () => {
   const navigate = useNavigate();
-  const { funders, partners, programs: storePrograms, fundingRecords, beneficiaries } = useCSRStore();
+  const { funders, partners, programs: storePrograms, fundingRecords, beneficiaries, isAuthenticated, user } = useCSRStore();
   const programs = useMemo(() => {
     return storePrograms.length >= SEED_PROGRAMS.length ? storePrograms : SEED_PROGRAMS;
   }, [storePrograms]);
@@ -299,13 +298,6 @@ export const LandingPage: React.FC = () => {
                 className="block py-2 hover:text-[#D4F63D]"
               >
                 CSR Award
-              </a>
-              <a
-                href="#regulasi"
-                onClick={() => setMobileMenuOpen(false)}
-                className="block py-2 hover:text-[#D4F63D]"
-              >
-                Regulasi
               </a>
               <HeaderUserProfileMobile
                 onClose={() => setMobileMenuOpen(false)}
@@ -882,6 +874,15 @@ export const LandingPage: React.FC = () => {
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
+                        if (!isAuthenticated) {
+                          navigate('/login', {
+                            state: {
+                              from: '/#program',
+                              message: 'Silakan masuk terlebih dahulu untuk melakukan Booking / LOI Minat pendanaan CSR.'
+                            }
+                          });
+                          return;
+                        }
                         const match = programs.find((p) => p.id === prog.id) || null;
                         setSelectedBookingProgram(match);
                         setIsBookingModalOpen(true);
@@ -918,8 +919,23 @@ export const LandingPage: React.FC = () => {
             <div className="flex flex-wrap items-center gap-3 shrink-0">
               <button
                 type="button"
-                onClick={() => setIsAspirationModalOpen(true)}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#176B4D] hover:bg-[#0E4D36] text-white text-xs font-bold transition-all shadow-md shadow-[#176B4D]/25 cursor-pointer"
+                onClick={() => {
+                  if (!isAuthenticated) {
+                    navigate('/login', {
+                      state: {
+                        from: '/#desa',
+                        message: 'Silakan masuk terlebih dahulu untuk mengajukan usulan kebutuhan pembangunan desa.'
+                      }
+                    });
+                    return;
+                  }
+                  if (user?.role === 'funder') {
+                    alert('Akun Funder Korporasi berperan dalam mendanai program. Untuk mengajukan usulan kebutuhan desa/komunitas, silakan masuk menggunakan akun Mitra Desa / Yayasan.');
+                    return;
+                  }
+                  setIsAspirationModalOpen(true);
+                }}
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#176B4D] hover:bg-[#0E4D36] text-white text-xs font-bold transition-all shadow-md shadow-[#176B4D]/25 cursor-pointer active:scale-95"
               >
                 <Send className="w-3.5 h-3.5" />
                 <span>Ajukan Kebutuhan Desa</span>
@@ -1222,7 +1238,18 @@ export const LandingPage: React.FC = () => {
               <div className="pt-2 border-t border-slate-100">
                 <button
                   type="button"
-                  onClick={() => setIsBastModalOpen(true)}
+                  onClick={() => {
+                    if (!isAuthenticated) {
+                      navigate('/login', {
+                        state: {
+                          from: '/#dampak',
+                          message: 'Silakan masuk terlebih dahulu untuk mengakses generator dokumen resmi BAST.'
+                        }
+                      });
+                      return;
+                    }
+                    setIsBastModalOpen(true);
+                  }}
                   className="inline-flex items-center gap-1.5 text-xs font-bold text-[#176B4D] hover:underline cursor-pointer"
                 >
                   <FileCheck2 className="w-3.5 h-3.5" />
@@ -1250,11 +1277,11 @@ export const LandingPage: React.FC = () => {
               </div>
               <div className="pt-2 border-t border-slate-100">
                 <a
-                  href="#regulasi"
+                  href="#award"
                   className="inline-flex items-center gap-1.5 text-xs font-bold text-[#176B4D] hover:underline cursor-pointer"
                 >
-                  <Scale className="w-3.5 h-3.5" />
-                  <span>Lihat Dasar Hukum &amp; Regulasi</span>
+                  <Award className="w-3.5 h-3.5" />
+                  <span>Lihat Galeri CSR Award &amp; Kepatuhan</span>
                   <ArrowRight className="w-3 h-3" />
                 </a>
               </div>
@@ -1352,10 +1379,7 @@ export const LandingPage: React.FC = () => {
       {/* 9. Section: Galeri CSR Award & Leaderboard Mitra Unggul */}
       <CSRAwardsSection />
 
-      {/* 10. Section: Pusat Regulasi & Dasar Hukum Kemitraan */}
-      <CSRRegulationsSection />
-
-      {/* 11. Executive Pre-Footer Banner & Architectural Footer */}
+      {/* 10. Executive Pre-Footer Banner & Architectural Footer */}
       <footer className="bg-[#072418] text-white relative overflow-hidden pt-16 sm:pt-20 pb-10">
         {/* Ambient Decorative Background Accents */}
         <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
@@ -1493,15 +1517,20 @@ export const LandingPage: React.FC = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="#regulasi" className="hover:text-[#D4F63D] transition-colors inline-flex items-center gap-1.5 group">
-                    <ChevronRight className="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#D4F63D] group-hover:translate-x-0.5 transition-all" />
-                    <span>Dasar Hukum &amp; Regulasi</span>
-                  </a>
-                </li>
-                <li>
                   <button
                     type="button"
-                    onClick={() => setIsBastModalOpen(true)}
+                    onClick={() => {
+                      if (!isAuthenticated) {
+                        navigate('/login', {
+                          state: {
+                            from: '/#dampak',
+                            message: 'Silakan masuk terlebih dahulu untuk mengakses generator BAST resmi.'
+                          }
+                        });
+                        return;
+                      }
+                      setIsBastModalOpen(true);
+                    }}
                     className="hover:text-[#D4F63D] transition-colors inline-flex items-center gap-1.5 group cursor-pointer text-left"
                   >
                     <FileCheck2 className="w-3.5 h-3.5 text-emerald-400 group-hover:scale-110 transition-transform" />
@@ -1625,6 +1654,16 @@ export const LandingPage: React.FC = () => {
         isOpen={isMenuBookOpen}
         onClose={() => setIsMenuBookOpen(false)}
         onSelectProgramForBooking={(prog) => {
+          if (!isAuthenticated) {
+            setIsMenuBookOpen(false);
+            navigate('/login', {
+              state: {
+                from: '/#program',
+                message: 'Silakan masuk terlebih dahulu untuk melakukan Booking pendanaan CSR.'
+              }
+            });
+            return;
+          }
           setSelectedBookingProgram(prog);
           setIsBookingModalOpen(true);
         }}

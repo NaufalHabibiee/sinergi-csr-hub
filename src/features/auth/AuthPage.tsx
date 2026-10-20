@@ -157,6 +157,19 @@ export const AuthPage: React.FC<AuthPageProps> = ({ defaultMode = 'login' }) => 
               </button>
             </div>
 
+            {/* Redirection Notification */}
+            {(location.state as any)?.message && (
+              <div className="p-3 rounded-2xl bg-emerald-50 border border-emerald-200 text-[#0B2518] text-xs flex items-start gap-2.5 shadow-2xs animate-in fade-in duration-200">
+                <Sparkles className="w-4 h-4 text-[#176B4D] shrink-0 mt-0.5" />
+                <div className="flex-1">
+                  <span className="font-bold text-[#176B4D] block">Akses Memerlukan Autentikasi</span>
+                  <span className="text-slate-600 text-[11px] leading-relaxed">
+                    {(location.state as any).message}
+                  </span>
+                </div>
+              </div>
+            )}
+
             {/* Heading & Subtitle */}
             <div className="space-y-1 text-center sm:text-left">
               <h1 className="text-2xl sm:text-[28px] font-bold text-slate-900 tracking-tight leading-tight">
